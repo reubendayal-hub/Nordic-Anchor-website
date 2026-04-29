@@ -40,7 +40,11 @@
     .nav-gs:hover::before{animation-duration:1.2s;}
     /* MOBILE NAV FIX: never overflow, always accessible */
     @media(max-width:860px){
+<<<<<<< HEAD
       .nav-pill,.nav-sep{display:none;}
+=======
+      .nav-pill,.nav-sep,.nav-touch{display:none;}
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
       #mainNav{padding:0 16px;gap:6px;}
       .nav-touch{font-size:9px;padding:8px 12px;letter-spacing:.12em;}
       .nav-gs{font-size:9px;padding:9px 14px;letter-spacing:.14em;}
@@ -50,6 +54,7 @@
       .nav-touch{display:none;}
     }
     
+<<<<<<< HEAD
     /* DRAWER */
     .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
     .nav-overlay.open{display:block;}
@@ -66,6 +71,19 @@
     .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
     .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
     .nav-drawer-contact a::before{display:none;}
+=======
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:280px;background:var(--navy);z-index:300;padding:0 36px 40px;transform:translateX(-100%);transition:transform .32s ease;display:flex;flex-direction:column;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 28px;border-bottom:1px solid rgba(184,154,106,0.15);margin-bottom:24px;}
+    .nav-drawer-logo-text{font-family:'Newsreader',serif;font-size:15px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.92);}
+    .nav-drawer-logo-accent{color:var(--gold-eye);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-drawer-close{background:none;border:none;color:rgba(255,255,255,0.45);font-size:20px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#fff;}
+    .nav-drawer a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(184,154,106,0.1);transition:color .2s;}
+    .nav-drawer a:hover{color:var(--gold);}
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 
     /* PAGE HERO — white, centred, matching screenshot */
     .page-hero{background:var(--white);padding:80px 72px 64px;margin-top:72px;text-align:center;}
@@ -142,8 +160,11 @@
       .panel-top{padding:36px 28px 0;}
       .panel-bottom{padding:0 28px 36px;}
     }
+<<<<<<< HEAD
       /* --- LAUNCH: Get Started hidden until booking system ready --- */
     .nav-gs, .nav-gs::before { display: none !important; }
+=======
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
     /* PRICING OVERLAY */
     .pricing-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,25,40,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
     .pricing-overlay.open{display:flex;}
@@ -169,6 +190,7 @@
   
     .nav-logo-img{height:64px;width:auto;display:block;}
     .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+<<<<<<< HEAD
 
     /* COOKIE BANNER */
     #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:2px solid var(--gold);transform:translateY(100%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
@@ -205,6 +227,11 @@
   </div>
 </div>
 
+=======
+  </style>
+</head>
+<body>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 
 <div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
 <div class="nav-drawer" id="navDrawer">
@@ -218,11 +245,23 @@
   <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
   <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
   <a href="/about" onclick="closeDrawer()">Who We Are</a>
+<<<<<<< HEAD
+=======
+  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;">→ Free Assessment</a>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
     <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
   </div>
 </div>
+<<<<<<< HEAD
+=======
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/pricing" onclick="closeDrawer()">Pricing</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+</div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 <nav id="mainNav">
   <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
   <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
@@ -231,12 +270,16 @@
   <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
   <a href="/#contact" class="nav-touch">Get in Touch</a>
+<<<<<<< HEAD
 </nav>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/" class="bc-crumb"><svg style="width:10px;height:10px;flex-shrink:0;" viewBox="0 0 12 12" fill="none"><path d="M1 5.5L6 1l5 4.5V11H7.5V8h-3v3H1V5.5z" stroke="#888" stroke-width="1.2" fill="none"/></svg> Home</a>
   <span class="bc-sep">›</span>
   <span class="bc-crumb active">Services</span>
+=======
+  <a href="/get-started" class="nav-gs">Free Assessment</a>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </nav>
 
 <section class="page-hero">
@@ -256,6 +299,7 @@
       <h2 class="panel-title">Hire Internationally,<br><em>with confidence.</em></h2>
       <p class="panel-desc">We handle SIRI compliance, Fast-Track and Pay Limit applications — so you can focus on onboarding great people. Flat-fee. No surprises.</p>
       <div class="panel-pills">
+<<<<<<< HEAD
         <span class="panel-pill">Fast-Track Certification</span>
         <span class="panel-pill">Fast-Track Work Permit / Job Change</span>
         <span class="panel-pill">Pay Limit Work Permit / Job Change</span>
@@ -266,6 +310,14 @@
         <span class="panel-pill">Right-to-Work Check</span>
         <span class="panel-pill">HR Retainer</span>
         <span class="panel-pill">Consultation &amp; Document Review</span>
+=======
+        <span class="panel-pill">Fast-Track Certification — Company</span>
+        <span class="panel-pill">Pay Limit Work Permit</span>
+        <span class="panel-pill">Fast-Track Work Permit</span>
+        <span class="panel-pill">Relocation Assistance</span>
+        <span class="panel-pill">Right-to-Work Check</span>
+        <span class="panel-pill">HR Retainer</span>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
       </div>
     </div>
     <div class="panel-bottom">
@@ -281,6 +333,7 @@
       <h2 class="panel-title">Moving to Denmark,<br><em>or staying — shouldn't be stressful.</em></h2>
       <p class="panel-desc">Personalised assistance with work permits, family reunification, EU residence certificates and permanent residence.</p>
       <div class="panel-pills">
+<<<<<<< HEAD
         <span class="panel-pill">Work Permit (New &amp; Renewal)</span>
         <span class="panel-pill">Dependent / Family Permit (New &amp; Renewal)</span>
         <span class="panel-pill">EU Residence</span>
@@ -288,6 +341,14 @@
         <span class="panel-pill">Job Change</span>
         <span class="panel-pill">Job Seeking / Terminated Employment</span>
         <span class="panel-pill">Consultation &amp; Document Review</span>
+=======
+        <span class="panel-pill">Work Permits</span>
+        <span class="panel-pill">Family Permits</span>
+        <span class="panel-pill">EU Residence</span>
+        <span class="panel-pill">Permanent Residence</span>
+        <span class="panel-pill">Job Change</span>
+        <span class="panel-pill">Job Seeking Permit</span>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
         <span class="panel-pill">Terminated Employment</span>
       </div>
     </div>
@@ -325,11 +386,14 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+<<<<<<< HEAD
             <div class="footer-legal">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms &amp; Conditions</a>
         <a href="javascript:void(0)" onclick="resetCookieConsent()">Cookie Settings</a>
       </div>
+=======
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
       <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
     </div>
   </div>
@@ -371,6 +435,7 @@
   function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closePricing(); });
 </script>
+<<<<<<< HEAD
 <script>
   function cookieAccept(){localStorage.setItem('na_cookie_consent','accepted');hideBanner();}
   function cookieDecline(){localStorage.setItem('na_cookie_consent','declined');hideBanner();}
@@ -382,5 +447,7 @@
     }
   })();
 </script>
+=======
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </body>
 </html>

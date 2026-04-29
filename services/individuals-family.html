@@ -31,7 +31,11 @@
     .nav-gs::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.55),transparent);animation:goldSweep 4.5s ease-in-out infinite;pointer-events:none;}
     @keyframes goldSweep{0%{left:-70%;opacity:0}8%{opacity:1}52%{left:115%;opacity:1}58%{opacity:0}100%{left:115%;opacity:0}}
     .nav-gs:hover{filter:brightness(1.1) saturate(1.12);}
+<<<<<<< HEAD
     @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 16px;gap:6px;}.nav-touch{font-size:9px;padding:8px 12px;}.nav-gs{font-size:9px;padding:9px 14px;}}
+=======
+    @media(max-width:860px){.nav-pill,.nav-sep,.nav-touch{display:none;}#mainNav{padding:0 16px;gap:6px;}.nav-touch{font-size:9px;padding:8px 12px;}.nav-gs{font-size:9px;padding:9px 14px;}}
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
     @media(max-width:400px){.nav-logo-text{font-size:14px;}.nav-touch{display:none;}}
 
     /* DRAWER */
@@ -57,7 +61,11 @@
     /* HERO */
     .hero{position:relative;height:72vh;min-height:480px;background:linear-gradient(to bottom,rgba(10,20,38,0.82) 0%,rgba(10,20,38,0.65) 45%,rgba(10,20,38,0.2) 75%,rgba(10,20,38,0) 100%),url('/hero-individuals.jpg') center 40%/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-start;padding:56px 72px 0;margin-top:88px;}
     .hero-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-eye);border:2px solid rgba(184,154,106,0.7);padding:12px 28px;margin-bottom:28px;width:fit-content;background:rgba(0,0,0,0.18);backdrop-filter:blur(4px);}
+<<<<<<< HEAD
     .hero h1{font-size:clamp(28px,3.2vw,48px);font-weight:300;color:var(--white);line-height:1.2;max-width:900px;}
+=======
+    .hero h1{font-size:clamp(28px,3.8vw,54px);font-weight:300;color:var(--white);line-height:1.2;max-width:820px;}
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
     .hero h1 em{font-style:italic;}
 
     /* INTRO STRIP */
@@ -210,6 +218,7 @@
     .pricing-card:hover .pricing-card-cta{gap:14px;}
     @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}.pricing-modal{padding:40px 28px;}}
 
+<<<<<<< HEAD
 
     /* COOKIE BANNER */
     #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:2px solid var(--gold);transform:translateY(100%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
@@ -246,6 +255,11 @@
   </div>
 </div>
 
+=======
+  </style>
+</head>
+<body>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 
 <div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
 <div class="nav-drawer" id="navDrawer">
@@ -259,6 +273,10 @@
   <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
   <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
   <a href="/about" onclick="closeDrawer()">Who We Are</a>
+<<<<<<< HEAD
+=======
+  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;">→ Free Assessment</a>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
     <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
@@ -273,6 +291,7 @@
   <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
   <a href="/#contact" class="nav-touch">Get in Touch</a>
+<<<<<<< HEAD
 </nav>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -281,11 +300,18 @@
   <a href="/services" class="bc-crumb">Services</a>
   <span class="bc-sep">›</span>
   <span class="bc-crumb active">For Individuals</span>
+=======
+  <a href="/get-started" class="nav-gs">Free Assessment</a>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </nav>
 
 <section class="hero">
   <span class="hero-tag">For Individuals &amp; Families</span>
+<<<<<<< HEAD
   <h1>Moving to Denmark or Continued Residence <em>shouldn't be stressful.</em></h1>
+=======
+  <h1>Moving to Denmark or Continued Residence<br><em>shouldn't be stressful.</em></h1>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </section>
 
 <div class="intro-strip">
@@ -324,9 +350,16 @@
   <h2 class="section-heading">Expert guidance for every stage of your Danish journey</h2>
 
   <div class="accordion">
+<<<<<<< HEAD
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
         <div class="acc-left"><div class="acc-title">Work Permit <span style="font-size:13px;font-weight:400;color:var(--gold-dk);font-style:italic;">(New Permit)</span></div><div class="acc-subtitle">Fast-Track and Pay Limit scheme applications</div></div>
+=======
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Work Permits</div><div class="acc-subtitle">Fast-Track and Pay Limit scheme applications</div></div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
         <div class="acc-right"><div class="acc-price">DKK 4,500</div><div class="acc-icon">+</div></div>
       </div>
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
@@ -349,6 +382,7 @@
 
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
+<<<<<<< HEAD
         <div class="acc-left"><div class="acc-title">Work Permit <span style="color:var(--gold-dk);">Extension / Renewal</span></div><div class="acc-subtitle">Extend your right to work before your current permit expires</div></div>
         <div class="acc-right"><div class="acc-price">DKK 3,500</div><div class="acc-icon">+</div></div>
       </div>
@@ -396,6 +430,9 @@
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
         <div class="acc-left"><div class="acc-title">Dependent / Family Permit <span style="font-size:13px;font-weight:400;color:var(--gold-dk);font-style:italic;">(New Permit)</span></div><div class="acc-subtitle">Bring your spouse and children to Denmark / apply new permits for your family in Denmark</div></div>
+=======
+        <div class="acc-left"><div class="acc-title">Family Permits</div><div class="acc-subtitle">Bring your spouse and children to Denmark</div></div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
         <div class="acc-right"><div class="acc-price">DKK 3,000 <span>/ dependent</span></div><div class="acc-icon">+</div></div>
       </div>
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
@@ -408,6 +445,7 @@
         </ul></div>
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Good to Know</h4><p>Your spouse receives the right to work in Denmark without needing a separate work permit — making it easier for both of you to build your life here.</p></div>
+<<<<<<< HEAD
           <div class="acc-meta-block"><h4>Pricing</h4>
             <ul style="list-style:none;padding:0;margin:0;">
               <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Single dependent &mdash; <strong>DKK 3,000</strong></li>
@@ -415,6 +453,9 @@
               <li style="padding:8px 0;font-size:15px;color:#2a2a2a;">Three or more dependents &mdash; <strong>DKK 5,000 total (capped)</strong></li>
             </ul>
           </div>
+=======
+          <div class="acc-meta-block"><h4>Pricing</h4><p>DKK 3,000 per dependent. For families applying together, the fee is reduced to DKK 2,000 per dependent, with a total cap of DKK 5,000 for three or more dependents.</p></div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <div class="acc-meta-block"><h4>Timeline</h4><p>30–60 days. Can often be submitted and processed alongside the principal applicant's work permit application.</p></div>
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 2,000 / dependent</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 3,080 per person (paid to SIRI)</span></div>
           <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
@@ -424,6 +465,7 @@
 
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
+<<<<<<< HEAD
         <div class="acc-left"><div class="acc-title">Dependent / Family Member Permit <span style="color:var(--gold-dk);">Extension / Renewal</span></div><div class="acc-subtitle">Extend your family members' right to remain in Denmark</div></div>
         <div class="acc-right"><div class="acc-price">DKK 2,000 <span>/ dependent</span></div><div class="acc-icon">+</div></div>
       </div>
@@ -453,6 +495,8 @@
 
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
+=======
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
         <div class="acc-left"><div class="acc-title">EU Residence Certificate</div><div class="acc-subtitle">For EU/EEA nationals and their family members</div></div>
         <div class="acc-right"><div class="acc-price">DKK 3,000</div><div class="acc-icon">+</div></div>
       </div>
@@ -490,7 +534,34 @@
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Requirements</h4><p>Typically 8 years of legal residence, language test (Dansk 3), income requirements, and self-sufficiency. We'll assess your specific situation honestly before you apply.</p></div>
           <div class="acc-meta-block"><h4>Timeline</h4><p>6–12 months from submission. SIRI processes these thoroughly.</p></div>
+<<<<<<< HEAD
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 6,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 7,570 (work/study permit holders) &middot; DKK 4,970 (other permits)</span></div>
+=======
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 6,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Job Change</div><div class="acc-subtitle">Switching employers while on a Danish work permit</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 4,500</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Current permit validity and conditions review</li>
+          <li>New job offer compliance &amp; salary threshold assessment</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete new work permit application preparation &amp; submission to SIRI on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Right-to-work timeline guidance during the application period</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>What You Need to Know</h4><p>Changing employers always requires a new work permit application submitted to SIRI — your right to work with the new employer only begins once the new permit is approved. We manage the full process so your transition is seamless and compliant.</p></div>
+          <div class="acc-meta-block"><h4>Timeline</h4><p>Fast-Track: 15–30 days. Pay Limit: 30–60 days. We'll advise you on which scheme applies and manage your timeline.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 4,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
         </div>
       </div></div></div>
@@ -512,8 +583,25 @@
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Your Situation</h4><p>If your work permit is linked to an employer and you want to stay in Denmark to look for a new role, a job-seeking permit gives you up to 6 months to do so legally — without losing your right to remain.</p></div>
           <div class="acc-meta-block"><h4>Timeline</h4><p>Apply before your current permit expires. We'll assess your eligibility and submit as quickly as possible.</p></div>
+<<<<<<< HEAD
           <div class="did-you-know"><div class="dyk-icon"><svg viewBox="0 0 20 20" fill="none" stroke="#B8860B" stroke-width="1.2" stroke-linecap="round"><circle cx="10" cy="10" r="9"/><line x1="10" y1="7" x2="10" y2="11"/><circle cx="10" cy="14" r="0.8" fill="#B8860B" stroke="none"/></svg></div><div><span class="dyk-label">Did You Know?</span><p class="dyk-text">If your employer terminated your employment, you are <strong>automatically eligible for a 6-month job-seeking permit</strong> — even if your original permit hasn't expired yet. You don't need to scramble. You have time, and we'll make sure you use it wisely.</p></div></div>
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 2,000</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+=======
+          <div class="did-you-know">
+            <div class="dyk-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="#B8860B" stroke-width="1.2" stroke-linecap="round">
+                <circle cx="10" cy="10" r="9"/>
+                <line x1="10" y1="7" x2="10" y2="11"/>
+                <circle cx="10" cy="14" r="0.8" fill="#B8860B" stroke="none"/>
+              </svg>
+            </div>
+            <div>
+              <span class="dyk-label">Did You Know?</span>
+              <p class="dyk-text">If your employer terminated your employment, you are <strong>automatically eligible for a 6-month job-seeking permit</strong> — even if your original permit hasn't expired yet. You don't need to scramble. You have time, and we'll make sure you use it wisely.</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 2,000</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 0 (no fee for job-seeking permit)</span></div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
         </div>
       </div></div></div>
@@ -537,12 +625,17 @@
           <div class="acc-meta-block"><h4>We Understand</h4><p>Losing your job as an expat is terrifying — your permit, your home, your life in Denmark all feel at risk. We'll give you clarity, options, and a clear action plan. You're not alone in this.</p></div>
           <div class="acc-meta-block"><h4>Time Is Critical</h4><p>You typically have 30–60 days to find new employment before your permit expires. Contact us immediately — the sooner we assess your situation, the more options you have.</p></div>
           <div class="acc-meta-block"><h4>Your Next Step</h4><p>For most people, the immediate next step after losing their job is a <strong>Job Seeking Permit</strong> — giving you up to 6 months to find new employment legally in Denmark. We'll assess your eligibility and handle the application as part of your consultation.</p></div>
+<<<<<<< HEAD
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 2,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+=======
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 2,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> varies by application type</span></div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Help Now &nbsp;→</a>
         </div>
       </div></div></div>
     </div>
 
+<<<<<<< HEAD
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
         <div class="acc-left"><div class="acc-title">Immigration Consultation &amp; Document Review</div><div class="acc-subtitle">Expert guidance booked by the session — no ongoing commitment</div></div>
@@ -575,6 +668,9 @@
     </div>
   </div>
 </div>
+=======
+  </div>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </section>
 
 <div class="reassurance">
@@ -617,7 +713,11 @@
     <div class="footer-top">
       <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" style="height:56px;width:auto;display:block;"/></a>
       <div class="footer-center"><nav class="footer-nav">
+<<<<<<< HEAD
         <a href="/">Home</a><a href="/services">Services</a><a href="/services/companies-employers">For Companies</a><a href="/services/individuals-family">For Individuals</a><a href="/about">Who We Are</a><a href="/#contact">Contact</a>
+=======
+        <a href="/">Home</a><a href="/services">Services</a><a href="/services/companies-employers">For Companies</a><a href="/services/individuals-family">For Individuals</a><a href="/pricing">Pricing</a><a href="/about">Who We Are</a><a href="/#contact">Contact</a>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
       </nav></div>
       <div class="footer-right">
         <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
@@ -627,11 +727,14 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+<<<<<<< HEAD
       <div class="footer-legal">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms &amp; Conditions</a>
         <a href="javascript:void(0)" onclick="resetCookieConsent()">Cookie Settings</a>
       </div>
+=======
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
       <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
     </div>
   </div>
@@ -649,6 +752,7 @@
     document.querySelectorAll('.acc-item').forEach(i => { i.classList.remove('open'); i.querySelector('.acc-icon').textContent = '+'; });
     if (!isOpen) { item.classList.add('open'); icon.textContent = '−'; }
   }
+<<<<<<< HEAD
   function cookieAccept(){localStorage.setItem('na_cookie_consent','accepted');hideBanner();}
   function cookieDecline(){localStorage.setItem('na_cookie_consent','declined');hideBanner();}
   function hideBanner(){document.getElementById('cookieBanner').classList.remove('visible');}
@@ -661,3 +765,41 @@
 </script>
 </body>
 </html>
+=======
+</script>
+
+<!-- PRICING OVERLAY -->
+<div class="pricing-overlay" id="pricingOverlay" onclick="closePricingOutside(event)">
+  <div class="pricing-modal" id="pricingModal">
+    <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
+    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
+    <h2>Which best describes you?</h2>
+    <p>Select your situation and we'll show you the full pricing for every service &mdash; no hidden fees, no surprises.</p>
+    <div class="pricing-cards">
+      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Companies &amp; Employers</span>
+        <h3>Hiring internationally<br><em>with confidence.</em></h3>
+        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
+        <div class="pricing-card-range">From DKK 3,500 / mo</div>
+        <span class="pricing-card-cta">View employer services &nbsp;&rarr;</span>
+      </a>
+      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Individuals &amp; Families</span>
+        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
+        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
+        <div class="pricing-card-range">From DKK 2,500</div>
+        <span class="pricing-card-cta">View individual services &nbsp;&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePricing(); });
+</script>
+</body>
+</html>
+>>>>>>> a673438144cdf898899b9b8a957c91c259422995
