@@ -232,13 +232,14 @@
     .nav-drawer-logo-img{height:48px;width:auto;display:block;}
   
     /* BREADCRUMB */
-    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;}
-    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;}
+    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;white-space:nowrap;overflow:hidden;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
     .bc-crumb:hover{color:var(--gold-dk);}
     .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
-    .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);}
+    .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
     .bc-home{width:10px;height:10px;flex-shrink:0;}
-    @media(max-width:860px){.breadcrumb{padding:8px 16px;top:72px;}.bc-crumb{font-size:9px;}}
+    /* Hide breadcrumb on mobile — use floating back button instead */
+    @media(max-width:860px){.breadcrumb{display:none;}}
     /* FLOATING BACK BUTTON - mobile only */
     #backBtn{display:none;}
     @media(max-width:860px){
