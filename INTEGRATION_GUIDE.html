@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nordic Anchor — Cookie & Legal Footer Integration Guide</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#1a1a1a;line-height:1.6;}
+  .page{max-width:860px;margin:0 auto;padding:48px 32px;}
+  h1{font-size:26px;font-weight:600;color:#1e2f4a;margin-bottom:6px;}
+  .subtitle{font-size:14px;color:#888;margin-bottom:40px;}
+  h2{font-size:16px;font-weight:600;color:#1e2f4a;margin:36px 0 12px;display:flex;align-items:center;gap:10px;}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:#1e2f4a;color:#DAA520;font-size:12px;font-weight:700;border-radius:50%;flex-shrink:0;}
+  p{font-size:14px;color:#444;margin-bottom:12px;line-height:1.7;}
+  code{font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:13px;}
+  .card{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:20px 24px;margin-bottom:16px;}
+  .card-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#888;margin-bottom:10px;}
+  pre{background:#1a1a2e;color:#e8e8f0;font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:12.5px;line-height:1.7;padding:18px 20px;border-radius:4px;overflow-x:auto;margin:0;white-space:pre;}
+  .find{background:#fff8e6;border:1px solid #f0d070;border-radius:4px;padding:14px 16px;margin-bottom:8px;}
+  .replace{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:4px;padding:14px 16px;}
+  .find-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b8860b;margin-bottom:8px;}
+  .replace-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2e7d32;margin-bottom:8px;}
+  .find pre{background:#fffbf0;color:#4a3800;border:none;padding:0;font-size:12px;}
+  .replace pre{background:#f1f8f2;color:#1b4a1e;border:none;padding:0;font-size:12px;}
+  .tag{display:inline-block;font-size:12px;font-family:'SF Mono','Fira Code',Consolas,monospace;background:#e8f0fe;color:#1e2f4a;padding:2px 7px;border-radius:3px;}
+  .summary{background:#1e2f4a;border-radius:6px;padding:24px 28px;color:#fff;margin-top:36px;}
+  .summary h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#b89a6a;margin-bottom:16px;}
+  .file-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .file-row:last-child{border-bottom:none;}
+  .badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:3px;}
+  .badge-new{background:#DAA520;color:#1a0d00;}
+  .badge-patch{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);}
+  .file-name{font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:13px;color:#e0e0e0;}
+  .note{background:rgba(218,165,32,0.1);border-left:3px solid #DAA520;padding:14px 18px;border-radius:0 4px 4px 0;margin-top:16px;}
+  .note-title{font-size:12px;color:rgba(218,165,32,0.9);font-weight:600;margin-bottom:10px;}
+  .logic-row{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:13px;}
+  .logic-row:last-child{border-bottom:none;}
+  .logic-key{color:#b89a6a;font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:12px;min-width:190px;flex-shrink:0;}
+  .logic-val{color:rgba(255,255,255,0.7);}
+  .divider{height:1px;background:#e0e0e0;margin:28px 0;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Cookie Banner &amp; Legal Footer</h1>
+  <p class="subtitle">Nordic Anchor &mdash; Integration Guide &middot; Apply to all 5 existing pages</p>
+
+  <div class="card">
+    <div class="card-label">Overview</div>
+    <p style="margin:0;">This guide adds a GDPR-compliant cookie consent banner (slides up from the bottom on first visit) and adds Privacy Policy / Terms / Cookie Settings links to every page footer. The two new pages &mdash; <span class="tag">/privacy</span> and <span class="tag">/terms</span> &mdash; are already built and provided as separate files ready to drop into your repo.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2><span class="step-num">1</span> Add CSS &mdash; paste inside your &lt;style&gt; tag</h2>
+  <p>In each page file, find the closing <span class="tag">&lt;/style&gt;</span> tag and paste the block below just before it.</p>
+  <div class="card">
+    <div class="card-label">CSS to paste</div>
+<pre>    /* COOKIE BANNER */
+    #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);
+      color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+      border-top:2px solid var(--gold);transform:translateY(100%);
+      transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
+    #cookieBanner.visible{transform:translateY(0);}
+    .cookie-text{flex:1;min-width:240px;font-size:13px;line-height:1.75;
+      color:rgba(255,255,255,0.88);}
+    .cookie-text a{color:var(--gold);text-decoration:none;
+      border-bottom:1px solid rgba(184,154,106,0.4);}
+    .cookie-text a:hover{border-color:var(--gold);}
+    .cookie-actions{display:flex;gap:12px;flex-shrink:0;}
+    .cookie-accept{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;
+      text-transform:uppercase;background:var(--gold-dk);color:#fff;
+      border:1px solid var(--gold-dk);border-radius:2px;padding:10px 22px;
+      cursor:pointer;transition:background .22s;}
+    .cookie-accept:hover{background:#9a7209;}
+    .cookie-decline{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;
+      text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.65);
+      border:1px solid rgba(255,255,255,0.25);border-radius:2px;padding:10px 22px;
+      cursor:pointer;transition:border-color .22s,color .22s;}
+    .cookie-decline:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+
+    /* FOOTER LEGAL LINKS */
+    .footer-legal{display:flex;gap:20px;}
+    .footer-legal a{font-size:11px;color:var(--muted);text-decoration:none;
+      letter-spacing:.04em;transition:color .2s;}
+    .footer-legal a:hover{color:var(--gold-dk);}</pre>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2><span class="step-num">2</span> Add banner HTML &mdash; right after &lt;body&gt;</h2>
+  <p>Find the opening <span class="tag">&lt;body&gt;</span> tag. Paste this block immediately after it, before the <span class="tag">nav-overlay</span> div.</p>
+  <div class="card">
+    <div class="card-label">HTML to paste</div>
+<pre>&lt;div id="cookieBanner"&gt;
+  &lt;p class="cookie-text"&gt;We use cookies to ensure the site functions correctly
+  and to understand how visitors use it.
+  &lt;a href="/privacy"&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;
+  &lt;div class="cookie-actions"&gt;
+    &lt;button class="cookie-decline" onclick="cookieDecline()"&gt;Decline&lt;/button&gt;
+    &lt;button class="cookie-accept" onclick="cookieAccept()"&gt;Accept&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2><span class="step-num">3</span> Update the footer &mdash; add Privacy / Terms / Cookie links</h2>
+  <p>Find the <span class="tag">footer-bottom</span> div in each page and replace it with the version below.</p>
+
+  <div class="find">
+    <div class="find-label">&#x1F50D; Find this</div>
+<pre>&lt;div class="footer-bottom"&gt;
+  &lt;span class="footer-copy"&gt;&copy; 2026 Nordic Anchor. All Rights Reserved.&lt;/span&gt;
+  &lt;span class="footer-cvr"&gt;CVR: 46215540 &middot; Enkeltmandsvirksomhed &middot; Denmark&lt;/span&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <div class="replace">
+    <div class="replace-label">&#x2705; Replace with</div>
+<pre>&lt;div class="footer-bottom"&gt;
+  &lt;span class="footer-copy"&gt;&copy; 2026 Nordic Anchor. All Rights Reserved.&lt;/span&gt;
+  &lt;div class="footer-legal"&gt;
+    &lt;a href="/privacy"&gt;Privacy Policy&lt;/a&gt;
+    &lt;a href="/terms"&gt;Terms &amp;amp; Conditions&lt;/a&gt;
+    &lt;a href="#" onclick="resetCookieConsent();return false;"&gt;Cookie Settings&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;span class="footer-cvr"&gt;CVR: 46215540 &middot; Enkeltmandsvirksomhed &middot; Denmark&lt;/span&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2><span class="step-num">4</span> Add JavaScript &mdash; just before &lt;/body&gt;</h2>
+  <p>Paste this script block at the bottom of each page just before <span class="tag">&lt;/body&gt;</span>. If there is already a <span class="tag">&lt;script&gt;</span> block there, paste just the functions inside it rather than adding a second script tag.</p>
+  <div class="card">
+    <div class="card-label">JavaScript to paste</div>
+<pre>&lt;script&gt;
+  function cookieAccept(){
+    localStorage.setItem('na_cookie_consent','accepted');
+    hideBanner();
+  }
+  function cookieDecline(){
+    localStorage.setItem('na_cookie_consent','declined');
+    hideBanner();
+  }
+  function hideBanner(){
+    document.getElementById('cookieBanner').classList.remove('visible');
+  }
+  function resetCookieConsent(){
+    localStorage.removeItem('na_cookie_consent');
+    document.getElementById('cookieBanner').classList.add('visible');
+  }
+  (function(){
+    if(!localStorage.getItem('na_cookie_consent')){
+      setTimeout(()=&gt;document.getElementById('cookieBanner').classList.add('visible'),800);
+    }
+  })();
+&lt;/script&gt;</pre>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2><span class="step-num">5</span> vercel.json &mdash; no changes needed &#x2713;</h2>
+  <div class="card">
+    <p style="margin:0;">Because <span class="tag">cleanUrls: true</span> is already set in your <span class="tag">vercel.json</span>, placing <span class="tag">privacy.html</span> and <span class="tag">terms.html</span> in the repo root is all that's needed. They will automatically serve at <span class="tag">/privacy</span> and <span class="tag">/terms</span>. No config changes required.</p>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <h3>Deployment Checklist</h3>
+
+    <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:12px;">New files &mdash; add to repo root alongside index.html</p>
+    <div class="file-row"><span class="badge badge-new">NEW</span><span class="file-name">privacy.html</span><span style="font-size:12px;color:rgba(255,255,255,0.4);margin-left:auto;">serves at /privacy</span></div>
+    <div class="file-row" style="margin-bottom:20px;"><span class="badge badge-new">NEW</span><span class="file-name">terms.html</span><span style="font-size:12px;color:rgba(255,255,255,0.4);margin-left:auto;">serves at /terms</span></div>
+
+    <p style="font-size:12px;color:rgba(255,255,255,0.45);margin:16px 0 12px;">Existing files &mdash; apply steps 1&ndash;4</p>
+    <div class="file-row"><span class="badge badge-patch">PATCH</span><span class="file-name">index.html</span></div>
+    <div class="file-row"><span class="badge badge-patch">PATCH</span><span class="file-name">about.html</span></div>
+    <div class="file-row"><span class="badge badge-patch">PATCH</span><span class="file-name">services.html</span></div>
+    <div class="file-row"><span class="badge badge-patch">PATCH</span><span class="file-name">services/companies-employers.html</span></div>
+    <div class="file-row"><span class="badge badge-patch">PATCH</span><span class="file-name">services/individuals-family.html</span></div>
+
+    <div class="note">
+      <div class="note-title">How the cookie logic works</div>
+      <div class="logic-row"><span class="logic-key">localStorage key</span><span class="logic-val">na_cookie_consent</span></div>
+      <div class="logic-row"><span class="logic-key">Possible values</span><span class="logic-val">'accepted' &nbsp;|&nbsp; 'declined' &nbsp;|&nbsp; absent (not yet decided)</span></div>
+      <div class="logic-row"><span class="logic-key">Banner trigger</span><span class="logic-val">Appears 800ms after page load if no consent is stored</span></div>
+      <div class="logic-row"><span class="logic-key">Reset</span><span class="logic-val">"Cookie Settings" in footer removes the key and re-shows the banner</span></div>
+      <div class="logic-row"><span class="logic-key">/privacy and /terms</span><span class="logic-val">Both pages already include the banner and cookie JS</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

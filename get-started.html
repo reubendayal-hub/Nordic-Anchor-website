@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Get Started — Nordic Anchor</title>
+<link rel="icon" href="/favicon.jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;
+  --cream:#f9f6f2;--white:#ffffff;--page-bg:#f9f6f2;
+  --text:#1e2f4a;--body:#1e2f4a;--muted:#4a5a6e;
+  --border:rgba(184,154,106,0.25);--border-card:rgba(184,154,106,0.3);
+  --card-bg:#ffffff;--input-bg:#ffffff;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Newsreader',Georgia,serif;background:var(--page-bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+#mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;}
+.nav-logo-img{height:64px;width:auto;}
+.nav-close{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--body);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-close:hover{color:var(--navy);}
+.nav-close-x{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--navy);transition:all .2s;}
+.nav-close:hover .nav-close-x{border-color:var(--navy);background:var(--navy);color:#fff;}
+@media(max-width:600px){#mainNav{padding:0 16px;}.nav-logo-img{height:44px;}}
+.progress-wrap{position:fixed;top:88px;left:0;right:0;z-index:199;background:var(--page-bg);border-bottom:1px solid var(--border);padding:14px 48px;}
+.progress-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.progress-bar-track{flex:1;height:2px;background:rgba(184,154,106,0.2);border-radius:2px;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#b89a6a,#DAA520);border-radius:2px;transition:width .5s ease;}
+.progress-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--body);white-space:nowrap;}
+@media(max-width:600px){.progress-wrap{padding:12px 20px;}}
+.form-wrap{max-width:760px;margin:0 auto;padding:180px 48px 96px;}
+@media(max-width:600px){.form-wrap{padding:160px 20px 80px;}}
+.step{display:none !important;animation:stepIn .35s ease;}
+.step.active{display:block !important;}
+@keyframes stepIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.step-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:16px;display:block;}
+.step-heading{font-size:clamp(26px,3.8vw,42px);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+.step-heading em{font-style:italic;}
+.step-sub{font-size:16px;font-style:italic;color:var(--body);line-height:1.7;margin-bottom:36px;max-width:580px;}
+.step-dots{display:flex;gap:6px;margin-bottom:32px;}
+.step-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,154,106,0.3);transition:all .3s;}
+.step-dot.done{background:var(--gold);}
+.step-dot.active{background:var(--gold-dk);width:20px;border-radius:3px;}
+.gdpr-note{background:rgba(184,154,106,0.08);border-left:3px solid var(--gold);padding:14px 18px;margin-bottom:32px;font-size:13px;color:var(--body);line-height:1.7;font-style:italic;}
+.gdpr-note a{color:var(--gold-dk);text-decoration:none;}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:500px){.profile-grid{grid-template-columns:1fr;}}
+.profile-card{border:1.5px solid var(--border);padding:28px 24px;cursor:pointer;transition:all .25s;position:relative;background:var(--card-bg);}
+.profile-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .25s;}
+.profile-card:hover,.profile-card.selected{border-color:var(--gold-dk);transform:translateY(-2px);box-shadow:0 6px 28px rgba(30,47,74,0.08);}
+.profile-card:hover::before,.profile-card.selected::before{background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+.profile-card.selected{background:rgba(184,134,11,0.05);}
+.profile-icon{width:56px;height:56px;margin-bottom:16px;}
+.profile-icon svg{width:56px;height:56px;}
+.profile-title{font-size:18px;font-weight:400;color:var(--navy);margin-bottom:8px;line-height:1.3;}
+.profile-desc{font-size:14px;font-style:italic;color:var(--body);line-height:1.6;}
+.choice-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.choice-item{border:1px solid var(--border);padding:14px 18px;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:14px;background:var(--white);}
+.choice-item:hover{border-color:var(--gold-dk);background:rgba(184,134,11,0.02);}
+.choice-item.selected{border-color:var(--gold-dk);background:rgba(184,134,11,0.04);}
+.choice-check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.choice-item.selected .choice-check{background:var(--gold-dk);border-color:var(--gold-dk);}
+.choice-item.selected .choice-check::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;}
+.choice-label{font-size:15px;color:var(--navy);line-height:1.4;}
+.choice-sub{font-size:12px;font-style:italic;color:var(--body);margin-top:2px;}
+.field-group{margin-bottom:22px;}
+.field-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);display:block;margin-bottom:8px;font-weight:500;}
+.field-opt{font-weight:400;color:var(--body);letter-spacing:0;text-transform:none;font-size:11px;margin-left:4px;}
+.field-input,.field-select,.field-textarea{width:100%;font-family:'Newsreader',Georgia,serif;font-size:15px;color:var(--body);background:var(--input-bg);border:1px solid var(--border);padding:12px 16px;outline:none;transition:border-color .2s;}
+.field-input:focus,.field-select:focus,.field-textarea:focus{border-color:var(--gold-dk);}
+.field-salary{-moz-appearance:textfield;}
+.field-salary::-webkit-inner-spin-button,.field-salary::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+.field-textarea{min-height:100px;resize:vertical;line-height:1.65;}
+.field-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B8860B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:10px;padding-right:36px;}
+.field-hint{font-size:12px;font-style:italic;color:var(--body);margin-top:6px;line-height:1.5;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.field-row{grid-template-columns:1fr;}}
+.ft-search-wrap{position:relative;}
+.ft-results{position:absolute;top:100%;left:0;right:0;background:var(--input-bg);border:1px solid var(--gold-dk);border-top:none;max-height:220px;overflow-y:auto;z-index:50;display:none;}
+.ft-results.open{display:block;}
+.ft-result-item{padding:10px 16px;cursor:pointer;font-size:14px;color:var(--navy);border-bottom:1px solid rgba(184,154,106,0.15);display:flex;justify-content:space-between;align-items:center;}
+.ft-result-item:hover{background:rgba(184,134,11,0.04);}
+.ft-result-item:last-child{border-bottom:none;}
+.ft-cvr{font-size:11px;color:var(--body);font-style:italic;}
+.ft-not-found{padding:12px 16px;font-size:13px;font-style:italic;color:var(--body);}
+.ft-selected-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.3);padding:8px 14px;font-size:13px;color:var(--navy);margin-top:8px;}
+.ft-selected-badge button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0 0 0 4px;}
+.salary-meter{margin:8px 0 4px;height:5px;background:rgba(184,154,106,0.2);border-radius:3px;overflow:hidden;}
+.salary-meter-fill{height:100%;border-radius:3px;transition:width .4s ease,background .4s ease;width:0%;}
+.flag{padding:14px 18px;margin:12px 0 20px;font-size:14px;line-height:1.75;}
+.flag-amber{background:#fff8e6;border-left:3px solid var(--gold-dk);color:#5a3e00;}
+.flag-amber strong{color:#8a5e00;}
+.flag-red{background:#fff2f2;border-left:3px solid #c62828;color:#5a1010;}
+.flag-info{background:#e8f4fd;border-left:3px solid #1976d2;color:#0d3558;}
+.flag-success{background:#f1f8f2;border-left:3px solid #388e3c;color:#1b4a1e;}
+.flag-success strong{color:#2e7d32;}
+.flag-title{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:6px;display:block;}
+.family-check-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.family-check{border:1px solid var(--border);padding:12px 16px;cursor:pointer;transition:border-color .2s;display:flex;align-items:flex-start;gap:12px;background:var(--white);}
+.family-check:hover{border-color:var(--gold-dk);}
+.family-check.checked{border-color:var(--gold-dk);background:rgba(184,134,11,0.03);}
+.family-check input{accent-color:var(--gold-dk);margin-top:2px;flex-shrink:0;}
+.family-check-label{font-size:15px;color:var(--navy);}
+.family-check-sub{font-size:12px;font-style:italic;color:var(--body);margin-top:2px;}
+.dual-toggle{display:flex;align-items:center;gap:10px;margin-bottom:18px;cursor:pointer;width:fit-content;}
+.dual-toggle input{accent-color:var(--gold-dk);}
+.dual-toggle-label{font-size:14px;color:var(--navy);}
+.dual-nat-extra{display:none;}
+.dual-nat-extra.show{display:block;}
+.form-divider{height:1px;background:var(--border);margin:24px 0;}
+.summary-block{background:var(--white);border:1px solid var(--border);margin-bottom:16px;}
+.summary-head{background:var(--navy);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;}
+.summary-head-title{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.summary-edit{font-size:11px;color:rgba(255,255,255,0.6);cursor:pointer;text-decoration:none;transition:color .2s;}
+.summary-edit:hover{color:var(--gold);}
+.summary-body{padding:20px;}
+.summary-row{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid rgba(184,154,106,0.12);font-size:14px;}
+.summary-row:last-child{border-bottom:none;}
+.summary-key{color:var(--body);min-width:180px;flex-shrink:0;font-size:13px;}
+.summary-val{color:var(--navy);}
+.rec-block{background:linear-gradient(135deg,var(--navy) 0%,#2b3e5c 100%);padding:28px 32px;margin:24px 0;position:relative;overflow:hidden;}
+.rec-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+.rec-label{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block;}
+.rec-title{font-size:24px;font-weight:300;color:#fff;margin-bottom:10px;}
+.rec-desc{font-size:14px;font-style:italic;color:rgba(255,255,255,0.72);line-height:1.75;}
+.rec-flags{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.rec-flag-item{font-size:13px;display:flex;gap:10px;align-items:flex-start;line-height:1.6;padding:10px 14px;background:rgba(255,255,255,0.06);border-left:2px solid rgba(218,165,32,0.5);}
+.rec-flag-item.red-flag{border-left-color:rgba(239,83,80,0.8);background:rgba(239,83,80,0.08);}
+.rec-flag-icon{flex-shrink:0;}
+.rec-flag-text{color:rgba(255,255,255,0.82);}
+.consent-block{background:rgba(184,134,11,0.05);border:1px solid var(--border);padding:20px 24px;margin:24px 0;}
+.consent-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;cursor:pointer;}
+.consent-check:last-child{margin-bottom:0;}
+.consent-check input{accent-color:var(--gold-dk);margin-top:3px;flex-shrink:0;}
+.consent-check-label{font-size:13px;color:var(--body);line-height:1.7;}
+.consent-check-label a{color:var(--gold-dk);text-decoration:none;}
+.btn-row{display:flex;gap:12px;align-items:center;margin-top:28px;flex-wrap:wrap;}
+.btn-primary{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#2a1800;padding:14px 32px;cursor:pointer;border:none;transition:filter .3s;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.4),0 0 0 1px rgba(140,90,0,0.75);}
+.btn-primary:hover{filter:brightness(1.08);}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;filter:none;}
+.btn-back{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--body);background:transparent;border:1px solid var(--border);padding:13px 24px;cursor:pointer;transition:all .2s;}
+.btn-back:hover{border-color:var(--navy);color:var(--navy);}
+</style>
+</head>
+<body>
+<nav id="mainNav">
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/" class="nav-close">Back to site <span class="nav-close-x">&#x2715;</span></a>
+</nav>
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:8%"></div></div>
+    <span class="progress-label" id="progressLabel">Step 1 of 7</span>
+  </div>
+</div>
+<div class="form-wrap">
+<div class="step-dots" id="stepDots"></div>
+
+<!-- STEP 1 -->
+<div class="step active" id="step-1">
+  <span class="step-eyebrow">Quick Assessment</span>
+  <h1 class="step-heading">Which of these best describes <em>your situation?</em></h1>
+  <p class="step-sub">No two journeys to Denmark are quite the same — let's start with the right questions from the very beginning.</p>
+  <div class="gdpr-note">🔒 The information you share here is used solely to understand your situation and identify how we can help. Sent securely to Nordic Anchor — not stored on any third-party platform. <a href="/privacy">Privacy Policy</a>.</div>
+  <div class="profile-grid">
+    <div class="profile-card" onclick="selectProfile('company')" id="profile-company">
+      <div class="profile-icon"><svg viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Skyline -->
+        <rect x="2" y="24" width="10" height="24" stroke="#1e2f4a" stroke-width="1.5" fill="none"/>
+        <rect x="14" y="14" width="12" height="34" stroke="#1e2f4a" stroke-width="1.5" fill="none"/>
+        <line x1="20" y1="14" x2="20" y2="9" stroke="#1e2f4a" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="28" y="19" width="10" height="29" stroke="#1e2f4a" stroke-width="1.5" fill="none"/>
+        <!-- Gold windows -->
+        <rect x="4" y="27" width="2.5" height="2.5" fill="#B8860B" opacity=".9"/>
+        <rect x="8" y="27" width="2.5" height="2.5" fill="#B8860B" opacity=".9"/>
+        <rect x="4" y="32" width="2.5" height="2.5" fill="#B8860B" opacity=".5"/>
+        <rect x="16" y="18" width="2.5" height="2.5" fill="#B8860B" opacity=".9"/>
+        <rect x="21" y="18" width="2.5" height="2.5" fill="#B8860B" opacity=".9"/>
+        <rect x="16" y="24" width="2.5" height="2.5" fill="#B8860B" opacity=".6"/>
+        <rect x="21" y="24" width="2.5" height="2.5" fill="#B8860B" opacity=".6"/>
+        <rect x="16" y="30" width="2.5" height="2.5" fill="#B8860B" opacity=".35"/>
+        <rect x="30" y="23" width="2.5" height="2.5" fill="#B8860B" opacity=".8"/>
+        <rect x="34" y="23" width="2.5" height="2.5" fill="#B8860B" opacity=".8"/>
+        <rect x="30" y="29" width="2.5" height="2.5" fill="#B8860B" opacity=".45"/>
+        <!-- Ground -->
+        <line x1="2" y1="48" x2="40" y2="48" stroke="#1e2f4a" stroke-width="1.2" opacity=".2"/>
+        <!-- 4 people: outer two faded for depth -->
+        <circle cx="8" cy="54" r="3" stroke="#1e2f4a" stroke-width="1.3" fill="none" opacity=".5"/>
+        <path d="M3.5 65c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#1e2f4a" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".5"/>
+        <circle cx="18" cy="53" r="3.5" stroke="#1e2f4a" stroke-width="1.5" fill="none"/>
+        <path d="M13 65c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="#1e2f4a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <circle cx="28" cy="53" r="3.5" stroke="#1e2f4a" stroke-width="1.5" fill="none"/>
+        <path d="M23 65c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="#1e2f4a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <circle cx="37" cy="54" r="3" stroke="#1e2f4a" stroke-width="1.3" fill="none" opacity=".5"/>
+        <path d="M32.5 65c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#1e2f4a" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".5"/>
+        <!-- Certification badge -->
+        <circle cx="57" cy="40" r="9" stroke="#B8860B" stroke-width="1.8" fill="none"/>
+        <circle cx="57" cy="40" r="5.5" stroke="#B8860B" stroke-width="1" fill="none" opacity=".3"/>
+        <path d="M53.5 40l2.5 2.8 5-5.5" stroke="#B8860B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="54.5" y1="49" x2="52.5" y2="55" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="59.5" y1="49" x2="61.5" y2="55" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"/>
+      </svg></div>
+      <div class="profile-title">I represent a company or organisation</div>
+      <div class="profile-desc">HR manager, business owner, or team lead looking to hire international talent or manage your workforce's immigration needs.</div>
+    </div>
+    <div class="profile-card" onclick="selectProfile('individual')" id="profile-individual">
+      <div class="profile-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="14" r="8" stroke="#1e2f4a" stroke-width="2"/><path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#1e2f4a" stroke-width="2" stroke-linecap="round"/><path d="M33 30l3 3-3 3" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M37 24c2.5 1.5 4 4.5 4 6" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="profile-title">I'm an individual or moving with my family</div>
+      <div class="profile-desc">You have a job offer, are already in Denmark, want to bring family members, or need guidance on your immigration situation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2a COMPANY NEED -->
+<div class="step" id="step-2a">
+  <span class="step-eyebrow">For Companies &amp; Employers</span>
+  <h2 class="step-heading">What can we <em>help you with?</em></h2>
+  <p class="step-sub">Pick the option that fits best — if you're not entirely sure, that's perfectly fine. We'll work it out together.</p>
+  <div class="choice-grid" id="co-need-grid">
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','hiring-new',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">We're looking to hire someone from outside Denmark</div><div class="choice-sub">New work permit for a candidate joining your company</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','job-change',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">We're hiring someone already in Denmark on a work permit</div><div class="choice-sub">Job change — a new permit is required before they can start</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','renewal',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">An existing employee's permit is due for renewal</div><div class="choice-sub">Extension or renewal of a current work permit</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','family',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">We need accompanying permits for an employee's family</div><div class="choice-sub">Spouse, partner, or children joining an employee in Denmark</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','compliance',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">We'd like a compliance review or right-to-work audit</div><div class="choice-sub">Check your international workforce's permit status and obligations</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','retainer',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">We're looking for ongoing immigration support</div><div class="choice-sub">HR retainer — a dedicated partner for all your immigration needs</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('co-need-grid','advice',this,'step-3a')"><div class="choice-check"></div><div><div class="choice-label">We have a specific question and would like some guidance</div><div class="choice-sub">One-off consultation or document review</div></div></div>
+  </div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button></div>
+</div>
+
+<!-- STEP 3a COMPANY DETAILS -->
+<div class="step" id="step-3a">
+  <span class="step-eyebrow">A little about your company</span>
+  <h2 class="step-heading">Let's make sure we have <em>the right context.</em></h2>
+  <p class="step-sub">A few quick details about your organisation — this helps us identify the fastest and most suitable route.</p>
+  <div class="field-group"><label class="field-label">Company name</label><input class="field-input" type="text" id="co-name" placeholder="e.g. Acme Denmark A/S"/></div>
+  <div class="field-group"><label class="field-label">CVR number <span class="field-opt">(optional)</span></label><input class="field-input" type="text" id="co-cvr" placeholder="8-digit CVR number" maxlength="8"/></div>
+  <div class="field-group">
+    <label class="field-label">Is your company Fast-Track certified with SIRI?</label>
+    <p class="field-hint" style="margin-bottom:10px;">Fast-Track certification allows permits to be processed in as little as 15 days. Type your company name or CVR to check instantly against the SIRI register.</p>
+    <div class="ft-search-wrap"><input class="field-input" type="text" id="ft-search" placeholder="Start typing your company name or CVR number…" oninput="searchFT(this.value)" autocomplete="off"/><div class="ft-results" id="ft-results"></div></div>
+    <div id="ft-status" style="margin-top:4px;"></div>
+  </div>
+  <div id="co-staff-section" style="display:none;">
+    <div class="field-group">
+      <label class="field-label">How many full-time employees does your company have in total?</label>
+      <p class="field-hint" style="margin-bottom:10px;">Fast-Track certification requires a minimum of 10 full-time employees — this helps us understand whether certification might be worth exploring for your company.</p>
+      <select class="field-select" id="co-staff" onchange="checkStaff()"><option value="">Please select…</option><option value="under10">Fewer than 10</option><option value="10-25">10–25</option><option value="26-100">26–100</option><option value="100+">More than 100</option></select>
+      <div id="co-staff-flag"></div>
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button><button class="btn-primary" onclick="goTo('step-4a')">Continue →</button></div>
+</div>
+
+<!-- STEP 4a CANDIDATE -->
+<div class="step" id="step-4a">
+  <span class="step-eyebrow">About the individual involved</span>
+  <h2 class="step-heading">A few details about <em>the person.</em></h2>
+  <p class="step-sub">This is where the eligibility assessment begins — and where we flag anything that may need early attention.</p>
+  <div class="field-group">
+    <label class="field-label">What is their nationality? <span style="font-style:italic;font-weight:400;font-size:11px;color:var(--muted);">🇪🇺 = EU/EEA route may apply</span></label>
+    <select class="field-select" id="co-nat" onchange="checkCoNat()"><option value="">Please select…</option><option value="eu">🇪🇺 EU / EEA national (incl. Norway, Iceland, Switzerland)</option><option value="dual-eu">🇪🇺 Dual nationality — one of which is EU / EEA</option><option value="uk">British (UK)</option><option value="non-eu">Non-EU / Non-EEA national</option><option value="dual-non-eu">Dual nationality — both non-EU</option></select>
+    <div id="co-nat-flag"></div>
+  </div>
+  <div class="field-group"><label class="field-label">Where are they currently based?</label><select class="field-select" id="co-location"><option value="">Please select…</option><option value="in-dk">Already in Denmark</option><option value="eu">In another EU / EEA country</option><option value="abroad">Outside the EU / EEA</option></select><div id="co-location-flag"></div></div>
+  <div id="co-salary-wrap"><div class="field-group"><label class="field-label">Annual salary for this role <span class="field-opt">(DKK)</span></label><input class="field-input field-salary" type="text" inputmode="numeric" id="co-salary" placeholder="e.g. 600000" oninput="checkSal('co');this.value=this.value.replace(/[^0-9]/g,'')"/><div class="salary-meter"><div class="salary-meter-fill" id="co-sal-meter"></div></div><div id="co-sal-flag"></div></div></div>
+  <div class="field-group"><label class="field-label">Is your company willing to act as the formal sponsor for this permit?</label><select class="field-select" id="co-sponsor" onchange="checkCoSponsor()"><option value="">Please select…</option><option value="yes">Yes — we will sponsor the application</option><option value="no">No — we are not willing or able to sponsor</option><option value="unsure">We're not sure what this means</option></select><div id="co-sponsor-flag"></div></div>
+  <div class="form-divider"></div>
+  <div class="field-group">
+    <label class="field-label">Will the candidate be relocating with any family members?</label>
+    <p class="field-hint" style="margin-bottom:10px;">Knowing this upfront helps us flag anything important — including situations that, if not addressed early, can lead to a senior hire unexpectedly withdrawing from a relocation.</p>
+    <select class="field-select" id="co-has-family" onchange="showCoFamily()"><option value="">Please select…</option><option value="no">No — they will be relocating alone</option><option value="yes">Yes — family members will be joining them</option><option value="unsure">They haven't confirmed yet</option></select>
+  </div>
+  <div id="co-family-detail" style="display:none;">
+    <div class="field-group"><label class="field-label">Who will be accompanying them? <span class="field-opt">(select all that apply)</span></label>
+      <div class="family-check-list">
+        <label class="family-check" onclick="togCoFam('spouse',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Spouse (legally married)</div></div></label>
+        <label class="family-check" onclick="togCoFam('reg-partner',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Registered partner</div></div></label>
+        <label class="family-check" onclick="togCoFam('cohab',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Unmarried / cohabiting partner</div><div class="family-check-sub">Not legally married or in a registered partnership</div></div></label>
+        <label class="family-check" onclick="togCoFam('children',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Children</div></div></label>
+      </div>
+      <div id="co-fam-flags"></div>
+    </div>
+  </div>
+  <div class="field-group"><label class="field-label">Roughly when does this position need to start?</label><select class="field-select" id="co-urgency"><option value="">Please select…</option><option value="asap">As soon as possible</option><option value="1month">Within the next month</option><option value="3months">Within 1–3 months</option><option value="planning">Still in the planning phase</option></select></div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button><button class="btn-primary" onclick="goTo('step-5-contact')">Continue →</button></div>
+</div>
+
+<!-- STEP 2b INDIVIDUAL SITUATION -->
+<div class="step" id="step-2b">
+  <span class="step-eyebrow">For Individuals &amp; Families</span>
+  <h2 class="step-heading">Which of these best describes <em>your current situation?</em></h2>
+  <p class="step-sub">Don't worry if you're between options — just pick the closest one and we'll ask a few follow-up questions.</p>
+  <div class="choice-grid" id="ind-sit-grid">
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','new-permit',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I have a job offer and need a work permit to move to Denmark</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','renewal',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I'm already in Denmark and my permit needs renewing or extending</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','job-change',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I'm changing employers and need a new permit</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','family',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I'd like to bring family members to Denmark</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','eu',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">🇪🇺 I'm an EU / EEA national and need an EU residence certificate</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','permanent',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I've been in Denmark for several years and want to explore permanent residence</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','job-seeking',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I've lost my job or my employment has ended — I need to understand my options</div></div></div>
+    <div class="choice-item" onclick="choiceAdvance('ind-sit-grid','advice',this,'step-3b')"><div class="choice-check"></div><div><div class="choice-label">I have a specific immigration question and would like some guidance</div></div></div>
+  </div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button></div>
+</div>
+
+<!-- STEP 3b NATIONALITY -->
+<div class="step" id="step-3b">
+  <span class="step-eyebrow">Your nationality</span>
+  <h2 class="step-heading">Let's find the <em>simplest route for you.</em></h2>
+  <p class="step-sub">Your nationality determines which permit scheme applies — and sometimes a second passport opens up a much easier path.</p>
+  <div class="field-group"><label class="field-label">Your primary nationality <span style="font-style:italic;font-weight:400;font-size:11px;color:var(--muted);">🇪🇺 = EU/EEA route may apply</span></label><select class="field-select" id="ind-nat-p" onchange="checkIndNat()"><option value="">Please select…</option><option value="eu">🇪🇺 EU / EEA national (Germany, France, Spain, Sweden, Norway, etc.)</option><option value="uk">British (UK)</option><option value="us">American (USA)</option><option value="in">Indian</option><option value="cn">Chinese</option><option value="ph">Filipino</option><option value="other-non-eu">Other non-EU nationality</option></select></div>
+  <label class="dual-toggle" onclick="togDual()"><input type="checkbox" id="dual-cb" style="pointer-events:none;"/><span class="dual-toggle-label">I hold a second passport (dual nationality)</span></label>
+  <div class="dual-nat-extra" id="dual-extra"><div class="field-group"><label class="field-label">Your second nationality 🇪🇺 = may unlock EU route</label><select class="field-select" id="ind-nat-s" onchange="checkIndNat()"><option value="">Please select…</option><option value="eu">🇪🇺 EU / EEA national</option><option value="uk">British (UK)</option><option value="us">American (USA)</option><option value="other-non-eu">Other non-EU nationality</option></select></div></div>
+  <div id="ind-nat-flag"></div>
+  <div class="field-group"><label class="field-label">Where are you currently living?</label><select class="field-select" id="ind-location"><option value="">Please select…</option><option value="in-dk">I'm already in Denmark</option><option value="eu">In another EU / EEA country</option><option value="abroad">Outside the EU / EEA</option></select></div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button><button class="btn-primary" onclick="goTo('step-4b')">Continue →</button></div>
+</div>
+
+<!-- STEP 4b INDIVIDUAL DETAILS -->
+<div class="step" id="step-4b">
+  <span class="step-eyebrow" id="s4b-eyebrow">A little more detail</span>
+  <h2 class="step-heading" id="s4b-heading">Almost there — <em>just a few more questions.</em></h2>
+  <p class="step-sub" id="s4b-sub">We'll keep this as brief as possible. These details help us identify the right service and flag anything that may need extra consideration.</p>
+
+  <!-- WORK / RENEWAL / JOB CHANGE -->
+  <div id="sec-work" style="display:none;">
+    <div class="field-group"><label class="field-label">Annual salary for this role <span class="field-opt">(DKK)</span></label><input class="field-input field-salary" type="text" inputmode="numeric" id="ind-salary" placeholder="e.g. 600000" oninput="checkSal('ind');this.value=this.value.replace(/[^0-9]/g,'')"/><div class="salary-meter"><div class="salary-meter-fill" id="ind-sal-meter"></div></div><div id="ind-sal-flag"></div></div>
+    <div class="field-group"><label class="field-label">Is your employer managing the application, or would you like Nordic Anchor to handle it?</label><select class="field-select" id="ind-sponsor" onchange="checkIndSponsor()"><option value="">Please select…</option><option value="employer">My employer is handling it</option><option value="na">I'd like Nordic Anchor to manage it on my behalf</option><option value="unsure">I'm not sure yet</option><option value="no-sponsor">My employer isn't willing to assist</option></select><div id="ind-sponsor-flag"></div></div>
+  </div>
+
+  <!-- FAMILY -->
+  <div id="sec-family" style="display:none;">
+    <div class="field-group"><label class="field-label">Who will be accompanying you? <span class="field-opt">(select all that apply)</span></label>
+      <div class="family-check-list">
+        <label class="family-check" onclick="togIndFam('spouse',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Spouse (legally married)</div></div></label>
+        <label class="family-check" onclick="togIndFam('reg-partner',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Registered partner</div></div></label>
+        <label class="family-check" onclick="togIndFam('cohab',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Unmarried / cohabiting partner</div><div class="family-check-sub">Not legally married or in a registered partnership</div></div></label>
+        <label class="family-check" onclick="togIndFam('children',this)"><input type="checkbox" style="pointer-events:none;accent-color:var(--gold-dk);"/><div><div class="family-check-label">Children</div></div></label>
+      </div>
+      <div id="ind-fam-flags"></div>
+    </div>
+    <div id="ind-cohab-sec" style="display:none;"><div class="field-group"><label class="field-label">How long have you been living together at the same registered address?</label><select class="field-select" id="ind-cohab-dur" onchange="checkCohab('ind')"><option value="">Please select…</option><option value="under1">Less than 1 year</option><option value="1to2">Between 1 and 2 years</option><option value="over2">More than 2 years</option></select><div id="ind-cohab-flag"></div></div></div>
+    <div id="ind-children-sec" style="display:none;">
+      <div class="field-group"><label class="field-label">Ages of the children accompanying you</label><p class="field-hint" style="margin-bottom:8px;">Please list their ages separated by commas, e.g. <em>5, 10, 17</em></p><input class="field-input" type="text" id="ind-child-ages" placeholder="e.g. 5, 10, 17" oninput="checkChildAges('ind')"/><div id="ind-child-flag"></div></div>
+      <div class="field-group"><label class="field-label">Will both parents be relocating to Denmark together?</label><select class="field-select" id="ind-parents" onchange="checkParents('ind')"><option value="">Please select…</option><option value="yes">Yes, both parents are coming</option><option value="one-stays">No — one parent is remaining abroad</option><option value="separated">The parents are separated or divorced</option></select><div id="ind-parent-flag"></div></div>
+    </div>
+  </div>
+
+  <!-- PERMANENT RESIDENCE -->
+  <div id="sec-perm" style="display:none;">
+    <div class="field-group"><label class="field-label">What type of residence permit do you currently hold?</label><select class="field-select" id="perm-type"><option value="">Please select…</option><option value="work">Work permit (Pay Limit, Fast-Track, or similar)</option><option value="study">Student permit</option><option value="family">Family reunification permit</option><option value="eu">🇪🇺 EU residence certificate</option><option value="other">Other / I'm not sure</option></select></div>
+    <div class="field-group"><label class="field-label">Roughly how long have you held a valid Danish residence permit in total?</label><select class="field-select" id="perm-years" onchange="checkPermYears()"><option value="">Please select…</option><option value="under4">Less than 4 years</option><option value="4to6">4–6 years</option><option value="6to8">6–8 years</option><option value="over8">8 years or more</option></select><div id="perm-years-flag"></div></div>
+    <div id="perm-supp-sec" style="display:none;"><div class="field-group"><label class="field-label">Have you met all four supplementary requirements?</label><p class="field-hint" style="margin-bottom:8px;">These are: (1) Prøve i Dansk 3, (2) employed or self-employed for at least 3.5 of the last 4 years, (3) active citizenship activities, and (4) a higher Danish language score. Meeting all four may reduce the residence requirement from 8 to 4 years.</p><select class="field-select" id="perm-supp" onchange="checkPermSupp()"><option value="">Please select…</option><option value="all4">Yes — I believe I meet all four</option><option value="two">I meet at least two, but not all four</option><option value="unsure">I'm not sure what these requirements are</option><option value="none">I don't think I meet any of these</option></select><div id="perm-supp-flag"></div></div></div>
+    <div class="field-group"><label class="field-label">Do you hold any special ties to Denmark?</label><p class="field-hint" style="margin-bottom:8px;">For example: Danish descent, former Danish citizen, aged 18–19 with continuous employment/education since folkeskolen, or 🇪🇺 EU/EEA national with 5 years of residence.</p><select class="field-select" id="perm-ties" onchange="checkPermTies()"><option value="">Please select…</option><option value="none">No special ties</option><option value="danish-descent">Danish descent or former Danish citizen</option><option value="young">Aged 18–19, continuous employment/education since folkeskolen</option><option value="eu-5yr">🇪🇺 EU/EEA national — 5 years of residence in Denmark</option></select><div id="perm-ties-flag"></div></div>
+  </div>
+
+  <!-- JOB SEEKING -->
+  <div id="sec-jobseek" style="display:none;">
+    <div class="field-group"><label class="field-label">How did your employment come to an end?</label><select class="field-select" id="js-how" onchange="checkJsHow()"><option value="">Please select…</option><option value="dismissed">My employer terminated my contract or made me redundant</option><option value="resigned">I resigned voluntarily</option><option value="contract-end">My fixed-term contract came to a natural end</option><option value="mutual">It was a mutual agreement</option></select><div id="js-how-flag"></div></div>
+    <div class="field-group"><label class="field-label">When did your employment end, or when is it expected to?</label><select class="field-select" id="js-when"><option value="">Please select…</option><option value="today">Today or very recently</option><option value="week">Within the last week</option><option value="month">Within the last month</option><option value="upcoming">It hasn't ended yet — I'm preparing ahead</option></select></div>
+    <div class="field-group">
+      <label class="field-label">What type of permit are you currently on?</label>
+      <p class="field-hint" style="margin-bottom:8px;">This is usually stated on your residence card or in your approval letter from SIRI. If you're unsure, select the closest match or "Not sure" — we'll confirm it.</p>
+      <select class="field-select" id="js-permit-type" onchange="checkJsPermitType()">
+        <option value="">Please select…</option>
+        <optgroup label="Fast-Track schemes (employer must be certified)">
+          <option value="ft-pay-limit">Fast-Track — Pay Limit or Education</option>
+          <option value="ft-researcher">Fast-Track — Researcher</option>
+          <option value="ft-supp">Fast-Track — Supplementary Pay Limit</option>
+          <option value="ft-short">Fast-Track — Short-term (3 months)</option>
+        </optgroup>
+        <optgroup label="Standard work schemes">
+          <option value="pay-limit">Pay Limit Scheme</option>
+          <option value="supp-pay-limit">Supplementary Pay Limit Scheme</option>
+          <option value="positive-list-higher">Positive List — Higher Education</option>
+          <option value="positive-list-skilled">Positive List — Skilled Work</option>
+          <option value="researcher">Researcher Scheme</option>
+          <option value="guest-researcher">Guest Researcher Scheme</option>
+          <option value="trainee">Trainee Scheme</option>
+          <option value="special-qual">Special Individual Qualifications</option>
+          <option value="startup">Start-up Denmark</option>
+          <option value="labour-market">Labour Market Attachment Scheme</option>
+          <option value="herdsmen">Herdsmen and Farm Managers</option>
+          <option value="sea">Employee on Mobile Workplace at Sea</option>
+        </optgroup>
+        <option value="unsure">I'm not sure of the exact type</option>
+      </select>
+      <div id="js-permit-type-flag"></div>
+    </div>
+    <div class="field-group"><label class="field-label">When does your current permit expire?</label><select class="field-select" id="js-expiry"><option value="">Please select…</option><option value="expired">It has already expired</option><option value="under1m">Within the next month</option><option value="1to3m">In 1–3 months</option><option value="over3m">More than 3 months away</option></select></div>
+    <div class="field-group"><label class="field-label">Are you currently in Denmark?</label><select class="field-select" id="js-in-dk" onchange="checkJsInDk()"><option value="">Please select…</option><option value="yes">Yes, I'm in Denmark</option><option value="no">No, I'm outside Denmark</option></select><div id="js-in-dk-flag"></div></div>
+    <div class="field-group"><label class="field-label">Do you intend to stay in Denmark and find new employment?</label><select class="field-select" id="js-intent"><option value="">Please select…</option><option value="yes">Yes — I'd like to stay and look for work</option><option value="unsure">I'm not sure yet — it depends on my options</option><option value="no">No — I'm planning to leave Denmark</option></select></div>
+  </div>
+
+  <!-- ADVICE -->
+  <div id="sec-advice" style="display:none;">
+    <div class="field-group"><label class="field-label">What area does your question relate to?</label><select class="field-select" id="advice-topic"><option value="">Please select…</option><option value="work-permit">Work permits — eligibility, applications, or conditions</option><option value="family">Family or accompanying permits</option><option value="eu-res">🇪🇺 EU residence — registration or documentation</option><option value="renewal">Renewals or extensions</option><option value="job-change">Changing employers or job change permits</option><option value="permanent">Permanent residence eligibility</option><option value="compliance">Employer compliance or right-to-work</option><option value="other">Something else</option></select></div>
+    <div class="field-group"><label class="field-label">How urgent is this for you?</label><select class="field-select" id="advice-urgency"><option value="">Please select…</option><option value="asap">I need a response as soon as possible</option><option value="days">Within the next few days</option><option value="relaxed">No immediate urgency — I'm planning ahead</option></select></div>
+    <div class="field-group"><label class="field-label">Could you briefly describe what you'd like guidance on?</label><textarea class="field-textarea" id="advice-desc" placeholder="Please share a short summary of your question or situation — as much or as little detail as you're comfortable with. This helps us prepare properly before getting back to you."></textarea></div>
+  </div>
+
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button><button class="btn-primary" onclick="goTo('step-5-contact')">Continue →</button></div>
+</div>
+
+<!-- STEP 5 CONTACT -->
+<div class="step" id="step-5-contact">
+  <span class="step-eyebrow">Almost done</span>
+  <h2 class="step-heading">How should we <em>get back to you?</em></h2>
+  <p class="step-sub">We'll review everything carefully and come back to you within one business day with a clear summary and recommended next steps.</p>
+  <div class="field-row"><div class="field-group"><label class="field-label">First name</label><input class="field-input" type="text" id="c-first" placeholder="Your first name"/></div><div class="field-group"><label class="field-label">Last name</label><input class="field-input" type="text" id="c-last" placeholder="Your last name"/></div></div>
+  <div class="field-group"><label class="field-label">Email address</label><input class="field-input" type="email" id="c-email" placeholder="you@example.com"/></div>
+  <div class="field-group"><label class="field-label">Phone number <span class="field-opt">(optional)</span></label><input class="field-input" type="tel" id="c-phone" placeholder="+45 · · · · · · · ·"/></div>
+  <div class="field-group"><label class="field-label">Anything else you'd like us to know? <span class="field-opt">(optional)</span></label><textarea class="field-textarea" id="c-notes" placeholder="Any additional context, questions, or details that might be helpful…"></textarea></div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button><button class="btn-primary" onclick="buildSummary()">Review my answers →</button></div>
+</div>
+
+<!-- STEP 6 SUMMARY -->
+<div class="step" id="step-6-summary">
+  <span class="step-eyebrow">Review before you submit</span>
+  <h2 class="step-heading">Here's a summary of <em>what you've shared.</em></h2>
+  <p class="step-sub">Please take a moment to check everything looks right — you can go back and edit any section before submitting.</p>
+  <div id="summary-content"></div>
+  <div id="rec-block-wrap"></div>
+  <div class="form-divider"></div>
+  <div class="consent-block">
+    <p style="font-size:13px;color:var(--body);margin-bottom:16px;line-height:1.7;">By submitting this form, you agree to the following:</p>
+    <label class="consent-check"><input type="checkbox" id="consent-1" onchange="chkConsent()"/><span class="consent-check-label">I agree that Nordic Anchor may use the information I've provided to assess my situation and contact me. This information will be retained for up to <strong>6 months</strong> while my enquiry is active, after which it will be deleted unless I engage Nordic Anchor's services. I may request deletion at any time by emailing <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>.</span></label>
+    <label class="consent-check"><input type="checkbox" id="consent-2" onchange="chkConsent()"/><span class="consent-check-label">I have read and understood the <a href="/privacy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms &amp; Conditions</a>.</span></label>
+  </div>
+  <div class="btn-row"><button class="btn-back" onclick="goBack()">← Back</button><button class="btn-primary" id="btn-submit" onclick="submitForm()" disabled>Submit my enquiry →</button></div>
+</div>
+
+<!-- STEP 7 CONFIRM -->
+<div class="step" id="step-7-confirm">
+  <span class="step-eyebrow">Enquiry received</span>
+  <h2 class="step-heading">Thank you — we'll be in <em>touch very soon.</em></h2>
+  <p class="step-sub">We've received everything and will review your situation carefully. You can expect to hear from us within <strong>one business day</strong>.</p>
+  <div class="rec-block" style="margin:32px 0;">
+    <span class="rec-label">What happens next</span>
+    <div class="rec-title">A personal assessment — not a template reply</div>
+    <div class="rec-desc">One of our specialists will review your answers, cross-reference the requirements relevant to your situation, and come back to you with a plain-language summary of the best path forward — along with a proposed service and clear next steps.</div>
+    <div class="rec-flags" style="margin-top:20px;">
+      <div class="rec-flag-item"><span class="rec-flag-icon">→</span><span class="rec-flag-text">Browse our <a href="/services" style="color:var(--gold);">services pages</a> for pricing and scope details.</span></div>
+      <div class="rec-flag-item"><span class="rec-flag-icon">→</span><span class="rec-flag-text">For anything urgent, email us at <a href="mailto:rd@nordicanchor.dk" style="color:var(--gold);">rd@nordicanchor.dk</a>.</span></div>
+    </div>
+  </div>
+  <a href="/" class="btn-primary" style="display:inline-block;text-decoration:none;">Back to Nordic Anchor →</a>
+</div>
+
+</div><!-- /form-wrap -->
+<script>
+const S={profile:null,coNeed:null,indSit:null,ftCertified:null,ftName:null,flags:[],redFlags:[],recTitle:'',recDesc:'',stepHistory:['step-1'],cur:'step-1'};
+const coFam={},indFam={};
+const TOTAL=7;
+const ORDERS={company:['step-1','step-2a','step-3a','step-4a','step-5-contact','step-6-summary','step-7-confirm'],individual:['step-1','step-2b','step-3b','step-4b','step-5-contact','step-6-summary','step-7-confirm']};
+const CERTIFIED=[["&TRADITION A/S","18169304"],["3Shape A/S","25553489"],["3XN A/S","14277137"],["4N Manpower A/S","44825678"],["ABB A/S","31371716"],["Accenture A/S","13227500"],["AGC Biologics A/S","25950941"],["AFRY Denmark A/S","13590885"],["Alfa Laval Copenhagen A/S","10134285"],["Alfa Laval Nordic A/S","20255617"],["ALK-ABELLÓ A/S","63717916"],["AMBU A/S","63644919"],["A.P. MØLLER HOLDING A/S","25679288"],["Arla Foods AMBA","25313763"],["Ascendis Pharma A/S","29918791"],["ASTRAZENECA A/S","55742928"],["Avanade Denmark A/S","20646330"],["Bain & Company Denmark P/S","30714520"],["Banedanmark","18632276"],["Bang & Olufsen A/S","41257911"],["BAVARIAN NORDIC A/S","16271187"],["BEC Financial Technologies a.m.b.a.","13088810"],["Bech-Bruun Advokatpartnerselskab","38538071"],["Bestseller A/S","88216512"],["Better Collective ApS","27652913"],["BEUMER Group A/S","12655681"],["Bjarke Ingels Group A/S","29309396"],["BOCONCEPT A/S","89866618"],["Boozt A/S","31863147"],["Capgemini Danmark A/S","25606965"],["Carlsberg A/S","61056416"],["Carlsberg Breweries A/S","25508343"],["Chr. Hansen A/S","12516479"],["Coloplast A/S","69749917"],["Copenhagen Business School","19596915"],["COWI A/S","44623528"],["DANFOSS A/S","20165715"],["Danish Crown A/S","26121264"],["Danmarks Tekniske Universitet (DTU)","30060946"],["Danske Bank A/S","61126228"],["Danske Commodities A/S","28113951"],["Databricks Denmark ApS","44975130"],["Deloitte Statsautoriseret Revisionspartnerselskab","33963556"],["Demant A/S","71186911"],["DFDS","14194711"],["DHI A/S","36466871"],["DNV GL Denmark A/S","89832314"],["DSB","25050053"],["DSV A/S","58233528"],["ECCO Sko A/S","45349918"],["emagine Consulting A/S","26249627"],["Ernst & Young Godkendt Revisionspartnerselskab","30700228"],["EUROPEAN ENERGY A/S","18351331"],["Everfuel A/S","38456695"],["F.C. København P/S","43952161"],["Facebook Denmark ApS","39174499"],["Falck Danmark A/S","16271241"],["FERM LIVING ApS","30070186"],["Ferring Pharmaceuticals A/S","16313440"],["FLSmidth A/S","15028882"],["Force Technology","55117314"],["FUJIFILM Diosynth Biotechnologies Denmark ApS","26060702"],["FUJITSU A/S","86631628"],["Ganni A/S","21664731"],["GEA Process Engineering A/S","10050715"],["Genmab A/S","21023884"],["Global Wind Service A/S","31166047"],["GN Hearing A/S","55082715"],["GN Store Nord A/S","24257843"],["Google Denmark ApS","28866984"],["Grundfos A/S","37499919"],["GRUNDFOS DK A/S","19342735"],["H. Lundbeck A/S","56759913"],["Hempel A/S","59946013"],["Henning Larsen Architects A/S","18940884"],["HI3G DENMARK ApS","26123445"],["Hitachi Energy Denmark A/S","39856638"],["HUMMEL A/S","81198411"],["IBM Danmark ApS","65305216"],["IKEA A/S","50574911"],["IMPACT A/S","25858832"],["Implement Consulting Group P/S","32767788"],["IO Interactive A/S","24216209"],["ISS World Services A/S","10161614"],["IT-Universitetet i København","29057753"],["JYSK A/S","13590400"],["KAMSTRUP A/S","21248118"],["Kirkbi A/S","18591235"],["KMD A/S","26911745"],["Københavns Universitet","29979812"],["KPMG Statsautoriseret Revisionpartnerselskab","25578198"],["Lactalis Danmark A/S","10106982"],["Languagewire A/S","25567846"],["Lego System A/S","47458714"],["LEO Pharma A/S","56759514"],["LINAK A/S","66365328"],["LM WIND POWER A/S","76490511"],["Lunar Bank A/S","39697696"],["MAERSK TANKERS A/S","28673590"],["Marel A/S","25013719"],["MARS DANMARK A/S","63203211"],["McKinsey & Company Denmark P/S","32284671"],["Microsoft Danmark ApS","13612870"],["Microsoft Development Center Copenhagen ApS","76247218"],["Milestone Systems A/S","20341130"],["NKT (Denmark) A/S","25711548"],["NNIT A/S","21093106"],["Nokia Denmark A/S","13680531"],["Nordea Danmark","25992180"],["Novo Holdings A/S","24257630"],["Novo Nordisk A/S","24256790"],["NIRAS A/S","37295728"],["Ørsted A/S","36213728"],["Pandora A/S","28505116"],["Ramboll Denmark A/S","35128417"],["Rockwool A/S","54879415"],["Saxo Bank A/S","15731249"],["Siemens Gamesa Renewable Energy A/S","26100519"],["VELUX A/S","36892940"],["Vestas Wind Systems A/S","10403782"],["Zealand Pharma A/S","20045078"]];
+
+function goTo(id){document.getElementById(S.cur).classList.remove('active');S.stepHistory.push(id);S.cur=id;document.getElementById(id).classList.add('active');updateProg();window.scrollTo({top:0,behavior:'smooth'});}
+function goBack(){if(S.stepHistory.length<=1)return;S.stepHistory.pop();const p=S.stepHistory[S.stepHistory.length-1];document.getElementById(S.cur).classList.remove('active');S.cur=p;document.getElementById(p).classList.add('active');updateProg();window.scrollTo({top:0,behavior:'smooth'});}
+function updateProg(){const order=ORDERS[S.profile]||ORDERS.individual;const idx=order.indexOf(S.cur);const step=Math.max(idx+1,1);document.getElementById('progressFill').style.width=Math.round((step/TOTAL)*100)+'%';document.getElementById('progressLabel').textContent='Step '+step+' of '+TOTAL;const dots=document.getElementById('stepDots');dots.innerHTML='';order.forEach((_,i)=>{const d=document.createElement('div');d.className='step-dot'+(i<idx?' done':i===idx?' active':'');dots.appendChild(d);});}
+
+function selectProfile(p){S.profile=p;document.getElementById('profile-company').classList.toggle('selected',p==='company');document.getElementById('profile-individual').classList.toggle('selected',p==='individual');setTimeout(()=>goTo(p==='company'?'step-2a':'step-2b'),220);}
+
+function choiceAdvance(grid,val,el,next){document.querySelectorAll('#'+grid+' .choice-item').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');if(grid==='co-need-grid')S.coNeed=val;if(grid==='ind-sit-grid'){S.indSit=val;configStep4b(val);}if(next)setTimeout(()=>goTo(next),220);}
+
+function configStep4b(sit){['sec-work','sec-family','sec-perm','sec-jobseek','sec-advice'].forEach(id=>document.getElementById(id).style.display='none');const map={'new-permit':'sec-work','renewal':'sec-work','job-change':'sec-work','family':'sec-family','permanent':'sec-perm','job-seeking':'sec-jobseek','advice':'sec-advice'};if(map[sit])document.getElementById(map[sit]).style.display='block';if(sit==='advice'){document.getElementById('s4b-heading').innerHTML='Tell us a little more about <em>what you need.</em>';document.getElementById('s4b-sub').textContent='A brief description helps us prepare properly — so when we come back to you, we can give you something genuinely useful.';}else{document.getElementById('s4b-heading').innerHTML='Almost there — <em>just a few more questions.</em>';document.getElementById('s4b-sub').textContent='We\'ll keep this as brief as possible. These details help us identify the right service and flag anything that may need extra consideration.';}}
+
+// FT SEARCH
+function searchFT(q){const res=document.getElementById('ft-results'),st=document.getElementById('ft-status');if(q.length<2){res.innerHTML='';res.classList.remove('open');return;}const m=CERTIFIED.filter(([n,c])=>n.toLowerCase().includes(q.toLowerCase())||c.includes(q)).slice(0,8);if(!m.length){res.innerHTML='<div class="ft-not-found">No match found in the SIRI certified list.</div>';res.classList.add('open');S.ftCertified=false;st.innerHTML='<div class="flag flag-amber" style="margin-top:6px;"><span class="flag-title">ℹ️ Not on the certified list</span>Your company doesn\'t appear on the current SIRI Fast-Track register — that\'s not a barrier to hiring internationally. We can help with standard permit routes, and advise on whether certification would make sense going forward.</div>';document.getElementById('co-staff-section').style.display='block';return;}res.innerHTML=m.map(([n,c])=>`<div class="ft-result-item" onclick="selFT('${n.replace(/'/g,"\\'")}','${c}')"><span>${n}</span><span class="ft-cvr">CVR ${c}</span></div>`).join('');res.classList.add('open');}
+function selFT(name,cvr){S.ftCertified=true;S.ftName=name;document.getElementById('ft-search').value='';document.getElementById('ft-results').classList.remove('open');document.getElementById('ft-status').innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;"><div class="ft-selected-badge">✓ ${name} <span style="color:var(--muted);font-size:11px;">CVR ${cvr}</span><button onclick="clearFT()">×</button></div><div class="flag flag-success" style="margin:0;"><span class="flag-title">✓ Fast-Track certified</span>${name} is on the SIRI Fast-Track list — permits can typically be processed in as little as 15 days.</div></div>`;document.getElementById('co-staff-section').style.display='none';if(!document.getElementById('co-name').value)document.getElementById('co-name').value=name;}
+function clearFT(){S.ftCertified=null;S.ftName=null;document.getElementById('ft-status').innerHTML='';document.getElementById('ft-search').value='';document.getElementById('co-staff-section').style.display='none';}
+document.addEventListener('click',e=>{if(!e.target.closest('.ft-search-wrap'))document.getElementById('ft-results').classList.remove('open');});
+function checkStaff(){const v=document.getElementById('co-staff').value;const f=document.getElementById('co-staff-flag');f.innerHTML=v==='under10'?'<div class="flag flag-amber" style="margin-top:6px;"><span class="flag-title">ℹ️ Certification eligibility</span>Fast-Track certification generally requires a minimum of 10 full-time employees. With fewer than 10, certification may not be available yet — but all standard permit routes remain fully open.</div>':'';}
+
+// SALARY
+const TS=446000,TP=552000;
+function checkSal(b){const raw=(document.getElementById(b==='co'?'co-salary':'ind-salary').value||'').replace(/[^0-9]/g,'');const v=parseInt(raw)||0;const m=document.getElementById(b+'-sal-meter'),f=document.getElementById(b+'-sal-flag');const pct=Math.min(Math.round((v/750000)*100),100);m.style.width=pct+'%';m.style.background=v<TS?'#e57373':v<TP?'#FFB300':'#4caf50';if(!v){f.innerHTML='';return;}if(v<TS){if(!S.flags.includes('salary-below'))S.flags.push('salary-below');f.innerHTML=`<div class="flag flag-amber"><span class="flag-title">⚠️ Salary note</span>DKK ${v.toLocaleString()} is below the Supplementary Pay Limit minimum of DKK ${TS.toLocaleString()}/year. Standard Fast-Track and Pay Limit routes require at least this amount. There may be alternative routes — we'll explore these as part of our assessment.</div>`;}else if(v<TP){S.flags=S.flags.filter(x=>x!=='salary-below');f.innerHTML=`<div class="flag flag-amber"><span class="flag-title">ℹ️ Supplementary Pay Limit Scheme</span>DKK ${v.toLocaleString()} qualifies under the <strong>Supplementary Pay Limit Scheme</strong> (min. DKK ${TS.toLocaleString()}). This route has additional requirements including a job posting obligation — we'll cover all of this in our assessment.</div>`;}else{S.flags=S.flags.filter(x=>x!=='salary-below');f.innerHTML=`<div class="flag flag-success"><span class="flag-title">✓ Qualifies for Pay Limit Scheme</span>DKK ${v.toLocaleString()} meets the Pay Limit Scheme threshold (min. DKK ${TP.toLocaleString()}).</div>`;}}
+
+// NATIONALITY
+function checkCoNat(){const v=document.getElementById('co-nat').value;const f=document.getElementById('co-nat-flag');f.innerHTML=(v==='eu'||v==='dual-eu')?'<div class="flag flag-success"><span class="flag-title">🇪🇺 EU route available</span>As an EU/EEA national, your candidate has the right to live and work in Denmark without a traditional work permit — just an EU residence certificate, which is much faster and simpler. We\'ll factor this in.</div>':'';}
+function checkIndNat(){const p=document.getElementById('ind-nat-p').value;const s=document.getElementById('ind-nat-s')?document.getElementById('ind-nat-s').value:'';const f=document.getElementById('ind-nat-flag');if(p==='eu'||s==='eu')f.innerHTML=`<div class="flag flag-success"><span class="flag-title">🇪🇺 EU route available</span>You hold EU/EEA nationality${s==='eu'?' through your second passport':''}. You have the right to live and work in Denmark freely — no salary thresholds, no employer sponsor required. An EU residence certificate formalises this. We'll factor this in.</div>`;else if(p==='uk')f.innerHTML='<div class="flag flag-info"><span class="flag-title">ℹ️ UK nationals post-Brexit</span>Since Brexit, British nationals need a standard Danish work permit — the same routes as other non-EU nationals. We\'ll guide you to the right one.</div>';else f.innerHTML='';}
+function togDual(){const cb=document.getElementById('dual-cb');cb.checked=!cb.checked;document.getElementById('dual-extra').classList.toggle('show',cb.checked);if(!cb.checked)document.getElementById('ind-nat-flag').innerHTML='';}
+
+// COMPANY FAMILY
+function showCoFamily(){const v=document.getElementById('co-has-family').value;document.getElementById('co-family-detail').style.display=(v==='yes')?'block':'none';}
+function togCoFam(type,el){const cb=el.querySelector('input');cb.checked=!cb.checked;el.classList.toggle('checked',cb.checked);coFam[type]=cb.checked;renderCoFamFlags();}
+function renderCoFamFlags(){const c=document.getElementById('co-fam-flags');let h='';if(coFam['cohab']){h+=`<div class="flag flag-amber"><span class="flag-title">⚠️ Important — please read carefully</span>Accompanying permit applications for unmarried cohabiting partners are held to significantly stricter standards than for married or registered couples. SIRI typically requires documented proof of at least <strong>1.5–2 years of shared residence at the same registered address</strong>, supported by joint lease agreements, utility bills, or bank statements.<br><br><strong>Why this matters to you as an employer:</strong> This is one of the most common reasons a senior relocation falls apart late in the process. An executive accepting a role in Denmark may withdraw their acceptance — sometimes after contracts are signed — if they discover their partner cannot accompany them. Flagging this early and advising your candidate to prepare the right documentation (or consider formalising the relationship before applying) can prevent a very costly situation. We'll assess the full picture as part of our review.</div>`;if(!S.redFlags.includes('cohab'))S.redFlags.push('cohab');}else S.redFlags=S.redFlags.filter(x=>x!=='cohab');if(coFam['children']){h+=`<div class="flag flag-amber"><span class="flag-title">⚠️ Note on accompanying children</span>Children under 18 can generally accompany the permit holder. <strong>Children aged 18 or over are very unlikely to qualify</strong> for an accompanying family permit — except in the narrow case of an adult child with a disability requiring ongoing parental care. Please flag this in the notes if relevant.</div>`;if(!S.flags.includes('children-employer'))S.flags.push('children-employer');}c.innerHTML=h;}
+
+// INDIVIDUAL FAMILY
+function togIndFam(type,el){const cb=el.querySelector('input');cb.checked=!cb.checked;el.classList.toggle('checked',cb.checked);indFam[type]=cb.checked;document.getElementById('ind-cohab-sec').style.display=indFam['cohab']?'block':'none';document.getElementById('ind-children-sec').style.display=indFam['children']?'block':'none';renderIndFamFlags();}
+function renderIndFamFlags(){const c=document.getElementById('ind-fam-flags');let h='';if(indFam['cohab']){h+=`<div class="flag flag-amber"><span class="flag-title">⚠️ Unmarried/cohabiting partner — please read</span>SIRI applies strict requirements for unmarried cohabiting partners. You'll typically need documented proof of at least <strong>1.5–2 years of cohabitation at the same registered address</strong>, plus supporting evidence such as joint utility bills, lease agreements, or bank statements. This is important to know upfront.</div>`;if(!S.redFlags.includes('cohab'))S.redFlags.push('cohab');}else S.redFlags=S.redFlags.filter(x=>x!=='cohab');c.innerHTML=h;}
+function checkCohab(b){const v=document.getElementById(b+'-cohab-dur').value,f=document.getElementById(b+'-cohab-flag');if(v==='under1')f.innerHTML='<div class="flag flag-red"><span class="flag-title">⚠️ Likely too short</span>Less than 1 year of cohabitation makes an application very unlikely to succeed. We strongly recommend a consultation before proceeding, and advise exploring whether the relationship could be formalised in the meantime.</div>';else if(v==='1to2')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Borderline — documentation is essential</span>1–2 years of cohabitation may be possible, but will require thorough documentation. A detailed review of your evidence is strongly recommended before submitting.</div>';else if(v==='over2')f.innerHTML='<div class="flag flag-success"><span class="flag-title">✓ Likely to qualify on this requirement</span>2+ years of documented shared residence puts you in a good position. We\'ll confirm all other documentation requirements in our assessment.</div>';}
+function checkChildAges(b){const ages=(document.getElementById(b+'-child-ages').value||'').split(',').map(a=>parseInt(a.trim())).filter(a=>!isNaN(a));const over18=ages.filter(a=>a>=18);const f=document.getElementById(b+'-child-flag');if(over18.length){f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Child(ren) aged 18 or over</span>Danish law treats individuals aged 18+ as adults — they are very unlikely to be granted an accompanying family permit. There is one narrow exception: an adult child with a disability requiring ongoing parental care. Please mention this in your notes if applicable.</div>';if(!S.redFlags.includes('child-over-18'))S.redFlags.push('child-over-18');}else{f.innerHTML='';S.redFlags=S.redFlags.filter(x=>x!=='child-over-18');}}
+function checkParents(b){const v=document.getElementById(b+'-parents').value,f=document.getElementById(b+'-parent-flag');if(v==='one-stays')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Custody consent required</span>When one parent remains abroad, SIRI requires written consent from that parent for the children to relocate to Denmark. Existing custody arrangements will also need to be documented.</div>';else if(v==='separated')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Separated/divorced families</span>Applications involving separated or divorced parents require formal custody documentation and written consent from the other parent in most cases. This can add complexity — a consultation before submitting is recommended.</div>';else f.innerHTML='';}
+
+// CO SPONSOR
+function checkCoSponsor(){const v=document.getElementById('co-sponsor').value,f=document.getElementById('co-sponsor-flag');if(v==='no')f.innerHTML='<div class="flag flag-red"><span class="flag-title">⚠️ Employer sponsorship is required</span>For all standard Danish work permit routes, the employer must be the formal applicant. If your company is unwilling to sponsor, the standard permit routes are unfortunately not available. Please add context in the notes — there may be alternatives to explore.</div>';else if(v==='unsure')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">ℹ️ What sponsorship involves</span>The employer formally applies for the work permit on behalf of the employee — providing information about the role, salary, and contract. We\'ll walk you through exactly what\'s involved.</div>';else f.innerHTML='';}
+
+// IND SPONSOR
+function checkIndSponsor(){const v=document.getElementById('ind-sponsor').value,f=document.getElementById('ind-sponsor-flag');if(v==='no-sponsor')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Employer cooperation is needed</span>Most Danish work permit routes require the employer to be the formal applicant. If your employer is unwilling to cooperate, this significantly limits your options. Please add details in the notes — we\'ll advise on what\'s available.</div>';else f.innerHTML='';}
+
+// PERMANENT RESIDENCE
+function checkPermYears(){const y=document.getElementById('perm-years').value,f=document.getElementById('perm-years-flag'),ss=document.getElementById('perm-supp-sec');ss.style.display='none';if(y==='under4')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">ℹ️ Residence requirement — planning ahead</span>The standard route requires <strong>8 years</strong> of continuous legal residence. A fast-track <strong>4-year route</strong> exists only if all four supplementary requirements are met. With fewer than 4 years, it\'s too early to apply — but we can help you plan towards it.</div>';else if(y==='4to6'){f.innerHTML='<div class="flag flag-amber"><span class="flag-title">ℹ️ Possibly eligible via the 4-year fast-track</span>The 4-year route requires meeting <strong>all four supplementary requirements</strong>. Let\'s check whether you qualify.</div>';ss.style.display='block';}else if(y==='6to8'){f.innerHTML='<div class="flag flag-amber"><span class="flag-title">ℹ️ Approaching the standard threshold</span>You\'re close to the 8-year standard eligibility. If you meet all four supplementary requirements, you may already qualify under the 4-year fast-track.</div>';ss.style.display='block';}else if(y==='over8'){f.innerHTML='<div class="flag flag-success"><span class="flag-title">✓ Residence threshold met</span>8+ years satisfies the primary residence requirement. You\'ll also need to meet the basic conditions and at least <strong>2 of the 4 supplementary requirements</strong>.</div>';ss.style.display='block';}}
+function checkPermSupp(){const v=document.getElementById('perm-supp').value,f=document.getElementById('perm-supp-flag');if(v==='all4')f.innerHTML='<div class="flag flag-success"><span class="flag-title">✓ 4-year fast-track may apply</span>Meeting all four supplementary requirements with 4+ years of residence may qualify you for permanent residence now. We\'ll verify this in our assessment.</div>';else if(v==='two')f.innerHTML='<div class="flag flag-info"><span class="flag-title">ℹ️ Standard route</span>At least 2 of 4 supplementary requirements satisfies the standard permanent residence criteria once the 8-year threshold is met.</div>';else if(v==='none')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Additional preparation needed</span>You\'ll need at least 2 of the 4 supplementary requirements to qualify. We\'ll assess where you stand and what you need to work towards.</div>';else if(v==='unsure')f.innerHTML='<div class="flag flag-info"><span class="flag-title">ℹ️ We\'ll explain these in our assessment</span>The four requirements are: (1) Prøve i Dansk 3, (2) employment for 3.5 of the last 4 years, (3) active citizenship activities, and (4) a higher Danish language score. We\'ll check which ones you meet.</div>';}
+function checkPermTies(){const v=document.getElementById('perm-ties').value,f=document.getElementById('perm-ties-flag');if(v==='danish-descent')f.innerHTML='<div class="flag flag-success"><span class="flag-title">✓ Reduced residence requirement may apply</span>Danish descent or former Danish citizens may qualify after as little as 1–2 years of residence. We\'ll assess your specific situation.</div>';else if(v==='young')f.innerHTML='<div class="flag flag-success"><span class="flag-title">✓ Youth route</span>Individuals aged 18–19 in continuous employment or education since folkeskolen may qualify under a specific route. We\'ll confirm the conditions.</div>';else if(v==='eu-5yr')f.innerHTML='<div class="flag flag-success"><span class="flag-title">🇪🇺 EU permanent residence — 5-year route</span>EU/EEA nationals who have lived in Denmark for 5 consecutive years under EU regulations may apply for EU permanent residence — no salary requirements, separate from the standard permit track.</div>';else f.innerHTML='';}
+
+// JOB SEEKING — SIRI scheme data (source: nyidanmark.dk/en-GB/Words-and-concepts/SIRI/Work-schemes-in-SIRI---an-overview, updated 06-01-2026)
+// jobSeek: '6mo' = 6-month job-seeking permit if dismissed through no fault of own | '3mo' = 3 months | null = no job-seeking right
+// partTime: whether part-time work is allowed on this scheme
+// lapse: 'covered' = permit lapses after 6 months abroad | 'exempt' = exempt from lapsing rules
+const SIRI_SCHEMES = {
+  'ft-pay-limit':       {label:'Fast-Track (Pay Limit / Education)',     jobSeek:'6mo', partTime:false, lapse:'exempt',   duration:'4 years, extendable'},
+  'ft-researcher':      {label:'Fast-Track (Researcher)',                 jobSeek:'6mo', partTime:true,  lapse:'exempt',   duration:'4 years, extendable'},
+  'ft-supp':            {label:'Fast-Track (Supplementary Pay Limit)',    jobSeek:null,  partTime:false, lapse:'exempt',   duration:'5 years, extendable'},
+  'ft-short':           {label:'Fast-Track (Short-term)',                 jobSeek:null,  partTime:false, lapse:'exempt',   duration:'3 months, cannot be extended'},
+  'pay-limit':          {label:'Pay Limit Scheme',                        jobSeek:'6mo', partTime:false, lapse:'covered',  duration:'4 years, extendable'},
+  'supp-pay-limit':     {label:'Supplementary Pay Limit Scheme',          jobSeek:null,  partTime:false, lapse:'covered',  duration:'5 years, extendable'},
+  'positive-list-higher':{label:'Positive List (Higher Education)',       jobSeek:'6mo', partTime:false, lapse:'covered',  duration:'4 years, extendable'},
+  'positive-list-skilled':{label:'Positive List (Skilled Work)',          jobSeek:null,  partTime:false, lapse:'covered',  duration:'4 years, extendable'},
+  'researcher':         {label:'Researcher Scheme',                       jobSeek:'6mo', partTime:true,  lapse:'exempt',   duration:'4 years, extendable'},
+  'guest-researcher':   {label:'Guest Researcher Scheme',                 jobSeek:null,  partTime:true,  lapse:'covered',  duration:'3 years or until project ends, cannot be extended'},
+  'trainee':            {label:'Trainee Scheme',                          jobSeek:null,  partTime:false, lapse:'covered',  duration:'1 year, extendable up to 24 months total'},
+  'special-qual':       {label:'Special Individual Qualifications',       jobSeek:null,  partTime:true,  lapse:'covered',  duration:'1 year, extendable'},
+  'startup':            {label:'Start-up Denmark',                        jobSeek:null,  partTime:false, lapse:'covered',  duration:'2 years, extendable'},
+  'labour-market':      {label:'Labour Market Attachment Scheme',         jobSeek:'3mo', partTime:false, lapse:'covered',  duration:'2 years, extendable'},
+  'herdsmen':           {label:'Herdsmen and Farm Managers',              jobSeek:null,  partTime:false, lapse:'covered',  duration:'4 years, extendable'},
+  'sea':                {label:'Employee on Mobile Workplace at Sea',     jobSeek:null,  partTime:false, lapse:'covered',  duration:'Maximum 6 months'},
+};
+
+function checkJsPermitType(){
+  const v=document.getElementById('js-permit-type').value;
+  const f=document.getElementById('js-permit-type-flag');
+  if(!v||v==='unsure'){f.innerHTML='<div class="flag flag-info"><span class="flag-title">ℹ️ We\'ll identify your scheme</span>Don\'t worry — your permit type will be stated on your residence card or in your SIRI approval letter. We\'ll confirm this as part of our assessment.</div>';return;}
+  const s=SIRI_SCHEMES[v];
+  if(!s){f.innerHTML='';return;}
+  let html='';
+  if(s.jobSeek==='6mo'){
+    html=`<div class="flag flag-success"><span class="flag-title">✓ Your scheme includes a 6-month job-seeking right</span>The <strong>${s.label}</strong> grants a 6-month job-seeking permit if you became unemployed through no fault of your own (i.e. dismissal or redundancy — not resignation). The application must be submitted no later than the date your employment terminates. During this period you may not work, but you retain the right to remain in Denmark legally while searching. Standard permit duration: ${s.duration}.</div>`;
+  } else if(s.jobSeek==='3mo'){
+    html=`<div class="flag flag-amber"><span class="flag-title">ℹ️ Limited job-seeking right — 3 months</span>The <strong>${s.label}</strong> grants only a 3-month job-seeking period (not 6 months), and only if you became unemployed through no fault of your own. Standard permit duration: ${s.duration}.</div>`;
+  } else {
+    html=`<div class="flag flag-amber"><span class="flag-title">⚠️ Your scheme does not include a job-seeking right</span>Unfortunately, the <strong>${s.label}</strong> does not entitle you to a job-seeking permit when employment ends. This means your right to remain in Denmark is tied directly to your employment — when employment ends, your basis for residence ends too. It is important to act quickly. We'll assess whether any alternative routes are available to you. Standard permit duration: ${s.duration}.</div>`;
+  }
+  if(s.lapse==='exempt') html+=`<div class="flag flag-info" style="margin-top:-8px;"><span class="flag-title">ℹ️ Lapsing rules</span>Your scheme is <strong>exempt from the standard permit lapsing rules</strong> — meaning your permit does not automatically lapse if you spend more than 6 months outside Denmark (subject to other conditions).</div>`;
+  f.innerHTML=html;
+  // Cross-reference with how employment ended
+  checkJsHow();
+}
+
+function checkJsHow(){
+  const how=document.getElementById('js-how').value;
+  const scheme=document.getElementById('js-permit-type').value;
+  const f=document.getElementById('js-how-flag');
+  const s=SIRI_SCHEMES[scheme];
+  if(!how){f.innerHTML='';return;}
+  if(how==='dismissed'){
+    if(s&&s.jobSeek){
+      f.innerHTML=`<div class="flag flag-success"><span class="flag-title">✓ Dismissed — you are likely eligible</span>Being dismissed or made redundant (through no fault of your own) is the qualifying condition for a job-seeking permit on your scheme. The application must be submitted <strong>no later than the date your employment terminates</strong> — submitting early is strongly advisable. You cannot work during the job-seeking period, but you retain the right to remain in Denmark.</div>`;
+    } else if(s&&!s.jobSeek){
+      f.innerHTML=`<div class="flag flag-amber"><span class="flag-title">⚠️ Dismissed — but your scheme has no job-seeking right</span>Even though your employment ended through no fault of your own, your permit scheme does not include an entitlement to a job-seeking permit. This is an urgent situation — your right to remain in Denmark may end when your employment does. Please contact us immediately so we can assess alternative options.</div>`;
+    } else {
+      f.innerHTML=`<div class="flag flag-success"><span class="flag-title">✓ Dismissed — likely eligible for a job-seeking permit</span>Being dismissed or made redundant qualifies you to apply for a job-seeking permit (subject to your permit type). The application must be submitted no later than your last day of employment. Select your permit type above for a more precise assessment.</div>`;
+    }
+  } else if(how==='resigned'){
+    f.innerHTML=`<div class="flag flag-amber"><span class="flag-title">⚠️ Voluntary resignation — job-seeking permit not available</span>SIRI's job-seeking permit is only available to those who became unemployed <em>through no fault of their own</em>. Voluntary resignation does not qualify. Your right to remain in Denmark is therefore directly tied to your current permit's expiry date. We'll assess what alternatives may be available — but time is important.</div>`;
+  } else if(how==='contract-end'){
+    if(s&&s.jobSeek){
+      f.innerHTML=`<div class="flag flag-info"><span class="flag-title">ℹ️ Contract end — likely eligible</span>The natural end of a fixed-term contract is generally treated in the same way as a dismissal for the purposes of a job-seeking permit. Eligibility depends on SIRI's assessment of whether the contract ending was "through no fault of your own." In most straightforward cases this is accepted. The application must be submitted no later than your last working day.</div>`;
+    } else if(s&&!s.jobSeek){
+      f.innerHTML=`<div class="flag flag-amber"><span class="flag-title">⚠️ Contract end — your scheme has no job-seeking right</span>Even if the contract end is treated as a qualifying event, your scheme does not include an entitlement to a job-seeking permit. Please contact us urgently — we'll look at what options remain.</div>`;
+    } else {
+      f.innerHTML=`<div class="flag flag-info"><span class="flag-title">ℹ️ Contract end — usually qualifies</span>A fixed-term contract ending is generally treated similarly to a dismissal. Select your permit type above for a more precise assessment.</div>`;
+    }
+  } else if(how==='mutual'){
+    f.innerHTML=`<div class="flag flag-amber"><span class="flag-title">⚠️ Mutual agreement — eligibility is uncertain</span>SIRI assesses "mutual agreement" terminations case by case. The job-seeking permit is only available when the unemployment is "through no fault of your own" — and mutual agreement situations sit in a grey area. We'll need to review the specifics of your case before advising. Please don't delay.</div>`;
+  }
+}
+
+function checkJsInDk(){const v=document.getElementById('js-in-dk').value,f=document.getElementById('js-in-dk-flag');if(v==='no')f.innerHTML='<div class="flag flag-amber"><span class="flag-title">⚠️ Location matters</span>If you\'re outside Denmark and your permit has expired or is linked to a role that has ended, re-entering may not be straightforward. Please contact us as soon as possible — time-sensitive situations like this need careful handling.</div>';else f.innerHTML='';}
+
+// RECOMMENDATION
+function buildRec(){const p=S.profile,cn=S.coNeed,is=S.indSit;const coNat=(document.getElementById('co-nat')||{}).value||'';const natP=(document.getElementById('ind-nat-p')||{}).value||'';const natS=(document.getElementById('ind-nat-s')||{}).value||'';let t='',d='';if(p==='company'){const isEU=coNat==='eu'||coNat==='dual-eu';const ft=S.ftCertified;if(isEU){t='EU Residence Certificate (Employer Support)';d='Your candidate holds EU/EEA nationality — no work permit is needed. We can assist with their EU residence registration, which is faster and simpler than the standard permit process.';}else if(cn==='hiring-new'){t=ft?'Fast-Track Work Permit':'Pay Limit / Fast-Track Work Permit';d=ft?'As a Fast-Track certified employer, permits can typically be processed in 15–30 days. We\'ll handle the end-to-end application.':'We\'ll assess whether the Pay Limit, Fast-Track, or an alternative scheme applies — and manage the full application on your behalf.';}else if(cn==='job-change'){t='Work Permit — Job Change';d='A new permit must be submitted to SIRI before your new hire can legally start. We\'ll manage the full process and advise on the right-to-work position during the transition.';}else if(cn==='renewal'){t='Work Permit Extension / Renewal';d='We\'ll review the permit, check salary compliance, prepare the renewal, and submit to SIRI on your behalf — well ahead of the expiry date.';}else if(cn==='family'){t='Accompanying Family Member Permit';d='We\'ll handle the permits for your employee\'s family members, coordinating submission alongside their work permit where possible.';}else if(cn==='compliance'){t='Right-to-Work Check & Audit';d='A thorough review of your workforce\'s permit status, expiry dates, salary compliance, and job alignment — with a written report.';}else if(cn==='retainer'){t='HR Immigration Retainer';d='A dedicated monthly retainer — unlimited support, priority processing, and an annual compliance audit.';}else if(cn==='advice'){t='Immigration Consultation';d='A focused consultation or document review addressing your specific question.';}}else{const isEU=natP==='eu'||natS==='eu';if(isEU){t='EU Residence Certificate';d='As an EU/EEA national, you have the right to live and work in Denmark freely — no salary thresholds, no employer sponsor required.';}else if(is==='new-permit'){t='Work Permit (New Application)';d='We\'ll assess which scheme applies and handle the full application on your behalf.';}else if(is==='renewal'){t='Work Permit Extension / Renewal';d='We\'ll review your permit, confirm eligibility, and manage the renewal — making sure you\'re covered well before expiry.';}else if(is==='job-change'){t='Work Permit — Job Change';d='A fresh permit application is required. We\'ll handle everything including advising on your right-to-work status during the transition.';}else if(is==='family'){t='Family / Accompanying Permit';d='We\'ll assess eligibility for each family member and coordinate the permit applications.';}else if(is==='permanent'){t='Permanent Residence';d='A thorough eligibility assessment across all routes, followed by end-to-end application support.';}else if(is==='job-seeking'){t='Job Seeking Permit';d='We\'ll assess your eligibility and submit as quickly as possible — protecting your right to remain in Denmark while you look for work.';}else if(is==='eu'){t='EU Residence Certificate';d='We\'ll handle the EU residence certificate registration, formalising your right to reside and work in Denmark.';}else if(is==='advice'){t='Immigration Consultation';d='A focused session addressing your specific question — call or document review, whichever is most useful.';}}return{title:t||'Preliminary Assessment',desc:d||'We\'ll review your answers and identify the most suitable service.'};}
+
+// SUMMARY
+function buildSummary(){const first=(document.getElementById('c-first').value||'').trim(),email=(document.getElementById('c-email').value||'').trim();if(!first||!email){alert('Please fill in your name and email address before continuing.');return;}const rec=buildRec();S.recTitle=rec.title;S.recDesc=rec.desc;
+const rows=[];const natMap={eu:'EU / EEA',uk:'British (UK)',us:'American (USA)',in:'Indian',cn:'Chinese',ph:'Filipino','other-non-eu':'Other non-EU'};const sitMap={'new-permit':'New work permit','renewal':'Permit renewal / extension','job-change':'Job change','family':'Family / accompanying permit','eu':'EU residence certificate','permanent':'Permanent residence','job-seeking':'Job seeking permit','advice':'Immigration consultation'};
+if(S.profile==='company'){
+  rows.push(['Enquiry type','Company / HR'],['Company',(document.getElementById('co-name').value)||'—'],['CVR',(document.getElementById('co-cvr').value)||'—'],['Fast-Track',S.ftCertified===true?'✓ Certified':S.ftCertified===false?'Not on SIRI list':'Not checked'],['Need',S.coNeed?(S.coNeed.replace(/-/g,' ')):'—']);
+  const coSal=(document.getElementById('co-salary')||{}).value||'';if(coSal)rows.push(['Annual salary (DKK)',parseInt(coSal).toLocaleString()]);
+  const coFamStr=Object.entries(coFam).filter(([,v])=>v).map(([k])=>k.replace(/-/g,' ')).join(', ');if(coFamStr)rows.push(['Family accompanying',coFamStr]);
+}else{
+  const nat=(document.getElementById('ind-nat-p')||{}).value||'';
+  const sit=S.indSit;
+  rows.push(['Enquiry type','Individual / Family'],['Nationality',natMap[nat]||nat||'—'],['Situation',sitMap[sit]||sit||'—']);
+  const indSal=(document.getElementById('ind-salary')||{}).value||'';if(indSal)rows.push(['Annual salary (DKK)',parseInt(indSal).toLocaleString()]);
+  // Job seeking: include scheme info
+  if(sit==='job-seeking'){
+    const schemeEl=document.getElementById('js-permit-type');const schemeV=schemeEl?schemeEl.value:'';const schemeData=SIRI_SCHEMES[schemeV];
+    if(schemeData)rows.push(['Current permit scheme',schemeData.label]);
+    const jsHow=document.getElementById('js-how');if(jsHow&&jsHow.value)rows.push(['How employment ended',jsHow.options[jsHow.selectedIndex].text]);
+    const jsExpiry=document.getElementById('js-expiry');if(jsExpiry&&jsExpiry.value)rows.push(['Permit expiry',jsExpiry.options[jsExpiry.selectedIndex].text]);
+  }
+  const indFamStr=Object.entries(indFam).filter(([,v])=>v).map(([k])=>k.replace(/-/g,' ')).join(', ');if(indFamStr)rows.push(['Family accompanying',indFamStr]);
+}
+rows.push(['Contact name',`${first} ${document.getElementById('c-last').value}`],['Email',email]);const notes=(document.getElementById('c-notes').value||'');if(notes)rows.push(['Notes',notes]);
+document.getElementById('summary-content').innerHTML=`<div class="summary-block"><div class="summary-head"><span class="summary-head-title">Your answers</span><span class="summary-edit" onclick="goBack()">← Edit</span></div><div class="summary-body">${rows.map(([k,v])=>`<div class="summary-row"><span class="summary-key">${k}</span><span class="summary-val">${v}</span></div>`).join('')}</div></div>`;
+const allFlags=[...new Set([...S.flags,...S.redFlags])];const fMap={'salary-below':'Salary below the Pay Limit threshold — alternative routes will be explored','cohab':'Unmarried/cohabiting partner — strict SIRI requirements apply; detailed documentation review essential','child-over-18':'Child(ren) aged 18+ — very unlikely to qualify for an accompanying permit (disability exception may apply)','children-employer':'Accompanying children — ages and custody situation will need to be confirmed'};
+const flagsHtml=allFlags.length?`<div class="rec-flags">${allFlags.map(f=>{const isR=S.redFlags.includes(f);return`<div class="rec-flag-item${isR?' red-flag':''}"><span class="rec-flag-icon">${isR?'⚠️':'ℹ️'}</span><span class="rec-flag-text">${fMap[f]||f}</span></div>`;}).join('')}</div>`:'';
+document.getElementById('rec-block-wrap').innerHTML=`<div class="rec-block"><span class="rec-label">Likely best-fit service</span><div class="rec-title">${rec.title}</div><div class="rec-desc">${rec.desc}</div><div class="rec-desc" style="margin-top:10px;font-size:13px;opacity:.65;">For pricing details, see our <a href="/services" style="color:var(--gold);">services pages</a>. We'll confirm the exact service and fee after reviewing your enquiry.</div>${flagsHtml}</div>`;
+goTo('step-6-summary');}
+
+function chkConsent(){document.getElementById('btn-submit').disabled=!(document.getElementById('consent-1').checked&&document.getElementById('consent-2').checked);}
+
+function submitForm(){const payload={_subject:`Nordic Anchor Enquiry — ${S.recTitle} — ${document.getElementById('c-first').value} ${document.getElementById('c-last').value}`,profile:S.profile,situation:S.coNeed||S.indSit,recommendedService:S.recTitle,flags:[...new Set([...S.flags,...S.redFlags])].join(', ')||'none',ftCertified:String(S.ftCertified),contactFirst:document.getElementById('c-first').value,contactLast:document.getElementById('c-last').value,contactEmail:document.getElementById('c-email').value,contactPhone:document.getElementById('c-phone').value,notes:document.getElementById('c-notes').value};if(S.profile==='company')Object.assign(payload,{companyName:document.getElementById('co-name').value,companyCvr:document.getElementById('co-cvr').value,salary:(document.getElementById('co-salary')||{}).value||'',urgency:document.getElementById('co-urgency').value});else{const schemeEl=document.getElementById('js-permit-type');const schemeV=schemeEl?schemeEl.value:'';const schemeData=SIRI_SCHEMES[schemeV];Object.assign(payload,{nationality:(document.getElementById('ind-nat-p')||{}).value||'',salary:(document.getElementById('ind-salary')||{}).value||'',location:(document.getElementById('ind-location')||{}).value||'',permitScheme:schemeData?schemeData.label:schemeV||''});}fetch('https://formspree.io/f/xpqknroj',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).finally(()=>goTo('step-7-confirm'));}
+
+updateProg();
+configStep4b('');
+</script>
+</body>
+</html>

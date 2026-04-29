@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Nordic Anchor</title>
+  <meta name="description" content="About Nordic Anchor — boutique Danish immigration consultancy built on over a decade of expertise."/>
+  <link rel="icon" href="favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --navy:#1e2f4a; --gold:#b89a6a; --gold-dk:#B8860B;
+      --gold-eye:#DAA520; --cream:#f9f6f2; --white:#ffffff;
+      --text:#2a2a2a; --muted:#888;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-text{font-family:'Newsreader',serif;font-size:18px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .nav-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    .nav-gs{font-family:'Newsreader',serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2a1800;border:none;padding:11px 22px;cursor:pointer;position:relative;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;flex-shrink:0;border-radius:2px;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.42),0 0 0 1px rgba(140,90,0,0.82),0 2px 14px rgba(184,134,11,0.28);transition:filter .3s,box-shadow .3s;}
+    .nav-gs::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.55),transparent);animation:goldSweep 4.5s ease-in-out infinite;pointer-events:none;}
+    @keyframes goldSweep{0%{left:-70%;opacity:0}8%{opacity:1}52%{left:115%;opacity:1}58%{opacity:0}100%{left:115%;opacity:0}}
+    .nav-gs:hover{filter:brightness(1.1) saturate(1.12);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.95),inset 0 -1.5px 0 rgba(80,45,0,0.52),0 0 0 1px rgba(140,90,0,0.95),0 4px 22px rgba(184,134,11,0.5),0 0 30px rgba(220,170,20,0.2);}
+    .nav-gs:hover::before{animation-duration:1.2s;}
+    @media(max-width:860px){.nav-pill,.nav-sep,.nav-touch{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+
+    /* DRAWER */
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-text{font-family:'Newsreader',serif;font-size:16px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#1e2f4a;}
+    .nav-drawer-logo-accent{color:#B8860B;font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    /* PAGE HERO */
+    .page-hero{background:var(--navy);padding:140px 48px 88px;text-align:center;position:relative;overflow:hidden;margin-top:72px;}
+    .page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 110%,rgba(184,154,106,0.1) 0%,transparent 65%);pointer-events:none;}
+    .page-eyebrow{display:inline-block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,154,106,0.45);padding:7px 18px;margin-bottom:28px;opacity:0;animation:fadeUp .8s ease .15s forwards;}
+    .page-hero h1{font-size:clamp(36px,5vw,64px);font-weight:300;color:var(--white);line-height:1.14;letter-spacing:-.01em;margin-bottom:20px;opacity:0;animation:fadeUp .8s ease .3s forwards;}
+    .page-hero h1 em{font-style:italic;color:var(--gold);}
+    .hero-rule{width:44px;height:1.5px;background:var(--gold);margin:0 auto 20px;opacity:0;animation:fadeUp .8s ease .38s forwards;}
+    .page-hero-sub{font-size:clamp(15px,1.6vw,17px);font-style:italic;color:rgba(255,255,255,0.72);max-width:500px;margin:0 auto;line-height:1.85;opacity:0;animation:fadeUp .8s ease .45s forwards;}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0);}from{opacity:0;transform:translateY(18px);}}
+
+    /* SHARED */
+    .section-eyebrow{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:18px;font-weight:500;}
+    .gold-rule{width:44px;height:1.5px;background:var(--gold);opacity:.55;}
+
+    /* MISSION / VISION */
+    .mv-section{background:var(--cream);padding:88px 72px;border-top:1px solid rgba(184,154,106,0.15);}
+    .mv-inner{max-width:1100px;margin:0 auto;}
+    .mv-header{text-align:center;margin-bottom:56px;}
+    .mv-header h2{font-size:clamp(30px,3.8vw,50px);font-weight:300;color:var(--navy);line-height:1.22;}
+    .mv-header h2 em{font-style:italic;}
+    .mv-header .gold-rule{margin:20px auto 0;}
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(184,134,11,0.28);background:#fff;box-shadow:0 4px 28px rgba(30,47,74,0.06);}
+    .mv-card{padding:52px 48px;position:relative;}
+    .mv-card:first-child{border-right:1px solid rgba(184,134,11,0.22);}
+    .mv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .mv-tag{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:18px;display:block;}
+    .mv-card h3{font-size:clamp(22px,2.4vw,30px);font-weight:300;color:var(--navy);line-height:1.28;margin-bottom:18px;}
+    .mv-card h3 em{font-style:italic;}
+    .mv-card p{font-size:15px;font-style:italic;color:#4a4a4a;line-height:1.85;}
+    @media(max-width:860px){.mv-section{padding:64px 28px;}.mv-grid{grid-template-columns:1fr;}.mv-card:first-child{border-right:none;border-bottom:1px solid rgba(184,134,11,0.22);}}
+
+    /* STORY */
+    .story-section{background:#fbfaf7;padding:96px 72px;border-top:1px solid rgba(184,154,106,0.15);}
+    .story-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:88px;align-items:start;}
+    .story-left{position:sticky;top:96px;}
+    .story-left h2{font-size:clamp(26px,2.8vw,38px);font-weight:300;color:var(--navy);line-height:1.25;margin-bottom:16px;}
+    .story-left h2 em{font-style:italic;}
+    .story-rule{width:44px;height:1.5px;background:var(--gold-dk);opacity:.75;margin-bottom:20px;}
+    .story-left p{font-size:15px;font-style:italic;color:#5a5a5a;line-height:1.85;}
+    .story-body p{font-size:16px;color:#3a3a3a;line-height:1.9;margin-bottom:28px;font-weight:300;}
+    .story-body p:last-child{margin-bottom:0;}
+    .story-body strong{color:var(--navy);font-weight:500;}
+    @media(max-width:860px){.story-section{padding:64px 28px;}.story-inner{grid-template-columns:1fr;gap:44px;}.story-left{position:static;}}
+
+    /* CREDENTIALS */
+    .cred-section{background:var(--navy);padding:88px 72px;}
+    .cred-inner{max-width:1100px;margin:0 auto;}
+    .cred-header{text-align:center;margin-bottom:56px;}
+    .cred-header h2{font-size:clamp(28px,3.4vw,46px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:16px;}
+    .cred-header h2 em{font-style:italic;}
+    .cred-header-rule{width:44px;height:1.5px;background:var(--gold);margin:0 auto;opacity:.75;}
+    .cred-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(184,154,106,0.2);}
+    .cred-card{padding:48px 38px;border-right:1px solid rgba(184,154,106,0.18);transition:background .25s;}
+    .cred-card:last-child{border-right:none;}
+    .cred-card:hover{background:rgba(255,255,255,0.04);}
+    .cred-icon-wrap{width:48px;height:48px;border:1px solid rgba(184,154,106,0.4);display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--gold-eye);transition:border-color .25s,transform .25s;}
+    .cred-card:hover .cred-icon-wrap{border-color:var(--gold-eye);transform:scale(1.05);}
+    .cred-icon-wrap svg{width:22px;height:22px;}
+    .cred-card h3{font-size:15px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+    .cred-card p{font-size:15px;font-style:italic;color:rgba(255,255,255,0.6);line-height:1.85;}
+    @media(max-width:860px){.cred-section{padding:64px 28px;}.cred-grid{grid-template-columns:1fr;}.cred-card{border-right:none;border-bottom:1px solid rgba(184,154,106,0.18);}.cred-card:last-child{border-bottom:none;}}
+
+    /* VALUES — mirrors why-section from homepage */
+    .values-section{background:#fbfaf7;padding:96px 72px;border-top:1px solid rgba(184,154,106,0.15);}
+    .values-inner{max-width:1100px;margin:0 auto;}
+    .values-header{text-align:center;margin-bottom:64px;}
+    .values-header h2{font-size:clamp(30px,4.2vw,54px);font-weight:300;color:var(--navy);margin-bottom:16px;line-height:1.2;}
+    .values-rule{width:44px;height:1.5px;background:var(--gold-dk);margin:0 auto 20px;opacity:.75;}
+    .values-header p{font-size:16px;font-style:italic;color:#5a5a5a;max-width:480px;margin:0 auto;line-height:1.85;}
+    .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid rgba(184,134,11,0.28);background:#fff;box-shadow:0 4px 28px rgba(30,47,74,0.06);}
+    .value-card{padding:48px 38px;border-right:1px solid rgba(184,134,11,0.22);border-bottom:1px solid rgba(184,134,11,0.22);transition:background .25s;background:#fff;}
+    .value-card:nth-child(2n){border-right:none;}
+    .value-card:nth-child(3),.value-card:nth-child(4){border-bottom:none;}
+    .value-card:hover{background:#f6f1e6;}
+    .value-num{font-size:52px;font-weight:300;font-style:italic;color:var(--gold-dk);opacity:.55;line-height:1;margin-bottom:18px;}
+    .value-card h3{font-size:15px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:14px;}
+    .value-card p{font-size:15px;font-style:italic;color:#4a4a4a;line-height:1.85;}
+    @media(max-width:780px){.values-section{padding:64px 28px;}.values-grid{grid-template-columns:1fr;}.value-card{border-right:none;}.value-card:nth-child(3){border-bottom:1px solid rgba(184,134,11,0.22);}}
+
+    /* CTA */
+    .cta-band{background:var(--cream);padding:88px 72px;text-align:center;border-top:1px solid rgba(184,154,106,0.18);}
+    .cta-band h2{font-size:clamp(28px,3.4vw,44px);font-weight:300;color:var(--navy);margin-bottom:14px;line-height:1.2;}
+    .cta-band h2 em{font-style:italic;}
+    .cta-band p{font-size:16px;font-style:italic;color:#5a5a5a;max-width:440px;margin:0 auto 40px;line-height:1.85;}
+    .cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+    .btn-cta-gold{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px 36px;border:none;cursor:pointer;color:#2a1800;position:relative;overflow:hidden;transition:filter .3s,box-shadow .3s;text-decoration:none;display:inline-block;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.4),0 0 0 1px rgba(140,90,0,0.8),0 2px 12px rgba(184,134,11,0.25);}
+    .btn-cta-gold::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.5),transparent);animation:goldSweep 5s ease-in-out infinite;}
+    .btn-cta-gold:hover{filter:brightness(1.1) saturate(1.1);}
+    .btn-cta-navy{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px 34px;border:1px solid var(--navy);color:var(--navy);text-decoration:none;display:inline-block;transition:background .22s,color .22s;}
+    .btn-cta-navy:hover{background:var(--navy);color:var(--white);}
+
+    /* FOOTER */
+    footer{background:var(--white);padding:60px 72px 32px;border-top:2px solid rgba(184,154,106,0.3);}
+    .footer-inner{max-width:1100px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(184,154,106,0.18);}
+    .footer-logo-text{font-family:'Newsreader',serif;font-size:24px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .footer-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .footer-center{display:flex;flex-direction:column;gap:24px;padding-top:8px;}
+    .footer-nav{display:flex;gap:8px;flex-wrap:wrap;}
+    .footer-nav a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .22s,border-color .22s,background .22s;padding:8px 16px;border:1px solid rgba(184,134,11,0.3);border-radius:2px;}
+    .footer-nav a:hover{color:var(--gold-dk);border-color:var(--gold-dk);background:rgba(184,134,11,0.04);}
+    .footer-right{text-align:right;padding-top:8px;}
+    .footer-right a{display:block;font-size:13px;color:var(--navy);text-decoration:none;line-height:2.2;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);}
+    .footer-social a:hover{color:var(--navy);border-color:rgba(30,47,74,0.4);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    @media(max-width:860px){footer{padding:44px 24px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{text-align:left;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;align-items:flex-start;}}
+  
+    /* PRICING OVERLAY */
+    .pricing-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,25,40,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
+    .pricing-overlay.open{display:flex;}
+    .pricing-modal{background:var(--white);max-width:720px;width:100%;padding:56px 52px;position:relative;}
+    .pricing-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;transition:color .2s;}
+    .pricing-modal-close:hover{color:var(--navy);}
+    .pricing-modal-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;display:block;}
+    .pricing-modal h2{font-size:clamp(24px,3vw,36px);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:12px;}
+    .pricing-modal p{font-size:15px;font-style:italic;color:#666;margin-bottom:40px;line-height:1.75;}
+    .pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .pricing-card{display:flex;flex-direction:column;padding:32px 28px;text-decoration:none;border:1px solid rgba(184,134,11,0.3);transition:all .25s;position:relative;}
+    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .pricing-card:hover{border-color:var(--gold-dk);background:rgba(184,134,11,0.03);transform:translateY(-2px);}
+    .pricing-card-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:14px;}
+    .pricing-card h3{font-size:20px;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+    .pricing-card h3 em{font-style:italic;}
+    .pricing-card p{font-size:13px;font-style:italic;color:#666;line-height:1.65;margin-bottom:20px;flex:1;}
+    .pricing-card-range{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;}
+    .pricing-card-cta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);display:inline-flex;align-items:center;gap:8px;transition:gap .2s;}
+    .pricing-card:hover .pricing-card-cta{gap:14px;}
+    @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}.pricing-modal{padding:40px 28px;}}
+
+  
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+  </style>
+</head>
+<body>
+
+<!-- DRAWER -->
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;">→ Free Assessment</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <a href="/pricing" onclick="closeDrawer()">Pricing</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
+  <div class="nav-sep"></div>
+  <a href="/#contact" class="nav-touch">Get in Touch</a>
+  <a href="/get-started" class="nav-gs">Free Assessment</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <span class="page-eyebrow">About Nordic Anchor</span>
+  <h1>Experience You Can <em>Rely On</em></h1>
+  <div class="hero-rule"></div>
+  <p class="page-hero-sub">Boutique Danish immigration consultancy. Deep expertise. Straightforward guidance.</p>
+</section>
+
+<!-- MISSION / VISION -->
+<section class="mv-section">
+  <div class="mv-inner">
+    <div class="mv-header">
+      <span class="section-eyebrow">Our Purpose</span>
+      <h2>Why Nordic Anchor <em>exists</em></h2>
+      <div class="gold-rule mv-header"></div>
+    </div>
+    <div class="mv-grid">
+      <div class="mv-card">
+        <span class="mv-tag">Mission</span>
+        <h3>Clarity in a <em>complex</em> system</h3>
+        <p>Danish immigration is meticulous, fast-moving, and consequential. Our mission is to remove the uncertainty from that process — giving individuals and organisations the informed guidance they need to move forward with confidence, every time.</p>
+      </div>
+      <div class="mv-card">
+        <span class="mv-tag">Vision</span>
+        <h3>The trusted name in <em>Danish</em> immigration</h3>
+        <p>We aim to be the consultancy that professionals and companies return to — and recommend without hesitation. Not because we're the largest, but because we consistently deliver the right outcome through honest, expert advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="story-inner">
+    <div class="story-left">
+      <span class="section-eyebrow">Our Background</span>
+      <h2>Built on experience from <em>the best in the field</em></h2>
+      <div class="story-rule"></div>
+      <p>Over a decade of hands-on immigration and mobility work, accumulated across some of the most respected organisations in the field.</p>
+    </div>
+    <div class="story-body">
+      <p>Nordic Anchor was founded on a simple conviction: that clients navigating Danish immigration deserve more than process management — they deserve a consultant who has seen the full picture.</p>
+      <p>That background spans time at two of Denmark's leading Relocation Management Companies, where we supported both multinational employers and their relocating employees through every stage of the Danish permit process — from initial eligibility through to final approval and beyond.</p>
+      <p>It includes advisory work embedded within one of the Big Four professional services firms in Denmark, where immigration sat at the intersection of corporate compliance, workforce strategy, and tax — where the stakes were high and precision was expected as standard.</p>
+      <p>And it includes experience at an internationally recognised immigration law firm, where we encountered the full breadth of global mobility — from straightforward Danish work permits to complex, multi-jurisdictional cases spanning multiple countries and regulatory environments.</p>
+      <p>That breadth matters. It means we understand not just the Danish rules, but <strong>the business and human context behind them</strong> — what HR teams are managing, what individuals are anxious about, and what actually moves a case forward. Nordic Anchor brings that institutional knowledge to a boutique practice: senior-level expertise, without the overhead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="cred-section">
+  <div class="cred-inner">
+    <div class="cred-header">
+      <span class="section-eyebrow" style="color:var(--gold);">Where We've Worked</span>
+      <h2>Shaped by the <em>best</em></h2>
+      <div class="cred-header-rule"></div>
+    </div>
+    <div class="cred-grid">
+
+      <!-- RMC: Two interlocking arrows — relocation / movement -->
+      <div class="cred-card">
+        <div class="cred-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/>
+            <path d="M13 6l6 6-6 6"/>
+            <path d="M19 12H5"/>
+            <path d="M11 18l-6-6 6-6"/>
+          </svg>
+        </div>
+        <h3>Leading Danish RMCs</h3>
+        <p>Hands-on experience at two of Denmark's top Relocation Management Companies, supporting companies and assignees across the full permit lifecycle.</p>
+      </div>
+
+      <!-- Big Four: Scales of justice / advisory -->
+      <div class="cred-card">
+        <div class="cred-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="3" x2="12" y2="21"/>
+            <line x1="5" y1="21" x2="19" y2="21"/>
+            <path d="M7 9l-4 6h8z"/>
+            <path d="M17 9l-4 6h8z"/>
+          </svg>
+        </div>
+        <h3>Big Four Advisory</h3>
+        <p>Immigration advisory at a Big Four firm in Denmark — where workforce compliance, tax considerations, and permit strategy converge at the highest level.</p>
+      </div>
+
+      <!-- Global law: Globe with meridian lines -->
+      <div class="cred-card">
+        <div class="cred-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <ellipse cx="12" cy="12" rx="3.5" ry="9"/>
+            <line x1="3" y1="9" x2="21" y2="9"/>
+            <line x1="3" y1="15" x2="21" y2="15"/>
+          </svg>
+        </div>
+        <h3>Global Immigration Law</h3>
+        <p>Broad international exposure through one of the world's leading immigration law firms, covering complex mobility cases across multiple countries and regulatory frameworks.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="values-inner">
+    <div class="values-header">
+      <span class="section-eyebrow">How We Work</span>
+      <h2>The principles behind<br>every case we handle</h2>
+      <div class="values-rule"></div>
+      <p>Four commitments that define every interaction — with companies and individuals alike.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3>Transparency</h3>
+        <p>Flat-fee pricing, published upfront. No hidden costs, no vague estimates — you know exactly what you're paying before we begin.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h3>Precision</h3>
+        <p>Danish immigration is unforgiving of errors. We apply the same rigour to every application, whether it's a fast-track corporate permit or a family reunification case.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h3>Accessibility</h3>
+        <p>Senior expertise without enterprise pricing. We exist to make high-quality immigration guidance available to the companies and individuals who need it done right.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">04</div>
+        <h3>Accountability</h3>
+        <p>We take ownership of your case from intake to outcome. When questions arise, we're reachable — not routing you through a call centre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <span class="section-eyebrow">Take the Next Step</span>
+  <h2>Ready to move <em>forward</em>?</h2>
+  <p>Whether you're an individual planning a move or a company hiring internationally — we're here to help.</p>
+  <div class="cta-buttons">
+    <a href="/#contact" class="btn-cta-gold">Get Started</a>
+    <a href="/services" class="btn-cta-navy">View Services</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" style="height:56px;width:auto;display:block;"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/about">Who We Are</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+      <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const mainNav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 20));
+  function openDrawer()  { document.getElementById('navDrawer').classList.add('open');    document.getElementById('navOverlay').classList.add('open'); }
+  function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); }
+</script>
+
+<!-- PRICING OVERLAY -->
+<div class="pricing-overlay" id="pricingOverlay" onclick="closePricingOutside(event)">
+  <div class="pricing-modal" id="pricingModal">
+    <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
+    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
+    <h2>Which best describes you?</h2>
+    <p>Select your situation and we'll show you the full pricing for every service &mdash; no hidden fees, no surprises.</p>
+    <div class="pricing-cards">
+      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Companies &amp; Employers</span>
+        <h3>Hiring internationally<br><em>with confidence.</em></h3>
+        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
+        <div class="pricing-card-range">From DKK 3,500 / mo</div>
+        <span class="pricing-card-cta">View employer services &nbsp;&rarr;</span>
+      </a>
+      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Individuals &amp; Families</span>
+        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
+        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
+        <div class="pricing-card-range">From DKK 2,500</div>
+        <span class="pricing-card-cta">View individual services &nbsp;&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePricing(); });
+</script>
+</body>
+</html>

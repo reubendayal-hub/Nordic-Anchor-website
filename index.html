@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nordic Anchor — Danish Immigration & Consulting</title>
+  <meta name="description" content="Expert Danish immigration consulting. 12 years of experience."/>
+  <link rel="icon" href="favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --navy:#1e2f4a; --gold:#b89a6a; --gold-dk:#B8860B;
+      --gold-eye:#DAA520; --cream:#f9f6f2; --white:#ffffff;
+      --text:#2a2a2a; --muted:#888;
+    }
+    html{scroll-behavior:smooth;}
+    @media(min-width:861px) and (hover:hover){
+      html{scroll-snap-type:y proximity;scroll-padding-top:72px;}
+      .services-teaser, .why-section{scroll-snap-align:start;}
+      .contact-section{scroll-snap-align:start;scroll-snap-stop:always;}
+    }
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-img{height:46px;width:auto;display:block;}
+    .nav-logo-text{font-family:'Newsreader',serif;font-size:18px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .nav-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    .nav-gs{font-family:'Newsreader',serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2a1800;border:none;padding:11px 22px;cursor:pointer;position:relative;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;flex-shrink:0;border-radius:2px;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.42),0 0 0 1px rgba(140,90,0,0.82),0 2px 14px rgba(184,134,11,0.28);transition:filter .3s,box-shadow .3s;}
+    .nav-gs::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.55),transparent);animation:goldSweep 4.5s ease-in-out infinite;pointer-events:none;}
+    @keyframes goldSweep{0%{left:-70%;opacity:0}8%{opacity:1}52%{left:115%;opacity:1}58%{opacity:0}100%{left:115%;opacity:0}}
+    .nav-gs:hover{filter:brightness(1.1) saturate(1.12);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.95),inset 0 -1.5px 0 rgba(80,45,0,0.52),0 0 0 1px rgba(140,90,0,0.95),0 4px 22px rgba(184,134,11,0.5),0 0 30px rgba(220,170,20,0.2);}
+    .nav-gs:hover::before{animation-duration:1.2s;}
+    @media(max-width:860px){.nav-pill,.nav-sep,.nav-touch{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+
+    /* DRAWER */
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-text{font-family:'Newsreader',serif;font-size:16px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#1e2f4a;}
+    .nav-drawer-logo-accent{color:#B8860B;font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    /* HERO */
+    .hero{position:relative;height:78vh;min-height:560px;max-height:780px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 48px 48px;overflow:hidden;margin-top:72px;}
+    .hero-bg{position:absolute;inset:0;background:#1e2f4a url('hero-bg.jpg') center 35%/cover no-repeat;transform:scale(1.05);transition:transform 7s ease-out;}
+    .hero-bg.loaded{transform:scale(1);}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,22,40,0.55) 0%,rgba(20,28,45,0.45) 35%,rgba(20,28,45,0.55) 65%,rgba(10,15,30,0.78) 100%);}
+    .hero-scrim{position:absolute;inset:0;background:radial-gradient(ellipse 72% 52% at 50% 46%,rgba(8,15,32,0.5) 0%,transparent 100%);}
+    .hero-content{position:relative;z-index:2;max-width:920px;opacity:0;transform:translateY(20px);animation:fadeUp .9s ease .25s forwards;}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+    .hero-eyebrow{display:inline-block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,154,106,0.45);padding:7px 18px;margin-bottom:28px;}
+    .hero h1{font-size:clamp(40px,5.8vw,72px);font-weight:300;color:#fff;line-height:1.12;letter-spacing:-.01em;margin-bottom:22px;text-shadow:0 2px 28px rgba(8,15,32,0.55);}
+    .hero h1 em{font-style:italic;color:rgba(255,255,255,0.9);display:block;}
+    .hero-sub{font-size:clamp(15px,1.65vw,18px);font-style:italic;color:rgba(255,255,255,0.82);line-height:1.8;max-width:560px;margin:0 auto 52px;text-shadow:0 1px 10px rgba(8,15,32,0.5);}
+    .hero-scroll{display:inline-flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:rgba(255,255,255,0.5);font-size:9px;letter-spacing:.22em;text-transform:uppercase;transition:color .2s;}
+    .hero-scroll:hover{color:var(--gold);}
+    .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,0.55),transparent);animation:scrollPulse 2.2s ease-in-out infinite;}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* TRUST BAR */
+    .trust-bar{background:var(--navy);padding:32px 52px;display:flex;justify-content:center;align-items:center;gap:64px;flex-wrap:wrap;}
+    .trust-item{display:flex;align-items:center;gap:14px;}
+    .trust-ico{width:34px;height:34px;border:1px solid rgba(184,154,106,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-eye);flex-shrink:0;transition:border-color .25s,color .25s,transform .25s;}
+    .trust-ico svg{width:16px;height:16px;}
+    .trust-item:hover .trust-ico{border-color:var(--gold-eye);transform:scale(1.05);}
+    .trust-txt{display:flex;flex-direction:column;}
+    .trust-pri{font-size:13px;color:rgba(255,255,255,0.92);letter-spacing:.02em;white-space:nowrap;}
+    .trust-sec{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,154,106,0.7);margin-top:2px;}
+    @media(max-width:860px){.trust-bar{gap:28px;padding:24px;}.trust-pri{font-size:12px;}.trust-sec{font-size:9px;}}
+
+    /* SERVICES TEASER */
+    .services-teaser{background:var(--cream);}
+    .teaser-intro{text-align:center;padding:80px 48px 56px;}
+    .section-eyebrow{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:18px;font-weight:500;}
+    .teaser-intro h2{font-size:clamp(34px,4.4vw,56px);font-weight:300;color:var(--navy);line-height:1.2;}
+    .teaser-intro h2 em{font-style:italic;font-weight:300;}
+    .gold-rule{width:44px;height:1.5px;background:var(--gold);margin:20px auto 0;opacity:.55;}
+    .teaser-split{display:grid;grid-template-columns:1fr 1fr;position:relative;padding:0 48px 48px;gap:0;}
+    .teaser-divider{position:absolute;top:5%;bottom:calc(5% + 48px);left:50%;transform:translateX(-50%);width:2px;z-index:10;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,#b89a6a 12%,#DAA520 50%,#b89a6a 88%,transparent 100%);box-shadow:0 0 8px rgba(184,154,106,0.35);}
+    .teaser-card{padding:56px 56px 48px;min-height:340px;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden;text-decoration:none;transition:background .35s ease,box-shadow .35s ease,transform .35s ease;border:1px solid rgba(184,134,11,0.4);}
+    .teaser-card.card-co{border-right:none;}
+    .teaser-card.card-ind{border-left:none;}
+    .teaser-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .teaser-card:hover{box-shadow:0 12px 40px rgba(30,47,74,0.18);transform:translateY(-2px);}
+    .card-co{background:#1e2f4a;}
+    .card-co:hover{background:#2d4a6e;}
+    .card-ind{background:#b8956a;}
+    .card-ind:hover{background:#d4b48a;}
+    .teaser-card-tag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px;}
+    .card-co .teaser-card-tag{color:rgba(184,154,106,0.85);}
+    .card-ind .teaser-card-tag{color:rgba(30,47,74,0.75);}
+    .teaser-card h3{font-size:clamp(26px,2.8vw,36px);font-weight:300;line-height:1.22;margin-bottom:28px;}
+    .teaser-card h3 em{font-style:italic;}
+    .card-co h3{color:#fff;}
+    .card-ind h3{color:#fff;}
+    .card-ind:hover h3{color:#1e2f4a;}
+    .teaser-services{flex:1;min-height:160px;margin-bottom:28px;}
+    .tsvc-list{list-style:none;display:flex;flex-direction:column;gap:11px;}
+    .tsvc-item{font-size:15px;font-weight:300;display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(6px);transition:opacity .32s ease,transform .32s ease;}
+    .tsvc-item.vis{opacity:1;transform:translateY(0);}
+    .tsvc-item::before{content:'';width:14px;height:1px;flex-shrink:0;}
+    .card-co .tsvc-item{color:rgba(255,255,255,0.75);}
+    .card-co .tsvc-item::before{background:rgba(184,154,106,0.65);}
+    .card-ind .tsvc-item{color:rgba(255,255,255,0.85);}
+    .card-ind:hover .tsvc-item{color:rgba(30,47,74,0.8);}
+    .card-ind .tsvc-item::before{background:rgba(255,255,255,0.6);}
+    .card-ind:hover .tsvc-item::before{background:rgba(30,47,74,0.4);}
+    .teaser-card-cta{font-size:9px;letter-spacing:.18em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;padding-bottom:2px;border-bottom:1px solid;margin-top:auto;transition:color .25s,border-color .25s,gap .22s;}
+    .card-co .teaser-card-cta{color:rgba(255,255,255,0.55);border-color:rgba(184,154,106,0.3);}
+    .card-co:hover .teaser-card-cta{color:#e8c96a;border-color:#e8c96a;gap:14px;}
+    .card-ind .teaser-card-cta{color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.3);}
+    .card-ind:hover .teaser-card-cta{color:var(--navy);border-color:var(--navy);gap:14px;}
+    @media(max-width:860px){.teaser-split{grid-template-columns:1fr;padding:0 20px 32px;}.teaser-divider{display:none;}.teaser-card{padding:36px 28px;}.teaser-card.card-co{border-right:1px solid rgba(184,134,11,0.4);border-bottom:none;}.teaser-card.card-ind{border-left:1px solid rgba(184,134,11,0.4);border-top:none;}}
+
+    /* WHY */
+    .why-section{background:#fbfaf7;padding:96px 72px;border-top:1px solid rgba(184,154,106,0.15);}
+    .why-inner{max-width:1100px;margin:0 auto;}
+    .why-header{text-align:center;margin-bottom:64px;}
+    .why-header h2{font-size:clamp(34px,4.2vw,54px);font-weight:300;color:var(--navy);margin-bottom:16px;line-height:1.2;}
+    .why-rule{width:44px;height:1.5px;background:var(--gold-dk);margin:0 auto 20px;opacity:.75;}
+    .why-header p{font-size:16px;font-style:italic;color:#5a5a5a;max-width:480px;margin:0 auto;line-height:1.85;}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(184,134,11,0.28);background:#fff;box-shadow:0 4px 28px rgba(30,47,74,0.06);}
+    .why-card{padding:48px 38px;border-right:1px solid rgba(184,134,11,0.22);transition:background .25s;background:#fff;}
+    .why-card:last-child{border-right:none;}
+    .why-card:hover{background:#f6f1e6;}
+    .why-number{font-size:52px;font-weight:300;font-style:italic;color:var(--gold-dk);opacity:0.55;line-height:1;margin-bottom:18px;}
+    .why-card h3{font-size:15px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:14px;}
+    .why-card p{font-size:15px;font-style:italic;color:#4a4a4a;line-height:1.85;}
+    @media(max-width:780px){.why-section{padding:64px 28px;}.why-grid{grid-template-columns:1fr;}.why-card{border-right:none;border-bottom:1px solid rgba(184,134,11,0.22);}}
+
+    /* CONTACT — NAVY */
+    .contact-section{background:var(--navy);padding:96px 72px;scroll-margin-top:72px;}
+    .contact-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1.35fr;gap:80px;align-items:start;}
+    .contact-left h2{font-size:clamp(28px,3.2vw,42px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:16px;}
+    .contact-left p{font-size:15px;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.9;margin-bottom:36px;}
+    .contact-eyebrow{display:block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:14px;font-size:10px;}
+    .contact-details{display:flex;flex-direction:column;gap:14px;}
+    .contact-detail{display:flex;align-items:center;gap:14px;font-size:14px;}
+    .contact-detail-icon{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(184,154,106,0.4);color:var(--gold-eye);font-size:13px;}
+    .contact-detail a{color:rgba(255,255,255,0.95);text-decoration:none;transition:color .2s;}
+    .contact-detail a:hover{color:var(--gold-eye);}
+    .form-note{font-size:12px;font-style:italic;color:rgba(255,255,255,0.65);margin-bottom:4px;}
+    .contact-form{display:flex;flex-direction:column;gap:18px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .form-group{display:flex;flex-direction:column;gap:7px;}
+    .form-group label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.78);}
+    .form-group input,.form-group select,.form-group textarea{font-family:'Newsreader',serif;font-size:14px;color:#fff;background:rgba(255,255,255,0.07);border:1px solid rgba(184,154,106,0.25);padding:12px 15px;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.4);}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold-eye);background:rgba(255,255,255,0.1);}
+    .form-group select{color:rgba(255,255,255,0.92);cursor:pointer;background-color:rgba(255,255,255,0.07);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23DAA520' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+    .form-group select option{background:var(--navy);color:var(--white);}
+    .form-group textarea{resize:vertical;min-height:110px;}
+    .form-submit{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+    .btn-submit{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px 36px;border:none;cursor:pointer;color:#2a1800;position:relative;overflow:hidden;transition:filter .3s,box-shadow .3s;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.4),0 0 0 1px rgba(140,90,0,0.8),0 2px 12px rgba(184,134,11,0.25);}
+    .btn-submit::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.5),transparent);animation:goldSweep 5s ease-in-out infinite;}
+    .btn-submit:hover{filter:brightness(1.1) saturate(1.1);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.95),inset 0 -1.5px 0 rgba(80,45,0,0.5),0 0 0 1px rgba(140,90,0,0.95),0 4px 20px rgba(184,134,11,0.45);}
+    .btn-submit:hover::before{animation-duration:1.2s;}
+    .form-privacy{font-size:11px;font-style:italic;color:rgba(255,255,255,0.55);max-width:240px;line-height:1.65;}
+    .form-success{display:none;background:rgba(184,154,106,0.12);border:1px solid rgba(184,154,106,0.4);padding:18px 22px;color:var(--gold-eye);font-style:italic;font-size:14px;}
+    @media(max-width:860px){.contact-section{padding:64px 28px;}.contact-inner{grid-template-columns:1fr;gap:44px;}.form-row{grid-template-columns:1fr;}}
+
+    /* FOOTER */
+    footer{background:var(--white);padding:60px 72px 32px;border-top:2px solid rgba(184,154,106,0.3);}
+    .footer-inner{max-width:1100px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(184,154,106,0.18);}
+    .footer-logo-img{height:64px;width:auto;display:block;}
+    .footer-logo-text{font-family:'Newsreader',serif;font-size:24px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .footer-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .footer-center{display:flex;flex-direction:column;gap:24px;padding-top:8px;}
+    .footer-nav{display:flex;gap:8px;flex-wrap:wrap;}
+    .footer-nav a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .22s,border-color .22s,background .22s;padding:8px 16px;border:1px solid rgba(184,134,11,0.3);border-radius:2px;}
+    .footer-nav a:hover{color:var(--gold-dk);border-color:var(--gold-dk);background:rgba(184,134,11,0.04);}
+    .footer-right{text-align:right;padding-top:8px;}
+    .footer-right a{display:block;font-size:13px;color:var(--navy);text-decoration:none;line-height:2.2;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);}
+    .footer-social a:hover{color:var(--navy);border-color:rgba(30,47,74,0.4);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    @media(max-width:860px){footer{padding:44px 24px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{text-align:left;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;align-items:flex-start;}}
+  
+    /* PRICING OVERLAY */
+    .pricing-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,25,40,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
+    .pricing-overlay.open{display:flex;}
+    .pricing-modal{background:var(--white);max-width:720px;width:100%;padding:56px 52px;position:relative;}
+    .pricing-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;transition:color .2s;}
+    .pricing-modal-close:hover{color:var(--navy);}
+    .pricing-modal-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;display:block;}
+    .pricing-modal h2{font-size:clamp(24px,3vw,36px);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:12px;}
+    .pricing-modal p{font-size:15px;font-style:italic;color:#666;margin-bottom:40px;line-height:1.75;}
+    .pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .pricing-card{display:flex;flex-direction:column;padding:32px 28px;text-decoration:none;border:1px solid rgba(184,134,11,0.3);transition:all .25s;position:relative;}
+    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .pricing-card:hover{border-color:var(--gold-dk);background:rgba(184,134,11,0.03);transform:translateY(-2px);}
+    .pricing-card-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:14px;}
+    .pricing-card h3{font-size:20px;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+    .pricing-card h3 em{font-style:italic;}
+    .pricing-card p{font-size:13px;font-style:italic;color:#666;line-height:1.65;margin-bottom:20px;flex:1;}
+    .pricing-card-range{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;}
+    .pricing-card-cta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);display:inline-flex;align-items:center;gap:8px;transition:gap .2s;}
+    .pricing-card:hover .pricing-card-cta{gap:14px;}
+    @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}.pricing-modal{padding:40px 28px;}}
+
+  
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;">→ Free Assessment</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
+  <div class="nav-sep"></div>
+  <a href="#contact" class="nav-touch">Get in Touch</a>
+  <a href="/get-started" class="nav-gs">Free Assessment</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Danish Immigration &amp; Consulting</span>
+    <h1>Navigating Danish<br>Immigration Permits<br><em>with Expert Precision</em></h1>
+    <p class="hero-sub">12 years guiding Companies and Individuals through work permits, Family Permits, EU Residence Certificates and Permanent Residence.</p>
+    <a href="#services" class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Explore</span>
+      <span style="font-size:15px;margin-top:-2px;">↓</span>
+    </a>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15,14"/></svg></div>
+    <div class="trust-txt"><span class="trust-pri">12+ Years Experience</span><span class="trust-sec">Since 2012</span></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6l2-7 4 14 2-7h4"/></svg></div>
+    <div class="trust-txt"><span class="trust-pri">SIRI Specialists</span><span class="trust-sec">Direct Knowledge</span></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18"/><path d="M8 15h3"/></svg></div>
+    <div class="trust-txt"><span class="trust-pri">Flat-Fee Pricing</span><span class="trust-sec">No Surprises</span></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M14 20c0-2.5 2-4.5 4.5-4.5"/></svg></div>
+    <div class="trust-txt"><span class="trust-pri">Companies &amp; Individuals</span><span class="trust-sec">Full Coverage</span></div>
+  </div>
+</div>
+
+<section class="services-teaser" id="services">
+  <div class="teaser-intro">
+    <span class="section-eyebrow">Expert Danish Immigration Guidance</span>
+    <h2>Danish immigration, handled with precision.<br><em>Whoever you are.</em></h2>
+    <div class="gold-rule"></div>
+  </div>
+  <div class="teaser-split">
+    <div class="teaser-divider"></div>
+    <a href="/services" class="teaser-card card-co">
+      <p class="teaser-card-tag">For Companies &amp; Employers</p>
+      <h3>Hire internationally,<br><em>with confidence.</em></h3>
+      <div class="teaser-services">
+        <ul class="tsvc-list" id="tsvc-co">
+          <li class="tsvc-item">Fast-Track Certification — Company</li>
+          <li class="tsvc-item">Fast-Track / Pay Limit Work Permits</li>
+          <li class="tsvc-item">Relocation Assistance</li>
+          <li class="tsvc-item">Right-to-Work Check</li>
+          <li class="tsvc-item">HR Retainer</li>
+        </ul>
+      </div>
+      <span class="teaser-card-cta">See employer services <span>→</span></span>
+    </a>
+    <a href="/services" class="teaser-card card-ind">
+      <p class="teaser-card-tag">For Individuals &amp; Families</p>
+      <h3>Moving to Denmark<br><em>shouldn't be stressful.</em></h3>
+      <div class="teaser-services">
+        <ul class="tsvc-list" id="tsvc-ind">
+          <li class="tsvc-item">Work Permits</li>
+          <li class="tsvc-item">Family Permits</li>
+          <li class="tsvc-item">EU Residence</li>
+          <li class="tsvc-item">Permanent Residence</li>
+          <li class="tsvc-item">Job Change</li>
+          <li class="tsvc-item">Job Seeking Permit / Terminated Employment</li>
+        </ul>
+      </div>
+      <span class="teaser-card-cta">See individual services <span>→</span></span>
+    </a>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="why-inner">
+    <div class="why-header">
+      <span class="section-eyebrow">Why Nordic Anchor</span>
+      <h2>The right partner for your<br>Danish immigration journey</h2>
+      <div class="why-rule"></div>
+      <p>Deep regulatory knowledge. A straightforward, client-first approach. No surprises.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-number">01</div>
+        <h3>12 Years of Expertise</h3>
+        <p>Over a decade working directly with SIRI, navigating Danish immigration rules as they evolve — so you don't have to.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">02</div>
+        <h3>Flat-Fee Transparency</h3>
+        <p>Every service has a clear, published price. No hourly billing, no surprise invoices. You know the cost before you commit.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">03</div>
+        <h3>End-to-End Support</h3>
+        <p>From eligibility check to approval — and the practical steps beyond. We handle the process, you handle your life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="contact-eyebrow">Get in Touch</span>
+      <h2>Request a Consultation</h2>
+      <p>Tell us briefly about your situation and we'll get back to you within one business day — no commitment required.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉</div>
+          <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✆</div>
+          <a href="tel:+4571396509">+45 7139 6509</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="form-note">All fields required. We respond within one business day.</p>
+      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="First name" required/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Last name" required/></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+        <div class="form-group">
+          <label>I am enquiring as</label>
+          <select name="enquiry_type" required>
+            <option value="" disabled selected>Select one…</option>
+            <option>An individual or family member</option>
+            <option>A company / employer</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Brief description of your situation</label><textarea name="message" placeholder="e.g. I need a work permit for a new employee joining next month…" required></textarea></div>
+        <div class="form-submit">
+          <button type="submit" class="btn-submit" id="submitBtn">Send Enquiry →</button>
+          <p class="form-privacy">Your details are used only to respond to your enquiry and are never shared.</p>
+        </div>
+        <div class="form-success" id="formSuccess">Thank you — we've received your enquiry and will be in touch within one business day.</div>
+        <div class="form-success" id="formError" style="display:none;border-color:rgba(255,100,100,0.4);color:#ff9999;">Something went wrong — please email us directly at <a href="mailto:rd@nordicanchor.dk" style="color:#ff9999;">rd@nordicanchor.dk</a></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" style="height:56px;width:auto;display:block;"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/about">Who We Are</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+      <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const mainNav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 20));
+  const heroBg = document.getElementById('heroBg');
+  setTimeout(() => heroBg.classList.add('loaded'), 80);
+  window.addEventListener('scroll', () => { heroBg.style.transform = `scale(1) translateY(${window.scrollY * 0.22}px)`; });
+  function openDrawer() { document.getElementById('navDrawer').classList.add('open'); document.getElementById('navOverlay').classList.add('open'); }
+  function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); }
+  function runC(listId, delay) {
+    const list = document.getElementById(listId); if (!list) return;
+    const items = list.querySelectorAll('.tsvc-item');
+    const stagger = 280;
+    const holdAfterLast = 2400;
+    const pauseBetweenCycles = 700;
+    function cycle() {
+      items.forEach((el, i) => setTimeout(() => el.classList.add('vis'), i * stagger));
+      const totalIn = (items.length - 1) * stagger;
+      setTimeout(() => {
+        items.forEach(el => el.classList.remove('vis'));
+        setTimeout(cycle, pauseBetweenCycles);
+      }, totalIn + holdAfterLast);
+    }
+    setTimeout(cycle, delay);
+  }
+  runC('tsvc-co', 600); runC('tsvc-ind', 600);
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('submitBtn');
+
+    // Disable form while submitting
+    form.style.opacity = '.6';
+    form.style.pointerEvents = 'none';
+    btn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xpqknroj', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        // Hide the form fields, show success
+        form.querySelectorAll('.form-row, .form-group, .form-submit').forEach(el => el.style.display = 'none');
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        // Re-enable form, show error
+        form.style.opacity = '1';
+        form.style.pointerEvents = 'auto';
+        btn.textContent = 'Send Enquiry →';
+        document.getElementById('formError').style.display = 'block';
+      }
+    } catch (err) {
+      // Network error fallback
+      form.style.opacity = '1';
+      form.style.pointerEvents = 'auto';
+      btn.textContent = 'Send Enquiry →';
+      document.getElementById('formError').style.display = 'block';
+    }
+  }
+</script>
+
+<!-- PRICING OVERLAY -->
+<div class="pricing-overlay" id="pricingOverlay" onclick="closePricingOutside(event)">
+  <div class="pricing-modal" id="pricingModal">
+    <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
+    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
+    <h2>Which best describes you?</h2>
+    <p>Select your situation and we'll show you the full pricing for every service &mdash; no hidden fees, no surprises.</p>
+    <div class="pricing-cards">
+      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Companies &amp; Employers</span>
+        <h3>Hiring internationally<br><em>with confidence.</em></h3>
+        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
+        <div class="pricing-card-range">From DKK 3,500 / mo</div>
+        <span class="pricing-card-cta">View employer services &nbsp;&rarr;</span>
+      </a>
+      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Individuals &amp; Families</span>
+        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
+        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
+        <div class="pricing-card-range">From DKK 2,500</div>
+        <span class="pricing-card-cta">View individual services &nbsp;&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePricing(); });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — Nordic Anchor</title>
+  <meta name="description" content="Nordic Anchor Privacy Policy. How we collect, use and protect your personal data in accordance with GDPR."/>
+  <link rel="icon" href="/favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --navy:#1e2f4a; --gold:#b89a6a; --gold-dk:#B8860B;
+      --gold-eye:#DAA520; --cream:#f9f6f2; --white:#ffffff;
+      --text:#2a2a2a; --muted:#888;
+    }
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+
+    /* DRAWER */
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    /* PAGE HEADER */
+    .page-header{margin-top:88px;padding:72px 48px 56px;background:var(--navy);text-align:center;position:relative;overflow:hidden;}
+    .page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 120%,rgba(184,154,106,0.12) 0%,transparent 70%);}
+    .page-header-eyebrow{display:inline-block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,154,106,0.4);padding:7px 18px;margin-bottom:24px;}
+    .page-header h1{font-size:clamp(32px,4vw,52px);font-weight:300;color:#fff;line-height:1.15;position:relative;}
+    .page-header h1 em{font-style:italic;color:rgba(255,255,255,0.85);}
+    .page-header-meta{margin-top:20px;font-size:13px;font-style:italic;color:rgba(255,255,255,0.55);position:relative;}
+
+    /* CONTENT */
+    .legal-body{max-width:780px;margin:0 auto;padding:72px 48px 96px;}
+    .legal-body h2{font-size:22px;font-weight:400;color:var(--navy);margin:48px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(184,154,106,0.3);}
+    .legal-body h2:first-child{margin-top:0;}
+    .legal-body h3{font-size:17px;font-weight:500;color:var(--navy);margin:28px 0 10px;}
+    .legal-body p{font-size:16px;line-height:1.85;color:#3a3a3a;margin-bottom:16px;}
+    .legal-body ul{margin:0 0 18px 24px;}
+    .legal-body ul li{font-size:15px;line-height:1.8;color:#3a3a3a;margin-bottom:6px;}
+    .legal-body a{color:var(--gold-dk);text-decoration:none;border-bottom:1px solid rgba(184,134,11,0.3);transition:border-color .2s;}
+    .legal-body a:hover{border-color:var(--gold-dk);}
+    .legal-callout{background:var(--cream);border-left:3px solid var(--gold);padding:20px 24px;margin:28px 0;font-size:15px;line-height:1.8;color:#3a3a3a;font-style:italic;}
+    .legal-table{width:100%;border-collapse:collapse;margin:20px 0 28px;font-size:14px;}
+    .legal-table th{text-align:left;padding:10px 14px;background:var(--navy);color:#fff;font-weight:400;font-size:11px;letter-spacing:.12em;text-transform:uppercase;}
+    .legal-table td{padding:12px 14px;border-bottom:1px solid rgba(184,154,106,0.2);color:#3a3a3a;vertical-align:top;line-height:1.65;}
+    .legal-table tr:last-child td{border-bottom:none;}
+    .legal-table tr:nth-child(even) td{background:rgba(249,246,242,0.6);}
+
+    /* FOOTER */
+    footer{background:var(--white);padding:60px 72px 32px;border-top:2px solid rgba(184,154,106,0.3);}
+    .footer-inner{max-width:1100px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(184,154,106,0.18);}
+    .footer-logo-img{height:64px;width:auto;display:block;}
+    .footer-center{display:flex;flex-direction:column;gap:24px;padding-top:8px;}
+    .footer-nav{display:flex;gap:8px;flex-wrap:wrap;}
+    .footer-nav a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .22s,border-color .22s,background .22s;padding:8px 16px;border:1px solid rgba(184,134,11,0.3);border-radius:2px;}
+    .footer-nav a:hover{color:var(--gold-dk);border-color:var(--gold-dk);background:rgba(184,134,11,0.04);}
+    .footer-right{text-align:right;padding-top:8px;}
+    .footer-right a{display:block;font-size:13px;color:var(--navy);text-decoration:none;line-height:2.2;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);}
+    .footer-social a:hover{color:var(--navy);border-color:rgba(30,47,74,0.4);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    .footer-legal{display:flex;gap:20px;}
+    .footer-legal a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+    .footer-legal a:hover{color:var(--gold-dk);}
+    @media(max-width:860px){footer{padding:44px 24px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{text-align:left;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;align-items:flex-start;}.legal-body{padding:48px 24px 72px;}.page-header{padding:56px 24px 44px;}}
+
+    /* COOKIE BANNER */
+    #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:2px solid var(--gold);transform:translateY(100%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
+    #cookieBanner.visible{transform:translateY(0);}
+    .cookie-text{flex:1;min-width:240px;font-size:13px;line-height:1.75;color:rgba(255,255,255,0.88);}
+    .cookie-text a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,154,106,0.4);}
+    .cookie-text a:hover{border-color:var(--gold);}
+    .cookie-actions{display:flex;gap:12px;flex-shrink:0;}
+    .cookie-accept{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-dk);color:#fff;border:1px solid var(--gold-dk);border-radius:2px;padding:10px 22px;cursor:pointer;transition:background .22s;}
+    .cookie-accept:hover{background:#9a7209;}
+    .cookie-decline{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.25);border-radius:2px;padding:10px 22px;cursor:pointer;transition:border-color .22s,color .22s;}
+    .cookie-decline:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+  </style>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookieBanner">
+  <p class="cookie-text">We use cookies to ensure the site functions correctly and to understand how visitors use it. <a href="/privacy">Privacy Policy</a></p>
+  <div class="cookie-actions">
+    <button class="cookie-decline" onclick="cookieDecline()">Decline</button>
+    <button class="cookie-accept" onclick="cookieAccept()">Accept</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <div class="nav-sep"></div>
+  <a href="/#contact" class="nav-touch">Get in Touch</a>
+</nav>
+
+<div class="page-header">
+  <span class="page-header-eyebrow">Legal</span>
+  <h1>Privacy Policy</h1>
+  <p class="page-header-meta">Last updated: 28 April 2026</p>
+</div>
+
+<div class="legal-body">
+
+  <div class="legal-callout">
+    Nordic Anchor is committed to protecting your personal data. This policy explains what we collect, why, how long we keep it, and what your rights are under the General Data Protection Regulation (GDPR).
+  </div>
+
+  <h2>1. Who We Are (Data Controller)</h2>
+  <p>The data controller for personal data processed through this website is:</p>
+  <p>
+    <strong>Nordic Anchor</strong><br>
+    CVR: 46215540<br>
+    Enkeltmandsvirksomhed, Denmark<br>
+    Email: <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a><br>
+    Phone: +45 7139 6509
+  </p>
+  <p>If you have any questions about how we handle your personal data, please contact us at the email address above.</p>
+
+  <h2>2. What Data We Collect and Why</h2>
+  <p>We collect personal data only where there is a clear and legitimate purpose. The table below summarises each category:</p>
+
+  <table class="legal-table">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Purpose</th>
+        <th>Legal Basis</th>
+        <th>Retention</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Name, email address, phone number</td>
+        <td>Responding to enquiries submitted via our contact form</td>
+        <td>Legitimate interest (Art. 6(1)(f) GDPR)</td>
+        <td>24 months from last contact, then deleted</td>
+      </tr>
+      <tr>
+        <td>Enquiry content (your message)</td>
+        <td>Understanding your immigration situation to provide relevant advice</td>
+        <td>Legitimate interest (Art. 6(1)(f) GDPR)</td>
+        <td>24 months from last contact, then deleted</td>
+      </tr>
+      <tr>
+        <td>Payment information (when Stripe is enabled)</td>
+        <td>Processing upfront service payments securely</td>
+        <td>Contractual necessity (Art. 6(1)(b) GDPR)</td>
+        <td>5 years (Danish bookkeeping requirements)</td>
+      </tr>
+      <tr>
+        <td>IP address, browser type, pages visited</td>
+        <td>Website analytics — understanding how visitors use the site</td>
+        <td>Consent (Art. 6(1)(a) GDPR) — only if you accept cookies</td>
+        <td>Until consent is withdrawn or 13 months</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>We do not collect any special category data (such as health information, national origin, or immigration status beyond what you voluntarily share in an enquiry message).</p>
+
+  <h2>3. Contact Forms — Formspree</h2>
+  <p>Our contact form is powered by <strong>Formspree, Inc.</strong>, a US-based third-party service. When you submit a form, your name, email address and message are transmitted to and stored on Formspree's servers.</p>
+  <ul>
+    <li>Formspree acts as a data processor on our behalf under a data processing agreement.</li>
+    <li>Data transfers to the US are conducted under standard contractual clauses (SCCs) as per Formspree's privacy framework.</li>
+    <li>You can review Formspree's privacy policy at <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer">formspree.io/legal/privacy-policy</a>.</li>
+  </ul>
+
+  <h2>4. Google Fonts</h2>
+  <p>This website loads the <em>Newsreader</em> typeface from Google Fonts (Google LLC, USA). When your browser requests the font files, your IP address is transmitted to Google's servers. This is a technically necessary step to render the site correctly.</p>
+  <ul>
+    <li>Google may use this IP address in accordance with their own privacy policy.</li>
+    <li>The legal basis for this transfer is our legitimate interest in providing a correctly rendered website (Art. 6(1)(f) GDPR).</li>
+    <li>Google's privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a></li>
+  </ul>
+
+  <h2>5. Cookies</h2>
+  <p>We use cookies to make the website function and, with your consent, to understand how it is used. The table below describes the cookies we set:</p>
+
+  <table class="legal-table">
+    <thead>
+      <tr>
+        <th>Cookie</th>
+        <th>Type</th>
+        <th>Purpose</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>na_cookie_consent</code></td>
+        <td>Necessary</td>
+        <td>Records whether you have accepted or declined cookies, so we do not show the banner on every visit</td>
+        <td>12 months</td>
+      </tr>
+      <tr>
+        <td>Analytics cookies (if consent given)</td>
+        <td>Analytics</td>
+        <td>Aggregate, anonymised data on page visits and navigation — used to improve the site</td>
+        <td>13 months</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>You can withdraw your cookie consent at any time by clicking the link in the footer or by clearing your browser cookies. Withdrawing consent does not affect the lawfulness of processing that occurred before withdrawal.</p>
+
+  <h2>6. Payment Processing — Stripe (Upcoming)</h2>
+  <p>We intend to offer online payment for services via <strong>Stripe, Inc.</strong>. When this feature is enabled:</p>
+  <ul>
+    <li>Payment card details are entered directly into Stripe's secure, PCI-DSS-compliant payment interface. Nordic Anchor never sees or stores your full card number.</li>
+    <li>Stripe acts as an independent data controller for payment data. Their privacy policy is available at <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">stripe.com/privacy</a>.</li>
+    <li>We retain transaction references (not card data) for 5 years to meet Danish bookkeeping obligations under Bogføringsloven.</li>
+  </ul>
+
+  <h2>7. Data Sharing</h2>
+  <p>We do not sell, rent or trade your personal data. We only share data with the third-party processors listed in this policy (Formspree, Google, Stripe) and only to the extent necessary to provide our services. We do not share data with immigration authorities, government bodies or any other third parties without your explicit consent or a clear legal obligation to do so.</p>
+
+  <h2>8. International Transfers</h2>
+  <p>Some of our processors (Formspree, Google, Stripe) are based in the United States. Transfers to these processors are made under appropriate safeguards — specifically, the EU Standard Contractual Clauses approved by the European Commission — ensuring your data receives an equivalent level of protection to that required within the EU/EEA.</p>
+
+  <h2>9. Your Rights</h2>
+  <p>Under GDPR, you have the following rights in relation to your personal data:</p>
+  <ul>
+    <li><strong>Right of access</strong> — you may request a copy of the personal data we hold about you.</li>
+    <li><strong>Right to rectification</strong> — you may ask us to correct inaccurate data.</li>
+    <li><strong>Right to erasure ("right to be forgotten")</strong> — you may ask us to delete your data where there is no overriding legal basis to retain it.</li>
+    <li><strong>Right to restriction</strong> — you may ask us to restrict processing while a dispute is resolved.</li>
+    <li><strong>Right to data portability</strong> — you may request your data in a structured, machine-readable format.</li>
+    <li><strong>Right to object</strong> — you may object to processing based on legitimate interest.</li>
+    <li><strong>Right to withdraw consent</strong> — where processing is based on consent, you may withdraw it at any time without affecting prior processing.</li>
+  </ul>
+  <p>To exercise any of these rights, email us at <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>. We will respond within 30 days. There is no charge for reasonable requests.</p>
+
+  <h2>10. Right to Lodge a Complaint</h2>
+  <p>If you believe we have not handled your data correctly, you have the right to lodge a complaint with the Danish supervisory authority:</p>
+  <p>
+    <strong>Datatilsynet</strong><br>
+    Carl Jacobsens Vej 35<br>
+    2500 Valby, Denmark<br>
+    Website: <a href="https://www.datatilsynet.dk" target="_blank" rel="noopener noreferrer">datatilsynet.dk</a><br>
+    Email: <a href="mailto:dt@datatilsynet.dk">dt@datatilsynet.dk</a>
+  </p>
+
+  <h2>11. Security</h2>
+  <p>We take reasonable technical and organisational measures to protect your personal data against accidental loss, unauthorised access, disclosure, alteration or destruction. Our website is served over HTTPS with TLS encryption. Access to form submissions is restricted to authorised personnel only.</p>
+
+  <h2>12. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of the page. We encourage you to review this policy periodically. Continued use of our website after changes are published constitutes acceptance of those changes.</p>
+
+  <h2>13. Contact Us</h2>
+  <p>For any privacy-related questions or to exercise your rights, please contact:</p>
+  <p>
+    <strong>Nordic Anchor</strong><br>
+    Email: <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a><br>
+    Phone: +45 7139 6509
+  </p>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" class="footer-logo-img"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/about">Who We Are</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="#" onclick="resetCookieConsent();return false;">Cookie Settings</a>
+      </div>
+      <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // NAV
+  function openDrawer(){document.getElementById('navDrawer').classList.add('open');document.getElementById('navOverlay').classList.add('open');document.body.style.overflow='hidden';}
+  function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.body.style.overflow='';}
+  window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>10);});
+
+  // COOKIE CONSENT
+  function cookieAccept(){localStorage.setItem('na_cookie_consent','accepted');hideBanner();}
+  function cookieDecline(){localStorage.setItem('na_cookie_consent','declined');hideBanner();}
+  function hideBanner(){document.getElementById('cookieBanner').classList.remove('visible');}
+  function resetCookieConsent(){localStorage.removeItem('na_cookie_consent');document.getElementById('cookieBanner').classList.add('visible');}
+  (function(){
+    if(!localStorage.getItem('na_cookie_consent')){
+      setTimeout(()=>document.getElementById('cookieBanner').classList.add('visible'),800);
+    }
+  })();
+</script>
+</body>
+</html>
