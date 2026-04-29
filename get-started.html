@@ -32,6 +32,11 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--page-bg);color:var(
 .progress-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--body);white-space:nowrap;}
 @media(max-width:600px){.progress-wrap{padding:12px 20px;}}
 .form-wrap{max-width:760px;margin:0 auto;padding:180px 48px 96px;}
+    /* Side accent borders */
+    .form-wrap::before,.form-wrap::after{content:'';position:fixed;top:0;bottom:0;width:3px;z-index:198;}
+    .form-wrap::before{left:0;background:linear-gradient(180deg,transparent 0%,#B8860B 20%,#DAA520 50%,#B8860B 80%,transparent 100%);}
+    .form-wrap::after{right:0;background:linear-gradient(180deg,transparent 0%,#1e2f4a 20%,#2b3e5c 50%,#1e2f4a 80%,transparent 100%);}
+    @media(max-width:600px){.form-wrap::before,.form-wrap::after{width:2px;}}
 @media(max-width:600px){.form-wrap{padding:160px 20px 80px;}}
 .step{display:none !important;animation:stepIn .35s ease;}
 .step.active{display:block !important;}
@@ -262,7 +267,27 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--page-bg);color:var(
   <p class="step-sub">This is where the eligibility assessment begins — and where we flag anything that may need early attention.</p>
   <div class="field-group">
     <label class="field-label">What is their nationality? <span style="font-style:italic;font-weight:400;font-size:11px;color:var(--muted);">🇪🇺 = EU/EEA route may apply</span></label>
-    <select class="field-select" id="co-nat" onchange="checkCoNat()"><option value="">Please select…</option><option value="eu">🇪🇺 EU / EEA national (incl. Norway, Iceland, Switzerland)</option><option value="dual-eu">🇪🇺 Dual nationality — one of which is EU / EEA</option><option value="uk">British (UK)</option><option value="non-eu">Non-EU / Non-EEA national</option><option value="dual-non-eu">Dual nationality — both non-EU</option></select>
+    <select class="field-select" id="co-nat" onchange="checkCoNat()"><option value="">Please select…</option>
+        <optgroup label="🇪🇺 EU / EEA — no work permit required">
+          <option value="eu">🇪🇺 EU / EEA national (Germany, France, Spain, Poland, Sweden, Norway, etc.)</option>
+          <option value="dual-eu">🇪🇺 Dual nationality — one of which is EU / EEA</option>
+        </optgroup>
+        <optgroup label="Non-EU nationalities">
+          <option value="uk">British (UK)</option>
+          <option value="us">American (USA)</option>
+          <option value="ca">Canadian</option>
+          <option value="au">Australian / New Zealander</option>
+          <option value="in">Indian</option>
+          <option value="cn">Chinese</option>
+          <option value="ph">Filipino</option>
+          <option value="pk">Pakistani</option>
+          <option value="ng">Nigerian</option>
+          <option value="br">Brazilian</option>
+          <option value="jp">Japanese / South Korean</option>
+          <option value="za">South African</option>
+          <option value="non-eu">Other non-EU / Non-EEA national</option>
+          <option value="dual-non-eu">Dual nationality — both non-EU</option>
+        </optgroup></select>
     <div id="co-nat-flag"></div>
   </div>
   <div class="field-group"><label class="field-label">Where are they currently based?</label><select class="field-select" id="co-location"><option value="">Please select…</option><option value="in-dk">Already in Denmark</option><option value="eu">In another EU / EEA country</option><option value="abroad">Outside the EU / EEA</option></select><div id="co-location-flag"></div></div>
@@ -312,7 +337,25 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--page-bg);color:var(
   <span class="step-eyebrow">Your nationality</span>
   <h2 class="step-heading">Let's find the <em>simplest route for you.</em></h2>
   <p class="step-sub">Your nationality determines which permit scheme applies — and sometimes a second passport opens up a much easier path.</p>
-  <div class="field-group"><label class="field-label">Your primary nationality <span style="font-style:italic;font-weight:400;font-size:11px;color:var(--muted);">🇪🇺 = EU/EEA route may apply</span></label><select class="field-select" id="ind-nat-p" onchange="checkIndNat()"><option value="">Please select…</option><option value="eu">🇪🇺 EU / EEA national (Germany, France, Spain, Sweden, Norway, etc.)</option><option value="uk">British (UK)</option><option value="us">American (USA)</option><option value="in">Indian</option><option value="cn">Chinese</option><option value="ph">Filipino</option><option value="other-non-eu">Other non-EU nationality</option></select></div>
+  <div class="field-group"><label class="field-label">Your primary nationality <span style="font-style:italic;font-weight:400;font-size:11px;color:var(--muted);">🇪🇺 = EU/EEA route may apply</span></label><select class="field-select" id="ind-nat-p" onchange="checkIndNat()"><option value="">Please select…</option>
+          <optgroup label="🇪🇺 EU / EEA — right to live &amp; work in Denmark freely">
+            <option value="eu">EU / EEA national (Germany, France, Italy, Spain, Netherlands, Sweden, Poland, Norway, etc.)</option>
+          </optgroup>
+          <optgroup label="Non-EU nationalities">
+            <option value="uk">British (UK)</option>
+            <option value="us">American (USA)</option>
+            <option value="ca">Canadian</option>
+            <option value="au">Australian / New Zealander</option>
+            <option value="in">Indian</option>
+            <option value="cn">Chinese</option>
+            <option value="ph">Filipino</option>
+            <option value="pk">Pakistani</option>
+            <option value="ng">Nigerian</option>
+            <option value="br">Brazilian</option>
+            <option value="jp">Japanese / South Korean</option>
+            <option value="za">South African</option>
+            <option value="other-non-eu">Other nationality not listed above</option>
+          </optgroup></select></div>
   <label class="dual-toggle" onclick="togDual()"><input type="checkbox" id="dual-cb" style="pointer-events:none;"/><span class="dual-toggle-label">I hold a second passport (dual nationality)</span></label>
   <div class="dual-nat-extra" id="dual-extra"><div class="field-group"><label class="field-label">Your second nationality 🇪🇺 = may unlock EU route</label><select class="field-select" id="ind-nat-s" onchange="checkIndNat()"><option value="">Please select…</option><option value="eu">🇪🇺 EU / EEA national</option><option value="uk">British (UK)</option><option value="us">American (USA)</option><option value="other-non-eu">Other non-EU nationality</option></select></div></div>
   <div id="ind-nat-flag"></div>
