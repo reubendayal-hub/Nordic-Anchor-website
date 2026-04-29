@@ -27,15 +27,11 @@
     .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
     .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
     .nav-touch:hover{background:#2b3e5c;}
-    .nav-gs{font-family:'Newsreader',serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2a1800;border:none;padding:11px 22px;cursor:pointer;position:relative;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;flex-shrink:0;border-radius:2px;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.42),0 0 0 1px rgba(140,90,0,0.82),0 2px 14px rgba(184,134,11,0.28);transition:filter .3s,box-shadow .3s;}
+    .nav-gs{font-family:'Newsreader',serif;font-size:clamp(8px,1.8vw,10px);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2a1800;border:none;padding:11px 22px;cursor:pointer;position:relative;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;flex-shrink:0;border-radius:2px;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.42),0 0 0 1px rgba(140,90,0,0.82),0 2px 14px rgba(184,134,11,0.28);transition:filter .3s,box-shadow .3s;}
     .nav-gs::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.55),transparent);animation:goldSweep 4.5s ease-in-out infinite;pointer-events:none;}
     @keyframes goldSweep{0%{left:-70%;opacity:0}8%{opacity:1}52%{left:115%;opacity:1}58%{opacity:0}100%{left:115%;opacity:0}}
     .nav-gs:hover{filter:brightness(1.1) saturate(1.12);}
-<<<<<<< HEAD
-    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 16px;gap:6px;}.nav-touch{font-size:9px;padding:8px 12px;}.nav-gs{font-size:9px;padding:9px 14px;}}
-=======
     @media(max-width:860px){.nav-pill,.nav-sep,.nav-touch{display:none;}#mainNav{padding:0 16px;gap:6px;}.nav-touch{font-size:9px;padding:8px 12px;}.nav-gs{font-size:9px;padding:9px 14px;}}
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
     @media(max-width:400px){.nav-logo-text{font-size:14px;}.nav-touch{display:none;}}
 
     /* DRAWER */
@@ -209,48 +205,30 @@
     .nav-drawer-logo-img{height:48px;width:auto;display:block;}
     @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}.pricing-modal{padding:40px 28px;}}
 
-<<<<<<< HEAD
-
-    /* COOKIE BANNER */
-    #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:2px solid var(--gold);transform:translateY(100%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
-    #cookieBanner.visible{transform:translateY(0);}
-    .cookie-text{flex:1;min-width:240px;font-size:13px;line-height:1.75;color:rgba(255,255,255,0.88);}
-    .cookie-text a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,154,106,0.4);}
-    .cookie-text a:hover{border-color:var(--gold);}
-    .cookie-actions{display:flex;gap:12px;flex-shrink:0;}
-    .cookie-accept{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-dk);color:#fff;border:1px solid var(--gold-dk);border-radius:2px;padding:10px 22px;cursor:pointer;transition:background .22s;}
-    .cookie-accept:hover{background:#9a7209;}
-    .cookie-decline{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.25);border-radius:2px;padding:10px 22px;cursor:pointer;transition:border-color .22s,color .22s;}
-    .cookie-decline:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
-
-    /* FOOTER LEGAL LINKS */
-    .footer-legal{display:flex;gap:20px;}
-    .footer-legal a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
-    .footer-legal a:hover{color:var(--gold-dk);}
-
+  
     /* BREADCRUMB */
     .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;}
     .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;}
     .bc-crumb:hover{color:var(--gold-dk);}
     .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
-    .bc-sep{font-size:10px;color:rgba(184,154,106,0.6);line-height:1;}
-    @media(max-width:860px){.breadcrumb{padding:8px 16px;top:72px;}}
-  </style>
+    .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);}
+    .bc-home{width:10px;height:10px;flex-shrink:0;}
+    @media(max-width:860px){.breadcrumb{padding:8px 16px;top:72px;}.bc-crumb{font-size:9px;}}
+    /* FLOATING BACK BUTTON - mobile only */
+    #backBtn{display:none;}
+    @media(max-width:860px){
+      #backBtn{display:flex;align-items:center;gap:6px;position:fixed;bottom:24px;left:16px;z-index:300;
+        background:var(--navy);color:var(--gold-eye);font-family:'Newsreader',serif;
+        font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+        padding:10px 18px;border-radius:20px;border:1px solid #B8860B;
+        cursor:pointer;text-decoration:none;
+        box-shadow:0 4px 20px rgba(30,47,74,0.35);
+        transition:opacity .2s,transform .2s;}
+      #backBtn.hidden{opacity:0;pointer-events:none;transform:translateY(8px);}
+    }
+</style>
 </head>
 <body>
-<div id="cookieBanner">
-  <p class="cookie-text">We use cookies to ensure the site functions correctly and to understand how visitors use it. <a href="/privacy">Privacy Policy</a></p>
-  <div class="cookie-actions">
-    <button class="cookie-decline" onclick="cookieDecline()">Decline</button>
-    <button class="cookie-accept" onclick="cookieAccept()">Accept</button>
-  </div>
-</div>
-
-=======
-  </style>
-</head>
-<body>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
 
 <div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
 <div class="nav-drawer" id="navDrawer">
@@ -264,10 +242,7 @@
   <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
   <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
   <a href="/about" onclick="closeDrawer()">Who We Are</a>
-<<<<<<< HEAD
-=======
-  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;">→ Free Assessment</a>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
+  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;display:block;">→ Free Assessment</a>
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
     <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
@@ -282,18 +257,7 @@
   <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
   <a href="/#contact" class="nav-touch">Get in Touch</a>
-<<<<<<< HEAD
-</nav>
-
-<nav class="breadcrumb" aria-label="Breadcrumb">
-  <a href="/" class="bc-crumb"><svg style="width:10px;height:10px;flex-shrink:0;" viewBox="0 0 12 12" fill="none"><path d="M1 5.5L6 1l5 4.5V11H7.5V8h-3v3H1V5.5z" stroke="#888" stroke-width="1.2" fill="none"/></svg> Home</a>
-  <span class="bc-sep">›</span>
-  <a href="/services" class="bc-crumb">Services</a>
-  <span class="bc-sep">›</span>
-  <span class="bc-crumb active">For Companies</span>
-=======
   <a href="/get-started" class="nav-gs">Free Assessment</a>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </nav>
 
 <section class="hero">
@@ -330,14 +294,10 @@
           <div class="acc-title">Fast-Track Certification for Companies</div>
           <div class="acc-subtitle">Become a SIRI-certified employer</div>
         </div>
-<<<<<<< HEAD
-        <div class="acc-right"><div class="acc-price">DKK 4,500 <span>/ one-time</span></div><div class="acc-icon">+</div></div>
-=======
         <div class="acc-right">
           <div class="acc-price">DKK 4,500 <span>/ one-time</span></div>
           <div class="acc-icon">+</div>
         </div>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
       </div>
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
         <div class="acc-includes"><h4>What's Included</h4><ul>
@@ -353,13 +313,9 @@
           <div class="did-you-know">
             <div class="dyk-icon">
               <svg viewBox="0 0 20 20" fill="none" stroke="#B8860B" stroke-width="1.2" stroke-linecap="round">
-<<<<<<< HEAD
-                <circle cx="10" cy="10" r="9"/><line x1="10" y1="7" x2="10" y2="11"/><circle cx="10" cy="14" r="0.8" fill="#B8860B" stroke="none"/>
-=======
                 <circle cx="10" cy="10" r="9"/>
                 <line x1="10" y1="7" x2="10" y2="11"/>
                 <circle cx="10" cy="14" r="0.8" fill="#B8860B" stroke="none"/>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
               </svg>
             </div>
             <div>
@@ -367,10 +323,6 @@
               <p class="dyk-text">Fast-Track certified companies can have a foreign national employee holding a provisional work permit and <strong>ready to start in under 3 hours</strong> — application submitted, SIRI appointment booked, permit issued. When speed matters, Denmark delivers.</p>
             </div>
           </div>
-<<<<<<< HEAD
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 4,500</span><span class="govt-fee"><span class="govt-fee-label">SIRI fee</span> No government fee for certification</span></div>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
         </div>
       </div></div></div>
@@ -379,16 +331,6 @@
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
         <div class="acc-left">
-<<<<<<< HEAD
-          <div class="acc-title">Fast-Track Scheme Work Permit / Job Change</div>
-          <div class="acc-subtitle">Pay limit track (≥ DKK 552,000/year) · Supplementary track (≥ DKK 446,000/year)</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">From DKK 4,500</div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>Salary threshold verification — pay limit track (≥ DKK 552,000) or supplementary track (≥ DKK 446,000)</li>
-=======
           <div class="acc-title">Fast-Track Scheme Work Permit</div>
           <div class="acc-subtitle">For high-salary hires (≥ DKK 600,000/year)</div>
         </div>
@@ -400,7 +342,6 @@
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
         <div class="acc-includes"><h4>What's Included</h4><ul>
           <li>Salary threshold verification (≥ DKK 600,000/year)</li>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <li>End-to-end SIRI application preparation</li>
           <li>Document review and checklist guidance</li>
           <li>Priority SIRI submission and tracking</li>
@@ -409,12 +350,7 @@
         </ul></div>
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Timeline</h4><p>15–30 days (SIRI processing). We submit within 5 business days of receiving complete documents.</p></div>
-<<<<<<< HEAD
-          <div class="acc-meta-block"><h4>Ideal For</h4><p>Senior developers, engineers, executives, and specialists. The pay limit track requires ≥ DKK 552,000/year; the supplementary track requires ≥ DKK 446,000/year. We assess which track applies upfront. Also applies when an existing permit holder changes employer.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 4,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
-=======
           <div class="acc-meta-block"><h4>Ideal For</h4><p>Senior developers, engineers, executives, and specialists earning above the Fast-Track salary threshold.</p></div>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
         </div>
       </div></div></div>
@@ -423,16 +359,6 @@
     <div class="acc-item">
       <div class="acc-header" onclick="toggleAcc(this)">
         <div class="acc-left">
-<<<<<<< HEAD
-          <div class="acc-title">Pay Limit Scheme Work Permit / Job Change</div>
-          <div class="acc-subtitle">For hires at ≥ DKK 552,000/year (or ≥ DKK 446,000 supplementary track)</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">From DKK 5,500</div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>Salary compliance check — Pay Limit (≥ DKK 552,000) or Supplementary Pay Limit (≥ DKK 446,000) thresholds</li>
-=======
           <div class="acc-title">Pay Limit Scheme Work Permit</div>
           <div class="acc-subtitle">For mid-level hires (DKK 450,000–600,000/year)</div>
         </div>
@@ -444,7 +370,6 @@
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
         <div class="acc-includes"><h4>What's Included</h4><ul>
           <li>Salary compliance check against 2025 Pay Limit thresholds</li>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <li>Full SIRI application preparation</li>
           <li>Document review and guidance</li>
           <li>SIRI submission and case tracking</li>
@@ -452,129 +377,7 @@
         </ul></div>
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Timeline</h4><p>30–60 days (SIRI processing).</p></div>
-<<<<<<< HEAD
-          <div class="acc-meta-block"><h4>Ideal For</h4><p>Professionals across any industry where the salary meets the Pay Limit threshold (≥ DKK 552,000) or the Supplementary Pay Limit threshold (≥ DKK 446,000). Also applies to job changes within either scheme.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 5,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
-          <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
-        </div>
-      </div></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        <div class="acc-left">
-          <div class="acc-title">Work Permit — Job Change</div>
-          <div class="acc-subtitle">Your new employer needs a new permit — we handle the full transition</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">DKK 3,500</div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>Current permit validity and conditions review for the employee</li>
-          <li>New job offer compliance &amp; salary threshold assessment</li>
-          <li>Gathering and review of all required documents</li>
-          <li>Complete new work permit application preparation &amp; submission to SIRI on your behalf</li>
-          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
-          <li>Right-to-work timeline guidance during the application period</li>
-        </ul></div>
-        <div class="acc-meta">
-          <div class="acc-meta-block"><h4>What You Need to Know</h4><p>When an employee with an existing Danish work permit joins your company from a different employer, a new permit application must be submitted to SIRI before they can legally start work. The employee's right to work with your company begins only once the new permit is approved — we manage the full process to make the transition seamless and compliant.</p></div>
-          <div class="acc-meta-block"><h4>Timeline</h4><p>Fast-Track: 15–30 days. Pay Limit / Supplementary: 30–60 days. We'll assess which scheme applies and manage the timeline so your onboarding stays on track.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 3,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
-          <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
-        </div>
-      </div></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        <div class="acc-left">
-          <div class="acc-title">Work Permit <span style="color:var(--gold-dk);">Extension / Renewal</span></div>
-          <div class="acc-subtitle">Keep your employee compliant and working without interruption</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">DKK 3,500</div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>Current permit review — conditions, expiry date, scheme eligibility</li>
-          <li>Salary and job role compliance check for renewal period</li>
-          <li>Gathering and review of all required documents</li>
-          <li>Complete SIRI renewal application preparation &amp; submission on your behalf</li>
-          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
-          <li>Approval notification and next-step guidance for HR</li>
-        </ul></div>
-        <div class="acc-meta">
-          <div class="acc-meta-block"><h4>Don't Leave This Late</h4><p>A permit that lapses means your employee loses their right to work immediately — creating a compliance risk and operational disruption for your team. We recommend starting the renewal process 3 months before expiry. Retainer clients receive automatic expiry tracking and renewal reminders as standard.</p></div>
-          <div class="acc-meta-block"><h4>Why It's Priced Lower Than a First Permit</h4><p>The renewal process is substantially the same as a first application, but without the biometric and overseas processing complexities that often apply when a candidate applies from abroad for the first time.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 3,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
-          <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
-        </div>
-      </div></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        <div class="acc-left">
-          <div class="acc-title">Accompanying Family Member Permit</div>
-          <div class="acc-subtitle">Keep your hire's family covered so they can focus on the job</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">DKK 3,000 <span>/ dependent</span></div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>Eligibility assessment for all accompanying family members</li>
-          <li>Gathering and review of all required documents per dependent</li>
-          <li>Complete SIRI application preparation &amp; submission on your behalf</li>
-          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
-          <li>Family residence card and CPR registration guidance</li>
-          <li>Can be submitted and tracked alongside the employee's work permit application</li>
-        </ul></div>
-        <div class="acc-meta">
-          <div class="acc-meta-block"><h4>Why This Matters for Employers</h4><p>A relocating employee whose family isn't settled is a distracted employee. By handling accompanying permits as part of the onboarding process, you remove a major source of anxiety and signal to your hire that you've thought of everything. It's one of the most impactful things you can do for early retention.</p></div>
-          <div class="acc-meta-block"><h4>Pricing Structure</h4>
-            <ul style="list-style:none;padding:0;margin:0;">
-              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Single dependent &mdash; <strong>DKK 3,000</strong></li>
-              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Two dependents applying together &mdash; <strong>DKK 2,000 each</strong></li>
-              <li style="padding:8px 0;font-size:15px;color:#2a2a2a;">Three or more dependents &mdash; <strong>DKK 5,000 total (capped)</strong></li>
-            </ul>
-          </div>
-          <div class="acc-meta-block"><h4>Good to Know</h4><p>The accompanying spouse receives an automatic right to work in Denmark without needing a separate work permit — a significant benefit that often surprises both HR teams and employees.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 2,000 / dependent</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 3,080 per person (paid to SIRI)</span></div>
-          <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
-        </div>
-      </div></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        <div class="acc-left">
-          <div class="acc-title">Accompanying Family Member Permit <span style="color:var(--gold-dk);">Extension / Renewal</span></div>
-          <div class="acc-subtitle">Extend your employee's family members' right to remain</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">DKK 2,000 <span>/ dependent</span></div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>Dependent permit review — expiry dates and conditions for each family member</li>
-          <li>Verification that the employee's permit covers the renewal period</li>
-          <li>Gathering and review of all required documents per dependent</li>
-          <li>Complete SIRI renewal application preparation &amp; submission on your behalf</li>
-          <li>Coordinating any SIRI requests for further documentation</li>
-          <li>Approval notification and updated residence card guidance</li>
-        </ul></div>
-        <div class="acc-meta">
-          <div class="acc-meta-block"><h4>Pricing Structure</h4>
-            <ul style="list-style:none;padding:0;margin:0;">
-              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Single dependent &mdash; <strong>DKK 2,000</strong></li>
-              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Two dependents applying together &mdash; <strong>DKK 2,000 each</strong></li>
-              <li style="padding:8px 0;font-size:15px;color:#2a2a2a;">Three or more dependents &mdash; <strong>DKK 5,000 total (capped)</strong></li>
-            </ul>
-          </div>
-          <div class="acc-meta-block"><h4>Good to Know</h4><p>We coordinate family renewals alongside the employee's own permit renewal wherever possible, keeping the whole family's status aligned and saving your HR team from tracking multiple expiry dates independently.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 2,000 / dependent</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 3,080 per person (paid to SIRI)</span></div>
-=======
           <div class="acc-meta-block"><h4>Ideal For</h4><p>Mid-level professionals across any industry where the salary meets the Pay Limit threshold.</p></div>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
         </div>
       </div></div></div>
@@ -586,14 +389,10 @@
           <div class="acc-title">Relocation Assistance</div>
           <div class="acc-subtitle">Full support from offer letter to first day</div>
         </div>
-<<<<<<< HEAD
-        <div class="acc-right"><div class="acc-price">From DKK 12,000</div><div class="acc-icon">+</div></div>
-=======
         <div class="acc-right">
           <div class="acc-price">From DKK 12,000</div>
           <div class="acc-icon">+</div>
         </div>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
       </div>
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
         <div class="acc-includes"><h4>What's Included</h4><ul>
@@ -608,10 +407,6 @@
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Ideal For</h4><p>C-level hires, first international employees, or any hire where white-glove onboarding matters.</p></div>
           <div class="acc-meta-block"><h4>Timeline</h4><p>Full support from offer letter through the employee's first 30 days on the ground in Denmark.</p></div>
-<<<<<<< HEAD
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 12,000</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> Included in case fee above</span></div>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
         </div>
       </div></div></div>
@@ -623,14 +418,10 @@
           <div class="acc-title">Right-to-Work Check &amp; Audit</div>
           <div class="acc-subtitle">Compliance review for your international workforce</div>
         </div>
-<<<<<<< HEAD
-        <div class="acc-right"><div class="acc-price">DKK 7,500 <span>/ year</span></div><div class="acc-icon">+</div></div>
-=======
         <div class="acc-right">
           <div class="acc-price">DKK 7,500 <span>/ year</span></div>
           <div class="acc-icon">+</div>
         </div>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
       </div>
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
         <div class="acc-includes"><h4>What's Included</h4><ul>
@@ -645,10 +436,6 @@
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Why This Matters</h4><p>A single compliance violation can result in fines of DKK 50,000–100,000. Annual audit cost: DKK 7,500. The ROI is clear.</p></div>
           <div class="acc-meta-block"><h4>Ideal For</h4><p>Companies with 3+ international employees who want proactive compliance rather than reactive fixes.</p></div>
-<<<<<<< HEAD
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 7,500 / year</span><span class="govt-fee"><span class="govt-fee-label">SIRI fee</span> No government fee</span></div>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
         </div>
       </div></div></div>
@@ -660,14 +447,10 @@
           <div class="acc-title">HR Immigration Retainer</div>
           <div class="acc-subtitle">Your dedicated immigration partner, on demand</div>
         </div>
-<<<<<<< HEAD
-        <div class="acc-right"><div class="acc-price">DKK 3,500 <span>/ month</span></div><div class="acc-icon">+</div></div>
-=======
         <div class="acc-right">
           <div class="acc-price">DKK 3,500 <span>/ month</span></div>
           <div class="acc-icon">+</div>
         </div>
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
       </div>
       <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
         <div class="acc-includes"><h4>What's Included</h4><ul>
@@ -682,54 +465,10 @@
         <div class="acc-meta">
           <div class="acc-meta-block"><h4>Break-Even</h4><p>Two to three new international hires per year and the retainer pays for itself through case discounts alone — before factoring in the audit and unlimited support.</p></div>
           <div class="acc-meta-block"><h4>Ideal For</h4><p>Scale-ups and growth-stage companies hiring one or more international employees per quarter.</p></div>
-<<<<<<< HEAD
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 3,500 / month</span><span class="govt-fee"><span class="govt-fee-label">SIRI fee</span> No government fee for retainer</span></div>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
           <a href="/#contact" class="acc-cta">Get Started &nbsp;→</a>
         </div>
       </div></div></div>
     </div>
-<<<<<<< HEAD
-
-    <div class="acc-item">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        <div class="acc-left">
-          <div class="acc-title">Immigration Consultation &amp; Document Review</div>
-          <div class="acc-subtitle">Ad-hoc expert guidance — no retainer required</div>
-        </div>
-        <div class="acc-right"><div class="acc-price">From DKK 650</div><div class="acc-icon">+</div></div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
-        <div class="acc-includes"><h4>What's Included</h4><ul>
-          <li>30- or 60-minute consultation call — any immigration topic</li>
-          <li>Written review of an existing permit, approval letter, or SIRI correspondence</li>
-          <li>Permit validity, conditions, and compliance check for a specific employee</li>
-          <li>Document checklist review before a new application is submitted</li>
-          <li>Guidance on an upcoming hiring scenario or edge case</li>
-          <li>Written summary of advice sent by email the same day</li>
-          <li>Referral to a full service with fee credited if needed</li>
-        </ul></div>
-        <div class="acc-meta">
-          <div class="acc-meta-block"><h4>Pricing Options</h4>
-            <ul style="list-style:none;padding:0;margin:0;">
-              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;"><strong>30-minute call</strong> &mdash; DKK 650<br><span style="font-size:13px;font-style:italic;color:#888;">One focused question or hiring scenario</span></li>
-              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;"><strong>Document review</strong> &mdash; DKK 650<br><span style="font-size:13px;font-style:italic;color:#888;">Written feedback on a permit, approval letter, or application draft</span></li>
-              <li style="padding:8px 0;font-size:15px;color:#2a2a2a;"><strong>60-minute deep dive</strong> &mdash; DKK 950<br><span style="font-size:13px;font-style:italic;color:#888;">Complex hiring situation, multiple employees, or a policy question</span></li>
-            </ul>
-          </div>
-          <div class="acc-meta-block"><h4>Ideal For</h4><p>HR teams facing a one-off question — a candidate whose permit situation is unusual, a letter from SIRI that needs interpreting, or a new hiring scenario you want expert input on before committing to a full process. No retainer needed, no ongoing commitment.</p></div>
-          <div class="acc-meta-block"><h4>How It Works</h4><p>Book and pay, receive a calendar link or document upload instructions. Written advice note sent same day. Fees paid here are credited in full against any full Nordic Anchor service booked within 30 days.</p></div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">From DKK 650 — no SIRI fee applies</span></div>
-          <a href="/#contact" class="acc-cta">Book a Consultation &nbsp;→</a>
-        </div>
-      </div></div></div>
-    </div>
-    </div>
-  </div>
-</div>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
   </div>
 </section>
 
@@ -783,14 +522,6 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
-<<<<<<< HEAD
-            <div class="footer-legal">
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms &amp; Conditions</a>
-        <a href="javascript:void(0)" onclick="resetCookieConsent()">Cookie Settings</a>
-      </div>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
       <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
     </div>
   </div>
@@ -842,19 +573,12 @@
   function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closePricing(); });
 </script>
-<<<<<<< HEAD
 <script>
-  function cookieAccept(){localStorage.setItem('na_cookie_consent','accepted');hideBanner();}
-  function cookieDecline(){localStorage.setItem('na_cookie_consent','declined');hideBanner();}
-  function hideBanner(){document.getElementById('cookieBanner').classList.remove('visible');}
-  function resetCookieConsent(){localStorage.removeItem('na_cookie_consent');document.getElementById('cookieBanner').classList.add('visible');}
   (function(){
-    if(!localStorage.getItem('na_cookie_consent')){
-      setTimeout(()=>document.getElementById('cookieBanner').classList.add('visible'),800);
-    }
+    var btn=document.getElementById('backBtn');
+    if(!btn)return;
+    if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
   })();
 </script>
-=======
->>>>>>> a673438144cdf898899b9b8a957c91c259422995
 </body>
 </html>
