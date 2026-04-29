@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services — Nordic Anchor</title>
+  <meta name="description" content="Danish immigration services for companies and individuals."/>
+  <link rel="icon" href="favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    
+    :root{
+      --navy:#1e2f4a; --navy-mid:#2b3e5c;
+      --gold:#b89a6a; --gold-dk:#B8860B; --gold-eye:#DAA520;
+      --cream:#f9f6f2; --warm:#f0ebe3;
+      --white:#ffffff; --text:#2a2a2a; --muted:#888;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-text{font-family:'Newsreader',serif;font-size:18px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .nav-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    .nav-gs{font-family:'Newsreader',serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2a1800;border:none;padding:11px 22px;cursor:pointer;position:relative;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;flex-shrink:0;border-radius:2px;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.42),0 0 0 1px rgba(140,90,0,0.82),0 2px 14px rgba(184,134,11,0.28);transition:filter .3s,box-shadow .3s;}
+    .nav-gs::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.55),transparent);animation:goldSweep 4.5s ease-in-out infinite;pointer-events:none;}
+    @keyframes goldSweep{0%{left:-70%;opacity:0}8%{opacity:1}52%{left:115%;opacity:1}58%{opacity:0}100%{left:115%;opacity:0}}
+    .nav-gs:hover{filter:brightness(1.1) saturate(1.12);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.95),inset 0 -1.5px 0 rgba(80,45,0,0.52),0 0 0 1px rgba(140,90,0,0.95),0 4px 22px rgba(184,134,11,0.5),0 0 30px rgba(220,170,20,0.2);}
+    .nav-gs:hover::before{animation-duration:1.2s;}
+    /* MOBILE NAV FIX: never overflow, always accessible */
+    @media(max-width:860px){
+      .nav-pill,.nav-sep{display:none;}
+      #mainNav{padding:0 16px;gap:6px;}
+      .nav-touch{font-size:9px;padding:8px 12px;letter-spacing:.12em;}
+      .nav-gs{font-size:9px;padding:9px 14px;letter-spacing:.14em;}
+    }
+    @media(max-width:400px){
+      .nav-logo-text{font-size:14px;letter-spacing:.1em;}
+      .nav-touch{display:none;}
+    }
+    
+    /* DRAWER */
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    /* PAGE HERO — white, centred, matching screenshot */
+    .page-hero{background:var(--white);padding:80px 72px 64px;margin-top:72px;text-align:center;}
+    .section-eyebrow{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;font-weight:500;}
+    .page-hero h1{font-size:clamp(36px,5.5vw,68px);font-weight:300;color:var(--navy);line-height:1.12;margin-bottom:0;letter-spacing:-.01em;}
+    .gold-rule{width:52px;height:1.5px;background:var(--gold);opacity:.55;margin:28px auto 0;}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0);}from{opacity:0;transform:translateY(16px);}}
+
+    /* SPLIT PANELS — gap with gold divider centred in it */
+    .split-panels{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:28px 20px 0;background:var(--white);position:relative;}
+    .split-divider{position:absolute;top:calc(28px + 6%);bottom:6%;left:50%;transform:translateX(-50%);width:2px;z-index:10;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,#b89a6a 8%,#DAA520 50%,#b89a6a 92%,transparent 100%);box-shadow:0 0 8px rgba(184,154,106,0.55);}
+
+    .split-panel{position:relative;min-height:72vh;max-height:780px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;text-decoration:none;}
+    .panel-bg{position:absolute;inset:0;background-size:cover;background-position:center 20%;transition:transform .7s ease;}
+    .panel-bg-co{background-position:center 22%;}
+    .panel-bg-ind{background-position:center 45%;}
+    .split-panel:hover .panel-bg{transform:scale(1.03);}
+    .panel-overlay-co{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,35,58,0.9) 0%,rgba(20,35,58,0.68) 40%,rgba(20,35,58,0.18) 68%,rgba(20,35,58,0) 80%);}
+    .panel-overlay-ind{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(55,35,5,0.88) 0%,rgba(90,58,10,0.65) 40%,rgba(90,58,10,0.12) 68%,rgba(90,58,10,0) 80%);}
+
+    .panel-top{position:relative;z-index:2;padding:36px 44px 0;}
+    .panel-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-eye);border:1.5px solid rgba(184,154,106,0.6);padding:10px 22px;margin-bottom:24px;}
+    .panel-title{font-size:clamp(26px,2.8vw,42px);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:18px;}
+    .panel-title em{font-style:italic;}
+    .panel-desc{font-size:15px;font-style:italic;color:rgba(255,255,255,0.82);line-height:1.7;margin-bottom:0;}
+    .panel-pills{display:flex;flex-wrap:wrap;gap:7px;}
+
+    /* Companies: title can be wider, desc+pills stay left of building */
+    .panel-top-co .panel-title{max-width:62%;}
+    .panel-top-co .panel-desc{max-width:55%;}
+    .panel-top-co .panel-pills{max-width:64%;margin-top:28px;}
+
+    /* Individuals: 2-line title via smaller font, text starts higher */
+    .panel-top-ind{padding-top:28px;}
+    .panel-top-ind .panel-title{font-size:clamp(26px,2.5vw,38px);max-width:82%;}
+    .panel-top-ind .panel-desc{max-width:72%;margin-bottom:20px;}
+    .panel-top-ind .panel-pills{max-width:88%;}
+
+    .panel-pill{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,0.88);background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.28);padding:5px 12px;}
+
+    .panel-bottom{position:relative;z-index:2;padding:0 44px 44px;}
+    /* Solid block CTAs matching screenshot */
+    .panel-cta{display:inline-flex;align-items:center;gap:12px;font-family:'Newsreader',serif;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:15px 28px;}
+    .panel-cta-navy{color:var(--white);background:var(--navy);}
+    .panel-cta-navy:hover{background:#2b3e5c;}
+    .panel-cta-gold{color:var(--white);background:var(--gold-dk);}
+    .panel-cta-gold:hover{background:#9a7009;}
+
+    
+    footer{background:var(--white);padding:60px 72px 32px;border-top:2px solid rgba(184,154,106,0.3);}
+    .footer-inner{max-width:1100px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(184,154,106,0.18);}
+    .footer-logo-text{font-family:'Newsreader',serif;font-size:24px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .footer-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .footer-center{display:flex;flex-direction:column;gap:24px;padding-top:8px;}
+    .footer-nav{display:flex;gap:8px;flex-wrap:wrap;}
+    .footer-nav a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .22s,border-color .22s,background .22s;padding:8px 16px;border:1px solid rgba(184,134,11,0.3);border-radius:2px;}
+    .footer-nav a:hover{color:var(--gold-dk);border-color:var(--gold-dk);background:rgba(184,134,11,0.04);}
+    .footer-right{text-align:right;padding-top:8px;}
+    .footer-right a{display:block;font-size:13px;color:var(--navy);text-decoration:none;line-height:2.2;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);}
+    .footer-social a:hover{color:var(--navy);border-color:rgba(30,47,74,0.4);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    @media(max-width:860px){footer{padding:44px 24px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{text-align:left;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;align-items:flex-start;}}
+
+    @media(max-width:860px){
+      .page-hero{padding:80px 24px 48px;}
+      .split-panels{grid-template-columns:1fr;gap:12px;padding:12px 12px 0;}
+      .split-divider{display:none;}
+      .split-panel{min-height:68vh;max-height:none;}
+      .panel-top{padding:36px 28px 0;}
+      .panel-bottom{padding:0 28px 36px;}
+    }
+      /* --- LAUNCH: Get Started hidden until booking system ready --- */
+    .nav-gs, .nav-gs::before { display: none !important; }
+    /* PRICING OVERLAY */
+    .pricing-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,25,40,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
+    .pricing-overlay.open{display:flex;}
+    .pricing-modal{background:var(--white);max-width:720px;width:100%;padding:56px 52px;position:relative;}
+    .pricing-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;transition:color .2s;}
+    .pricing-modal-close:hover{color:var(--navy);}
+    .pricing-modal-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;display:block;}
+    .pricing-modal h2{font-size:clamp(24px,3vw,36px);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:12px;}
+    .pricing-modal p{font-size:15px;font-style:italic;color:#666;margin-bottom:40px;line-height:1.75;}
+    .pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .pricing-card{display:flex;flex-direction:column;padding:32px 28px;text-decoration:none;border:1px solid rgba(184,134,11,0.3);transition:all .25s;position:relative;}
+    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .pricing-card:hover{border-color:var(--gold-dk);background:rgba(184,134,11,0.03);transform:translateY(-2px);}
+    .pricing-card-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:14px;}
+    .pricing-card h3{font-size:20px;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+    .pricing-card h3 em{font-style:italic;}
+    .pricing-card p{font-size:13px;font-style:italic;color:#666;line-height:1.65;margin-bottom:20px;flex:1;}
+    .pricing-card-range{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;}
+    .pricing-card-cta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);display:inline-flex;align-items:center;gap:8px;transition:gap .2s;}
+    .pricing-card:hover .pricing-card-cta{gap:14px;}
+    @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}.pricing-modal{padding:40px 28px;}}
+
+  
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+
+    /* COOKIE BANNER */
+    #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:2px solid var(--gold);transform:translateY(100%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
+    #cookieBanner.visible{transform:translateY(0);}
+    .cookie-text{flex:1;min-width:240px;font-size:13px;line-height:1.75;color:rgba(255,255,255,0.88);}
+    .cookie-text a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,154,106,0.4);}
+    .cookie-text a:hover{border-color:var(--gold);}
+    .cookie-actions{display:flex;gap:12px;flex-shrink:0;}
+    .cookie-accept{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-dk);color:#fff;border:1px solid var(--gold-dk);border-radius:2px;padding:10px 22px;cursor:pointer;transition:background .22s;}
+    .cookie-accept:hover{background:#9a7209;}
+    .cookie-decline{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.25);border-radius:2px;padding:10px 22px;cursor:pointer;transition:border-color .22s,color .22s;}
+    .cookie-decline:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+
+    /* FOOTER LEGAL LINKS */
+    .footer-legal{display:flex;gap:20px;}
+    .footer-legal a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+    .footer-legal a:hover{color:var(--gold-dk);}
+
+    /* BREADCRUMB */
+    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;}
+    .bc-crumb:hover{color:var(--gold-dk);}
+    .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
+    .bc-sep{font-size:10px;color:rgba(184,154,106,0.6);line-height:1;}
+    @media(max-width:860px){.breadcrumb{padding:8px 16px;top:72px;}}
+  </style>
+</head>
+<body>
+<div id="cookieBanner">
+  <p class="cookie-text">We use cookies to ensure the site functions correctly and to understand how visitors use it. <a href="/privacy">Privacy Policy</a></p>
+  <div class="cookie-actions">
+    <button class="cookie-decline" onclick="cookieDecline()">Decline</button>
+    <button class="cookie-accept" onclick="cookieAccept()">Accept</button>
+  </div>
+</div>
+
+
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
+  <div class="nav-sep"></div>
+  <a href="/#contact" class="nav-touch">Get in Touch</a>
+</nav>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/" class="bc-crumb"><svg style="width:10px;height:10px;flex-shrink:0;" viewBox="0 0 12 12" fill="none"><path d="M1 5.5L6 1l5 4.5V11H7.5V8h-3v3H1V5.5z" stroke="#888" stroke-width="1.2" fill="none"/></svg> Home</a>
+  <span class="bc-sep">›</span>
+  <span class="bc-crumb active">Services</span>
+</nav>
+
+<section class="page-hero">
+  <span class="section-eyebrow">Expert Danish Immigration Guidance</span>
+  <h1>Tell us your starting point</h1>
+  <div class="gold-rule"></div>
+</section>
+
+<div class="split-panels snap-section">
+  <div class="split-divider"></div>
+
+  <a href="/services/companies-employers" class="split-panel">
+    <div class="panel-bg panel-bg-co" style="background-image:url('https://images.squarespace-cdn.com/content/6979f7c47d20b7543c987d03/33fd022e-4c87-4492-822b-9f1d615feecf/Untitled+4.png?content-type=image%2Fpng');"></div>
+    <div class="panel-overlay-co"></div>
+    <div class="panel-top panel-top-co">
+      <span class="panel-tag">For Companies &amp; Employers</span>
+      <h2 class="panel-title">Hire Internationally,<br><em>with confidence.</em></h2>
+      <p class="panel-desc">We handle SIRI compliance, Fast-Track and Pay Limit applications — so you can focus on onboarding great people. Flat-fee. No surprises.</p>
+      <div class="panel-pills">
+        <span class="panel-pill">Fast-Track Certification</span>
+        <span class="panel-pill">Fast-Track Work Permit / Job Change</span>
+        <span class="panel-pill">Pay Limit Work Permit / Job Change</span>
+        <span class="panel-pill">Work Permit Renewal</span>
+        <span class="panel-pill">Accompanying Family Permit</span>
+        <span class="panel-pill">Family Permit Renewal</span>
+        <span class="panel-pill">Relocation Assistance</span>
+        <span class="panel-pill">Right-to-Work Check</span>
+        <span class="panel-pill">HR Retainer</span>
+        <span class="panel-pill">Consultation &amp; Document Review</span>
+      </div>
+    </div>
+    <div class="panel-bottom">
+      <span class="panel-cta panel-cta-navy">Explore Employer Services &nbsp;→</span>
+    </div>
+  </a>
+
+  <a href="/services/individuals-family" class="split-panel">
+    <div class="panel-bg panel-bg-ind" style="background-image:url('https://images.squarespace-cdn.com/content/6979f7c47d20b7543c987d03/a329027d-2be7-41b3-8e13-e6d2c459890c/Untitled.png?content-type=image%2Fpng');"></div>
+    <div class="panel-overlay-ind"></div>
+    <div class="panel-top panel-top-ind">
+      <span class="panel-tag">For Individuals &amp; Families</span>
+      <h2 class="panel-title">Moving to Denmark,<br><em>or staying — shouldn't be stressful.</em></h2>
+      <p class="panel-desc">Personalised assistance with work permits, family reunification, EU residence certificates and permanent residence.</p>
+      <div class="panel-pills">
+        <span class="panel-pill">Work Permit (New &amp; Renewal)</span>
+        <span class="panel-pill">Dependent / Family Permit (New &amp; Renewal)</span>
+        <span class="panel-pill">EU Residence</span>
+        <span class="panel-pill">Permanent Residence</span>
+        <span class="panel-pill">Job Change</span>
+        <span class="panel-pill">Job Seeking / Terminated Employment</span>
+        <span class="panel-pill">Consultation &amp; Document Review</span>
+        <span class="panel-pill">Terminated Employment</span>
+      </div>
+    </div>
+    <div class="panel-bottom">
+      <span class="panel-cta panel-cta-gold">Explore Individual Services &nbsp;→</span>
+    </div>
+  </a>
+</div>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" style="height:56px;width:auto;display:block;"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/about">Who We Are</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+            <div class="footer-legal">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="javascript:void(0)" onclick="resetCookieConsent()">Cookie Settings</a>
+      </div>
+      <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<!-- PRICING OVERLAY -->
+<div class="pricing-overlay" id="pricingOverlay" onclick="closePricingOutside(event)">
+  <div class="pricing-modal" id="pricingModal">
+    <button class="pricing-modal-close" onclick="closePricing()">✕</button>
+    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
+    <h2>Which best describes you?</h2>
+    <p>Select your situation and we'll show you the full pricing for every service — no hidden fees, no surprises.</p>
+    <div class="pricing-cards">
+      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Companies &amp; Employers</span>
+        <h3>Hiring internationally<br><em>with confidence.</em></h3>
+        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
+        <div class="pricing-card-range">From DKK 3,500 / mo</div>
+        <span class="pricing-card-cta">View employer pricing &nbsp;→</span>
+      </a>
+      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Individuals &amp; Families</span>
+        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
+        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
+        <div class="pricing-card-range">From DKK 2,500</div>
+        <span class="pricing-card-cta">View individual pricing &nbsp;→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const mainNav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 20));
+  function openDrawer()  { document.getElementById('navDrawer').classList.add('open');    document.getElementById('navOverlay').classList.add('open'); }
+  function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); }
+  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePricing(); });
+</script>
+<script>
+  function cookieAccept(){localStorage.setItem('na_cookie_consent','accepted');hideBanner();}
+  function cookieDecline(){localStorage.setItem('na_cookie_consent','declined');hideBanner();}
+  function hideBanner(){document.getElementById('cookieBanner').classList.remove('visible');}
+  function resetCookieConsent(){localStorage.removeItem('na_cookie_consent');document.getElementById('cookieBanner').classList.add('visible');}
+  (function(){
+    if(!localStorage.getItem('na_cookie_consent')){
+      setTimeout(()=>document.getElementById('cookieBanner').classList.add('visible'),800);
+    }
+  })();
+</script>
+</body>
+</html>

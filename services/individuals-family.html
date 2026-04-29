@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Individuals & Families — Nordic Anchor</title>
+  <link rel="icon" href="favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;--cream:#f9f6f2;--warm:#f0ebe3;--white:#ffffff;--text:#2a2a2a;--muted:#888;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;} .nav-logo-img{height:64px;width:auto;display:block;} @media(max-width:860px){.nav-logo-img{height:44px;}}
+    .nav-logo-text{font-family:'Newsreader',serif;font-size:18px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .nav-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    .nav-gs{font-family:'Newsreader',serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2a1800;border:none;padding:11px 22px;cursor:pointer;position:relative;display:inline-flex;align-items:center;overflow:hidden;text-decoration:none;flex-shrink:0;border-radius:2px;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.42),0 0 0 1px rgba(140,90,0,0.82),0 2px 14px rgba(184,134,11,0.28);transition:filter .3s,box-shadow .3s;}
+    .nav-gs::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.55),transparent);animation:goldSweep 4.5s ease-in-out infinite;pointer-events:none;}
+    @keyframes goldSweep{0%{left:-70%;opacity:0}8%{opacity:1}52%{left:115%;opacity:1}58%{opacity:0}100%{left:115%;opacity:0}}
+    .nav-gs:hover{filter:brightness(1.1) saturate(1.12);}
+    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 16px;gap:6px;}.nav-touch{font-size:9px;padding:8px 12px;}.nav-gs{font-size:9px;padding:9px 14px;}}
+    @media(max-width:400px){.nav-logo-text{font-size:14px;}.nav-touch{display:none;}}
+
+    /* DRAWER */
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-text{font-family:'Newsreader',serif;font-size:16px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#1e2f4a;}
+    .nav-drawer-logo-accent{color:#B8860B;font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+
+    /* HERO */
+    .hero{position:relative;height:72vh;min-height:480px;background:linear-gradient(to bottom,rgba(10,20,38,0.82) 0%,rgba(10,20,38,0.65) 45%,rgba(10,20,38,0.2) 75%,rgba(10,20,38,0) 100%),url('/hero-individuals.jpg') center 40%/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-start;padding:56px 72px 0;margin-top:88px;}
+    .hero-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-eye);border:2px solid rgba(184,154,106,0.7);padding:12px 28px;margin-bottom:28px;width:fit-content;background:rgba(0,0,0,0.18);backdrop-filter:blur(4px);}
+    .hero h1{font-size:clamp(28px,3.2vw,48px);font-weight:300;color:var(--white);line-height:1.2;max-width:900px;}
+    .hero h1 em{font-style:italic;}
+
+    /* INTRO STRIP */
+    .intro-strip{background:var(--navy);padding:64px 72px;position:relative;overflow:hidden;}
+    .intro-strip::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 20%,#DAA520 50%,#b89a6a 80%,transparent);}
+    .intro-strip-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:64px;}
+    .intro-strip-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);display:block;margin-bottom:16px;font-weight:500;}
+    .intro-strip p{font-size:19px;font-style:italic;color:rgba(255,255,255,0.88);line-height:1.8;max-width:680px;}
+    .intro-strip-stats{display:flex;gap:48px;margin-top:32px;padding-top:28px;border-top:1px solid rgba(184,154,106,0.25);}
+    .intro-stat-num{font-size:28px;font-weight:300;color:var(--gold-eye);display:block;line-height:1;}
+    .intro-stat-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:6px;display:block;}
+    .intro-cta-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:16px;flex-shrink:0;}
+    .intro-cta{display:inline-flex;align-items:center;gap:10px;font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#2a1800;text-decoration:none;padding:14px 28px;white-space:nowrap;position:relative;overflow:hidden;transition:filter .3s;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.4),0 0 0 1px rgba(140,90,0,0.75);}
+    .intro-cta::before{content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,252,200,0.5),transparent);animation:goldSweep 4.5s ease-in-out infinite;}
+    .intro-cta:hover{filter:brightness(1.1);}
+    .intro-note{font-size:12px;font-style:italic;color:rgba(255,255,255,0.5);text-align:right;}
+    @media(max-width:860px){.intro-strip{padding:48px 28px;}.intro-strip-inner{grid-template-columns:1fr;gap:36px;}.intro-cta-wrap{align-items:flex-start;}.intro-note{text-align:left;}.intro-strip-stats{gap:28px;}}
+
+    /* PAYMENT NOTE */
+    .payment-note{background:var(--cream);padding:18px 72px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(184,154,106,0.2);}
+    .payment-note svg{width:18px;height:18px;flex-shrink:0;color:var(--gold-dk);}
+    .payment-note p{font-size:14px;color:var(--muted);line-height:1.55;}
+    .payment-note strong{color:var(--navy);}
+
+    /* SERVICES */
+    .services-section{padding:80px 72px;background:var(--white);max-width:1200px;margin:0 auto;}
+    .section-eyebrow{font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:18px;display:block;font-weight:500;}
+    .section-heading{font-size:clamp(26px,2.8vw,38px);font-weight:300;color:var(--navy);line-height:1.25;margin-bottom:52px;max-width:900px;}
+
+    /* ACCORDION */
+    .accordion{border-top:1px solid rgba(30,47,74,0.12);}
+    .acc-item{border-bottom:1px solid rgba(30,47,74,0.12);}
+    .acc-header{display:flex;justify-content:space-between;align-items:center;padding:28px 0;cursor:pointer;user-select:none;gap:24px;}
+    .acc-header:hover .acc-title{color:var(--gold-dk);}
+    .acc-left{display:flex;flex-direction:column;gap:6px;}
+    .acc-title{font-size:clamp(17px,2vw,23px);font-weight:400;color:var(--navy);transition:color .2s;line-height:1.2;}
+    .acc-subtitle{font-size:14px;font-style:italic;color:var(--muted);}
+    .acc-right{display:flex;align-items:center;gap:28px;flex-shrink:0;}
+    .acc-price{font-size:clamp(17px,2vw,22px);font-weight:300;color:var(--navy);white-space:nowrap;}
+    .acc-price span{font-size:13px;color:var(--muted);}
+    .acc-icon{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;color:var(--gold);font-size:16px;}
+    .acc-item.open .acc-icon{background:var(--gold);color:var(--white);}
+    .acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;}
+    .acc-item.open .acc-body{grid-template-rows:1fr;}
+    .acc-body-inner{overflow:hidden;}
+    .acc-body-content{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 0 40px;}
+    .acc-includes h4{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:18px;}
+    .acc-includes ul{list-style:none;}
+    .acc-includes li{font-size:15px;color:var(--text);padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:12px;line-height:1.55;}
+    .acc-includes li::before{content:'✓';color:var(--gold-dk);font-size:12px;flex-shrink:0;margin-top:3px;}
+    .acc-meta{display:flex;flex-direction:column;gap:20px;}
+    .acc-meta-block{background:var(--cream);padding:22px 26px;}
+    .acc-meta-block h4{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:10px;}
+    .acc-meta-block p{font-size:15px;color:var(--text);line-height:1.65;}
+    .govt-fee{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.04em;color:rgba(255,255,255,0.9);background:var(--navy);border:1px solid rgba(30,47,74,0.5);padding:5px 12px;margin-left:10px;}
+    .govt-fee-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-eye);}
+    .acc-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;color:var(--gold-dk);border:1px solid rgba(184,154,106,0.5);padding:6px 14px;width:fit-content;}
+    .did-you-know{border:1px solid rgba(184,134,11,0.35);background:var(--white);padding:28px 32px;position:relative;display:flex;align-items:flex-start;gap:20px;margin-bottom:20px;}
+    .did-you-know::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .dyk-icon{flex-shrink:0;width:44px;height:44px;border:1.5px solid rgba(184,134,11,0.5);display:flex;align-items:center;justify-content:center;}
+    .dyk-icon svg{width:20px;height:20px;}
+    .dyk-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);font-weight:600;display:block;margin-bottom:10px;}
+    .dyk-text{font-size:15px;font-style:italic;color:var(--text);line-height:1.75;margin:0;}
+    .dyk-text strong{font-style:normal;color:var(--navy);}
+    .acc-cta{display:inline-flex;align-items:center;gap:10px;font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--white);text-decoration:none;padding:13px 26px;background:var(--gold-dk);border:1.5px solid var(--gold-dk);transition:opacity .2s;width:fit-content;}
+    .acc-cta:hover{opacity:.85;}
+
+    /* REASSURANCE */
+    .reassurance{background:var(--cream);padding:80px 72px;border-top:1px solid rgba(184,154,106,0.2);}
+    .reassurance-inner{max-width:1100px;margin:0 auto;}
+    .reassurance-header{text-align:center;margin-bottom:48px;}
+    .reassurance-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);display:block;margin-bottom:14px;font-weight:500;}
+    .reassurance-heading{font-size:clamp(22px,2.4vw,32px);font-weight:300;color:var(--navy);}
+    .reassurance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(184,134,11,0.28);background:var(--white);box-shadow:0 4px 28px rgba(30,47,74,0.06);}
+    .reassurance-item{padding:44px 38px;border-right:1px solid rgba(184,134,11,0.22);position:relative;transition:background .25s;}
+    .reassurance-item:last-child{border-right:none;}
+    .reassurance-item:hover{background:#f6f1e6;}
+    .reassurance-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .reassurance-num{font-size:48px;font-weight:300;font-style:italic;color:var(--gold-dk);opacity:.45;line-height:1;margin-bottom:20px;}
+    .reassurance-item h3{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin-bottom:14px;font-weight:500;}
+    .reassurance-item p{font-size:15px;font-style:italic;color:#4a4a4a;line-height:1.85;}
+    @media(max-width:860px){.reassurance{padding:56px 28px;}.reassurance-grid{grid-template-columns:1fr;}.reassurance-item{border-right:none;border-bottom:1px solid rgba(184,134,11,0.22);}.reassurance-item:last-child{border-bottom:none;}}
+
+    /* BOTTOM CTA */
+    .bottom-cta{background:var(--navy);padding:80px 72px;text-align:center;}
+    .bottom-cta h2{font-size:clamp(24px,3.2vw,40px);font-weight:300;color:var(--white);margin-bottom:18px;line-height:1.3;}
+    .bottom-cta p{font-size:17px;font-style:italic;color:rgba(255,255,255,0.82);margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75;}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#2a1800;text-decoration:none;padding:14px 34px;position:relative;overflow:hidden;transition:filter .3s;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.4),0 0 0 1px rgba(140,90,0,0.75);}
+    .btn-primary:hover{filter:brightness(1.1);}
+    .btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--white);text-decoration:none;padding:13px 32px;border:1.5px solid rgba(255,255,255,0.4);transition:border-color .2s;}
+    .btn-outline:hover{border-color:var(--white);}
+    .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+    /* FOOTER */
+    footer{background:var(--white);padding:60px 72px 32px;border-top:2px solid rgba(184,154,106,0.3);}
+    .footer-inner{max-width:1100px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(184,154,106,0.18);}
+    .footer-logo-text{font-family:'Newsreader',serif;font-size:24px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;}
+    .footer-logo-accent{color:var(--gold-dk);font-style:italic;font-weight:400;letter-spacing:.08em;}
+    .footer-center{display:flex;flex-direction:column;gap:24px;padding-top:8px;}
+    .footer-nav{display:flex;gap:8px;flex-wrap:wrap;}
+    .footer-nav a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .22s,border-color .22s;padding:8px 16px;border:1px solid rgba(184,134,11,0.3);border-radius:2px;}
+    .footer-nav a:hover{color:var(--gold-dk);border-color:var(--gold-dk);}
+    .footer-right{text-align:right;padding-top:8px;}
+    .footer-right a{display:block;font-size:13px;color:var(--navy);text-decoration:none;line-height:2.2;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);transition:color .2s;}
+    .footer-social a:hover{color:var(--navy);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+
+    /* MOBILE */
+    @media(max-width:860px){
+      .hero{padding:0 28px 48px;height:48vh;}
+      .intro-strip{padding:40px 28px;flex-direction:column;}
+      .payment-note{padding:16px 28px;}
+      .services-section{padding:56px 28px;}
+      .acc-body-content{grid-template-columns:1fr;gap:24px;}
+      .acc-right{gap:16px;}
+      .reassurance{padding:48px 28px;grid-template-columns:1fr;gap:28px;}
+      .bottom-cta{padding:60px 28px;}
+      footer{padding:44px 24px 28px;}
+      .footer-top{grid-template-columns:1fr;gap:32px;}
+      .footer-right{text-align:left;}
+      .footer-social{justify-content:flex-start;}
+      .footer-bottom{flex-direction:column;}
+    }
+    @media(max-width:480px){.acc-header{padding:20px 0;}.acc-price{font-size:15px;}}
+  
+    /* PRICING OVERLAY */
+    .pricing-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,25,40,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
+    .pricing-overlay.open{display:flex;}
+    .pricing-modal{background:var(--white);max-width:720px;width:100%;padding:56px 52px;position:relative;}
+    .pricing-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;transition:color .2s;}
+    .pricing-modal-close:hover{color:var(--navy);}
+    .pricing-modal-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;display:block;}
+    .pricing-modal h2{font-size:clamp(24px,3vw,36px);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:12px;}
+    .pricing-modal p{font-size:15px;font-style:italic;color:#666;margin-bottom:40px;line-height:1.75;}
+    .pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .pricing-card{display:flex;flex-direction:column;padding:32px 28px;text-decoration:none;border:1px solid rgba(184,134,11,0.3);transition:all .25s;position:relative;}
+    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .pricing-card:hover{border-color:var(--gold-dk);background:rgba(184,134,11,0.03);transform:translateY(-2px);}
+    .pricing-card-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:14px;}
+    .pricing-card h3{font-size:20px;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+    .pricing-card h3 em{font-style:italic;}
+    .pricing-card p{font-size:13px;font-style:italic;color:#666;line-height:1.65;margin-bottom:20px;flex:1;}
+    .pricing-card-range{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;}
+    .pricing-card-cta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);display:inline-flex;align-items:center;gap:8px;transition:gap .2s;}
+    .pricing-card:hover .pricing-card-cta{gap:14px;}
+    @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}.pricing-modal{padding:40px 28px;}}
+
+
+    /* COOKIE BANNER */
+    #cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);color:#fff;padding:20px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:2px solid var(--gold);transform:translateY(100%);transition:transform .4s cubic-bezier(0.4,0,0.2,1);}
+    #cookieBanner.visible{transform:translateY(0);}
+    .cookie-text{flex:1;min-width:240px;font-size:13px;line-height:1.75;color:rgba(255,255,255,0.88);}
+    .cookie-text a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,154,106,0.4);}
+    .cookie-text a:hover{border-color:var(--gold);}
+    .cookie-actions{display:flex;gap:12px;flex-shrink:0;}
+    .cookie-accept{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-dk);color:#fff;border:1px solid var(--gold-dk);border-radius:2px;padding:10px 22px;cursor:pointer;transition:background .22s;}
+    .cookie-accept:hover{background:#9a7209;}
+    .cookie-decline{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.25);border-radius:2px;padding:10px 22px;cursor:pointer;transition:border-color .22s,color .22s;}
+    .cookie-decline:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+
+    /* FOOTER LEGAL LINKS */
+    .footer-legal{display:flex;gap:20px;}
+    .footer-legal a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+    .footer-legal a:hover{color:var(--gold-dk);}
+
+    /* BREADCRUMB */
+    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;}
+    .bc-crumb:hover{color:var(--gold-dk);}
+    .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
+    .bc-sep{font-size:10px;color:rgba(184,154,106,0.6);line-height:1;}
+    @media(max-width:860px){.breadcrumb{padding:8px 16px;top:72px;}}
+  </style>
+</head>
+<body>
+<div id="cookieBanner">
+  <p class="cookie-text">We use cookies to ensure the site functions correctly and to understand how visitors use it. <a href="/privacy">Privacy Policy</a></p>
+  <div class="cookie-actions">
+    <button class="cookie-decline" onclick="cookieDecline()">Decline</button>
+    <button class="cookie-accept" onclick="cookieAccept()">Accept</button>
+  </div>
+</div>
+
+
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
+  <div class="nav-sep"></div>
+  <a href="/#contact" class="nav-touch">Get in Touch</a>
+</nav>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/" class="bc-crumb"><svg style="width:10px;height:10px;flex-shrink:0;" viewBox="0 0 12 12" fill="none"><path d="M1 5.5L6 1l5 4.5V11H7.5V8h-3v3H1V5.5z" stroke="#888" stroke-width="1.2" fill="none"/></svg> Home</a>
+  <span class="bc-sep">›</span>
+  <a href="/services" class="bc-crumb">Services</a>
+  <span class="bc-sep">›</span>
+  <span class="bc-crumb active">For Individuals</span>
+</nav>
+
+<section class="hero">
+  <span class="hero-tag">For Individuals &amp; Families</span>
+  <h1>Moving to Denmark or Continued Residence <em>shouldn't be stressful.</em></h1>
+</section>
+
+<div class="intro-strip">
+  <div class="intro-strip-inner">
+    <div>
+      <span class="intro-strip-label">Your Journey, Our Expertise</span>
+      <p>Personalised assistance with work permits, family reunification, EU residence certificates and permanent residence. Expert guidance, human support, every step of the way.</p>
+      <div class="intro-strip-stats">
+        <div><span class="intro-stat-num">3,000+</span><span class="intro-stat-label">Professionals & families assisted</span></div>
+        <div><span class="intro-stat-num">99.8%</span><span class="intro-stat-label">Application success rate</span></div>
+        <div><span class="intro-stat-num">12+ years</span><span class="intro-stat-label">SIRI expertise</span></div>
+      </div>
+    </div>
+    <div class="intro-cta-wrap">
+      <a href="/#contact" class="intro-cta">Start Your Application &nbsp;→</a>
+      <span class="intro-note">We respond within one business day.</span>
+    </div>
+  </div>
+</div>
+
+<div class="payment-note">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  <div>
+    <p style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px;">Transparent pricing &amp; secure payment</p>
+    <ul style="list-style:none;display:flex;flex-wrap:wrap;gap:6px 24px;">
+      <li style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold-dk);">✓</span> 100% upfront payment required</li>
+      <li style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold-dk);">✓</span> Cards, Apple Pay, Google Pay &amp; MobilePay accepted</li>
+      <li style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold-dk);">✓</span> Full refund if ineligible (within 48 hrs)</li>
+      <li style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold-dk);">✓</span> SIRI government fees charged separately &amp; paid directly to SIRI</li>
+    </ul>
+  </div>
+</div>
+
+<section class="services-section">
+  <span class="section-eyebrow">Our Individual Services</span>
+  <h2 class="section-heading">Expert guidance for every stage of your Danish journey</h2>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Work Permit <span style="font-size:13px;font-weight:400;color:var(--gold-dk);font-style:italic;">(New Permit)</span></div><div class="acc-subtitle">Fast-Track and Pay Limit scheme applications</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 4,500</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Eligibility assessment (Fast-Track or Pay Limit)</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete SIRI application preparation &amp; submission on your behalf</li>
+          <li>Status tracking and updates throughout</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Approval notification and next-step guidance</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Timeline</h4><p>15–30 days (Fast-Track) or 30–60 days (Pay Limit), depending on which scheme you qualify for. We assess this for you upfront.</p></div>
+          <div class="acc-meta-block"><h4>Ideal For</h4><p>Professionals with a signed Danish job offer whose employer is not handling the permit process.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 4,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Work Permit <span style="color:var(--gold-dk);">Extension / Renewal</span></div><div class="acc-subtitle">Extend your right to work before your current permit expires</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 3,500</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Current permit review — conditions, expiry date, and scheme eligibility</li>
+          <li>Salary and job role compliance check for renewal</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete SIRI renewal application preparation &amp; submission on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Approval notification and updated permit guidance</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Why It's Priced Lower</h4><p>Renewals follow the same SIRI process as a first application, but without the biometric overseas complexities that often arise for applicants applying from abroad for the first time. You're already here, your documentation trail is established, and the process is more straightforward.</p></div>
+          <div class="acc-meta-block"><h4>When to Apply</h4><p>Apply no later than 2 months before your current permit expires. We recommend starting 3 months out — SIRI processing times have increased and applying early protects your right to continue working during the renewal period.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 3,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Renewal &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Job Change</div><div class="acc-subtitle">Switching employers while on a Danish work permit</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 3,500</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Current permit validity and conditions review</li>
+          <li>New job offer compliance &amp; salary threshold assessment</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete new work permit application preparation &amp; submission to SIRI on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Right-to-work timeline guidance during the application period</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>What You Need to Know</h4><p>Changing employers always requires a new work permit application submitted to SIRI — your right to work with the new employer only begins once the new permit is approved. We manage the full process so your transition is seamless and compliant.</p></div>
+          <div class="acc-meta-block"><h4>Timeline</h4><p>Fast-Track: 15–30 days. Pay Limit: 30–60 days. We'll advise you on which scheme applies and manage your timeline.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 3,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Dependent / Family Permit <span style="font-size:13px;font-weight:400;color:var(--gold-dk);font-style:italic;">(New Permit)</span></div><div class="acc-subtitle">Bring your spouse and children to Denmark / apply new permits for your family in Denmark</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 3,000 <span>/ dependent</span></div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Eligibility assessment for all family members</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete SIRI application preparation &amp; submission on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Family residence card and CPR registration guidance</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Good to Know</h4><p>Your spouse receives the right to work in Denmark without needing a separate work permit — making it easier for both of you to build your life here.</p></div>
+          <div class="acc-meta-block"><h4>Pricing</h4>
+            <ul style="list-style:none;padding:0;margin:0;">
+              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Single dependent &mdash; <strong>DKK 3,000</strong></li>
+              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Two dependents applying together &mdash; <strong>DKK 2,000 each</strong></li>
+              <li style="padding:8px 0;font-size:15px;color:#2a2a2a;">Three or more dependents &mdash; <strong>DKK 5,000 total (capped)</strong></li>
+            </ul>
+          </div>
+          <div class="acc-meta-block"><h4>Timeline</h4><p>30–60 days. Can often be submitted and processed alongside the principal applicant's work permit application.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 2,000 / dependent</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 3,080 per person (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Dependent / Family Member Permit <span style="color:var(--gold-dk);">Extension / Renewal</span></div><div class="acc-subtitle">Extend your family members' right to remain in Denmark</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 2,000 <span>/ dependent</span></div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Current dependent permit review for each family member</li>
+          <li>Verification that the principal applicant's permit covers the renewal period</li>
+          <li>Gathering and review of all required documents per family member</li>
+          <li>Complete SIRI renewal application preparation &amp; submission on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Approval notification and updated residence card guidance</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Pricing Structure</h4>
+            <ul style="list-style:none;padding:0;margin:0;">
+              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Single dependent &mdash; <strong>DKK 2,000</strong></li>
+              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;">Two dependents applying together &mdash; <strong>DKK 1,000 each</strong></li>
+              <li style="padding:8px 0;font-size:15px;color:#2a2a2a;">Three or more dependents &mdash; <strong>DKK 3,500 total (capped)</strong></li>
+            </ul>
+          </div>
+          <div class="acc-meta-block"><h4>Good to Know</h4><p>Dependent renewals must be submitted while the principal work permit is valid. We typically coordinate these alongside your own permit renewal to keep your family's status aligned.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — from DKK 1,000 / dependent</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 3,080 per person (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Renewal &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">EU Residence Certificate</div><div class="acc-subtitle">For EU/EEA nationals and their family members</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 3,000</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Eligibility assessment under EU freedom of movement rules</li>
+          <li>Application preparation for EU residence certificate</li>
+          <li>Family member applications (non-EU spouses, children)</li>
+          <li>SIRI submission and tracking</li>
+          <li>Registration certificate approval</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Who This Is For</h4><p>EU/EEA nationals living and working in Denmark, and their non-EU family members who need formal documentation of their right to reside.</p></div>
+          <div class="acc-meta-block"><h4>Timeline</h4><p>From submission of online application, typically 4 weeks for EU nationals and up to 8 weeks for non-EU spouses or children.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 3,000</span><span class="govt-fee"><span class="govt-fee-label">SIRI fee</span> No government fee</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Permanent Residence</div><div class="acc-subtitle">Secure your long-term future in Denmark</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 6,500</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Comprehensive eligibility assessment — residence years, language level, income &amp; self-sufficiency</li>
+          <li>Danish language test (Dansk 3) guidance — what's required and how to prepare</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete SIRI application preparation &amp; submission on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Post-approval permanent residence card guidance</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Requirements</h4><p>Typically 8 years of legal residence, language test (Dansk 3), income requirements, and self-sufficiency. We'll assess your specific situation honestly before you apply.</p></div>
+          <div class="acc-meta-block"><h4>Timeline</h4><p>6–12 months from submission. SIRI processes these thoroughly.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 6,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 7,570 (work/study permit holders) &middot; DKK 4,970 (other permits)</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Job Seeking Permit</div><div class="acc-subtitle">Stay in Denmark legally while looking for work</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 2,000</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Eligibility assessment for job-seeking permit</li>
+          <li>Gathering and review of all required documents</li>
+          <li>Complete SIRI application preparation &amp; submission on your behalf</li>
+          <li>Coordinating on your behalf any request for further documentation by SIRI</li>
+          <li>Guidance on next steps if no offer is secured within the permit period</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Your Situation</h4><p>If your work permit is linked to an employer and you want to stay in Denmark to look for a new role, a job-seeking permit gives you up to 6 months to do so legally — without losing your right to remain.</p></div>
+          <div class="acc-meta-block"><h4>Timeline</h4><p>Apply before your current permit expires. We'll assess your eligibility and submit as quickly as possible.</p></div>
+          <div class="did-you-know"><div class="dyk-icon"><svg viewBox="0 0 20 20" fill="none" stroke="#B8860B" stroke-width="1.2" stroke-linecap="round"><circle cx="10" cy="10" r="9"/><line x1="10" y1="7" x2="10" y2="11"/><circle cx="10" cy="14" r="0.8" fill="#B8860B" stroke="none"/></svg></div><div><span class="dyk-label">Did You Know?</span><p class="dyk-text">If your employer terminated your employment, you are <strong>automatically eligible for a 6-month job-seeking permit</strong> — even if your original permit hasn't expired yet. You don't need to scramble. You have time, and we'll make sure you use it wisely.</p></div></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 2,000</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Start Application &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Terminated Employment</div><div class="acc-subtitle">Emergency guidance when you've just been let go</div></div>
+        <div class="acc-right"><div class="acc-price">DKK 2,500</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>Emergency 1-hour consultation (within 48 hours)</li>
+          <li>Permit status assessment and remaining timeline</li>
+          <li>SIRI notification guidance</li>
+          <li>Job search strategy for permit holders</li>
+          <li>A-kasse (unemployment benefit) eligibility check</li>
+          <li>Backup plan if no new role is found in time</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>We Understand</h4><p>Losing your job as an expat is terrifying — your permit, your home, your life in Denmark all feel at risk. We'll give you clarity, options, and a clear action plan. You're not alone in this.</p></div>
+          <div class="acc-meta-block"><h4>Time Is Critical</h4><p>You typically have 30–60 days to find new employment before your permit expires. Contact us immediately — the sooner we assess your situation, the more options you have.</p></div>
+          <div class="acc-meta-block"><h4>Your Next Step</h4><p>For most people, the immediate next step after losing their job is a <strong>Job Seeking Permit</strong> — giving you up to 6 months to find new employment legally in Denmark. We'll assess your eligibility and handle the application as part of your consultation.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">Our fee — DKK 2,500</span><span class="govt-fee"><span class="govt-fee-label">+ SIRI fee</span> DKK 6,810 (paid to SIRI)</span></div>
+          <a href="/#contact" class="acc-cta">Get Help Now &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-left"><div class="acc-title">Immigration Consultation &amp; Document Review</div><div class="acc-subtitle">Expert guidance booked by the session — no ongoing commitment</div></div>
+        <div class="acc-right"><div class="acc-price">From DKK 650</div><div class="acc-icon">+</div></div>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner"><div class="acc-body-content">
+        <div class="acc-includes"><h4>What's Included</h4><ul>
+          <li>30- or 60-minute consultation call — any immigration topic</li>
+          <li>Written review of an existing permit, approval letter, or SIRI correspondence</li>
+          <li>Document checklist review — catch gaps before submission</li>
+          <li>Permit validity, conditions, and obligations check</li>
+          <li>Guidance on timelines and next steps</li>
+          <li>Written summary of advice sent by email the same day</li>
+          <li>Referral to a full service with fee credited if needed</li>
+        </ul></div>
+        <div class="acc-meta">
+          <div class="acc-meta-block"><h4>Pricing Options</h4>
+            <ul style="list-style:none;padding:0;margin:0;">
+              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;"><strong>30-minute call</strong> &mdash; DKK 650<br><span style="font-size:13px;font-style:italic;color:#888;">One focused question or situation</span></li>
+              <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:15px;color:#2a2a2a;"><strong>Document review</strong> &mdash; DKK 650<br><span style="font-size:13px;font-style:italic;color:#888;">Written feedback on a permit, approval, or draft application</span></li>
+              <li style="padding:8px 0;font-size:15px;color:#2a2a2a;"><strong>60-minute deep dive</strong> &mdash; DKK 950<br><span style="font-size:13px;font-style:italic;color:#888;">Complex situations, multiple permits, or a full case review</span></li>
+            </ul>
+          </div>
+          <div class="acc-meta-block"><h4>Ideal For</h4><p>Anyone with a specific immigration question — a permit about to expire, a letter from SIRI you don't understand, uncertainty about a job change, or a family member's status. No long-term commitment required.</p></div>
+          <div class="acc-meta-block"><h4>How It Works</h4><p>Book and pay, receive a calendar link or document upload instructions, join the call or submit your documents. Written advice note sent same day. Fees paid here are credited in full against any full Nordic Anchor service booked within 30 days.</p></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;"><span class="acc-badge">From DKK 650 — no SIRI fee applies</span></div>
+          <a href="/#contact" class="acc-cta">Book a Consultation &nbsp;→</a>
+        </div>
+      </div></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="reassurance">
+  <div class="reassurance-inner">
+    <div class="reassurance-header">
+      <span class="reassurance-eyebrow">Why Individuals Choose Us</span>
+      <h2 class="reassurance-heading">The Nordic Anchor difference</h2>
+    </div>
+    <div class="reassurance-grid">
+      <div class="reassurance-item">
+        <div class="reassurance-num">01</div>
+        <h3>Clear Communication</h3>
+        <p>You'll always know exactly where your application stands, what's needed next, and what to expect — in plain language.</p>
+      </div>
+      <div class="reassurance-item">
+        <div class="reassurance-num">02</div>
+        <h3>Personal Attention</h3>
+        <p>Your case gets expert attention — not a junior consultant. We know your situation and we're invested in your outcome.</p>
+      </div>
+      <div class="reassurance-item">
+        <div class="reassurance-num">03</div>
+        <h3>Transparent Pricing</h3>
+        <p>Fixed fees, no hidden charges. You know the full cost before you pay — and your money is protected by our refund policy.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="bottom-cta">
+  <h2>Ready to start your Danish journey?</h2>
+  <p>All individual services are paid 100% upfront via secure payment. You'll receive your case reference and a consultation booking within 24 hours.</p>
+  <div class="cta-btns">
+    <a href="/#contact" class="btn-primary">Start Your Application &nbsp;→</a>
+    <a href="/services" class="btn-outline">View All Services</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" style="height:56px;width:auto;display:block;"/></a>
+      <div class="footer-center"><nav class="footer-nav">
+        <a href="/">Home</a><a href="/services">Services</a><a href="/services/companies-employers">For Companies</a><a href="/services/individuals-family">For Individuals</a><a href="/about">Who We Are</a><a href="/#contact">Contact</a>
+      </nav></div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social"><a href="#">LinkedIn</a><a href="#">Instagram</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All Rights Reserved.</span>
+      <div class="footer-legal">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="javascript:void(0)" onclick="resetCookieConsent()">Cookie Settings</a>
+      </div>
+      <span class="footer-cvr">CVR: 46215540 · Enkeltmandsvirksomhed · Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const mainNav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 20));
+  function openDrawer()  { document.getElementById('navDrawer').classList.add('open');    document.getElementById('navOverlay').classList.add('open'); }
+  function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); document.getElementById('navOverlay').classList.remove('open'); }
+  function toggleAcc(header) {
+    const item = header.closest('.acc-item');
+    const icon = header.querySelector('.acc-icon');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => { i.classList.remove('open'); i.querySelector('.acc-icon').textContent = '+'; });
+    if (!isOpen) { item.classList.add('open'); icon.textContent = '−'; }
+  }
+  function cookieAccept(){localStorage.setItem('na_cookie_consent','accepted');hideBanner();}
+  function cookieDecline(){localStorage.setItem('na_cookie_consent','declined');hideBanner();}
+  function hideBanner(){document.getElementById('cookieBanner').classList.remove('visible');}
+  function resetCookieConsent(){localStorage.removeItem('na_cookie_consent');document.getElementById('cookieBanner').classList.add('visible');}
+  (function(){
+    if(!localStorage.getItem('na_cookie_consent')){
+      setTimeout(()=>document.getElementById('cookieBanner').classList.add('visible'),800);
+    }
+  })();
+</script>
+</body>
+</html>
