@@ -397,6 +397,9 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--bg);color:var(--tex
     <div class="eng-ref-note">Please quote this reference in all correspondence. Note: your SIRI case ID is issued separately after permit submission to SIRI.</div>
   </div>
 
+  <div class="btn-row" style="margin-bottom:8px;">
+    <button class="btn-back" onclick="goBack()">← Back to case details</button>
+  </div>
   <div class="path-grid">
     <div class="path-card" id="path-consult" onclick="selectPath('consult',this)">
       <span class="path-tag">Free · 15 minutes</span>
@@ -410,14 +413,11 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--bg);color:var(--tex
     </div>
   </div>
 
-  <div class="btn-row" style="margin-top:4px;"><button class="btn-back" onclick="goBack()">← Back to case details</button></div>
-
   <div id="path-calendly" style="display:none;">
     <div class="calendly-wrap">
       <div class="calendly-inline-widget" data-url="https://calendly.com/nordic-anchor/immigration-consultation-15-mins?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=1a2840&text_color=f0e8d8&primary_color=b8860b"></div>
     </div>
     <div class="btn-row">
-      <button class="btn-back" onclick="goBack()">← Back</button>
       <button class="btn-primary" onclick="submitCase()">Submit engagement after booking →</button>
     </div>
   </div>
@@ -427,7 +427,6 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--bg);color:var(--tex
       After submitting, we will send you a formal invoice via email within one business day. Payment can be made by bank transfer or card. Work commences once payment is confirmed.
     </div>
     <div class="btn-row">
-      <button class="btn-back" onclick="goBack()">← Back</button>
       <button class="btn-primary" onclick="submitCase()">Submit my engagement →</button>
     </div>
   </div>
