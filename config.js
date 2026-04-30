@@ -20,7 +20,7 @@ const SIRI_FEES = {
   familyMember: 3080,         // Per accompanying family member
 
   // Job-seeking permit
-  jobSeeking: 0,              // No government fee
+  jobSeeking: 6810,           // DKK 6,810 — same fee category as work permit (Pay Limit / Fast-Track / Positive List). Source: nyidanmark.dk Jan 2026
 
   // EU residence certificate
   euNational: 0,              // Free for EU/EEA nationals

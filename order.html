@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Start Your Engagement — Nordic Anchor</title>
+<link rel="icon" href="/favicon.jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+/* ── DARK THEME (default) ─────────────────────────────────────────── */
+:root,[data-theme="dark"]{
+  --bg:#1a2840; --bg-card:#243552; --bg-input:#1a2840;
+  --navy:#1a2840; --navy-mid:#243552;
+  --gold:#b89a6a; --gold-dk:#B8860B; --gold-eye:#DAA520;
+  --text:#f0e8d8; --body:#9ab0c8; --muted:#6a8aaa;
+  --border:rgba(184,154,106,0.25); --border-strong:rgba(184,154,106,0.45);
+  --excl-color:#d4920a; --incl-color:rgba(144,200,144,0.9);
+  --scope-bg:#243552; --signoff-bg:#243552;
+  --btn-back-color:#6a8aaa; --btn-back-border:rgba(184,154,106,0.25);
+  --nav-bg:rgba(26,40,64,0.97);
+  --toggle-icon:"☀";
+}
+
+/* ── LIGHT THEME ──────────────────────────────────────────────────── */
+[data-theme="light"]{
+  --bg:#f5f0e8; --bg-card:#fffdf9; --bg-input:#fffdf9;
+  --gold:#b89a6a; --gold-dk:#9a6f00; --gold-eye:#9a6f00;
+  --text:#1e2f4a; --body:#4a3f32; --muted:#8a7a6a;
+  --border:rgba(184,154,106,0.3); --border-strong:rgba(184,154,106,0.5);
+  --excl-color:#9a6000; --incl-color:#2a6a2a;
+  --scope-bg:#fffdf9; --signoff-bg:#fffdf9;
+  --btn-back-color:#6a5a4a; --btn-back-border:rgba(184,154,106,0.3);
+  --nav-bg:rgba(245,240,232,0.97);
+  --toggle-icon:"☾";
+}
+
+html{scroll-behavior:smooth;}
+body{font-family:'Newsreader',Georgia,serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+#mainNav{position:fixed;top:0;left:0;right:0;z-index:200;height:80px;display:flex;align-items:center;padding:0 40px;background:var(--nav-bg);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);gap:16px;}
+.nav-logo{display:flex;align-items:center;margin-right:auto;text-decoration:none;}
+.nav-logo img{height:52px;width:auto;}
+.theme-toggle{background:none;border:1px solid var(--border);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--gold-dk);transition:all .2s;flex-shrink:0;}
+.theme-toggle:hover{border-color:var(--gold-dk);}
+.nav-back{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--gold-dk);}
+.nav-back-x{width:26px;height:26px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;}
+.nav-back:hover .nav-back-x{border-color:var(--gold-dk);color:var(--gold-dk);}
+@media(max-width:600px){#mainNav{padding:0 16px;}.nav-logo img{height:40px;}}
+
+/* ── PROGRESS ────────────────────────────────────────────────────── */
+.progress-wrap{position:fixed;top:80px;left:0;right:0;z-index:199;background:var(--nav-bg);border-bottom:1px solid var(--border);padding:12px 40px;transition:background .3s;}
+.progress-inner{max-width:820px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.progress-track{flex:1;height:1px;background:rgba(184,154,106,0.15);}
+.progress-fill{height:100%;background:linear-gradient(90deg,#b89a6a,#DAA520);transition:width .5s ease;}
+.progress-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.step-dots{display:flex;gap:5px;}
+.step-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,154,106,0.2);transition:all .3s;}
+.step-dot.done{background:var(--gold);}
+.step-dot.active{background:var(--gold-dk);width:18px;border-radius:3px;}
+@media(max-width:600px){.progress-wrap{padding:10px 20px;}}
+
+/* ── WRAP ────────────────────────────────────────────────────────── */
+.form-wrap{max-width:820px;margin:0 auto;padding:160px 40px 96px;}
+@media(max-width:600px){.form-wrap{padding:150px 20px 80px;}}
+
+/* ── STEPS ───────────────────────────────────────────────────────── */
+.step{display:none !important;}
+.step.active{display:block !important;animation:stepIn .35s ease;}
+@keyframes stepIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── TYPE ────────────────────────────────────────────────────────── */
+.eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:14px;display:block;}
+.step-heading{font-size:clamp(24px,3.5vw,40px);font-weight:300;color:var(--text);line-height:1.2;margin-bottom:10px;}
+.step-heading em{font-style:italic;}
+.step-sub{font-size:15px;font-style:italic;color:var(--body);line-height:1.75;margin-bottom:32px;max-width:620px;}
+
+/* ── GDPR ────────────────────────────────────────────────────────── */
+.gdpr-box{border-left:3px solid var(--gold);background:rgba(184,154,106,0.07);padding:20px 22px;margin-bottom:28px;font-size:13px;color:var(--body);line-height:1.8;}
+.gdpr-box strong{color:var(--text);}
+.gdpr-box a{color:var(--gold-dk);text-decoration:none;}
+.gdpr-section{margin-bottom:18px;}
+.gdpr-section:last-of-type{margin-bottom:0;}
+.consent-row{display:flex;gap:12px;align-items:flex-start;margin-top:18px;cursor:pointer;padding:14px 16px;border:1px solid var(--border);background:var(--bg-card);transition:border-color .2s;}
+.consent-row:hover{border-color:var(--gold-dk);}
+.consent-row input{accent-color:var(--gold-dk);margin-top:3px;flex-shrink:0;width:16px;height:16px;}
+.consent-label{font-size:13px;color:var(--body);line-height:1.7;}
+.consent-label a{color:var(--gold-dk);}
+
+/* ── SERVICE CARDS ───────────────────────────────────────────────── */
+.svc-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.svc-card{border:1px solid var(--border);background:var(--bg-card);padding:16px 20px;cursor:pointer;transition:all .22s;display:flex;align-items:flex-start;gap:14px;}
+.svc-card:hover{border-color:var(--gold-dk);transform:translateX(2px);}
+.svc-card.selected{border-color:var(--gold-dk);background:rgba(184,134,11,0.06);}
+.svc-check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:2px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:11px;color:transparent;}
+.svc-card.selected .svc-check{background:var(--gold-dk);border-color:var(--gold-dk);color:#1a0000;}
+.svc-body{flex:1;}
+.svc-title{font-size:16px;color:var(--text);margin-bottom:3px;}
+.svc-sub{font-size:12px;font-style:italic;color:var(--muted);}
+.svc-price{font-size:13px;color:var(--gold);white-space:nowrap;margin-left:auto;padding-left:16px;flex-shrink:0;}
+
+/* ── SCOPE BLOCKS ────────────────────────────────────────────────── */
+.scope-block{margin-bottom:14px;border:1px solid var(--border);background:var(--scope-bg);transition:background .3s;}
+.scope-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.scope-svc-name{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.scope-svc-fee{font-size:14px;color:var(--text);}
+.scope-body{padding:20px;}
+.scope-col-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:600px){.scope-col-wrap{grid-template-columns:1fr;}}
+.scope-section-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block;}
+.scope-line{font-size:13px;line-height:1.75;display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;}
+.scope-line.incl{color:var(--incl-color);}
+.scope-line.excl{color:var(--excl-color);font-weight:500;}
+.scope-line-icon{flex-shrink:0;width:14px;margin-top:2px;}
+.scope-gov-note{font-size:12px;font-style:italic;color:var(--muted);margin-top:10px;padding:8px 12px;border:1px solid rgba(212,146,10,0.2);background:rgba(212,146,10,0.05);}
+
+/* Scope checkbox */
+.scope-accept{display:flex;gap:10px;align-items:center;margin-top:16px;padding:12px 16px;border-top:1px solid var(--border);cursor:pointer;}
+.scope-accept input{accent-color:var(--gold-dk);width:15px;height:15px;flex-shrink:0;}
+.scope-accept-label{font-size:12px;color:var(--body);}
+.scope-accept.accepted .scope-accept-label{color:var(--text);}
+
+/* Total */
+.scope-total-block{border:1px solid var(--border-strong);background:var(--bg-card);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;transition:background .3s;}
+.scope-total-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+.scope-total-note{font-size:12px;font-style:italic;color:var(--muted);margin-top:4px;}
+.scope-total-amount{font-size:26px;font-weight:300;color:var(--text);}
+
+/* ── SIGN-OFF ─────────────────────────────────────────────────────── */
+.signoff-box{border:1px solid var(--border-strong);background:var(--signoff-bg);padding:28px;margin-top:8px;transition:background .3s;}
+.signoff-intro{font-size:13px;color:var(--body);line-height:1.8;margin-bottom:22px;}
+.signoff-intro strong{color:var(--text);}
+.signoff-name-input{width:100%;font-family:'Newsreader',Georgia,serif;font-size:20px;font-style:italic;color:var(--text);background:transparent;border:none;border-bottom:2px solid var(--gold-dk);padding:10px 0;outline:none;letter-spacing:.02em;transition:border-color .2s;}
+.signoff-name-input::placeholder{color:var(--muted);font-style:italic;}
+.signoff-name-input:focus{border-bottom-color:var(--gold-eye);}
+.signoff-ts{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;}
+
+/* ── FIELDS ──────────────────────────────────────────────────────── */
+.field-group{margin-bottom:20px;}
+.field-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dk);display:block;margin-bottom:8px;font-weight:500;}
+.field-opt{color:var(--muted);letter-spacing:0;text-transform:none;font-size:10px;margin-left:4px;}
+.field-input,.field-select,.field-textarea{width:100%;font-family:'Newsreader',Georgia,serif;font-size:15px;color:var(--text);background:var(--bg-input);border:1px solid var(--border);padding:12px 16px;outline:none;transition:border-color .2s,background .3s,color .3s;}
+.field-input::placeholder{color:var(--muted);}
+.field-input:focus,.field-select:focus,.field-textarea:focus{border-color:var(--gold-dk);}
+.field-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B8860B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:10px;padding-right:36px;}
+.field-textarea{min-height:90px;resize:vertical;line-height:1.65;}
+.field-hint{font-size:12px;font-style:italic;color:var(--muted);margin-top:6px;line-height:1.5;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.field-row{grid-template-columns:1fr;}}
+
+/* Document upload note */
+.doc-note{border:1px solid var(--border);background:var(--bg-card);padding:18px 20px;margin-bottom:20px;transition:background .3s;}
+.doc-note-title{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:8px;display:block;}
+.doc-note-body{font-size:13px;color:var(--body);line-height:1.75;}
+.doc-note-body strong{color:var(--text);}
+.doc-email-link{color:var(--gold-dk);text-decoration:none;font-weight:500;}
+
+/* ── ENGAGEMENT REF ──────────────────────────────────────────────── */
+.eng-ref-box{background:rgba(184,134,11,0.07);border:1px solid var(--border-strong);padding:20px 24px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.eng-ref-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.eng-ref-value{font-size:22px;letter-spacing:.08em;color:var(--gold-eye);font-weight:500;margin-top:4px;}
+.eng-ref-note{font-size:12px;font-style:italic;color:var(--muted);max-width:260px;text-align:right;line-height:1.65;}
+
+/* ── PATH CHOICE (step 5) ────────────────────────────────────────── */
+.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+@media(max-width:560px){.path-grid{grid-template-columns:1fr;}}
+.path-card{border:1px solid var(--border);background:var(--bg-card);padding:28px 24px;cursor:pointer;transition:all .25s;position:relative;}
+.path-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .25s;}
+.path-card:hover,.path-card.selected{border-color:var(--gold-dk);}
+.path-card:hover::before,.path-card.selected::before{background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+.path-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block;}
+.path-title{font-size:18px;font-weight:400;color:var(--text);margin-bottom:10px;line-height:1.3;}
+.path-desc{font-size:13px;font-style:italic;color:var(--body);line-height:1.7;}
+
+/* ── CALENDLY ────────────────────────────────────────────────────── */
+.calendly-wrap{border:1px solid var(--border);background:var(--bg-card);padding:4px;margin:20px 0;}
+.calendly-inline-widget{min-width:100%;height:660px;}
+
+/* ── CONFIRM SCREEN ──────────────────────────────────────────────── */
+.confirm-icon{width:60px;height:60px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;font-size:26px;color:var(--gold);}
+.summary-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+.summary-table tr{border-bottom:1px solid rgba(184,154,106,0.1);}
+.summary-table tr:last-child{border-bottom:none;}
+.summary-table td{padding:10px 0;font-size:14px;vertical-align:top;}
+.summary-table td:first-child{color:var(--muted);width:200px;flex-shrink:0;}
+.summary-table td:last-child{color:var(--text);}
+.cvr-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:24px;padding-top:16px;border-top:1px solid var(--border);line-height:1.7;}
+.cvr-note strong{color:var(--body);}
+
+/* ── DIVIDER ─────────────────────────────────────────────────────── */
+.divider{height:1px;background:var(--border);margin:28px 0;}
+
+/* ── BUTTONS ─────────────────────────────────────────────────────── */
+.btn-row{display:flex;gap:12px;align-items:center;margin-top:28px;flex-wrap:wrap;}
+.btn-primary{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#2a1800;padding:14px 32px;cursor:pointer;border:none;transition:filter .25s;background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);box-shadow:inset 0 1.5px 0 rgba(255,248,180,0.8),inset 0 -1.5px 0 rgba(80,45,0,0.4),0 0 0 1px rgba(140,90,0,0.75);}
+.btn-primary:hover{filter:brightness(1.08);}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;filter:none;}
+.btn-back{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--btn-back-color);background:transparent;border:1px solid var(--btn-back-border);padding:13px 24px;cursor:pointer;transition:all .2s;}
+.btn-back:hover{border-color:var(--gold-dk);color:var(--gold-dk);}
+.btn-outline{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--border-strong);padding:13px 24px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold-dk);color:var(--gold-dk);}
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="/" class="nav-logo"><img src="/logo-transparent.png" alt="Nordic Anchor"/></a>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" id="themeBtn">☀</button>
+    <span style="font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;">Light / Dark</span>
+  </div>
+  <a href="/individuals-family" class="nav-back">Back to Services <span class="nav-back-x">&#x2715;</span></a>
+</nav>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="step-dots" id="stepDots"></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:16%"></div></div>
+    <span class="progress-label" id="progressLabel">Step 1 of 6</span>
+  </div>
+</div>
+
+<div class="form-wrap">
+
+<!-- ══════════════════════════════════════════════════════════════════
+     STEP 1 — GDPR & Consent
+══════════════════════════════════════════════════════════════════ -->
+<div class="step active" id="step-1">
+  <span class="eyebrow">Your Engagement with Nordic Anchor</span>
+  <h1 class="step-heading">Before we begin — <em>a few important points.</em></h1>
+  <p class="step-sub">We're about to collect detailed personal information to open your immigration case. Danish and EU data protection law requires us to be fully transparent — please read carefully before proceeding.</p>
+
+  <div class="gdpr-box">
+    <div class="gdpr-section">
+      <strong>What we collect and why</strong><br/>
+      To open and manage your immigration case, we collect personal details including your full name, date of birth, nationality, current permit status, employment details, and in some cases family information. This is processed under <strong>Article 6(1)(b) GDPR</strong> (performance of a contract) and, where immigration status data is involved, <strong>Article 9(2)(b)</strong> (employment and social protection law).
+    </div>
+    <div class="gdpr-section">
+      <strong>How long we keep it</strong><br/>
+      Your case data is retained for the duration of your engagement plus <strong>5 years</strong> thereafter, in accordance with Danish bookkeeping law (Bogføringsloven §10). You may request deletion of non-legally-required data at any time by emailing <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>.
+    </div>
+    <div class="gdpr-section">
+      <strong>Who sees your data</strong><br/>
+      Your data is processed solely by Nordic Anchor (CVR 46215540) and submitted to SIRI as part of your permit application. It is not shared with any other third party without your explicit consent. All data is stored within the EU.
+    </div>
+    <div class="gdpr-section">
+      <strong>Your rights</strong><br/>
+      You have the right to access, correct, restrict, or request deletion of your data, and to lodge a complaint with <a href="https://www.datatilsynet.dk" target="_blank">Datatilsynet</a>. Full details are in our <a href="/privacy" target="_blank">Privacy Policy</a>.
+    </div>
+  </div>
+
+  <label class="consent-row" onclick="checkStep1()">
+    <input type="checkbox" id="consent-gdpr"/>
+    <span class="consent-label">I have read and understood how Nordic Anchor will collect, store, and use my personal data for the purposes of my immigration case. I consent to this processing and confirm I am 18 years of age or older.</span>
+  </label>
+  <label class="consent-row" onclick="checkStep1()" style="margin-top:8px;">
+    <input type="checkbox" id="consent-terms"/>
+    <span class="consent-label">I have read and accept the <a href="/terms" target="_blank">Terms &amp; Conditions</a> of Nordic Anchor's services, including the fee structure, cancellation policy, and scope limitations.</span>
+  </label>
+
+  <div class="btn-row">
+    <button class="btn-primary" id="btn-step1" onclick="goTo('step-2')" disabled>I understand — let's proceed →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     STEP 2 — Service Selection
+══════════════════════════════════════════════════════════════════ -->
+<div class="step" id="step-2">
+  <span class="eyebrow">Step 1 — Services</span>
+  <h2 class="step-heading">Which services would you like <em>our assistance with?</em></h2>
+  <p class="step-sub">Select all that apply. If you're unsure, select the closest option — you'll have the opportunity to review the exact scope and confirm before signing off, and we can discuss anything during your consultation.</p>
+
+  <div class="svc-grid" id="svc-grid">
+    <div class="svc-card" onclick="toggleSvc('work-permit',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Work Permit — New Application</div><div class="svc-sub">Fast-Track and Pay Limit scheme applications</div></div><div class="svc-price">DKK 4,500</div></div>
+    <div class="svc-card" onclick="toggleSvc('work-permit-renewal',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Work Permit — Extension / Renewal</div><div class="svc-sub">Renewing or extending your existing permit</div></div><div class="svc-price">DKK 3,500</div></div>
+    <div class="svc-card" onclick="toggleSvc('job-change',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Job Change</div><div class="svc-sub">Switching employers while on a Danish work permit</div></div><div class="svc-price">DKK 3,500</div></div>
+    <div class="svc-card" onclick="toggleSvc('family-permit',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Family / Accompanying Permit</div><div class="svc-sub">Bring your spouse, partner, or children to Denmark</div></div><div class="svc-price">DKK 3,000 / dep.</div></div>
+    <div class="svc-card" onclick="toggleSvc('eu-residence',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">EU Residence Certificate</div><div class="svc-sub">For EU/EEA nationals and their family members</div></div><div class="svc-price">DKK 3,000</div></div>
+    <div class="svc-card" onclick="toggleSvc('permanent-residence',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Permanent Residence</div><div class="svc-sub">Secure your long-term future in Denmark</div></div><div class="svc-price">DKK 6,500</div></div>
+    <div class="svc-card" onclick="toggleSvc('job-seeking',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Job Seeking Permit</div><div class="svc-sub">Stay in Denmark legally while looking for new work</div></div><div class="svc-price">DKK 2,000</div></div>
+    <div class="svc-card" onclick="toggleSvc('terminated',this)"><div class="svc-check">✓</div><div class="svc-body"><div class="svc-title">Terminated Employment</div><div class="svc-sub">Guidance and permit options when employment has ended</div></div><div class="svc-price">DKK 2,500</div></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-back" onclick="goBack()">← Back</button>
+    <button class="btn-primary" id="btn-step2" onclick="goTo('step-3')" disabled>Review scope →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     STEP 3 — Scope & Sign-Off
+══════════════════════════════════════════════════════════════════ -->
+<div class="step" id="step-3">
+  <span class="eyebrow">Step 2 — Scope &amp; Sign-Off</span>
+  <h2 class="step-heading">Please review the scope of <em>each service.</em></h2>
+  <p class="step-sub">Read each section carefully. Tick the confirmation box under each service, then sign your full legal name below. This forms your formal instruction to Nordic Anchor to act on your behalf.</p>
+
+  <div id="scope-blocks"></div>
+  <div id="scope-total"></div>
+
+  <div class="signoff-box">
+    <p class="signoff-intro">
+      <strong>Formal instruction to proceed</strong><br/><br/>
+      By entering your full legal name below, you confirm that you have read and accepted the scope of each service above, that you are instructing Nordic Anchor to act on your behalf, and that you accept the fees and exclusions as stated. This is your formal written instruction to commence work on your case.<br/><br/>
+      A timestamped copy of this scope confirmation will be sent to your email address for your records.
+    </p>
+    <input type="text" class="signoff-name-input" id="signoff-name" placeholder="Type your full legal name exactly as it appears on your passport…" oninput="checkSignoff()"/>
+    <div class="field-hint" style="margin-top:10px;">Please enter your name exactly as it appears on your passport or official identification.</div>
+    <div class="signoff-ts" id="signoff-ts"></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-back" onclick="goBack()">← Back</button>
+    <button class="btn-primary" id="btn-step3" onclick="goTo('step-4')" disabled>Confirmed — continue →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     STEP 4 — Case Details
+══════════════════════════════════════════════════════════════════ -->
+<div class="step" id="step-4">
+  <span class="eyebrow">Step 3 — Your Details</span>
+  <h2 class="step-heading">A few details to <em>open your case.</em></h2>
+  <p class="step-sub">This information forms the basis of your case file with Nordic Anchor. Please complete all fields as accurately as possible — this is the information we will work from.</p>
+
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">First name</label><input class="field-input" type="text" id="det-first" placeholder="As on your passport"/></div>
+    <div class="field-group"><label class="field-label">Last name</label><input class="field-input" type="text" id="det-last" placeholder="As on your passport"/></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Email address</label><input class="field-input" type="email" id="det-email" placeholder="your@email.com"/></div>
+    <div class="field-group"><label class="field-label">Phone number</label><input class="field-input" type="tel" id="det-phone" placeholder="+45 · · · · · · · ·"/></div>
+  </div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Date of birth</label><input class="field-input" type="date" id="det-dob"/></div>
+    <div class="field-group"><label class="field-label">Nationality (as on passport)</label><input class="field-input" type="text" id="det-nat" placeholder="e.g. Indian"/></div>
+  </div>
+  <div class="field-group"><label class="field-label">Current address in Denmark <span class="field-opt">(if applicable)</span></label><input class="field-input" type="text" id="det-address" placeholder="Street, City, Postcode"/></div>
+  <div class="field-row">
+    <div class="field-group"><label class="field-label">Employer name <span class="field-opt">(if applicable)</span></label><input class="field-input" type="text" id="det-employer" placeholder="Your Danish employer"/></div>
+    <div class="field-group"><label class="field-label">Target start / permit date</label><input class="field-input" type="date" id="det-start"/></div>
+  </div>
+  <div class="field-group">
+    <label class="field-label">Current permit type <span class="field-opt">(if you already hold a Danish permit)</span></label>
+    <select class="field-select" id="det-permit" onchange="toggleExpiryField()">
+      <option value="">Not applicable — I don't hold a Danish permit</option>
+      <option value="ft-pay-limit">Fast-Track — Pay Limit</option>
+      <option value="ft-researcher">Fast-Track — Researcher</option>
+      <option value="pay-limit">Pay Limit Scheme</option>
+      <option value="supp-pay-limit">Supplementary Pay Limit</option>
+      <option value="positive-list">Positive List</option>
+      <option value="eu-residence">EU Residence Certificate</option>
+      <option value="family">Family / Accompanying Permit</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div class="field-group"><label class="field-label">Current permit expiry date <span class="field-opt">(if applicable)</span></label><input class="field-input" type="date" id="det-expiry" disabled style="opacity:.4;cursor:not-allowed;"/></div>
+  <div class="field-group"><label class="field-label">Additional notes <span class="field-opt">(optional)</span></label><textarea class="field-textarea" id="det-notes" placeholder="Any additional context about your situation that will help us prepare…"></textarea></div>
+
+  <div class="doc-note">
+    <span class="doc-note-title">📎 Supporting documents</span>
+    <p class="doc-note-body">
+      Please email any relevant documents — <strong>passport, current permit card, employer letter, or payslips</strong> — directly to <a href="mailto:rd@nordicanchor.dk" class="doc-email-link">rd@nordicanchor.dk</a> with your <strong>Engagement Reference</strong> in the subject line. You will receive this reference on the next screen.<br/><br/>
+      We will confirm receipt of your documents during your consultation call. Please do not send sensitive documents via any other channel.
+    </p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-back" onclick="goBack()">← Back</button>
+    <button class="btn-primary" onclick="advanceToPath()">Choose how to proceed →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     STEP 5 — Choose your path
+══════════════════════════════════════════════════════════════════ -->
+<div class="step" id="step-5">
+  <span class="eyebrow">Step 4 — How would you like to proceed?</span>
+  <h2 class="step-heading">You're almost there — <em>choose your next step.</em></h2>
+  <p class="step-sub">Your scope has been confirmed and your details are with us. Now decide how you'd like to move forward.</p>
+
+  <div class="eng-ref-box">
+    <div>
+      <div class="eng-ref-label">Your Nordic Anchor Engagement Ref</div>
+      <div class="eng-ref-value" id="eng-ref-display">—</div>
+    </div>
+    <div class="eng-ref-note">Please quote this reference in all correspondence. Note: your SIRI case ID is issued separately after permit submission to SIRI.</div>
+  </div>
+
+  <div class="path-grid">
+    <div class="path-card" id="path-consult" onclick="selectPath('consult',this)">
+      <span class="path-tag">Free · 15 minutes</span>
+      <div class="path-title">Book a free discovery call first</div>
+      <p class="path-desc">Not quite ready to commit? Book a complimentary 15-minute call with Reuben to talk through your case, ask questions, and make sure you've selected the right services. No obligation whatsoever — this is simply a chance to get to know each other before proceeding.</p>
+    </div>
+    <div class="path-card" id="path-submit" onclick="selectPath('submit',this)">
+      <span class="path-tag">Ready to go</span>
+      <div class="path-title">Submit your engagement directly</div>
+      <p class="path-desc">You have identified the service or services you require and are ready to proceed. Submit your engagement below and we will be in touch within one business day to confirm your case, answer any initial questions, and send you a formal invoice. Payment is requested before work commences — we will issue this via email for your convenience.</p>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-top:4px;"><button class="btn-back" onclick="goBack()">← Back to case details</button></div>
+
+  <div id="path-calendly" style="display:none;">
+    <div class="calendly-wrap">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/nordic-anchor/immigration-consultation-15-mins?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=1a2840&text_color=f0e8d8&primary_color=b8860b"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-primary" onclick="submitCase()">Submit engagement after booking →</button>
+    </div>
+  </div>
+
+  <div id="path-submit-btn" style="display:none;">
+    <div style="font-size:13px;font-style:italic;color:var(--body);margin-top:16px;padding:14px 18px;border:1px solid var(--border);background:var(--bg-card);">
+      After submitting, we will send you a formal invoice via email within one business day. Payment can be made by bank transfer or card. Work commences once payment is confirmed.
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-primary" onclick="submitCase()">Submit my engagement →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     STEP 6 — Confirmation
+══════════════════════════════════════════════════════════════════ -->
+<div class="step" id="step-6">
+  <div class="confirm-icon">✓</div>
+  <span class="eyebrow">Engagement confirmed</span>
+  <h2 class="step-heading">You're all set — <em>we'll be in touch very soon.</em></h2>
+  <p class="step-sub">Your engagement has been formally registered with Nordic Anchor. A full summary — including your scope confirmation, signed instruction, and engagement reference — has been sent to your email address for your records.</p>
+
+  <div class="eng-ref-box" style="margin:32px 0;">
+    <div>
+      <div class="eng-ref-label">Nordic Anchor Engagement Ref</div>
+      <div class="eng-ref-value" id="eng-ref-confirm">—</div>
+    </div>
+    <div class="eng-ref-note">Keep this reference in a safe place. It will appear on your invoice and all case correspondence. Your SIRI case ID will be issued separately once your permit application is submitted to SIRI.</div>
+  </div>
+
+  <div id="confirm-summary"></div>
+
+  <div class="cvr-note">
+    <strong>Nordic Anchor</strong> (CVR: 46215540) is a registered Danish sole trader providing immigration guidance based on extensive hands-on experience with Danish immigration processes and SIRI applications. Nordic Anchor is not a law firm, and Reuben Dayal is not a lawyer. Nothing provided through this form or during any consultation constitutes legal advice — all guidance is based on professional experience and is provided for informational purposes only. For any queries, contact us at <a href="mailto:rd@nordicanchor.dk" style="color:var(--gold-dk);">rd@nordicanchor.dk</a>.
+  </div>
+
+  <div class="btn-row" style="margin-top:32px;">
+    <a href="/" class="btn-primary" style="text-decoration:none;">Back to Nordic Anchor →</a>
+    <a href="/individuals-family" class="btn-outline">View Services</a>
+  </div>
+</div>
+
+</div><!-- /form-wrap -->
+
+<script>
+// ══════════════════════════════════════
+// THEME
+// ══════════════════════════════════════
+function toggleTheme(){
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '☾' : '☀';
+  localStorage.setItem('na-order-theme', isDark ? 'light' : 'dark');
+  // Update Calendly colours
+  updateCalendlyTheme(!isDark);
+}
+function updateCalendlyTheme(isDark){
+  document.querySelectorAll('.calendly-inline-widget').forEach(w=>{
+    const url = w.getAttribute('data-url');
+    if(!url) return;
+    const base = url.split('?')[0];
+    const bg = isDark ? '1a2840' : 'f5f0e8';
+    const txt = isDark ? 'f0e8d8' : '1e2f4a';
+    w.setAttribute('data-url', `${base}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=${bg}&text_color=${txt}&primary_color=b8860b`);
+  });
+}
+// Restore theme
+(function(){
+  const saved = localStorage.getItem('na-order-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀' : '☾';
+})();
+
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+const O = {
+  selectedServices: {},
+  scopeAccepted: {},
+  signoffName: '',
+  engRef: '',
+  chosenPath: null,
+  stepHistory: ['step-1'],
+  cur: 'step-1',
+};
+const TOTAL = 6;
+const STEPS = ['step-1','step-2','step-3','step-4','step-5','step-6'];
+
+// ══════════════════════════════════════
+// SERVICE DATA
+// ══════════════════════════════════════
+const SVCS = {
+  'work-permit':{name:'Work Permit — New Application',fee:4500,govMin:6810,govMax:6810,
+    includes:['Full eligibility assessment against Fast-Track and Pay Limit scheme criteria','Personalised document checklist tailored to your situation','Complete application preparation and SIRI submission on your behalf','Liaison with SIRI throughout the processing period','Case tracking and status updates until a decision is issued'],
+    excludes:['SIRI government fee: DKK 6,810 — paid directly to SIRI, not included in our fee','Translation or notarisation of documents, if required (quoted separately)','Re-application costs where refusal results from incorrect information provided by the applicant']},
+  'work-permit-renewal':{name:'Work Permit — Extension / Renewal',fee:3500,govMin:6810,govMax:6810,
+    includes:['Review of current permit conditions and salary compliance check','Assessment of continued eligibility under your existing scheme','Complete renewal application preparation and SIRI submission','Case tracking until renewal decision is issued'],
+    excludes:['SIRI government fee: DKK 6,810 — paid directly to SIRI','Translation or notarisation costs, if required (quoted separately)']},
+  'job-change':{name:'Job Change',fee:3500,govMin:6810,govMax:6810,
+    includes:['Assessment of new role eligibility under your current permit scheme','Advice on your right-to-work status during the transition period','New permit application preparation and SIRI submission','Case tracking until new permit is issued'],
+    excludes:['SIRI government fee: DKK 6,810 — paid directly to SIRI','Translation or notarisation costs, if required (quoted separately)']},
+  'family-permit':{name:'Family / Accompanying Permit',fee:3000,govMin:3080,govMax:3080,feeNote:'DKK 3,000 per dependent (discounts apply for 2+ dependants)',
+    includes:['Eligibility assessment for each accompanying family member','Document checklist tailored to each applicant (spouse, partner, or children)','Application preparation and SIRI submission for each family member','Coordination with your main permit application where possible','Case tracking until each permit decision is issued'],
+    excludes:['SIRI government fee: DKK 3,080 per family member — paid directly to SIRI','Translation or notarisation costs, if required (quoted separately)','Applications for family members aged 18 or over (unless disability exception applies — please discuss with us)']},
+  'eu-residence':{name:'EU Residence Certificate',fee:3000,govMin:0,govMax:0,
+    includes:['Eligibility confirmation under EU free movement regulations','Document checklist and preparation for EU residence registration','Submission to the relevant Danish authority on your behalf','Confirmation of registration and guidance on next steps'],
+    excludes:['No SIRI government fee applies for EU/EEA nationals registering under EU law','Translation costs for non-Danish/non-English documents, if required (quoted separately)','Accompanying permits for non-EU family members (separate service — see Family / Accompanying Permit)']},
+  'permanent-residence':{name:'Permanent Residence',fee:6500,govMin:3800,govMax:7570,
+    includes:['Full eligibility assessment across all permanent residence routes (8-year standard, 4-year fast-track, EU 5-year, and special ties routes)','Review of your residence history, language documentation, employment record, and supplementary requirements','Guidance on meeting any outstanding requirements before submission','Complete application preparation and SIRI submission','Case tracking until a final decision is issued'],
+    excludes:['SIRI government fee: DKK 3,800–7,570 depending on your route — paid directly to SIRI','Danish language test fees, if not already passed','Translation or notarisation costs, if required (quoted separately)']},
+  'job-seeking':{name:'Job Seeking Permit',fee:2000,govMin:6810,govMax:6810,
+    includes:['Eligibility assessment based on your permit type and the circumstances of your job loss','Urgent application preparation and SIRI submission — note: the application must be submitted no later than 2 days after employment ends','Advice on what you may and may not do during the 6-month job-seeking period','Case tracking until a permit decision is issued'],
+    excludes:['SIRI government fee: DKK 6,810 — paid directly to SIRI, separate from our fee. This applies regardless of which qualifying scheme your permit was issued under','A subsequent work permit application, once new employment is found, is a separate service (DKK 3,500–4,500)','Job seeking permits are only available to holders of Pay Limit, Positive List (Higher Education), Researcher, or Fast-Track (pay limit, researcher, or educational track) permits who lost employment through no fault of their own']},
+  'terminated':{name:'Terminated Employment',fee:2500,govMin:6810,govMax:6810,
+    includes:['Emergency assessment of your current permit status and right to remain in Denmark','Identification of all available permit routes given your circumstances','Priority application preparation and submission for the most appropriate route','Immediate advice on steps to protect your right to remain'],
+    excludes:['SIRI government fee: DKK 0–6,810 depending on the route selected — paid directly to SIRI','Subsequent applications beyond the initial emergency route (quoted separately)']},
+};
+
+// ══════════════════════════════════════
+// URL PARAM PRE-FILL
+// ══════════════════════════════════════
+(function(){
+  const p = new URLSearchParams(window.location.search);
+  ['first','last','email'].forEach(k=>{
+    const el = document.getElementById('det-'+k);
+    if(el && p.get(k)) el.value = p.get(k);
+  });
+  const svcMap = {
+    'Work Permit (New Application)':'work-permit','Work Permit Extension / Renewal':'work-permit-renewal',
+    'Work Permit — Job Change':'job-change','Family / Accompanying Permit':'family-permit',
+    'EU Residence Certificate':'eu-residence','Permanent Residence':'permanent-residence',
+    'Job Seeking Permit':'job-seeking','Terminated Employment':'terminated',
+  };
+  const rec = p.get('service');
+  if(rec && svcMap[rec]){
+    const id = svcMap[rec];
+    const card = [...document.querySelectorAll('.svc-card')].find(c=>c.getAttribute('onclick')?.includes(id));
+    if(card) toggleSvc(id, card);
+  }
+})();
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+function goTo(id){
+  document.getElementById(O.cur).classList.remove('active');
+  O.stepHistory.push(id);
+  O.cur = id;
+  document.getElementById(id).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id === 'step-3') buildScopes();
+  if(id === 'step-5') generateRef();
+}
+function goBack(){
+  if(O.stepHistory.length <= 1) return;
+  O.stepHistory.pop();
+  const prev = O.stepHistory[O.stepHistory.length-1];
+  document.getElementById(O.cur).classList.remove('active');
+  O.cur = prev;
+  document.getElementById(prev).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function updateProgress(){
+  const idx = STEPS.indexOf(O.cur);
+  const pct = Math.round(((idx+1)/TOTAL)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = 'Step '+(idx+1)+' of '+TOTAL;
+  const dots = document.getElementById('stepDots');
+  dots.innerHTML = '';
+  STEPS.forEach((_,i)=>{
+    const d = document.createElement('div');
+    d.className='step-dot'+(i<idx?' done':i===idx?' active':'');
+    dots.appendChild(d);
+  });
+}
+
+// ══════════════════════════════════════
+// STEP 1
+// ══════════════════════════════════════
+function checkStep1(){
+  setTimeout(()=>{
+    const ok = document.getElementById('consent-gdpr').checked && document.getElementById('consent-terms').checked;
+    document.getElementById('btn-step1').disabled = !ok;
+  },50);
+}
+
+// ══════════════════════════════════════
+// STEP 2
+// ══════════════════════════════════════
+function toggleSvc(id, el){
+  el.classList.toggle('selected');
+  if(el.classList.contains('selected')) O.selectedServices[id]=true;
+  else { delete O.selectedServices[id]; delete O.scopeAccepted[id]; }
+  document.getElementById('btn-step2').disabled = Object.keys(O.selectedServices).length === 0;
+}
+
+// ══════════════════════════════════════
+// STEP 3 — SCOPE BUILDER
+// ══════════════════════════════════════
+function buildScopes(){
+  const c = document.getElementById('scope-blocks');
+  const t = document.getElementById('scope-total');
+  c.innerHTML = '';
+  O.scopeAccepted = {};
+  let total = 0; let govMin = 0; let govMax = 0;
+
+  Object.keys(O.selectedServices).forEach(id=>{
+    const s = SVCS[id];
+    if(!s) return;
+    total += s.fee;
+    govMin += s.govMin || 0;
+    govMax += s.govMax || 0;
+
+    const govNote = s.govMin === 0 && s.govMax === 0
+      ? 'No SIRI government fee applies for this service.'
+      : s.govMin === s.govMax
+        ? `SIRI government fee for this service: <strong>DKK ${s.govMin.toLocaleString()}</strong> — paid directly to SIRI, separate from Nordic Anchor's fee.`
+        : `SIRI government fee for this service: <strong>DKK ${s.govMin.toLocaleString()}–${s.govMax.toLocaleString()}</strong> depending on your specific route — paid directly to SIRI.`;
+
+    const div = document.createElement('div');
+    div.className = 'scope-block';
+    div.id = 'scope-'+id;
+    div.innerHTML = `
+      <div class="scope-head">
+        <span class="scope-svc-name">${s.name}</span>
+        <span class="scope-svc-fee">${s.feeNote||'DKK '+s.fee.toLocaleString()}</span>
+      </div>
+      <div class="scope-body">
+        <div class="scope-col-wrap">
+          <div>
+            <span class="scope-section-title">What's included</span>
+            ${s.includes.map(i=>`<div class="scope-line incl"><span class="scope-line-icon">✓</span><span>${i}</span></div>`).join('')}
+          </div>
+          <div>
+            <span class="scope-section-title">What's not included</span>
+            ${s.excludes.map(e=>`<div class="scope-line excl"><span class="scope-line-icon">⚠</span><span>${e}</span></div>`).join('')}
+            <div class="scope-gov-note">${govNote}</div>
+          </div>
+        </div>
+        <label class="scope-accept" id="accept-label-${id}" onclick="acceptScope('${id}')">
+          <input type="checkbox" id="accept-${id}" style="pointer-events:none;"/>
+          <span class="scope-accept-label">I have read and accept the scope for <strong>${s.name}</strong></span>
+        </label>
+      </div>`;
+    c.appendChild(div);
+  });
+
+  const govRange = govMin === govMax
+    ? `approx. DKK ${govMin.toLocaleString()}`
+    : `approx. DKK ${govMin.toLocaleString()}–${govMax.toLocaleString()}`;
+
+  t.innerHTML = `
+    <div class="scope-total-block">
+      <div>
+        <div class="scope-total-label">Nordic Anchor assistance fee total</div>
+        <div class="scope-total-note">SIRI government fees (${govRange}) are paid directly to SIRI and are not included.</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="scope-total-amount">DKK ${total.toLocaleString()}</div>
+      </div>
+    </div>`;
+
+  document.getElementById('signoff-ts').textContent = 'Signing on: '+new Date().toLocaleString('en-DK',{dateStyle:'long',timeStyle:'short'})+' (Copenhagen time)';
+  checkSignoff();
+}
+
+function acceptScope(id){
+  setTimeout(()=>{
+    const cb = document.getElementById('accept-'+id);
+    const lbl = document.getElementById('accept-label-'+id);
+    if(cb.checked){ O.scopeAccepted[id]=true; lbl.classList.add('accepted'); }
+    else { delete O.scopeAccepted[id]; lbl.classList.remove('accepted'); }
+    checkSignoff();
+  },50);
+}
+
+function checkSignoff(){
+  const name = (document.getElementById('signoff-name')?.value||'').trim();
+  O.signoffName = name;
+  const allAccepted = Object.keys(O.selectedServices).every(id => O.scopeAccepted[id]);
+  const btn = document.getElementById('btn-step3');
+  if(btn) btn.disabled = name.length < 4 || !allAccepted;
+}
+
+// ══════════════════════════════════════
+// STEP 4 → 5
+// ══════════════════════════════════════
+function advanceToPath(){
+  const first = document.getElementById('det-first').value.trim();
+  const email = document.getElementById('det-email').value.trim();
+  if(!first || !email){ alert('Please fill in at least your first name and email address.'); return; }
+  goTo('step-5');
+}
+
+// ══════════════════════════════════════
+// STEP 5 — PATH
+// ══════════════════════════════════════
+function generateRef(){
+  if(O.engRef) return;
+  const yr = new Date().getFullYear();
+  const num = String(Math.floor(1000+Math.random()*9000));
+  O.engRef = `NA-IND-${yr}-${num}`;
+  document.getElementById('eng-ref-display').textContent = O.engRef;
+  document.getElementById('eng-ref-confirm').textContent = O.engRef;
+}
+
+function selectPath(path, el){
+  document.querySelectorAll('.path-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  O.chosenPath = path;
+  document.getElementById('path-calendly').style.display = path==='consult' ? 'block' : 'none';
+  document.getElementById('path-submit-btn').style.display = path==='submit' ? 'block' : 'none';
+}
+
+// ══════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════
+function submitCase(){
+  const services = Object.keys(O.selectedServices).map(id=>SVCS[id]?.name||id).join(', ');
+  const first = document.getElementById('det-first').value;
+  const last  = document.getElementById('det-last').value;
+  const email = document.getElementById('det-email').value;
+
+  const payload = {
+    _subject: `Nordic Anchor Engagement — ${O.engRef} — ${first} ${last}`,
+    engagementRef: O.engRef,
+    signoffName: O.signoffName,
+    signoffTimestamp: new Date().toISOString(),
+    services,
+    chosenPath: O.chosenPath === 'consult' ? 'Free discovery call booked' : 'Direct submission',
+    contactFirst: first, contactLast: last, contactEmail: email,
+    contactPhone: document.getElementById('det-phone').value,
+    dateOfBirth: document.getElementById('det-dob').value,
+    nationality: document.getElementById('det-nat').value,
+    address: document.getElementById('det-address').value,
+    employer: document.getElementById('det-employer').value,
+    targetDate: document.getElementById('det-start').value,
+    currentPermit: document.getElementById('det-permit').value,
+    permitExpiry: document.getElementById('det-expiry').value,
+    notes: document.getElementById('det-notes').value,
+    gdprConsent: 'confirmed', termsConsent: 'confirmed',
+  };
+
+  fetch('https://formspree.io/f/xpqknroj',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(payload)
+  }).finally(()=>{
+    const rows=[
+      ['Engagement ref', O.engRef],
+      ['Services', services],
+      ['Name', `${first} ${last}`],
+      ['Email', email],
+      ['Next step', O.chosenPath==='consult' ? 'Free 15-min discovery call booked — confirmation sent to your email' : 'Nordic Anchor will be in touch within 1 business day with case confirmation and invoice'],
+      ['Signed by', O.signoffName],
+      ['Signed at', new Date().toLocaleString('en-DK',{dateStyle:'long',timeStyle:'short'})],
+    ];
+    document.getElementById('confirm-summary').innerHTML =
+      `<table class="summary-table">${rows.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>`;
+    goTo('step-6');
+  });
+}
+
+// Init
+updateProgress();
+
+// ══════════════════════════════════════
+// PERMIT / EXPIRY FIELD LOGIC
+// ══════════════════════════════════════
+function toggleExpiryField(){
+  const permit = document.getElementById('det-permit').value;
+  const expiry = document.getElementById('det-expiry');
+  const hint   = document.getElementById('expiry-hint');
+  const noPermit = permit === '' || permit === 'not-applicable';
+  expiry.disabled = noPermit;
+  expiry.style.opacity = noPermit ? '0.4' : '1';
+  expiry.style.cursor  = noPermit ? 'not-allowed' : 'auto';
+  if(noPermit) expiry.value = '';
+}
+</script>
+</body>
+</html>
