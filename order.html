@@ -134,9 +134,9 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--bg);color:var(--tex
 .signoff-box{border:1px solid var(--border-strong);background:var(--signoff-bg);padding:28px;margin-top:8px;transition:background .3s;}
 .signoff-intro{font-size:13px;color:var(--body);line-height:1.8;margin-bottom:22px;}
 .signoff-intro strong{color:var(--text);}
-.signoff-name-input{width:100%;font-family:'Newsreader',Georgia,serif;font-size:20px;font-style:italic;color:var(--text);background:transparent;border:none;border-bottom:2px solid var(--gold-dk);padding:10px 0;outline:none;letter-spacing:.02em;transition:border-color .2s;}
+.signoff-name-input{width:100%;font-family:'Newsreader',Georgia,serif;font-size:20px;font-style:italic;color:var(--text);background:var(--bg-input);border:2px solid var(--gold-dk);padding:14px 18px;outline:none;letter-spacing:.02em;transition:border-color .2s,box-shadow .2s;display:block;}
 .signoff-name-input::placeholder{color:var(--muted);font-style:italic;}
-.signoff-name-input:focus{border-bottom-color:var(--gold-eye);}
+.signoff-name-input:focus{border-color:var(--gold-eye);box-shadow:0 0 0 3px rgba(218,165,32,0.15);}
 .signoff-ts{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;}
 
 /* ── FIELDS ──────────────────────────────────────────────────────── */
@@ -313,7 +313,8 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--bg);color:var(--tex
       By entering your full legal name below, you confirm that you have read and accepted the scope of each service above, that you are instructing Nordic Anchor to act on your behalf, and that you accept the fees and exclusions as stated. This is your formal written instruction to commence work on your case.<br/><br/>
       A timestamped copy of this scope confirmation will be sent to your email address for your records.
     </p>
-    <input type="text" class="signoff-name-input" id="signoff-name" placeholder="Type your full legal name exactly as it appears on your passport…" oninput="checkSignoff()"/>
+    <label style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dk);display:block;margin-bottom:8px;font-weight:500;">✍ Your full legal name</label>
+    <input type="text" class="signoff-name-input" id="signoff-name" placeholder="e.g. John Alexander Doe" oninput="checkSignoff()"/>
     <div class="field-hint" style="margin-top:10px;">Please enter your name exactly as it appears on your passport or official identification.</div>
     <div class="signoff-ts" id="signoff-ts"></div>
   </div>
