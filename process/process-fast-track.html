@@ -70,23 +70,55 @@ body{
 .nav-back::before{content:'←';font-size:13px;color:var(--gold);}
 .nav-back:hover{color:var(--ink);border-color:var(--gold-line);background:var(--gold-soft);}
 .nav-right{display:flex;align-items:center;gap:14px;}
-.nav-logo{height:32px;width:auto;display:block;opacity:.95;}
+.nav-logo-wrap{
+  display:flex;align-items:center;justify-content:center;
+  padding:6px 14px;border-radius:999px;
+  transition:background-color .25s,box-shadow .25s;
+}
+:root[data-theme="dark"] .nav-logo-wrap{
+  background:rgba(245,242,234,0.06);
+  box-shadow:inset 0 0 0 1px rgba(212,184,120,0.18),
+             0 0 24px -8px rgba(212,184,120,0.35);
+}
+:root[data-theme="light"] .nav-logo-wrap{
+  background:transparent;
+}
+.nav-logo{height:40px;width:auto;display:block;}
 
-/* THEME TOGGLE */
+/* THEME TOGGLE — sun/moon switch */
 .theme-toggle{
-  width:52px;height:28px;border-radius:999px;
+  width:56px;height:30px;border-radius:999px;
   background:var(--bg-inset);border:1px solid var(--line-2);
   position:relative;cursor:pointer;padding:0;
   transition:background-color .25s,border-color .25s;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 7px;
+}
+.theme-toggle::before,
+.theme-toggle::after{
+  font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;
+  font-size:11px;line-height:1;z-index:1;pointer-events:none;
+  transition:opacity .2s;
+}
+.theme-toggle::before{
+  content:'\2600';color:var(--gold-2);font-size:13px;
+  opacity:1;
 }
 .theme-toggle::after{
-  content:'';position:absolute;top:2px;left:2px;
-  width:22px;height:22px;border-radius:50%;
+  content:'\263D';color:var(--ink-3);font-size:11px;
+  opacity:.55;
+}
+:root[data-theme="dark"] .theme-toggle::before{opacity:.4;}
+:root[data-theme="dark"] .theme-toggle::after{opacity:1;color:var(--gold);}
+.theme-toggle .toggle-knob{
+  position:absolute;top:3px;left:3px;
+  width:24px;height:24px;border-radius:50%;
   background:var(--gold);
   transition:transform .28s cubic-bezier(.4,0,.2,1),background-color .25s;
   box-shadow:var(--shadow-sm);
 }
-:root[data-theme="dark"] .theme-toggle::after{transform:translateX(24px);}
+:root[data-theme="dark"] .theme-toggle .toggle-knob{transform:translateX(26px);}
+.theme-toggle:hover{border-color:var(--gold-line);}
 
 /* ─── HERO ──────────────────────────────────────────────────────── */
 .hero{
@@ -140,6 +172,33 @@ body{
 .rbtn-s{font-size:11px;font-weight:400;color:var(--ink-3);}
 .rbtn.active .rbtn-s{color:var(--ink-2);}
 @media(max-width:520px){.route-row{flex-direction:column;}}
+
+/* Collapsed route summary */
+.route-summary{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:10px;
+  background:var(--bg-soft);border:1px solid var(--line);
+  font-size:13px;
+  flex-wrap:wrap;
+}
+.route-summary-lbl{
+  font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.route-summary-val{
+  font-weight:500;color:var(--ink);
+  flex:1;min-width:120px;
+}
+.route-change-btn{
+  background:none;border:1px solid var(--gold-line);
+  color:var(--gold);
+  font-size:11px;font-weight:500;letter-spacing:.04em;
+  padding:6px 12px;border-radius:6px;cursor:pointer;
+  transition:all .18s ease;font-family:inherit;
+}
+.route-change-btn:hover{
+  background:var(--gold-soft);border-color:var(--gold);color:var(--gold);
+}
 
 /* ─── PROGRESS ──────────────────────────────────────────────────── */
 .prog-sec{padding:24px 0 14px;}
@@ -373,6 +432,62 @@ body{
 }
 .tracking-tip-icon{color:var(--gold);font-size:16px;flex-shrink:0;margin-top:1px;font-weight:600;}
 
+/* Journey overview — special editorial block on the intro stage */
+.journey-overview{
+  background:linear-gradient(180deg,var(--bg-soft) 0%,var(--bg-elev) 100%);
+  border:1px solid var(--gold-line);
+  border-radius:14px;padding:24px 26px;margin-bottom:22px;
+  position:relative;
+}
+.journey-overview::before{
+  content:'';position:absolute;top:0;left:24px;right:24px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  border-radius:2px;
+}
+.journey-overview-hdr{
+  margin-bottom:18px;padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+.journey-overview-lbl{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:22px;font-weight:400;letter-spacing:-.02em;
+  color:var(--ink);margin-bottom:4px;line-height:1.2;
+}
+.journey-overview-sub{
+  font-family:'Newsreader',Georgia,serif;font-style:italic;
+  font-size:13px;color:var(--ink-3);
+}
+.journey-overview-list{display:flex;flex-direction:column;gap:14px;}
+.journey-overview-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:6px 0;
+  position:relative;
+}
+.journey-overview-item:not(:last-child)::after{
+  content:'';position:absolute;
+  left:14px;top:36px;bottom:-14px;
+  width:1px;background:var(--gold-line);opacity:.5;
+}
+.journey-overview-num{
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:var(--gold);color:#fff;
+  font-size:12px;font-weight:600;
+  font-family:'Inter',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  z-index:1;position:relative;
+  box-shadow:0 0 0 3px var(--bg-elev),0 0 0 4px var(--gold-line);
+}
+.journey-overview-body{flex:1;padding-top:1px;}
+.journey-overview-stage{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:15px;font-weight:500;
+  color:var(--gold);
+  margin-bottom:3px;letter-spacing:.005em;
+}
+.journey-overview-desc{
+  font-size:13.5px;color:var(--ink-2);line-height:1.55;
+}
+
 /* Rich reloc CTA \u2014 sales-forward */
 .reloc-cta-rich{
   background:linear-gradient(135deg,var(--gold-soft) 0%,var(--bg-elev) 60%);
@@ -515,8 +630,8 @@ body{
 <nav class="nav">
   <a href="../services/individuals-family.html" class="nav-back">Services</a>
   <div class="nav-right">
-    <img class="nav-logo" id="nav-logo" src="/logo-transparent.png" alt="Nordic Anchor"/>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme"></button>
+    <span class="nav-logo-wrap"><img class="nav-logo" id="nav-logo" src="/logo-transparent.png" alt="Nordic Anchor"/></span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme"><span class="toggle-knob"></span></button>
   </div>
 </nav>
 
@@ -527,10 +642,10 @@ body{
 </div>
 
 <main class="main">
-  <div class="route-sec">
-    <div class="section-lbl">Select your starting situation</div>
-    <div class="route-row">
-      <button class="rbtn active" id="btn-abroad">
+  <div class="route-sec" id="route-sec">
+    <div class="section-lbl" id="route-lbl">Select your starting situation</div>
+    <div class="route-row" id="route-row">
+      <button class="rbtn" id="btn-abroad">
         <span class="rbtn-t">Applicant is abroad</span>
         <span class="rbtn-s">New arrival to Denmark · Most common</span>
       </button>
@@ -538,6 +653,11 @@ body{
         <span class="rbtn-t">Applicant is in Denmark</span>
         <span class="rbtn-s">Already on a valid permit · Switching jobs</span>
       </button>
+    </div>
+    <div class="route-summary" id="route-summary" style="display:none;">
+      <span class="route-summary-lbl">Viewing:</span>
+      <span class="route-summary-val" id="route-summary-val"></span>
+      <button class="route-change-btn" id="route-change-btn" type="button">Change \u2192</button>
     </div>
   </div>
 
@@ -686,8 +806,12 @@ window.addEventListener('DOMContentLoaded',function(){
 
   document.getElementById('btn-abroad').classList.toggle('active',route==='abroad');
   document.getElementById('btn-indk').classList.toggle('active',route==='indk');
-  document.getElementById('btn-abroad').addEventListener('click',function(){setRoute('abroad');});
-  document.getElementById('btn-indk').addEventListener('click',function(){setRoute('indk');});
+  document.getElementById('btn-abroad').addEventListener('click',function(){setRoute('abroad');collapseRoute();});
+  document.getElementById('btn-indk').addEventListener('click',function(){setRoute('indk');collapseRoute();});
+
+  // Route picker: start collapsed; user can click "Change" to reopen
+  collapseRoute();
+  document.getElementById('route-change-btn').addEventListener('click',expandRoute);
 
   document.getElementById('themeToggle').addEventListener('click',function(){
     var cur=document.documentElement.getAttribute('data-theme');
@@ -711,6 +835,19 @@ function setRoute(r){
   var steps=getSteps();
   if(open!==null&&open>=steps.length) open=null;
   renderStrip(); renderPanel(); updateProgress();
+}
+
+function collapseRoute(){
+  document.getElementById('route-row').style.display='none';
+  document.getElementById('route-lbl').style.display='none';
+  document.getElementById('route-summary').style.display='flex';
+  document.getElementById('route-summary-val').textContent =
+    route==='abroad' ? 'Applicant is abroad — new arrival to Denmark' : 'Applicant is in Denmark — already on a valid permit';
+}
+function expandRoute(){
+  document.getElementById('route-row').style.display='';
+  document.getElementById('route-lbl').style.display='';
+  document.getElementById('route-summary').style.display='none';
 }
 
 function updateProgress(){
@@ -802,11 +939,27 @@ function renderPanel(){
     var sec=s.sections[si];
 
     if(sec.type==='overview'){
-      bodyHtml+='<div class="doc-box"><div class="doc-lbl">Your 5-stage journey</div>';
+      bodyHtml+='<div class="journey-overview">'+
+        '<div class="journey-overview-hdr">'+
+          '<div class="journey-overview-lbl">Your 5-stage journey</div>'+
+          '<div class="journey-overview-sub">A snapshot of how it unfolds from here</div>'+
+        '</div>'+
+        '<div class="journey-overview-list">';
+      // Map item index to short stage label for visual reinforcement
+      var stageLabels=['Introduction','Documents','Application & biometrics','Approval','Arrival in Denmark'];
       for(var k=0;k<sec.items.length;k++){
-        bodyHtml+='<div class="ditem"><div class="dn">'+(k+1)+'</div><span>'+e(sec.items[k])+'</span></div>';
+        var stageLabel = stageLabels[k] || ('Stage '+(k+1));
+        // Strip "Stage N: " prefix from item if present, since we display the stage label visually
+        var itemTxt = sec.items[k].replace(/^Stage \d+:\s*[^—]+—\s*/,'');
+        bodyHtml+='<div class="journey-overview-item">'+
+          '<div class="journey-overview-num">'+(k+1)+'</div>'+
+          '<div class="journey-overview-body">'+
+            '<div class="journey-overview-stage">'+e(stageLabel)+'</div>'+
+            '<div class="journey-overview-desc">'+e(itemTxt)+'</div>'+
+          '</div>'+
+        '</div>';
       }
-      bodyHtml+='</div>';
+      bodyHtml+='</div></div>';
     }
 
     if(sec.type==='docs'){
