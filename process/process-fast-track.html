@@ -207,19 +207,23 @@ body{
 .sitem.done .snum{color:var(--gold);border-color:var(--gold-line);}
 .sitem.now .snum,.sitem.selected .snum{background:var(--gold);color:#fff;border-color:var(--gold);}
 .slabel{
-  font-size:10px;font-weight:500;text-align:center;line-height:1.35;color:var(--ink-4);
-  max-width:108px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;
+  font-family:'Newsreader',Georgia,serif;
+  font-size:14px;font-weight:400;text-align:center;line-height:1.25;color:var(--ink-3);
+  max-width:140px;overflow:visible;text-overflow:initial;white-space:normal;width:100%;
+  letter-spacing:.005em;
   transition:color .2s,font-weight .2s;
+  margin-top:2px;
 }
-.sitem.done .slabel{color:var(--ink-3);}
-.sitem.now .slabel,.sitem.selected .slabel{color:var(--gold)!important;font-weight:600;}
+.sitem.done .slabel{color:var(--ink-2);font-weight:400;}
+.sitem.now .slabel,.sitem.selected .slabel{color:var(--gold)!important;font-weight:500;}
+.sitem.next .slabel{color:var(--ink-3);font-weight:400;}
 .sarrow{display:flex;align-items:center;padding-bottom:46px;flex-shrink:0;width:14px;}
 .sarrow-inner{width:14px;height:1px;background:var(--gold-line);}
 
 @media(max-width:640px){
   .sframe{width:62px;height:62px;border-radius:12px;}
   .snum{width:18px;height:18px;font-size:9px;bottom:3px;right:3px;}
-  .slabel{font-size:9px;max-width:62px;}
+  .slabel{font-size:12px;max-width:78px;line-height:1.2;}
   .sarrow{width:6px;}
   .strip::before{top:32px;left:32px;right:32px;}
 }
@@ -369,6 +373,132 @@ body{
 }
 .tracking-tip-icon{color:var(--gold);font-size:16px;flex-shrink:0;margin-top:1px;font-weight:600;}
 
+/* Rich reloc CTA \u2014 sales-forward */
+.reloc-cta-rich{
+  background:linear-gradient(135deg,var(--gold-soft) 0%,var(--bg-elev) 60%);
+  border:1px solid var(--gold-line);
+  border-radius:14px;
+  padding:24px 26px;margin-top:20px;margin-bottom:6px;
+  position:relative;overflow:hidden;
+}
+.reloc-cta-rich::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold-2),var(--gold));
+}
+.reloc-lbl-rich{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:20px;font-weight:400;letter-spacing:-.01em;
+  color:var(--ink);margin-bottom:8px;
+}
+.reloc-intro{
+  font-size:14px;color:var(--ink-2);line-height:1.65;
+  margin-bottom:16px;font-family:'Newsreader',Georgia,serif;font-style:italic;
+}
+.reloc-services{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;
+  margin-bottom:20px;
+}
+@media(max-width:600px){.reloc-services{grid-template-columns:1fr;}}
+.reloc-service{
+  display:flex;gap:9px;align-items:flex-start;
+  font-size:13px;color:var(--ink-2);line-height:1.5;
+}
+.reloc-service strong{color:var(--ink);font-weight:500;}
+.reloc-check{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  background:var(--gold);color:#fff;
+  font-size:11px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.reloc-cta-row{
+  display:flex;align-items:center;gap:14px;
+  padding-top:14px;border-top:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.reloc-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gold);color:#fff!important;
+  font-size:13px;font-weight:500;
+  padding:10px 18px;border-radius:8px;
+  text-decoration:none!important;border:none!important;
+  transition:all .18s ease;
+  box-shadow:var(--shadow-sm);
+}
+.reloc-btn:hover{background:var(--gold-2);box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.reloc-meta{
+  font-size:12px;color:var(--ink-3);font-style:italic;
+  font-family:'Newsreader',Georgia,serif;
+}
+
+/* Highlighted doc-box for personalised biometrics */
+.doc-box-highlight{
+  background:linear-gradient(135deg,var(--gold-soft) 0%,var(--bg-soft) 60%);
+  border:1px solid var(--gold-line);
+  position:relative;
+}
+.doc-box-highlight::before{
+  content:'PERSONALISED FOR YOU';
+  position:absolute;top:14px;right:18px;
+  font-size:9px;font-weight:600;letter-spacing:.16em;
+  color:var(--gold);
+  background:var(--bg-elev);padding:3px 8px;border-radius:999px;
+  border:1px solid var(--gold-line);
+}
+
+/* Personal info card */
+.bio-personal-card{
+  background:var(--bg-elev);
+  border:1px solid var(--gold-line);
+  border-radius:10px;padding:14px 18px;margin-bottom:16px;margin-top:10px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.bio-personal-row{
+  display:flex;gap:14px;align-items:flex-start;
+  padding-bottom:10px;border-bottom:1px solid var(--line);
+}
+.bio-personal-row:last-child{border-bottom:none;padding-bottom:0;}
+.bio-personal-key{
+  flex-shrink:0;width:70px;
+  font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);padding-top:2px;
+}
+.bio-personal-val{flex:1;font-size:14px;color:var(--ink);line-height:1.55;}
+.bio-personal-val strong{color:var(--ink);font-weight:500;}
+.bio-addr{font-size:13px;color:var(--ink-2);font-style:italic;}
+.bio-book-btn{
+  display:inline-flex;align-items:center;
+  background:var(--gold);color:#fff!important;
+  font-size:13px;font-weight:500;
+  padding:9px 16px;border-radius:8px;
+  text-decoration:none!important;border:none!important;
+  transition:all .18s ease;
+  box-shadow:var(--shadow-sm);
+}
+.bio-book-btn:hover{background:var(--gold-2);box-shadow:var(--shadow-md);transform:translateY(-1px);}
+
+/* Generic biometrics outline for organic visitors */
+.bio-intro{
+  font-family:'Newsreader',Georgia,serif;font-style:italic;
+  font-size:14px;color:var(--ink-2);line-height:1.65;
+  margin-bottom:14px;
+}
+.bio-paths{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+.bio-path{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:12px 14px;border-radius:10px;
+  background:var(--bg-elev);border:1px solid var(--line);
+}
+.bio-path-num{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  background:var(--gold-soft);color:var(--gold);
+  font-size:12px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--gold-line);margin-top:1px;
+}
+.bio-path-body{font-size:13px;color:var(--ink-2);line-height:1.6;flex:1;}
+.bio-path-body strong{color:var(--ink);font-weight:500;}
+
 /* FOOTER */
 .guide-footer{
   text-align:center;padding:32px 24px 56px;
@@ -498,25 +628,26 @@ var ALL_STEPS=[
       ]},
       {type:'bio',abroad:true},
       {type:'bio',abroad:false},
-      {type:'na',text:"We monitor your SIRI Case Order ID and handle any queries SIRI may raise on your behalf."},
-      {type:'tip',text:"SIRI actively prioritises applications where the start date is approaching. If timing is tight, please let us know as early as possible."}
+      {type:'na',text:"We monitor your case with SIRI throughout the processing period and coordinate any basic queries SIRI may raise on your behalf, keeping you informed at every stage."},
+      {type:'tip',text:"At intake, we review your intended start date against current SIRI processing times and flag any tight timelines upfront \u2014 so you know what\u2019s realistic before we proceed."}
     ]
   },
   {
     key:'approval',label:'Approval',title:'Permit approved',time:'Typically 1\u20134 weeks after biometrics',abroadOnly:false,
-    lead:"SIRI issues their decision and we receive it directly. We\u2019ll notify you and your employer the same day.",
+    lead:"SIRI issues their decision and we receive it directly. We\u2019ll notify you the same day with the decision letter attached. If your employer has separately authorised us to communicate with them, we\u2019ll also send them a copy of the permit.",
     sections:[
       {type:'docs',label:'On approval',items:[
-        {text:"We receive your decision letter (also called: ruling letter, permit letter, approval letter) via our Eboks account"},
-        {text:"We send you a confirmation with the decision letter attached"},
-        {text:"Your residence card will be sent by post to your registered Danish address within 2\u20134 weeks"}
+        {text:"We receive your decision letter (also called: ruling letter, permit letter, approval letter) via our Eboks account on the same day SIRI issues it"},
+        {text:"We send you a confirmation email with the decision letter attached, along with onward instructions"},
+        {text:"Your physical residence card (pink) will be sent by post to your registered Danish residence address within 4\u20138 weeks of CPR registration"}
       ]},
-      {type:'gk',label:'Good to know \u2014 your residence card',items:[
-        "Your card is sent to your CPR-registered address in Denmark. If you\u2019re in temporary accommodation (serviced apartments, hotels), confirm in advance that the address permits CPR registration \u2014 most do not.",
-        "Without a CPR-registered address, your CPR number cannot be activated. Without an active CPR number you cannot access Danish health insurance or open a Danish bank account to receive your salary.",
+      {type:'gk',label:'Good to know \u2014 your residence card and health card',items:[
+        "Your <strong>pink residence card</strong> is sent by post to your CPR-registered address in Denmark within 4\u20138 weeks of completing CPR registration. The card itself is your proof of legal residence and right to work \u2014 carry a digital copy on your phone for the first weeks until it arrives.",
+        "Your <strong>yellow health insurance card (sundhedskort)</strong> arrives by post separately, also after CPR registration is complete \u2014 typically within 2\u20133 weeks. It gives you full access to the Danish public healthcare system, including a registered family doctor (egen l\u00e6ge) of your choice.",
+        "If you\u2019re in temporary accommodation (serviced apartments, hotels, Airbnbs), confirm in advance that the address permits CPR registration \u2014 most temporary accommodation does <em>not</em>. Without a CPR-registered address, neither card can be issued.",
         "If family members are joining you, their permits typically follow 4\u20136 weeks after yours."
       ]},
-      {type:'na',text:"We notify your employer separately with the confirmed permit details and start date. We set a renewal reminder 90 days before your permit expires."},
+      {type:'na',text:"We set a renewal reminder 90 days before your permit expires so you have plenty of time to plan ahead. If your employer has authorised us to liaise with them, we also keep them updated on permit details and start dates."},
       {type:'tip',text:"The CPR number is your Danish social security / national ID number. Activating it is the first priority on arrival."}
     ]
   },
@@ -525,9 +656,11 @@ var ALL_STEPS=[
     lead:"Your permit is sorted. Everything you need to settle in Denmark smoothly \u2014 Nordic Anchor can assist with all of it.",
     sections:[
       {type:'gk',label:'Good to know \u2014 settling in',items:[
-        "CPR registration at your local municipality (kommune) \u2014 this activates your Danish social security number and is required for health insurance, banking, and most administrative tasks",
-        "Opening a Danish bank account \u2014 required to receive your Danish salary",
-        "Activating your national health insurance card \u2014 arrives by post after CPR registration"
+        "<strong>CPR registration</strong> at your local municipality (kommune) \u2014 this is your first and most important step on arrival. It activates your Danish social security number and is required for everything that follows: health insurance, banking, tax registration, and most administrative tasks.",
+        "<strong>Yellow health card</strong> \u2014 once your CPR is registered, your sundhedskort arrives by post within 2\u20133 weeks. No separate activation step is needed \u2014 receiving the card means you\u2019re registered with the Danish public health system.",
+        "<strong>Pink residence card</strong> \u2014 your physical residence permit card arrives by post within 4\u20138 weeks of CPR registration. Carry your passport and digital permit confirmation in the meantime.",
+        "<strong>Danish bank account</strong> \u2014 required to receive your Danish salary. Your CPR number plus your residence card or passport will be needed to open one. We recommend Lunar, Nordea, Danske Bank, or Nykredit for new residents.",
+        "<strong>MitID</strong> \u2014 Denmark\u2019s digital identity system. Set this up as soon as your CPR is active \u2014 you\u2019ll need it for nearly every official, financial, and healthcare service in Denmark."
       ]},
       {type:'reloc'},
       {type:'tip',text:"Questions after arrival? Reply to any email from us or book a call at calendly.com/nordic-anchor \u2014 we\u2019re always here."}
@@ -695,17 +828,45 @@ function renderPanel(){
       if(!sec.abroad && isAbroad) continue;
 
       if(isAbroad){
-        bodyHtml+='<div class="doc-box"><div class="doc-lbl">Biometrics \u2014 applicant abroad</div>';
-        bodyHtml+='<div class="ditem"><div class="dn">1</div><span>Go to <a href="https://um.dk/en/travel-and-residence/where-to-apply" target="_blank">um.dk/en/travel-and-residence/where-to-apply</a> and find your country of residence</span></div>';
-        bodyHtml+='<div class="ditem"><div class="dn">2</div><span>Look for <strong>"Residence and work permit (long stay visa)"</strong> \u2014 the exact wording may vary by country</span></div>';
-        bodyHtml+='<div class="ditem"><div class="dn">3</div><span>Follow the link to book your appointment at either: a VFS Global centre, a Danish embassy, or a Norwegian embassy (if Denmark has a representation agreement with Norway for your country)</span></div>';
-        bodyHtml+='<div class="ditem"><div class="dn">4</div><span>Attend your appointment. Bring: your passport, all application documents, and passport-style photos. Pay the VFS/embassy fee on the day (approx. \u20ac250 at VFS \u2014 embassy fees vary)</span></div>';
-        bodyHtml+='</div>';
-        bodyHtml+='<div class="gk-box"><div class="gk-lbl">Three scenarios \u2014 which applies to you?</div>';
-        bodyHtml+='<div class="gk-item"><div class="gk-dot"></div><span><strong>VFS Global centre</strong> \u2014 most common. Book online, attend in person, biometrics recorded on the day. Nordic Anchor will send you the direct booking link for your country.</span></div>';
-        bodyHtml+='<div class="gk-item"><div class="gk-dot"></div><span><strong>Danish embassy</strong> \u2014 where no VFS centre exists. Contact the embassy directly to book. Process varies by location.</span></div>';
-        bodyHtml+='<div class="gk-item"><div class="gk-dot"></div><span><strong>Norwegian embassy (identity verification only)</strong> \u2014 for countries where Denmark has a representation agreement with Norway. You visit the Norwegian embassy only for identity verification. Biometrics are then recorded at a SIRI branch office within 2 weeks of arriving in Denmark.</span></div>';
-        bodyHtml+='</div>';
+        // Read personalisation params
+        var bioCountry  = getParam('country');     // e.g. "United States"
+        var bioCenter   = getParam('biocenter');   // e.g. "VFS Global New York"
+        var bioUrl      = getParam('biourl');      // booking URL
+        var bioAddr     = getParam('bioaddr');     // street address
+        var bioFee      = getParam('biofee');      // numeric, e.g. "185"
+        var bioCurrency = getParam('biocurrency') || 'USD';
+        var bioScenario = getParam('bioscenario'); // 'vfs' | 'embassy' | 'norway'
+
+        var hasPersonalised = bioCountry && bioCenter && bioUrl;
+
+        if(hasPersonalised){
+          // PERSONALISED, applicant-specific
+          bodyHtml+='<div class="doc-box doc-box-highlight"><div class="doc-lbl">Your biometrics appointment \u2014 '+e(bioCountry)+'</div>';
+          bodyHtml+='<div class="bio-personal-card">';
+          bodyHtml+='<div class="bio-personal-row"><span class="bio-personal-key">Where</span><span class="bio-personal-val"><strong>'+e(bioCenter)+'</strong>'+(bioAddr?'<br><span class="bio-addr">'+e(bioAddr)+'</span>':'')+'</span></div>';
+          if(bioFee){
+            bodyHtml+='<div class="bio-personal-row"><span class="bio-personal-key">Fee</span><span class="bio-personal-val">Approx. '+e(bioFee)+' '+e(bioCurrency)+' \u2014 paid on the day at the appointment</span></div>';
+          }
+          bodyHtml+='<div class="bio-personal-row"><span class="bio-personal-key">Book</span><span class="bio-personal-val"><a href="'+e(bioUrl)+'" target="_blank" rel="noopener" class="bio-book-btn">Book your appointment \u2192</a></span></div>';
+          bodyHtml+='</div>';
+          bodyHtml+='<div class="ditem"><div class="dn">1</div><span>Use the booking link above to reserve a date and time at <strong>'+e(bioCenter)+'</strong></span></div>';
+          bodyHtml+='<div class="ditem"><div class="dn">2</div><span>Attend in person on the day. <strong>Bring:</strong> your passport (original), all application documents we have provided to you, and 2 passport-style photos taken within the last 3 months</span></div>';
+          bodyHtml+='<div class="ditem"><div class="dn">3</div><span>Pay the fee at the appointment\u2014 most centres accept card and cash. Some VFS centres charge additional service or courier fees.</span></div>';
+          bodyHtml+='<div class="ditem"><div class="dn">4</div><span>Send us a copy of the appointment confirmation as soon as you receive it</span></div>';
+          if(bioScenario === 'norway'){
+            bodyHtml+='<div class="ditem"><div class="dn">!</div><span><strong>Note for Norway representation:</strong> Denmark uses Norway\u2019s embassy in your country only for identity verification. Your biometrics will then be re-recorded at a SIRI branch office <em>after</em> you arrive in Denmark, within 14 days of arrival.</span></div>';
+          }
+          bodyHtml+='</div>';
+        } else {
+          // GENERIC fallback for organic / SEO traffic
+          bodyHtml+='<div class="doc-box"><div class="doc-lbl">Biometrics \u2014 applicant abroad</div>';
+          bodyHtml+='<p class="bio-intro">Once your application is submitted, biometrics (fingerprints and a digital photograph) must be recorded before SIRI can begin processing your case. The exact procedure depends on your country of residence.</p>';
+          bodyHtml+='<div class="bio-paths"><div class="bio-path"><div class="bio-path-num">1</div><div class="bio-path-body"><strong>VFS Global centre</strong> \u2014 the most common path. Available in around 80 countries. You book online, attend in person, biometrics are recorded on the day. The fee is typically &euro;200\u2013&euro;260 (paid in local currency).</div></div>';
+          bodyHtml+='<div class="bio-path"><div class="bio-path-num">2</div><div class="bio-path-body"><strong>Danish embassy or consulate</strong> \u2014 where no VFS centre exists. You contact the embassy directly to book. Process and fees vary by location.</div></div>';
+          bodyHtml+='<div class="bio-path"><div class="bio-path-num">3</div><div class="bio-path-body"><strong>Norwegian embassy (representation)</strong> \u2014 in countries where Denmark has a representation agreement with Norway, you visit the Norwegian embassy for identity verification only. Biometrics are then recorded at a SIRI branch office within 14 days of arrival in Denmark.</div></div></div>';
+          bodyHtml+='<div class="na-box"><span class="na-lbl">What we do for you</span>Once your case is opened with us, we identify exactly which path applies to your country of residence, locate the nearest centre or embassy, and send you a personalised guide with the direct booking link, address, fee in your local currency, and a checklist of what to bring \u2014 so you don\u2019t have to navigate any of this yourself.</div>';
+          bodyHtml+='</div>';
+        }
       } else {
         bodyHtml+='<div class="doc-box"><div class="doc-lbl">Biometrics \u2014 applicant in Denmark</div>';
         bodyHtml+='<div class="ditem"><div class="dn">1</div><span>Book an appointment at a SIRI branch office \u2014 this must happen within 14 days of submission</span></div>';
@@ -723,13 +884,32 @@ function renderPanel(){
     if(sec.type==='gk'){
       bodyHtml+='<div class="gk-box"><div class="gk-lbl">'+e(sec.label)+'</div>';
       for(var k=0;k<sec.items.length;k++){
-        bodyHtml+='<div class="gk-item"><div class="gk-dot"></div><span>'+e(sec.items[k])+'</span></div>';
+        // Escape, then restore the small set of safe inline tags we deliberately use in our copy
+        var safeItem=e(sec.items[k])
+          .replace(/&lt;strong&gt;/g,'<strong>').replace(/&lt;\/strong&gt;/g,'</strong>')
+          .replace(/&lt;em&gt;/g,'<em>').replace(/&lt;\/em&gt;/g,'</em>');
+        bodyHtml+='<div class="gk-item"><div class="gk-dot"></div><span>'+safeItem+'</span></div>';
       }
       bodyHtml+='</div>';
     }
 
     if(sec.type==='reloc'){
-      bodyHtml+='<div class="reloc-cta"><span class="reloc-lbl">Nordic Anchor can help</span>Settling into Denmark involves a handful of essential administrative steps \u2014 CPR registration, opening a bank account, and activating your health insurance card. If you\u2019d like our assistance with any of these, <a href="mailto:rd@nordicanchor.dk">get in touch</a> and we\u2019ll walk you through it.</div>';
+      bodyHtml+='<div class="reloc-cta-rich">'+
+        '<div class="reloc-lbl-rich">Need a hand getting set up?</div>'+
+        '<p class="reloc-intro">Settling in is faster, smoother, and less stressful with someone who knows the system. Our relocation service handles the practical work so you can focus on starting your new life in Denmark.</p>'+
+        '<div class="reloc-services">'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>CPR registration</strong> \u2014 we book your kommune appointment, prepare every document, and accompany you if needed</span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Bank account opening</strong> \u2014 we recommend the right bank for your situation, prepare your application, and liaise with the bank on your behalf</span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>MitID setup</strong> \u2014 the gateway to all Danish digital services, set up correctly first time</span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Tax card (skattekort)</strong> \u2014 ensures you\u2019re taxed correctly from day one</span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Family registration</strong> \u2014 spouse and children added to CPR, schools, and public health</span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Housing search support</strong> \u2014 navigating Denmark\u2019s rental market, deposits, and contracts</span></div>'+
+        '</div>'+
+        '<div class="reloc-cta-row">'+
+          '<a href="mailto:rd@nordicanchor.dk?subject=Relocation%20assistance%20enquiry" class="reloc-btn">Get in touch \u2192</a>'+
+          '<span class="reloc-meta">Or reply to any email from us \u2014 we\u2019re here to help.</span>'+
+        '</div>'+
+      '</div>';
     }
 
     if(sec.type==='tip'){
