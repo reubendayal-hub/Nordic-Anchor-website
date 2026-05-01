@@ -22,8 +22,8 @@
   --shadow-md:0 2px 4px rgba(30,47,74,0.04),0 8px 24px rgba(30,47,74,0.08);
   --shadow-lg:0 4px 12px rgba(30,47,74,0.06),0 16px 40px rgba(30,47,74,0.10);
   --img-now:brightness(1) saturate(1) contrast(1);
-  --img-done:brightness(0.95) saturate(0.55) contrast(0.95);
-  --img-next:brightness(0.98) saturate(0.4) contrast(0.92);
+  --img-done:brightness(0.96) saturate(0.3) contrast(0.95) opacity(0.62);
+  --img-next:brightness(0.98) saturate(0.2) contrast(0.92) opacity(0.5);
   --halo:rgba(184,154,106,0.18);
 }
 :root[data-theme="dark"]{
@@ -44,8 +44,8 @@
   --shadow-md:0 4px 14px -2px rgba(60,40,15,0.20),0 8px 28px -4px rgba(60,40,15,0.18);
   --shadow-lg:0 6px 20px -4px rgba(60,40,15,0.22),0 18px 48px -6px rgba(60,40,15,0.25);
   --img-now:brightness(1) saturate(1);
-  --img-done:brightness(0.72) saturate(0.7);
-  --img-next:brightness(0.5) saturate(0.5);
+  --img-done:brightness(0.78) saturate(0.35) contrast(0.9) opacity(0.65);
+  --img-next:brightness(0.62) saturate(0.25) contrast(0.85) opacity(0.55);
   --halo:rgba(230,201,138,0.28);
 }
 :root[data-theme="light"]{
@@ -187,7 +187,7 @@ body{
 :root[data-theme="dark"] .route-change-btn:hover{
   background:rgba(184,154,106,0.18);color:#5d4a20;border-color:#8a6f35;
 }
-:root[data-theme="dark"] .prog-track{background:rgba(60,40,15,0.10);}
+:root[data-theme="dark"] .prog-track{background:rgba(60,40,15,0.12);}
 :root[data-theme="dark"] .prog-meta,
 :root[data-theme="dark"] .prog-meta *{color:var(--on-cream-2);}
 :root[data-theme="dark"] .strip::before{background:rgba(60,40,15,0.18);}
@@ -320,17 +320,51 @@ body{
 }
 
 /* ─── PROGRESS ──────────────────────────────────────────────────── */
-.prog-sec{padding:24px 0 14px;}
-.prog-track{height:2px;background:var(--bg-inset);border-radius:2px;overflow:hidden;}
+.prog-sec{padding:24px 0 18px;}
+.prog-track{
+  height:5px;
+  background:var(--bg-inset);
+  border-radius:999px;
+  overflow:visible;
+  position:relative;
+}
 .prog-fill{
   height:100%;width:0%;
-  background:linear-gradient(90deg,var(--gold-2),var(--gold));
-  border-radius:2px;
-  transition:width .5s cubic-bezier(.4,0,.2,1);
+  background:linear-gradient(90deg,var(--gold-2) 0%,var(--gold) 100%);
+  border-radius:999px;
+  transition:width .55s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  box-shadow:0 0 0 0.5px var(--gold-line);
+}
+.prog-fill::before{
+  /* moving shimmer that fades in and out, left to right */
+  content:'';position:absolute;inset:0;
+  border-radius:999px;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0) 20%,
+    rgba(255,255,255,0.55) 50%,
+    rgba(255,255,255,0) 80%,
+    transparent 100%
+  );
+  background-size:200% 100%;
+  animation:progShimmer 2.6s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes progShimmer{
+  0%{background-position:-50% 0;opacity:0;}
+  18%{opacity:1;}
+  82%{opacity:1;}
+  100%{background-position:150% 0;opacity:0;}
+}
+.prog-fill::after{
+  /* no leading-edge arrow - clean bar only */
+  display:none;
 }
 .prog-meta{
-  display:flex;justify-content:space-between;margin-top:8px;
-  font-size:11px;color:var(--ink-4);font-weight:500;
+  display:flex;justify-content:space-between;margin-top:12px;
+  font-size:12px;color:var(--ink-3);font-weight:500;
 }
 
 /* ─── STAGE STRIP ───────────────────────────────────────────────── */
@@ -801,7 +835,9 @@ body{
   </div>
 
   <div class="prog-sec">
-    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="prog-track">
+      <div class="prog-fill" id="prog-fill"></div>
+    </div>
     <div class="prog-meta">
       <span id="prog-label">Tap any step to see what it involves</span>
       <span id="prog-count"></span>
@@ -951,7 +987,7 @@ var ALL_STEPS=[
   }
 ];
 
-var CURR_KEY=getParam('step')||'introduction';
+var CURR_KEY=getParam('step')||null;
 var route=(getParam('route')==='indk')?'indk':'abroad';
 var open=null;
 
@@ -959,8 +995,9 @@ function getSteps(){
   return route==='indk'?ALL_STEPS.filter(function(s){return !s.abroadOnly;}):ALL_STEPS;
 }
 function getCurrIdx(steps){
+  if(!CURR_KEY) return -1;
   for(var i=0;i<steps.length;i++){if(steps[i].key===CURR_KEY)return i;}
-  return 0;
+  return -1;
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────
@@ -1019,7 +1056,8 @@ function updateProgress(){
   var lbl=document.getElementById('prog-label');
   var cnt=document.getElementById('prog-count');
   if(open!==null){
-    fill.style.width=Math.round(((open+1)/steps.length)*100)+'%';
+    var pct=Math.round(((open+1)/steps.length)*100);
+    fill.style.width=pct+'%';
     lbl.textContent=steps[open].title;
     cnt.textContent=(open+1)+' of '+steps.length;
   }else{
@@ -1084,9 +1122,10 @@ function renderPanel(){
   var steps=getSteps();
   var s=steps[open];
   var currIdx=getCurrIdx(steps);
+  var hasCurrent=(currIdx!==-1);
   var state=open<currIdx?'done':open===currIdx?'now':'next';
-  var stateLabel=state==='now'?'Current stage':state==='done'?'Completed':'Upcoming';
-  var badge=state==='now'?'<div class="here-badge">You are here</div>':'';
+  var stateLabel=hasCurrent?(state==='now'?'Current stage':state==='done'?'Completed':'Upcoming'):'';
+  var badge=hasCurrent&&state==='now'?'<div class="here-badge">You are here</div>':'';
   var imgSrc=(typeof IMGS!=='undefined'&&IMGS[s.key])?IMGS[s.key]:'';
   var isAbroad=(route==='abroad');
 
@@ -1261,7 +1300,7 @@ function renderPanel(){
       '<div class="panel-top">'+
         '<div class="panel-img-col"><img class="panel-img-full" src="'+imgSrc+'" alt="'+e(s.label)+'"/></div>'+
         '<div class="panel-hdr">'+
-          '<div class="panel-eye">Step '+(open+1)+' \u00b7 '+stateLabel+'</div>'+
+          '<div class="panel-eye">Step '+(open+1)+(stateLabel?' \u00b7 '+stateLabel:'')+'</div>'+
           '<div class="panel-title">'+e(s.title)+'</div>'+
           '<div class="panel-time">'+e(s.time)+'</div>'+
           badge+
