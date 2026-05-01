@@ -13,10 +13,10 @@
 /* ─── DESIGN TOKENS ─────────────────────────────────────────────── */
 :root[data-theme="light"]{
   --bg:#faf8f4;--bg-elev:#ffffff;--bg-soft:#f3efe7;--bg-inset:#ede7da;
-  --ink:#1e2f4a;--ink-2:#4a5568;--ink-3:#8a8a82;--ink-4:#b8b3a8;
-  --gold:#9a7d3f;--gold-2:#b89a6a;
-  --gold-soft:rgba(184,154,106,0.12);
-  --gold-line:rgba(154,125,63,0.32);
+  --ink:#1e2f4a;--ink-2:#1f3050;--ink-3:#3d4d6a;--ink-4:#7a7a72;
+  --gold:#8a6f35;--gold-2:#b89a6a;
+  --gold-soft:rgba(184,154,106,0.14);
+  --gold-line:rgba(154,125,63,0.4);
   --line:rgba(30,47,74,0.10);--line-2:rgba(30,47,74,0.16);
   --shadow-sm:0 1px 2px rgba(30,47,74,0.04),0 1px 3px rgba(30,47,74,0.06);
   --shadow-md:0 2px 4px rgba(30,47,74,0.04),0 8px 24px rgba(30,47,74,0.08);
@@ -27,19 +27,32 @@
   --halo:rgba(184,154,106,0.18);
 }
 :root[data-theme="dark"]{
-  --bg:#131c2e;--bg-elev:#1a2540;--bg-soft:#1f2c4a;--bg-inset:#0f1726;
-  --ink:#f5f2ea;--ink-2:rgba(245,242,234,0.72);--ink-3:rgba(245,242,234,0.45);--ink-4:rgba(245,242,234,0.28);
-  --gold:#d4b878;--gold-2:#b89a6a;
-  --gold-soft:rgba(212,184,120,0.10);
-  --gold-line:rgba(212,184,120,0.30);
-  --line:rgba(245,242,234,0.08);--line-2:rgba(245,242,234,0.14);
+  --bg:#ede4d0;
+  --bg-elev:#1a2540;
+  --bg-soft:#1f2c4a;
+  --bg-inset:#15203a;
+  --panel-bg:#1a2540;
+  --on-cream:#3d2f15;
+  --on-cream-2:#6f5d3a;
+  --on-cream-3:#8a7a5a;
+  --ink:#faf8f4;--ink-2:#dad5c7;--ink-3:#a8a496;--ink-4:rgba(245,242,234,0.45);
+  --gold:#e6c98a;--gold-2:#b89a6a;
+  --gold-soft:rgba(230,201,138,0.12);
+  --gold-line:rgba(230,201,138,0.38);
+  --line:rgba(245,242,234,0.10);--line-2:rgba(245,242,234,0.18);
   --shadow-sm:0 1px 2px rgba(0,0,0,0.20),0 1px 3px rgba(0,0,0,0.30);
-  --shadow-md:0 2px 4px rgba(0,0,0,0.25),0 8px 24px rgba(0,0,0,0.35);
-  --shadow-lg:0 4px 12px rgba(0,0,0,0.30),0 16px 40px rgba(0,0,0,0.45);
+  --shadow-md:0 4px 14px -2px rgba(60,40,15,0.20),0 8px 28px -4px rgba(60,40,15,0.18);
+  --shadow-lg:0 6px 20px -4px rgba(60,40,15,0.22),0 18px 48px -6px rgba(60,40,15,0.25);
   --img-now:brightness(1) saturate(1);
   --img-done:brightness(0.72) saturate(0.7);
   --img-next:brightness(0.5) saturate(0.5);
-  --halo:rgba(212,184,120,0.22);
+  --halo:rgba(230,201,138,0.28);
+}
+:root[data-theme="light"]{
+  --panel-bg:#ffffff;
+  --on-cream:var(--ink);
+  --on-cream-2:var(--ink-2);
+  --on-cream-3:var(--ink-3);
 }
 
 html{scroll-behavior:smooth;}
@@ -72,18 +85,24 @@ body{
 .nav-right{display:flex;align-items:center;gap:14px;}
 .nav-logo-wrap{
   display:flex;align-items:center;justify-content:center;
-  padding:6px 14px;border-radius:999px;
+  padding:8px 22px;border-radius:999px;
   transition:background-color .25s,box-shadow .25s;
 }
 :root[data-theme="dark"] .nav-logo-wrap{
-  background:rgba(245,242,234,0.06);
-  box-shadow:inset 0 0 0 1px rgba(212,184,120,0.18),
-             0 0 24px -8px rgba(212,184,120,0.35);
+  background:rgba(245,242,234,0.92);
+  box-shadow:0 0 0 1px rgba(212,184,120,0.45),
+             0 6px 22px -6px rgba(212,184,120,0.55),
+             0 0 40px -10px rgba(212,184,120,0.35);
 }
 :root[data-theme="light"] .nav-logo-wrap{
   background:transparent;
+  padding:6px 14px;
 }
-.nav-logo{height:40px;width:auto;display:block;}
+.nav-logo{height:54px;width:auto;display:block;}
+@media(max-width:640px){
+  .nav-logo{height:42px;}
+  .nav-logo-wrap{padding:6px 16px;}
+}
 
 /* THEME TOGGLE — sun/moon switch */
 .theme-toggle{
@@ -110,6 +129,106 @@ body{
 }
 :root[data-theme="dark"] .theme-toggle::before{opacity:.4;}
 :root[data-theme="dark"] .theme-toggle::after{opacity:1;color:var(--gold);}
+
+/* ─── DARK THEME: ELEMENTS ON CREAM BACKGROUND ───────────────────── */
+/* Body/page bg is cream; only the main panel is navy.
+   Everything outside the panel needs dark navy text instead of cream. */
+:root[data-theme="dark"] body{color:var(--on-cream);}
+:root[data-theme="dark"] .nav{border-bottom-color:rgba(60,40,15,0.10);}
+:root[data-theme="dark"] .nav-back{
+  color:var(--on-cream-2);
+  background:rgba(255,255,255,0.45);
+  border-color:rgba(60,40,15,0.16);
+}
+:root[data-theme="dark"] .nav-back:hover{
+  color:var(--on-cream);
+  background:rgba(255,255,255,0.65);
+  border-color:rgba(184,154,106,0.5);
+}
+:root[data-theme="dark"] .theme-toggle{
+  background:rgba(255,255,255,0.45);
+  border-color:rgba(60,40,15,0.16);
+}
+:root[data-theme="dark"] .theme-toggle::before{color:#b89a6a;}
+:root[data-theme="dark"] .theme-toggle::after{color:#3d2f15;opacity:1;}
+:root[data-theme="dark"] .hero{border-bottom-color:rgba(60,40,15,0.12);}
+:root[data-theme="dark"] .hero h1{color:var(--on-cream);}
+:root[data-theme="dark"] .hero-sub{color:var(--on-cream-2);}
+:root[data-theme="dark"] .hero-eye{
+  color:#8a6f35;background:rgba(184,154,106,0.12);
+  border-color:rgba(154,125,63,0.4);
+}
+:root[data-theme="dark"] .section-lbl{color:#8a6f35;}
+:root[data-theme="dark"] .rbtn{
+  background:rgba(255,255,255,0.55);
+  border-color:rgba(60,40,15,0.18);
+  color:var(--on-cream);
+}
+:root[data-theme="dark"] .rbtn .rbtn-t{color:var(--on-cream);}
+:root[data-theme="dark"] .rbtn .rbtn-s{color:var(--on-cream-2);}
+:root[data-theme="dark"] .rbtn:hover{
+  background:rgba(255,255,255,0.75);
+  border-color:rgba(184,154,106,0.5);
+}
+:root[data-theme="dark"] .rbtn.active{
+  background:rgba(255,255,255,0.85);
+  border-color:#b89a6a;
+  box-shadow:0 0 0 1px #b89a6a;
+}
+:root[data-theme="dark"] .route-summary{
+  background:rgba(255,255,255,0.55);
+  border-color:rgba(60,40,15,0.16);
+}
+:root[data-theme="dark"] .route-summary-lbl{color:#8a6f35;}
+:root[data-theme="dark"] .route-summary-val{color:var(--on-cream);}
+:root[data-theme="dark"] .route-change-btn{
+  color:#8a6f35;border-color:rgba(154,125,63,0.4);
+}
+:root[data-theme="dark"] .route-change-btn:hover{
+  background:rgba(184,154,106,0.18);color:#5d4a20;border-color:#8a6f35;
+}
+:root[data-theme="dark"] .prog-track{background:rgba(60,40,15,0.10);}
+:root[data-theme="dark"] .prog-meta,
+:root[data-theme="dark"] .prog-meta *{color:var(--on-cream-2);}
+:root[data-theme="dark"] .strip::before{background:rgba(60,40,15,0.18);}
+:root[data-theme="dark"] .sframe{
+  background:rgba(255,255,255,0.5);
+  border-color:rgba(60,40,15,0.18);
+}
+:root[data-theme="dark"] .sitem.done .sframe,
+:root[data-theme="dark"] .sitem.now .sframe,
+:root[data-theme="dark"] .sitem.selected .sframe{
+  background:rgba(255,255,255,0.85);
+}
+:root[data-theme="dark"] .snum{
+  background:rgba(255,255,255,0.85);
+  color:#8a6f35;border-color:rgba(154,125,63,0.4);
+}
+:root[data-theme="dark"] .sitem.done .snum{
+  background:rgba(184,154,106,0.18);color:#8a6f35;
+  border-color:rgba(154,125,63,0.4);
+}
+:root[data-theme="dark"] .sitem.now .snum,
+:root[data-theme="dark"] .sitem.selected .snum{
+  background:#b89a6a;color:#fff;border-color:#b89a6a;
+}
+:root[data-theme="dark"] .slabel{color:var(--on-cream-2);}
+:root[data-theme="dark"] .sitem.done .slabel{color:var(--on-cream);}
+:root[data-theme="dark"] .sitem.now .slabel,
+:root[data-theme="dark"] .sitem.selected .slabel{color:#8a6f35!important;}
+:root[data-theme="dark"] .sitem.next .slabel{color:var(--on-cream-2);}
+:root[data-theme="dark"] .guide-footer{
+  border-top-color:rgba(60,40,15,0.12);
+  color:var(--on-cream-2);
+}
+:root[data-theme="dark"] .guide-footer a{color:#8a6f35;}
+
+/* Panel itself sits on cream; deepen the shadow so it lifts */
+:root[data-theme="dark"] .panel{
+  box-shadow:0 6px 24px -4px rgba(60,40,15,0.20),
+             0 18px 56px -8px rgba(60,40,15,0.22);
+  border-color:rgba(230,201,138,0.28);
+}
 .theme-toggle .toggle-knob{
   position:absolute;top:3px;left:3px;
   width:24px;height:24px;border-radius:50%;
@@ -144,8 +263,8 @@ body{
   color:var(--ink);margin-bottom:12px;line-height:1.05;
 }
 .hero-sub{
-  font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:300;
-  font-size:15px;color:var(--ink-3);
+  font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:400;
+  font-size:17px;color:var(--ink-2);
 }
 
 /* ─── MAIN ──────────────────────────────────────────────────────── */
@@ -332,28 +451,29 @@ body{
 
 /* Lead text */
 .plead{
-  font-family:'Newsreader',Georgia,serif;font-weight:300;font-style:italic;
-  font-size:16px;color:var(--ink-2);line-height:1.7;margin-bottom:22px;
+  font-family:'Newsreader',Georgia,serif;font-weight:400;font-style:italic;
+  font-size:18px;color:var(--ink);line-height:1.7;margin-bottom:24px;
 }
 
 /* Doc box */
 .doc-box{
   background:var(--bg-soft);border:1px solid var(--line);
-  border-radius:12px;padding:18px 20px;margin-bottom:16px;
+  border-radius:12px;padding:20px 22px;margin-bottom:18px;
 }
 .doc-lbl{
-  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--gold);margin-bottom:14px;
 }
 .ditem{
-  display:flex;gap:12px;margin-bottom:11px;
-  font-size:14px;color:var(--ink-2);line-height:1.55;align-items:flex-start;
+  display:flex;gap:14px;margin-bottom:13px;
+  font-size:16px;color:var(--ink);line-height:1.65;align-items:flex-start;
+  font-weight:400;
 }
 .ditem:last-child{margin-bottom:0;}
 .dn{
-  width:22px;height:22px;border-radius:50%;
+  width:26px;height:26px;border-radius:50%;
   background:var(--gold-soft);color:var(--gold);
-  font-size:10px;font-weight:600;
+  font-size:12px;font-weight:600;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
   border:1px solid var(--gold-line);
 }
@@ -364,50 +484,54 @@ body{
 /* PoA download buttons */
 .poa-btn{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:500;color:var(--gold);
+  font-size:12px;font-weight:500;color:var(--gold);
   border:1px solid var(--gold-line);border-radius:6px;
-  padding:5px 11px;text-decoration:none;
+  padding:6px 12px;text-decoration:none;
   background:var(--gold-soft);transition:all .18s;margin-left:6px;
   border-bottom:1px solid var(--gold-line);
 }
 .poa-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold);}
-.poa-btn::before{content:'↓';font-size:11px;}
+.poa-btn::before{content:'↓';font-size:12px;}
 
 /* NA box */
 .na-box{
-  border-left:2px solid var(--gold-line);
-  padding:12px 16px;margin-bottom:16px;
-  font-size:13px;color:var(--ink-3);line-height:1.6;font-style:italic;
+  border-left:3px solid var(--gold);
+  padding:14px 18px;margin-bottom:16px;
+  font-size:15.5px;color:var(--ink);line-height:1.65;font-style:italic;
   font-family:'Newsreader',Georgia,serif;
+  background:var(--bg-inset);border-radius:0 8px 8px 0;
+  font-weight:400;
 }
 .na-lbl{
-  font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--gold);font-style:normal;font-family:'Inter',sans-serif;
-  display:block;margin-bottom:5px;
+  display:block;margin-bottom:6px;
 }
 
 /* Good to know */
 .gk-box{
   background:var(--bg-inset);border:1px solid var(--line);
-  border-radius:12px;padding:16px 20px;margin-bottom:16px;
+  border-radius:12px;padding:18px 22px;margin-bottom:16px;
 }
 .gk-lbl{
-  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);margin-bottom:10px;
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
 }
 .gk-item{
-  display:flex;gap:10px;margin-bottom:8px;
-  font-size:13px;color:var(--ink-2);line-height:1.55;align-items:flex-start;
+  display:flex;gap:12px;margin-bottom:11px;
+  font-size:15px;color:var(--ink);line-height:1.65;align-items:flex-start;
+  font-weight:400;
 }
 .gk-item:last-child{margin-bottom:0;}
-.gk-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:7px;}
+.gk-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px;}
 .gk-item strong{color:var(--ink);font-weight:500;}
 
 /* Tip */
 .tip-txt{
-  font-size:12px;color:var(--ink-3);font-style:italic;line-height:1.6;
+  font-size:14.5px;color:var(--ink);font-style:italic;line-height:1.65;
   font-family:'Newsreader',Georgia,serif;
-  padding:8px 14px;border-left:2px solid var(--line-2);
+  padding:10px 16px;border-left:3px solid var(--gold-line);
+  font-weight:400;
 }
 
 /* Reloc CTA */
@@ -506,14 +630,29 @@ body{
   color:var(--ink);margin-bottom:8px;
 }
 .reloc-intro{
-  font-size:14px;color:var(--ink-2);line-height:1.65;
-  margin-bottom:16px;font-family:'Newsreader',Georgia,serif;font-style:italic;
+  font-size:15.5px;color:var(--ink);line-height:1.65;
+  margin-bottom:18px;font-family:'Newsreader',Georgia,serif;font-style:italic;
+  font-weight:400;
 }
 .reloc-services{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;
+  display:grid;grid-template-columns:1fr;gap:10px 18px;
   margin-bottom:20px;
 }
-@media(max-width:600px){.reloc-services{grid-template-columns:1fr;}}
+.reloc-service-lead{
+  grid-column:1/-1;
+  padding:12px 14px;border-radius:8px;
+  background:rgba(0,0,0,0);
+  border:1px solid var(--gold-line);
+  margin-bottom:6px;
+}
+.reloc-services .reloc-service:not(.reloc-service-lead){
+  display:flex;gap:9px;align-items:center;
+  font-size:14.5px;color:var(--ink);line-height:1.4;
+}
+@media(min-width:560px){
+  .reloc-services{grid-template-columns:repeat(2,1fr);}
+  .reloc-service-lead{grid-column:1/-1;}
+}
 .reloc-service{
   display:flex;gap:9px;align-items:flex-start;
   font-size:13px;color:var(--ink-2);line-height:1.5;
@@ -542,7 +681,7 @@ body{
 }
 .reloc-btn:hover{background:var(--gold-2);box-shadow:var(--shadow-md);transform:translateY(-1px);}
 .reloc-meta{
-  font-size:12px;color:var(--ink-3);font-style:italic;
+  font-size:13.5px;color:var(--ink-2);font-style:italic;
   font-family:'Newsreader',Georgia,serif;
 }
 
@@ -657,7 +796,7 @@ body{
     <div class="route-summary" id="route-summary" style="display:none;">
       <span class="route-summary-lbl">Viewing:</span>
       <span class="route-summary-val" id="route-summary-val"></span>
-      <button class="route-change-btn" id="route-change-btn" type="button">Change \u2192</button>
+      <button class="route-change-btn" id="route-change-btn" type="button">Change &rarr;</button>
     </div>
   </div>
 
@@ -706,7 +845,10 @@ function getParam(n){return new URLSearchParams(window.location.search).get(n);}
 var ALL_STEPS=[
   {
     key:'introduction',label:'Introduction',title:'Your permit journey',time:'Day 1\u20132',abroadOnly:false,
-    lead:"Welcome. Here\u2019s a complete overview of what\u2019s ahead \u2014 five clear stages from engagement to arrival. We\u2019ve also listed everything we need from you to get started.",
+    lead:{
+      abroad:"Welcome. Here\u2019s a complete overview of what\u2019s ahead. We\u2019ve also listed everything we need from you to get started.",
+      indk:"Welcome. You\u2019re applying for a new permit while already in Denmark, and because this is a Fast-Track application, you can begin work as soon as we lodge your application with SIRI \u2014 you don\u2019t have to wait for the decision. Here\u2019s what to expect."
+    },
     sections:[
       {type:'overview',items:[
         "Stage 1: Introduction \u2014 we review your case and collect all required documents",
@@ -740,12 +882,21 @@ var ALL_STEPS=[
   },
   {
     key:'application',label:'Application & biometrics',title:'Application & biometrics',time:'1\u20132 days once review is complete',abroadOnly:false,
-    lead:"We submit your application to SIRI online. At the same time, you\u2019ll need to attend a biometrics appointment \u2014 here\u2019s exactly how that works.",
+    lead:{
+      abroad:"We submit your application to SIRI online. At the same time, you\u2019ll need to attend a biometrics appointment \u2014 here\u2019s exactly how that works.",
+      indk:"We submit your application to SIRI online. From the moment we lodge it, you can begin working under the Fast-Track scheme. You\u2019ll then attend a biometrics appointment at a SIRI branch \u2014 here\u2019s how it works."
+    },
     sections:[
-      {type:'docs',label:'What happens',items:[
-        {text:"We submit your application online via the AR6 form and confirm your SIRI Case Order ID by email the same day"},
-        {text:"We send you a detailed biometrics guide specific to your country of residence"}
-      ]},
+      {type:'docs_routed',label:'What happens',items:{
+        abroad:[
+          {text:"We submit your application online via the AR6 form and confirm your SIRI Case Order ID by email the same day"},
+          {text:"We send you a detailed biometrics guide specific to your country of residence"}
+        ],
+        indk:[
+          {text:"We submit your online application with SIRI and provide you with instructions on recording your biometrics at one of SIRI\u2019s branches"},
+          {text:"You can begin working as soon as we have lodged your application \u2014 you don\u2019t have to wait for the decision"}
+        ]
+      }},
       {type:'bio',abroad:true},
       {type:'bio',abroad:false},
       {type:'na',text:"We monitor your case with SIRI throughout the processing period and coordinate any basic queries SIRI may raise on your behalf, keeping you informed at every stage."},
@@ -756,31 +907,43 @@ var ALL_STEPS=[
     key:'approval',label:'Approval',title:'Permit approved',time:'Typically 1\u20134 weeks after biometrics',abroadOnly:false,
     lead:"SIRI issues their decision and we receive it directly. We\u2019ll notify you the same day with the decision letter attached. If your employer has separately authorised us to communicate with them, we\u2019ll also send them a copy of the permit.",
     sections:[
-      {type:'docs',label:'On approval',items:[
-        {text:"We receive your decision letter (also called: ruling letter, permit letter, approval letter) via our Eboks account on the same day SIRI issues it"},
-        {text:"We send you a confirmation email with the decision letter attached, along with onward instructions"},
-        {text:"Your physical residence card (pink) will be sent by post to your registered Danish residence address within 4\u20138 weeks of CPR registration"}
-      ]},
-      {type:'gk',label:'Good to know \u2014 your residence card and health card',items:[
-        "Your <strong>pink residence card</strong> is sent by post to your CPR-registered address in Denmark within 4\u20138 weeks of completing CPR registration. The card itself is your proof of legal residence and right to work \u2014 carry a digital copy on your phone for the first weeks until it arrives.",
-        "Your <strong>yellow health insurance card (sundhedskort)</strong> arrives by post separately, also after CPR registration is complete \u2014 typically within 2\u20133 weeks. It gives you full access to the Danish public healthcare system, including a registered family doctor (egen l\u00e6ge) of your choice.",
-        "If you\u2019re in temporary accommodation (serviced apartments, hotels, Airbnbs), confirm in advance that the address permits CPR registration \u2014 most temporary accommodation does <em>not</em>. Without a CPR-registered address, neither card can be issued.",
-        "If family members are joining you, their permits typically follow 4\u20136 weeks after yours."
-      ]},
-      {type:'na',text:"We set a renewal reminder 90 days before your permit expires so you have plenty of time to plan ahead. If your employer has authorised us to liaise with them, we also keep them updated on permit details and start dates."},
-      {type:'tip',text:"The CPR number is your Danish social security / national ID number. Activating it is the first priority on arrival."}
+      {type:'docs_routed',label:'On approval',items:{
+        abroad:[
+          {text:"We receive your decision letter via our Eboks account on the same day SIRI issues it"},
+          {text:"We send you a confirmation email with the decision letter attached, along with onward instructions"},
+          {text:"Your physical residence card (pink) will be sent by post to your registered Danish residence address within 4\u20138 weeks of CPR registration"}
+        ],
+        indk:[
+          {text:"We receive your decision letter via our Eboks account on the same day SIRI issues it"},
+          {text:"We send you a confirmation email with the decision letter attached, along with onward instructions"},
+          {text:"Your physical residence card (pink) will be sent by post to your registered Danish residence address within 4\u20138 weeks"}
+        ]
+      }},
+      {type:'gk_routed',label:'Good to know \u2014 your residence card',items:{
+        abroad:[
+          "Your <strong>pink residence card</strong> is sent by post to your CPR-registered address in Denmark within 4\u20138 weeks of completing CPR registration. The card itself is your proof of legal residence and right to work \u2014 carry a digital copy on your phone for the first weeks until it arrives.",
+          "Your <strong>yellow health insurance card (sundhedskort)</strong> arrives by post separately, also after CPR registration is complete \u2014 typically within 2\u20133 weeks. It gives you full access to the Danish public healthcare system, including a registered family doctor (egen l\u00e6ge) of your choice.",
+          "If you\u2019re in temporary accommodation (serviced apartments, hotels, Airbnbs), confirm in advance that the address permits CPR registration \u2014 most temporary accommodation does <em>not</em>. Without a CPR-registered address, neither card can be issued.",
+          "If family members are joining you, their permits typically follow 4\u20136 weeks after yours."
+        ],
+        indk:[
+          "Your <strong>pink residence card</strong> arrives by post to your registered residence address within 4\u20138 weeks. The card itself is your proof of legal residence and right to work \u2014 carry a digital copy on your phone for the first weeks until it arrives."
+        ]
+      }},
+      {type:'na',text:"We set a renewal reminder 90 days before your permit expires so you have plenty of time to plan ahead. If your employer has authorised us to liaise with them, we also keep them updated on permit details and start dates."}
     ]
   },
   {
     key:'arrival',label:'Arrival in Denmark',title:'Welcome to Denmark',time:'Your new chapter begins',abroadOnly:true,
-    lead:"Your permit is sorted. Everything you need to settle in Denmark smoothly \u2014 Nordic Anchor can assist with all of it.",
+    lead:"You\u2019ve arrived. The next few weeks are about getting registered and set up. Here\u2019s what comes next.",
     sections:[
       {type:'gk',label:'Good to know \u2014 settling in',items:[
-        "<strong>CPR registration</strong> at your local municipality (kommune) \u2014 this is your first and most important step on arrival. It activates your Danish social security number and is required for everything that follows: health insurance, banking, tax registration, and most administrative tasks.",
-        "<strong>Yellow health card</strong> \u2014 once your CPR is registered, your sundhedskort arrives by post within 2\u20133 weeks. No separate activation step is needed \u2014 receiving the card means you\u2019re registered with the Danish public health system.",
-        "<strong>Pink residence card</strong> \u2014 your physical residence permit card arrives by post within 4\u20138 weeks of CPR registration. Carry your passport and digital permit confirmation in the meantime.",
-        "<strong>Danish bank account</strong> \u2014 required to receive your Danish salary. Your CPR number plus your residence card or passport will be needed to open one. We recommend Lunar, Nordea, Danske Bank, or Nykredit for new residents.",
-        "<strong>MitID</strong> \u2014 Denmark\u2019s digital identity system. Set this up as soon as your CPR is active \u2014 you\u2019ll need it for nearly every official, financial, and healthcare service in Denmark."
+        "<strong>CPR registration</strong> at your local municipality (kommune) \u2014 this is your first and most important step on arrival. It activates your Danish social security number (CPR Number) and is required for everything that follows: health insurance, banking, tax registration, and most administrative tasks.",
+        "<strong>Yellow health card (sundhedskort)</strong> \u2014 arrives by post 2\u20133 weeks after CPR registration. Gives you full access to Danish public healthcare.",
+        "<strong>Pink residence card</strong> \u2014 your physical residence permit, arrives by post 4\u20138 weeks after CPR registration. Carry your passport and digital permit confirmation in the meantime.",
+        "<strong>Danish bank account</strong> \u2014 required to receive your Danish salary.",
+        "<strong>MitID</strong> \u2014 Denmark\u2019s digital identity system, needed for almost every official and financial service.",
+        "<strong>Tax card (skattekort)</strong> \u2014 ensures you\u2019re taxed correctly from day one."
       ]},
       {type:'reloc'},
       {type:'tip',text:"Questions after arrival? Reply to any email from us or book a call at calendly.com/nordic-anchor \u2014 we\u2019re always here."}
@@ -933,7 +1096,8 @@ function renderPanel(){
   }
 
   var bodyHtml=trackHtml;
-  bodyHtml+='<p class="plead">'+e(s.lead)+'</p>';
+  var leadText = (typeof s.lead === 'object') ? (s.lead[route] || s.lead.abroad) : s.lead;
+  bodyHtml+='<p class="plead">'+e(leadText)+'</p>';
 
   for(var si=0;si<s.sections.length;si++){
     var sec=s.sections[si];
@@ -972,6 +1136,16 @@ function renderPanel(){
         var itm=sec.items[k];
         var dlBtn=itm.dl?(' <a class="poa-btn" href="'+dlHrefs[itm.dl]+'" target="_blank" download>Download PoA template</a>'):'';
         bodyHtml+='<div class="ditem"><div class="dn">'+(k+1)+'</div><span>'+e(itm.text)+dlBtn+'</span></div>';
+      }
+      bodyHtml+='</div>';
+    }
+
+    if(sec.type==='docs_routed'){
+      var routedItems = sec.items[route] || sec.items.abroad;
+      bodyHtml+='<div class="doc-box"><div class="doc-lbl">'+e(sec.label)+'</div>';
+      for(var k=0;k<routedItems.length;k++){
+        var itm=routedItems[k];
+        bodyHtml+='<div class="ditem"><div class="dn">'+(k+1)+'</div><span>'+e(itm.text)+'</span></div>';
       }
       bodyHtml+='</div>';
     }
@@ -1023,7 +1197,7 @@ function renderPanel(){
       } else {
         bodyHtml+='<div class="doc-box"><div class="doc-lbl">Biometrics \u2014 applicant in Denmark</div>';
         bodyHtml+='<div class="ditem"><div class="dn">1</div><span>Book an appointment at a SIRI branch office \u2014 this must happen within 14 days of submission</span></div>';
-        bodyHtml+='<div class="ditem"><div class="dn">2</div><span>Offices: Copenhagen \u00b7 Aarhus \u00b7 Odense \u00b7 Aalborg \u2014 book at nyidanmark.dk</span></div>';
+        bodyHtml+='<div class="ditem"><div class="dn">2</div><span>Book your appointment at <a href="https://scandic.cleverq.de/public/locations/siri_dk/index.html?lang=en" target="_blank" rel="noopener">scandic.cleverq.de/public/locations/siri_dk</a> \u2014 SIRI branches in Copenhagen, Aarhus, Odense, and Aalborg</span></div>';
         bodyHtml+='<div class="ditem"><div class="dn">3</div><span>Bring: your passport and the submission confirmation from Nordic Anchor</span></div>';
         bodyHtml+='</div>';
         bodyHtml+='<p class="tip-txt">SIRI cannot begin processing your application until biometrics are recorded. Book as soon as you receive submission confirmation.</p>';
@@ -1046,21 +1220,33 @@ function renderPanel(){
       bodyHtml+='</div>';
     }
 
+    if(sec.type==='gk_routed'){
+      var gkItems = sec.items[route] || sec.items.abroad;
+      bodyHtml+='<div class="gk-box"><div class="gk-lbl">'+e(sec.label)+'</div>';
+      for(var k=0;k<gkItems.length;k++){
+        var safeItem=e(gkItems[k])
+          .replace(/&lt;strong&gt;/g,'<strong>').replace(/&lt;\/strong&gt;/g,'</strong>')
+          .replace(/&lt;em&gt;/g,'<em>').replace(/&lt;\/em&gt;/g,'</em>');
+        bodyHtml+='<div class="gk-item"><div class="gk-dot"></div><span>'+safeItem+'</span></div>';
+      }
+      bodyHtml+='</div>';
+    }
+
     if(sec.type==='reloc'){
       bodyHtml+='<div class="reloc-cta-rich">'+
-        '<div class="reloc-lbl-rich">Need a hand getting set up?</div>'+
-        '<p class="reloc-intro">Settling in is faster, smoother, and less stressful with someone who knows the system. Our relocation service handles the practical work so you can focus on starting your new life in Denmark.</p>'+
+        '<div class="reloc-lbl-rich">Need a hand getting settled?</div>'+
+        '<p class="reloc-intro">Settling into Denmark is much smoother with someone who knows the system. We can take any of the practical steps off your plate \u2014 starting with the most important one.</p>'+
         '<div class="reloc-services">'+
-          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>CPR registration</strong> \u2014 we book your kommune appointment, prepare every document, and accompany you if needed</span></div>'+
-          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Bank account opening</strong> \u2014 we recommend the right bank for your situation, prepare your application, and liaise with the bank on your behalf</span></div>'+
-          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>MitID setup</strong> \u2014 the gateway to all Danish digital services, set up correctly first time</span></div>'+
-          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Tax card (skattekort)</strong> \u2014 ensures you\u2019re taxed correctly from day one</span></div>'+
-          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Family registration</strong> \u2014 spouse and children added to CPR, schools, and public health</span></div>'+
-          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Housing search support</strong> \u2014 navigating Denmark\u2019s rental market, deposits, and contracts</span></div>'+
+          '<div class="reloc-service reloc-service-lead"><span class="reloc-check">\u2713</span><span><strong>CPR registration</strong> \u2014 we book your kommune appointment, prepare every document, and walk you through the registration itself. This is the gateway to everything else, and the first thing to get right.</span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Bank account opening</strong></span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>MitID setup</strong></span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Tax card (skattekort)</strong></span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Family registration</strong></span></div>'+
+          '<div class="reloc-service"><span class="reloc-check">\u2713</span><span><strong>Housing search support</strong></span></div>'+
         '</div>'+
         '<div class="reloc-cta-row">'+
-          '<a href="mailto:rd@nordicanchor.dk?subject=Relocation%20assistance%20enquiry" class="reloc-btn">Get in touch \u2192</a>'+
-          '<span class="reloc-meta">Or reply to any email from us \u2014 we\u2019re here to help.</span>'+
+          '<a href="mailto:rd@nordicanchor.dk?subject=Relocation%20assistance%20enquiry" class="reloc-btn">Get in touch &rarr;</a>'+
+          '<span class="reloc-meta">Tell us what you need help with \u2014 we\u2019ll take it from there.</span>'+
         '</div>'+
       '</div>';
     }
