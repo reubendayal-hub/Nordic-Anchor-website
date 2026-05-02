@@ -242,30 +242,58 @@
     @media(max-width:860px){.breadcrumb{padding:7px 16px;top:88px;gap:3px;}
       .breadcrumb a,.breadcrumb span{font-size:10px;letter-spacing:.08em;}
     }
-    /* Floating back button removed — breadcrumb used on all screens */
+    /* Floating back button removed */
 
-    /* ── FONT SIZE TOGGLE ── */
-    .font-toggle{display:flex;align-items:center;gap:0;border:1px solid rgba(30,47,74,0.2);border-radius:3px;overflow:hidden;flex-shrink:0;margin-left:4px;}
-    .font-toggle-btn{background:none;border:none;cursor:pointer;font-family:'Newsreader',serif;color:var(--navy);padding:6px 9px;line-height:1;transition:background .18s,color .18s;display:flex;align-items:center;}
-    .font-toggle-btn:first-child{font-size:11px;border-right:1px solid rgba(30,47,74,0.15);}
-    .font-toggle-btn:last-child{font-size:15px;}
-    .font-toggle-btn.active{background:var(--navy);color:#fff;}
-    .font-toggle-btn:hover:not(.active){background:rgba(30,47,74,0.06);}
-    /* Hide on very small screens to protect the gold CTA */
-    @media(max-width:380px){.font-toggle{display:none;}}
+    /* ── TEXT SIZE TOGGLE ── */
+    /* Pill sits fixed at bottom-right, unobtrusive */
+    .font-bar{
+      position:fixed;bottom:20px;right:16px;z-index:290;
+      display:flex;align-items:center;gap:0;
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(30,47,74,0.18);
+      border-radius:20px;
+      box-shadow:0 2px 12px rgba(30,47,74,0.12);
+      padding:4px 6px 4px 10px;
+      backdrop-filter:blur(8px);
+    }
+    .font-bar-label{
+      font-family:Arial,sans-serif;font-size:9px;
+      letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(30,47,74,0.45);margin-right:7px;
+      white-space:nowrap;
+    }
+    .font-bar-btns{display:flex;gap:2px;}
+    .font-bar-btn{
+      background:none;border:1px solid transparent;
+      border-radius:20px;cursor:pointer;
+      font-family:'Newsreader',serif;
+      color:rgba(30,47,74,0.45);
+      padding:3px 9px;line-height:1;
+      transition:all .18s;white-space:nowrap;
+    }
+    .font-bar-btn:first-child{font-size:12px;}
+    .font-bar-btn:last-child{font-size:15px;}
+    .font-bar-btn.active{
+      background:var(--navy,#1e2f4a);
+      color:#fff;border-color:var(--navy,#1e2f4a);
+    }
+    .font-bar-btn:hover:not(.active){
+      border-color:rgba(30,47,74,0.22);
+      color:var(--navy,#1e2f4a);
+    }
     /* Large text mode */
-    body.large-text{font-size:17px;}
     body.large-text p,
     body.large-text li,
     body.large-text .svc-desc,
     body.large-text .accordion-body,
     body.large-text .mv-body,
-    body.large-text .story-body,
+    body.large-text .story-body p,
+    body.large-text .story-left p,
     body.large-text .trust-item,
     body.large-text .tc-body,
-    body.large-text .contact-sub{font-size:17px!important;}
-    body.large-text .bc-crumb,
-    body.large-text .bc-sep{font-size:11px!important;}
+    body.large-text .contact-left p,
+    body.large-text .contact-sub,
+    body.large-text .cred-card p{font-size:17px!important;line-height:1.85!important;}
 
 </style>
 </head>
@@ -298,10 +326,6 @@
   <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
   <a href="#contact" class="nav-touch">Get in Touch</a>
-  <div class="font-toggle" aria-label="Text size">
-    <button class="font-toggle-btn" id="fontSmall" onclick="setFont('normal')" title="Standard text size">A</button>
-    <button class="font-toggle-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size">A</button>
-  </div>
   <a href="/get-started" class="nav-gs">Free Assessment</a>
 </nav>
 
@@ -600,32 +624,31 @@
     if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
   })();
 
-  // ── FONT SIZE TOGGLE ──────────────────────────────────────────
+  // ── TEXT SIZE TOGGLE ─────────────────────────────────────────
   function setFont(size) {
-    if (size === 'large') {
-      document.body.classList.add('large-text');
-      document.getElementById('fontSmall').classList.remove('active');
-      document.getElementById('fontLarge').classList.add('active');
-      localStorage.setItem('na_font_size', 'large');
-    } else {
-      document.body.classList.remove('large-text');
-      document.getElementById('fontSmall').classList.add('active');
-      document.getElementById('fontLarge').classList.remove('active');
-      localStorage.setItem('na_font_size', 'normal');
-    }
+    var isLarge = size === 'large';
+    document.body.classList.toggle('large-text', isLarge);
+    document.getElementById('fontRegular').classList.toggle('active', !isLarge);
+    document.getElementById('fontRegular').setAttribute('aria-pressed', !isLarge);
+    document.getElementById('fontLarge').classList.toggle('active', isLarge);
+    document.getElementById('fontLarge').setAttribute('aria-pressed', isLarge);
+    localStorage.setItem('na_font_size', size);
   }
-  // Apply saved preference on load
-  (function() {
+  (function(){
     var saved = localStorage.getItem('na_font_size');
-    if (saved === 'large') {
-      setFont('large');
-    } else {
-      // Default: small button is active
-      var s = document.getElementById('fontSmall');
-      if (s) s.classList.add('active');
-    }
+    if (saved === 'large') setFont('large');
   })();
 
 </script>
+
+<!-- TEXT SIZE TOGGLE -->
+<div class="font-bar" role="group" aria-label="Text size">
+  <span class="font-bar-label">Text size</span>
+  <div class="font-bar-btns">
+    <button class="font-bar-btn active" id="fontRegular" onclick="setFont('normal')" title="Regular text size" aria-pressed="true">Regular</button>
+    <button class="font-bar-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size" aria-pressed="false">Large</button>
+  </div>
+</div>
+
 </body>
 </html>
