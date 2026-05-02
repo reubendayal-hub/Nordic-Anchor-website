@@ -245,41 +245,67 @@
     /* Floating back button removed */
 
     /* ── TEXT SIZE TOGGLE ── */
-    /* Pill sits fixed at bottom-right, unobtrusive */
-    .font-bar{
-      position:fixed;bottom:20px;right:16px;z-index:290;
-      display:flex;align-items:center;gap:0;
-      background:rgba(255,255,255,0.96);
-      border:1px solid rgba(30,47,74,0.18);
-      border-radius:20px;
-      box-shadow:0 2px 12px rgba(30,47,74,0.12);
-      padding:4px 6px 4px 10px;
-      backdrop-filter:blur(8px);
+    .font-toggle{
+      display:flex;flex-direction:column;align-items:center;gap:2px;
+      flex-shrink:0;
+      margin-left:12px;  /* small gap from gold button */
+      padding-left:12px;
+      border-left:1px solid rgba(30,47,74,0.12);
     }
-    .font-bar-label{
-      font-family:Arial,sans-serif;font-size:9px;
+    .font-toggle-label{
+      font-family:Arial,sans-serif;font-size:7px;
       letter-spacing:.12em;text-transform:uppercase;
-      color:rgba(30,47,74,0.45);margin-right:7px;
-      white-space:nowrap;
+      color:rgba(30,47,74,0.32);white-space:nowrap;line-height:1;
     }
-    .font-bar-btns{display:flex;gap:2px;}
-    .font-bar-btn{
-      background:none;border:1px solid transparent;
-      border-radius:20px;cursor:pointer;
+    .font-toggle-btns{display:flex;align-items:center;gap:0;}
+    .font-toggle-btn{
+      background:none;border:none;cursor:pointer;
       font-family:'Newsreader',serif;
-      color:rgba(30,47,74,0.45);
-      padding:3px 9px;line-height:1;
-      transition:all .18s;white-space:nowrap;
+      color:rgba(30,47,74,0.35);
+      padding:2px 5px;line-height:1;
+      transition:color .18s;
     }
-    .font-bar-btn:first-child{font-size:12px;}
-    .font-bar-btn:last-child{font-size:15px;}
-    .font-bar-btn.active{
-      background:var(--navy,#1e2f4a);
-      color:#fff;border-color:var(--navy,#1e2f4a);
+    .font-toggle-btn:first-child{font-size:11px;}
+    .font-toggle-btn:last-child{font-size:15px;}
+    .font-toggle-sep{
+      width:1px;height:10px;
+      background:rgba(30,47,74,0.15);flex-shrink:0;
     }
-    .font-bar-btn:hover:not(.active){
-      border-color:rgba(30,47,74,0.22);
-      color:var(--navy,#1e2f4a);
+    .font-toggle-btn.active{color:var(--navy,#1e2f4a);font-weight:500;}
+    .font-toggle-btn:hover{color:var(--navy,#1e2f4a);}
+    /* Hide on mobile — shown instead at bottom of drawer */
+    @media(max-width:860px){.font-toggle{display:none;}}
+    /* Mobile: appended inside nav drawer */
+    .font-toggle-mobile{display:none;}
+    @media(max-width:860px){
+      .font-toggle-mobile{
+        display:flex;flex-direction:column;align-items:center;
+        gap:4px;padding:16px 0 0;
+        border-top:1px solid rgba(184,134,11,0.15);
+        margin-top:12px;
+      }
+      .font-toggle-mobile-label{
+        font-family:Arial,sans-serif;font-size:9px;
+        letter-spacing:.12em;text-transform:uppercase;
+        color:rgba(30,47,74,0.4);white-space:nowrap;
+      }
+      .font-toggle-mobile-btns{display:flex;align-items:center;gap:0;}
+      .font-toggle-mobile-btn{
+        background:none;border:none;cursor:pointer;
+        font-family:'Newsreader',serif;
+        color:rgba(30,47,74,0.4);
+        padding:4px 8px;line-height:1;
+        transition:color .18s;
+      }
+      .font-toggle-mobile-btn:first-child{font-size:13px;}
+      .font-toggle-mobile-btn:last-child{font-size:17px;}
+      .font-toggle-mobile-sep{
+        width:1px;height:13px;
+        background:rgba(30,47,74,0.15);flex-shrink:0;
+      }
+      .font-toggle-mobile-btn.active{
+        color:var(--navy,#1e2f4a);font-weight:500;
+      }
     }
     /* Large text mode */
     body.large-text p,
@@ -289,11 +315,13 @@
     body.large-text .mv-body,
     body.large-text .story-body p,
     body.large-text .story-left p,
+    body.large-text .cred-card p,
     body.large-text .trust-item,
     body.large-text .tc-body,
     body.large-text .contact-left p,
-    body.large-text .contact-sub,
-    body.large-text .cred-card p{font-size:17px!important;line-height:1.85!important;}
+    body.large-text .contact-sub{
+      font-size:17px!important;line-height:1.85!important;
+    }
 
 </style>
 </head>
@@ -315,6 +343,15 @@
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
     <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+
+  <div class="font-toggle-mobile" role="group" aria-label="Text size">
+    <span class="font-toggle-mobile-label">Text size</span>
+    <div class="font-toggle-mobile-btns">
+      <button class="font-toggle-mobile-btn active" id="fontSmallM" onclick="setFont('normal')" title="Regular">A</button>
+      <span class="font-toggle-mobile-sep" aria-hidden="true"></span>
+      <button class="font-toggle-mobile-btn" id="fontLargeM" onclick="setFont('large')" title="Large">A</button>
+    </div>
+  </div>
   </div>
 </div>
 
@@ -327,6 +364,14 @@
   <div class="nav-sep"></div>
   <a href="#contact" class="nav-touch">Get in Touch</a>
   <a href="/get-started" class="nav-gs">Free Assessment</a>
+  <div class="font-toggle" role="group" aria-label="Text size">
+    <span class="font-toggle-label">Text size</span>
+    <div class="font-toggle-btns">
+      <button class="font-toggle-btn active" id="fontSmall" onclick="setFont('normal')" title="Regular text size">A</button>
+      <span class="font-toggle-sep" aria-hidden="true"></span>
+      <button class="font-toggle-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size">A</button>
+    </div>
+  </div>
 </nav>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -626,29 +671,22 @@
 
   // ── TEXT SIZE TOGGLE ─────────────────────────────────────────
   function setFont(size) {
-    var isLarge = size === 'large';
-    document.body.classList.toggle('large-text', isLarge);
-    document.getElementById('fontRegular').classList.toggle('active', !isLarge);
-    document.getElementById('fontRegular').setAttribute('aria-pressed', !isLarge);
-    document.getElementById('fontLarge').classList.toggle('active', isLarge);
-    document.getElementById('fontLarge').setAttribute('aria-pressed', isLarge);
+    var large = size === 'large';
+    document.body.classList.toggle('large-text', large);
+    ['fontSmall','fontSmallM'].forEach(function(id){
+      var el=document.getElementById(id); if(el) el.classList.toggle('active',!large);
+    });
+    ['fontLarge','fontLargeM'].forEach(function(id){
+      var el=document.getElementById(id); if(el) el.classList.toggle('active',large);
+    });
     localStorage.setItem('na_font_size', size);
   }
   (function(){
-    var saved = localStorage.getItem('na_font_size');
-    if (saved === 'large') setFont('large');
+    var saved=localStorage.getItem('na_font_size');
+    if(saved==='large'){setFont('large');}
+    else{['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('active');});}
   })();
 
 </script>
-
-<!-- TEXT SIZE TOGGLE -->
-<div class="font-bar" role="group" aria-label="Text size">
-  <span class="font-bar-label">Text size</span>
-  <div class="font-bar-btns">
-    <button class="font-bar-btn active" id="fontRegular" onclick="setFont('normal')" title="Regular text size" aria-pressed="true">Regular</button>
-    <button class="font-bar-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size" aria-pressed="false">Large</button>
-  </div>
-</div>
-
 </body>
 </html>
