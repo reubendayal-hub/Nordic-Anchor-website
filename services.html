@@ -171,11 +171,35 @@
     .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
     .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
     .bc-home{width:10px;height:10px;flex-shrink:0;}
-    /* Breadcrumb — shown on all screens, compact on mobile */
-    @media(max-width:860px){.breadcrumb{padding:7px 16px;top:72px;gap:3px;}
+    /* Breadcrumb — visible on all screens */
+    @media(max-width:860px){.breadcrumb{padding:7px 16px;top:88px;gap:3px;}
       .breadcrumb a,.breadcrumb span{font-size:10px;letter-spacing:.08em;}
     }
     /* Floating back button removed — breadcrumb used on all screens */
+
+    /* ── FONT SIZE TOGGLE ── */
+    .font-toggle{display:flex;align-items:center;gap:0;border:1px solid rgba(30,47,74,0.2);border-radius:3px;overflow:hidden;flex-shrink:0;margin-left:4px;}
+    .font-toggle-btn{background:none;border:none;cursor:pointer;font-family:'Newsreader',serif;color:var(--navy);padding:6px 9px;line-height:1;transition:background .18s,color .18s;display:flex;align-items:center;}
+    .font-toggle-btn:first-child{font-size:11px;border-right:1px solid rgba(30,47,74,0.15);}
+    .font-toggle-btn:last-child{font-size:15px;}
+    .font-toggle-btn.active{background:var(--navy);color:#fff;}
+    .font-toggle-btn:hover:not(.active){background:rgba(30,47,74,0.06);}
+    /* Hide on very small screens to protect the gold CTA */
+    @media(max-width:380px){.font-toggle{display:none;}}
+    /* Large text mode */
+    body.large-text{font-size:17px;}
+    body.large-text p,
+    body.large-text li,
+    body.large-text .svc-desc,
+    body.large-text .accordion-body,
+    body.large-text .mv-body,
+    body.large-text .story-body,
+    body.large-text .trust-item,
+    body.large-text .tc-body,
+    body.large-text .contact-sub{font-size:17px!important;}
+    body.large-text .bc-crumb,
+    body.large-text .bc-sep{font-size:11px!important;}
+
 </style>
 </head>
 <body>
@@ -211,6 +235,10 @@
   <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
   <a href="/#contact" class="nav-touch">Get in Touch</a>
+  <div class="font-toggle" aria-label="Text size">
+    <button class="font-toggle-btn" id="fontSmall" onclick="setFont('normal')" title="Standard text size">A</button>
+    <button class="font-toggle-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size">A</button>
+  </div>
   <a href="/get-started" class="nav-gs">Free Assessment</a>
 </nav>
 
@@ -354,6 +382,33 @@
     if(!btn)return;
     if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
   })();
+
+  // ── FONT SIZE TOGGLE ──────────────────────────────────────────
+  function setFont(size) {
+    if (size === 'large') {
+      document.body.classList.add('large-text');
+      document.getElementById('fontSmall').classList.remove('active');
+      document.getElementById('fontLarge').classList.add('active');
+      localStorage.setItem('na_font_size', 'large');
+    } else {
+      document.body.classList.remove('large-text');
+      document.getElementById('fontSmall').classList.add('active');
+      document.getElementById('fontLarge').classList.remove('active');
+      localStorage.setItem('na_font_size', 'normal');
+    }
+  }
+  // Apply saved preference on load
+  (function() {
+    var saved = localStorage.getItem('na_font_size');
+    if (saved === 'large') {
+      setFont('large');
+    } else {
+      // Default: small button is active
+      var s = document.getElementById('fontSmall');
+      if (s) s.classList.add('active');
+    }
+  })();
+
 </script>
 </body>
 </html>
