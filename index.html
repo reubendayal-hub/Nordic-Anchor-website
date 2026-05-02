@@ -238,20 +238,11 @@
     .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
     .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
     .bc-home{width:10px;height:10px;flex-shrink:0;}
-    /* Hide breadcrumb on mobile — use floating back button instead */
-    @media(max-width:860px){.breadcrumb{display:none;}}
-    /* FLOATING BACK BUTTON - mobile only */
-    #backBtn{display:none;}
-    @media(max-width:860px){
-      #backBtn{display:flex;align-items:center;gap:6px;position:fixed;bottom:24px;left:16px;z-index:300;
-        background:var(--navy);color:var(--gold-eye);font-family:'Newsreader',serif;
-        font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-        padding:10px 18px;border-radius:20px;border:1px solid #B8860B;
-        cursor:pointer;text-decoration:none;
-        box-shadow:0 4px 20px rgba(30,47,74,0.35);
-        transition:opacity .2s,transform .2s;}
-      #backBtn.hidden{opacity:0;pointer-events:none;transform:translateY(8px);}
+    /* Breadcrumb — shown on all screens, compact on mobile */
+    @media(max-width:860px){.breadcrumb{padding:7px 16px;top:72px;gap:3px;}
+      .breadcrumb a,.breadcrumb span{font-size:10px;letter-spacing:.08em;}
     }
+    /* Floating back button removed — breadcrumb used on all screens */
 </style>
 </head>
 <body>
@@ -290,7 +281,6 @@
   <span class="bc-crumb active"><svg class="bc-home" viewBox="0 0 12 12" fill="none"><path d="M1 5.5L6 1l5 4.5V11H7.5V8h-3v3H1V5.5z" stroke="#888" stroke-width="1.2" fill="none"/></svg> Home</span>
 </nav>
 
-<a id="backBtn" class="hidden" href="#" onclick="history.back();return false;">&#8592; Back</a>
 
 <section class="hero">
   <div class="hero-bg" id="heroBg"></div>
