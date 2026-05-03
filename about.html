@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About — Nordic Anchor</title>
   <meta name="description" content="About Nordic Anchor — boutique Danish immigration consultancy built on over a decade of expertise."/>
+  <!-- Open Graph / WhatsApp / Social preview -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Nordic Anchor"/>
+  <meta property="og:title" content="About — Nordic Anchor"/>
+  <meta property="og:description" content="Nordic Anchor is a boutique Danish immigration consultancy founded by Reuben Dayal, with over 12 years of experience guiding companies and individuals through the Danish permit process."/>
+  <meta property="og:url" content="https://nordicanchor.dk/about"/>
+  <meta property="og:image" content="https://nordicanchor.dk/hero-bg.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="en_GB"/>
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="About — Nordic Anchor"/>
+  <meta name="twitter:description" content="Nordic Anchor is a boutique Danish immigration consultancy founded by Reuben Dayal, with over 12 years of experience guiding companies and individuals through the Danish permit process."/>
+  <meta name="twitter:image" content="https://nordicanchor.dk/hero-bg.jpg"/>
   <link rel="icon" href="favicon.jpg"/>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
   <style>
@@ -210,83 +225,28 @@
     /* Floating back button removed */
 
     /* ── TEXT SIZE TOGGLE ── */
-    .font-toggle{
-      display:flex;flex-direction:column;align-items:center;gap:2px;
-      flex-shrink:0;
-      margin-left:12px;  /* small gap from gold button */
-      padding-left:12px;
-      border-left:1px solid rgba(30,47,74,0.12);
-    }
-    .font-toggle-label{
-      font-family:Arial,sans-serif;font-size:7px;
-      letter-spacing:.12em;text-transform:uppercase;
-      color:rgba(30,47,74,0.32);white-space:nowrap;line-height:1;
-    }
+    .font-toggle{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;margin-left:12px;padding-left:12px;border-left:1px solid rgba(30,47,74,0.12);}
+    .font-toggle-label{font-family:Arial,sans-serif;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,47,74,0.32);white-space:nowrap;line-height:1;}
     .font-toggle-btns{display:flex;align-items:center;gap:0;}
-    .font-toggle-btn{
-      background:none;border:none;cursor:pointer;
-      font-family:'Newsreader',serif;
-      color:rgba(30,47,74,0.35);
-      padding:2px 5px;line-height:1;
-      transition:color .18s;
-    }
+    .font-toggle-btn{background:none;border:none;cursor:pointer;font-family:'Newsreader',serif;color:rgba(30,47,74,0.35);padding:2px 5px;line-height:1;transition:color .18s;}
     .font-toggle-btn:first-child{font-size:11px;}
     .font-toggle-btn:last-child{font-size:15px;}
-    .font-toggle-sep{
-      width:1px;height:10px;
-      background:rgba(30,47,74,0.15);flex-shrink:0;
-    }
+    .font-toggle-sep{width:1px;height:10px;background:rgba(30,47,74,0.15);flex-shrink:0;}
     .font-toggle-btn.active{color:var(--navy,#1e2f4a);font-weight:500;}
     .font-toggle-btn:hover{color:var(--navy,#1e2f4a);}
-    /* Hide on mobile — shown instead at bottom of drawer */
     @media(max-width:860px){.font-toggle{display:none;}}
-    /* Mobile: appended inside nav drawer */
     .font-toggle-mobile{display:none;}
     @media(max-width:860px){
-      .font-toggle-mobile{
-        display:flex;flex-direction:column;align-items:center;
-        gap:4px;padding:16px 0 0;
-        border-top:1px solid rgba(184,134,11,0.15);
-        margin-top:12px;
-      }
-      .font-toggle-mobile-label{
-        font-family:Arial,sans-serif;font-size:9px;
-        letter-spacing:.12em;text-transform:uppercase;
-        color:rgba(30,47,74,0.4);white-space:nowrap;
-      }
+      .font-toggle-mobile{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0 0;border-top:1px solid rgba(184,134,11,0.15);margin-top:12px;}
+      .font-toggle-mobile-label{font-family:Arial,sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,47,74,0.4);white-space:nowrap;}
       .font-toggle-mobile-btns{display:flex;align-items:center;gap:0;}
-      .font-toggle-mobile-btn{
-        background:none;border:none;cursor:pointer;
-        font-family:'Newsreader',serif;
-        color:rgba(30,47,74,0.4);
-        padding:4px 8px;line-height:1;
-        transition:color .18s;
-      }
+      .font-toggle-mobile-btn{background:none;border:none;cursor:pointer;font-family:'Newsreader',serif;color:rgba(30,47,74,0.4);padding:4px 8px;line-height:1;transition:color .18s;}
       .font-toggle-mobile-btn:first-child{font-size:13px;}
       .font-toggle-mobile-btn:last-child{font-size:17px;}
-      .font-toggle-mobile-sep{
-        width:1px;height:13px;
-        background:rgba(30,47,74,0.15);flex-shrink:0;
-      }
-      .font-toggle-mobile-btn.active{
-        color:var(--navy,#1e2f4a);font-weight:500;
-      }
+      .font-toggle-mobile-sep{width:1px;height:13px;background:rgba(30,47,74,0.15);flex-shrink:0;}
+      .font-toggle-mobile-btn.active{color:var(--navy,#1e2f4a);font-weight:500;}
     }
-    /* Large text mode */
-    body.large-text p,
-    body.large-text li,
-    body.large-text .svc-desc,
-    body.large-text .accordion-body,
-    body.large-text .mv-body,
-    body.large-text .story-body p,
-    body.large-text .story-left p,
-    body.large-text .cred-card p,
-    body.large-text .trust-item,
-    body.large-text .tc-body,
-    body.large-text .contact-left p,
-    body.large-text .contact-sub{
-      font-size:17px!important;line-height:1.85!important;
-    }
+    body.large-text p,body.large-text li,body.large-text .svc-desc,body.large-text .accordion-body,body.large-text .mv-body,body.large-text .story-body p,body.large-text .story-left p,body.large-text .cred-card p,body.large-text .trust-item,body.large-text .tc-body,body.large-text .contact-left p,body.large-text .contact-sub{font-size:17px!important;line-height:1.85!important;}
 
 </style>
 </head>
@@ -574,23 +534,8 @@
     if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
   })();
 
-  // ── TEXT SIZE TOGGLE ─────────────────────────────────────────
-  function setFont(size) {
-    var large = size === 'large';
-    document.body.classList.toggle('large-text', large);
-    ['fontSmall','fontSmallM'].forEach(function(id){
-      var el=document.getElementById(id); if(el) el.classList.toggle('active',!large);
-    });
-    ['fontLarge','fontLargeM'].forEach(function(id){
-      var el=document.getElementById(id); if(el) el.classList.toggle('active',large);
-    });
-    localStorage.setItem('na_font_size', size);
-  }
-  (function(){
-    var saved=localStorage.getItem('na_font_size');
-    if(saved==='large'){setFont('large');}
-    else{['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('active');});}
-  })();
+  function setFont(size){var large=size==='large';document.body.classList.toggle('large-text',large);['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',!large);});['fontLarge','fontLargeM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',large);});localStorage.setItem('na_font_size',size);}
+  (function(){var s=localStorage.getItem('na_font_size');if(s==='large'){setFont('large');}else{['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('active');});}})();
 
 </script>
 </body>
