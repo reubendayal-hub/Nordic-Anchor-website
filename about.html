@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About — Nordic Anchor</title>
   <meta name="description" content="About Nordic Anchor — boutique Danish immigration consultancy built on over a decade of expertise."/>
+
+  <!-- Open Graph / WhatsApp / Social preview -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Nordic Anchor"/>
+  <meta property="og:title" content="About — Nordic Anchor"/>
+  <meta property="og:description" content="Nordic Anchor is a boutique Danish immigration consultancy founded by Reuben Dayal, with over 12 years of experience guiding companies and individuals."/>
+  <meta property="og:url" content="https://nordicanchor.dk/about"/>
+  <meta property="og:image" content="https://nordicanchor.dk/hero-bg.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="en_GB"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="About — Nordic Anchor"/>
+  <meta name="twitter:description" content="Nordic Anchor is a boutique Danish immigration consultancy founded by Reuben Dayal, with over 12 years of experience guiding companies and individuals."/>
+  <meta name="twitter:image" content="https://nordicanchor.dk/hero-bg.jpg"/>
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="wKRYrUBXHZ31vKEEOzC8IIwP2jPDMuDXTmATgweHpK8"/>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q419N227BZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q419N227BZ', {'anonymize_ip': true, 'cookie_flags': 'SameSite=Strict;Secure'});
+  </script>
   <link rel="icon" href="favicon.jpg"/>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
   <style>
@@ -208,25 +233,55 @@
       .breadcrumb a,.breadcrumb span{font-size:10px;letter-spacing:.08em;}
     }
     /* Floating back button removed */
-</style>
 
-  <!-- ═══ SEO & ANALYTICS ══════════════════════════════════════
-       Google Search Console verification
-       Google Analytics 4
-       Update GA_ID once you have it from analytics.google.com
-  ════════════════════════════════════════════════════════════ -->
-  <meta name="google-site-verification" content="wKRYrUBXHZ31vKEEOzC8IIwP2jPDMuDXTmATgweHpK8"/>
-  <!-- Google Analytics 4 — replace G-Q419N227BZ with your G-XXXXXXXX ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q419N227BZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Q419N227BZ', {
-      'anonymize_ip': true,
-      'cookie_flags': 'SameSite=Strict;Secure'
-    });
-  </script>
+    /* ── TEXT SIZE TOGGLE ── */
+    .font-toggle{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;margin-left:12px;padding-left:12px;border-left:1px solid rgba(30,47,74,0.12);}
+    .font-toggle-label{font-family:Arial,sans-serif;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,47,74,0.32);white-space:nowrap;line-height:1;}
+    .font-toggle-btns{display:flex;align-items:center;gap:0;}
+    .font-toggle-btn{
+      -webkit-appearance:none;-moz-appearance:none;appearance:none;
+      background:none;border:none;outline:none;
+      box-shadow:none;-webkit-box-shadow:none;
+      cursor:pointer;
+      font-family:'Newsreader',serif;
+      color:rgba(30,47,74,0.35);
+      padding:2px 5px;line-height:1;
+      transition:color .18s;
+    }
+    .font-toggle-btn:first-child{font-size:11px;}
+    .font-toggle-btn:last-child{font-size:15px;}
+    .font-toggle-btn:focus{outline:none;box-shadow:none;}
+    .font-toggle-sep{width:1px;height:10px;background:rgba(30,47,74,0.15);flex-shrink:0;}
+    .font-toggle-btn.active{color:var(--navy,#1e2f4a);font-weight:600;}
+    .font-toggle-btn:hover{color:var(--navy,#1e2f4a);}
+    @media(max-width:860px){.font-toggle{display:none;}}
+    /* Mobile drawer version */
+    .font-toggle-mobile{display:none;}
+    @media(max-width:860px){
+      .font-toggle-mobile{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0 0;border-top:1px solid rgba(184,134,11,0.15);margin-top:12px;}
+      .font-toggle-mobile-label{font-family:Arial,sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,47,74,0.4);white-space:nowrap;}
+      .font-toggle-mobile-btns{display:flex;align-items:center;gap:0;}
+      .font-toggle-mobile-btn{
+        -webkit-appearance:none;-moz-appearance:none;appearance:none;
+        background:none;border:none;outline:none;box-shadow:none;
+        cursor:pointer;font-family:'Newsreader',serif;
+        color:rgba(30,47,74,0.4);padding:4px 8px;line-height:1;transition:color .18s;
+      }
+      .font-toggle-mobile-btn:first-child{font-size:13px;}
+      .font-toggle-mobile-btn:last-child{font-size:17px;}
+      .font-toggle-mobile-btn:focus{outline:none;box-shadow:none;}
+      .font-toggle-mobile-sep{width:1px;height:13px;background:rgba(30,47,74,0.15);flex-shrink:0;}
+      .font-toggle-mobile-btn.active{color:var(--navy,#1e2f4a);font-weight:600;}
+    }
+    /* Large text mode */
+    body.large-text p,body.large-text li,body.large-text .svc-desc,
+    body.large-text .accordion-body,body.large-text .mv-body,
+    body.large-text .story-body p,body.large-text .story-left p,
+    body.large-text .cred-card p,body.large-text .trust-item,
+    body.large-text .tc-body,body.large-text .contact-left p,
+    body.large-text .contact-sub{font-size:17px!important;line-height:1.85!important;}
+
+</style>
 </head>
 <body>
 
@@ -267,9 +322,9 @@
   <div class="font-toggle" role="group" aria-label="Text size">
     <span class="font-toggle-label">Text size</span>
     <div class="font-toggle-btns">
-      <button class="font-toggle-btn active" id="fontSmall" onclick="setFont('normal')" title="Regular">A</button>
+      <button class="font-toggle-btn active" id="fontSmall" onclick="setFont('normal')" title="Regular text size">A</button>
       <span class="font-toggle-sep" aria-hidden="true"></span>
-      <button class="font-toggle-btn" id="fontLarge" onclick="setFont('large')" title="Large">A</button>
+      <button class="font-toggle-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size">A</button>
     </div>
   </div>
 </nav>
@@ -504,15 +559,6 @@
       <button class="font-toggle-mobile-btn" id="fontLargeM" onclick="setFont('large')" title="Large">A</button>
     </div>
   </div>
-
-  <div class="font-toggle-mobile" role="group" aria-label="Text size">
-    <span class="font-toggle-mobile-label">Text size</span>
-    <div class="font-toggle-mobile-btns">
-      <button class="font-toggle-mobile-btn active" id="fontSmallM" onclick="setFont('normal')" title="Regular">A</button>
-      <span class="font-toggle-mobile-sep" aria-hidden="true"></span>
-      <button class="font-toggle-mobile-btn" id="fontLargeM" onclick="setFont('large')" title="Large">A</button>
-    </div>
-  </div>
   </div>
 </div>
 
@@ -529,8 +575,18 @@
     if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
   })();
 
-  function setFont(size){var large=size==='large';document.body.classList.toggle('large-text',large);['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',!large);});['fontLarge','fontLargeM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',large);});localStorage.setItem('na_font_size',size);}
-  (function(){var s=localStorage.getItem('na_font_size');if(s==='large'){setFont('large');}else{['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('active');});}})();
+  function setFont(size){
+    var large=size==='large';
+    document.body.classList.toggle('large-text',large);
+    ['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',!large);});
+    ['fontLarge','fontLargeM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',large);});
+    localStorage.setItem('na_font_size',size);
+  }
+  (function(){
+    var s=localStorage.getItem('na_font_size');
+    if(s==='large'){setFont('large');}
+    else{['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('active');});}
+  })();
 
 </script>
 </body>
