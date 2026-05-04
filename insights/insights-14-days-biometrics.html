@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What "14 days for biometrics" actually means in practice — Nordic Anchor</title>
+  <meta name="description" content="The 14-day biometrics deadline is the single most common reason Danish residence permit applications get rejected and have to be restarted from scratch. Here's what the rule actually says, where the friction is in practice, and how to plan for it."/>
+  <link rel="icon" href="/favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;--cream:#f9f6f2;--warm:#f0ebe3;--white:#ffffff;--text:#2a2a2a;--muted:#888;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    /* NAV (same as other pages) */
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    @media(max-width:860px){.nav-logo-img{height:44px;}}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    /* BREADCRUMB */
+    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;white-space:nowrap;overflow:hidden;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+    .bc-crumb:hover{color:var(--gold-dk);}
+    .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
+    .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
+    @media(max-width:860px){.breadcrumb{display:none;}}
+
+    /* ARTICLE LAYOUT */
+    .article-page{padding-top:88px;}
+    .article-header{padding:84px 72px 48px;max-width:780px;margin:0 auto;}
+    .article-header-eye{display:flex;align-items:center;gap:14px;margin-bottom:32px;flex-wrap:wrap;}
+    .article-header-tag{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dk);font-weight:600;border:1px solid var(--gold-dk);padding:6px 12px;}
+    .article-header-date{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+    .article-header-readtime{font-size:12px;color:var(--muted);font-style:italic;}
+    .article-title{font-size:clamp(30px,4vw,50px);font-weight:300;color:var(--navy);line-height:1.15;letter-spacing:-0.01em;margin-bottom:24px;}
+    .article-title em{font-style:italic;color:var(--gold-dk);}
+    .article-deck{font-size:clamp(18px,2vw,21px);font-style:italic;color:var(--muted);line-height:1.6;font-weight:300;}
+    .article-byline{margin-top:36px;padding-top:24px;border-top:1px solid rgba(184,154,106,0.3);display:flex;align-items:center;gap:14px;}
+    .article-byline-img{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dk) 100%);display:flex;align-items:center;justify-content:center;color:var(--white);font-family:'Newsreader',serif;font-size:18px;font-weight:500;font-style:italic;}
+    .article-byline-text{display:flex;flex-direction:column;gap:2px;}
+    .article-byline-name{font-size:14px;font-weight:500;color:var(--navy);}
+    .article-byline-role{font-size:12px;font-style:italic;color:var(--muted);}
+    @media(max-width:860px){.article-header{padding:60px 28px 36px;}}
+
+    /* ARTICLE BODY */
+    .article-body{padding:0 72px 56px;max-width:780px;margin:0 auto;}
+    .article-body p{font-size:18px;line-height:1.85;color:var(--text);margin-bottom:24px;}
+    .article-body p:first-of-type::first-letter{font-family:'Newsreader',serif;font-size:64px;font-weight:300;float:left;line-height:0.9;margin:6px 12px 0 0;color:var(--gold-dk);font-style:italic;}
+    .article-body p strong{color:var(--navy);font-weight:500;}
+    .article-body p em{font-style:italic;}
+    .article-body h2{font-size:28px;font-weight:400;color:var(--navy);line-height:1.3;margin:48px 0 18px;letter-spacing:-0.01em;}
+    .article-body h2 em{font-style:italic;color:var(--gold-dk);}
+    .article-body h3{font-size:21px;font-weight:500;color:var(--navy);line-height:1.4;margin:36px 0 14px;}
+    .article-body blockquote{margin:32px 0;padding:24px 0 24px 32px;border-left:3px solid var(--gold-dk);font-size:21px;font-style:italic;color:var(--navy);line-height:1.6;}
+    .article-body blockquote p{margin-bottom:0;font-size:21px;color:var(--navy);}
+    .article-body ul,.article-body ol{margin:0 0 24px 24px;padding-left:14px;}
+    .article-body li{font-size:18px;line-height:1.85;color:var(--text);margin-bottom:10px;}
+    .article-body li strong{color:var(--navy);font-weight:500;}
+    .article-body a{color:var(--gold-dk);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;transition:color .2s;}
+    .article-body a:hover{color:var(--navy);}
+    .article-body hr{border:none;height:1px;background:rgba(184,154,106,0.4);margin:48px 0;}
+
+    /* CALLOUT BOX */
+    .article-body .callout{background:var(--cream);border-left:3px solid var(--gold-dk);padding:24px 28px;margin:32px 0;}
+    .article-body .callout-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);font-weight:600;margin-bottom:10px;display:block;}
+    .article-body .callout p{font-size:16px;line-height:1.75;margin-bottom:0;color:var(--text);}
+    .article-body .callout p strong{color:var(--navy);}
+
+    @media(max-width:860px){.article-body{padding:0 28px 48px;}.article-body p{font-size:17px;}.article-body p:first-of-type::first-letter{font-size:54px;}.article-body h2{font-size:24px;}.article-body blockquote{font-size:18px;padding-left:20px;}.article-body blockquote p{font-size:18px;}.article-body li{font-size:17px;}}
+
+    /* QUIET CTA — no marketing energy, just a relevant pointer */
+    .quiet-cta{margin:0 auto;max-width:780px;padding:0 72px 56px;}
+    .quiet-cta-inner{border-top:1px solid rgba(184,154,106,0.4);border-bottom:1px solid rgba(184,154,106,0.4);padding:28px 0;}
+    .quiet-cta-inner p{font-size:16px;line-height:1.75;color:var(--text);font-style:italic;margin:0;}
+    .quiet-cta-inner p strong{color:var(--navy);font-style:normal;font-weight:500;}
+    .quiet-cta-inner a{color:var(--gold-dk);text-decoration:none;border-bottom:1px solid var(--gold-dk);padding-bottom:1px;transition:color .2s,border-color .2s;}
+    .quiet-cta-inner a:hover{color:var(--navy);border-bottom-color:var(--navy);}
+    @media(max-width:860px){.quiet-cta{padding:0 28px 48px;}}
+
+    /* BACK */
+    .article-back{padding:24px 72px 80px;max-width:780px;margin:0 auto;}
+    .back-link{display:inline-flex;align-items:center;gap:10px;font-family:'Newsreader',serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s,gap .2s;}
+    .back-link:hover{color:var(--gold-dk);gap:14px;}
+    @media(max-width:860px){.article-back{padding:24px 28px 60px;}}
+
+    /* FOOTER */
+    footer{background:var(--cream);padding:56px 72px 32px;border-top:1px solid rgba(184,154,106,0.25);}
+    .footer-inner{max-width:1200px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;gap:48px;align-items:start;padding-bottom:36px;border-bottom:1px solid rgba(184,154,106,0.25);}
+    .footer-logo-img{height:56px;width:auto;display:block;}
+    .footer-center{display:flex;justify-content:center;}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:24px;}
+    .footer-nav a{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .2s;}
+    .footer-nav a:hover{color:var(--gold-dk);}
+    .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+    .footer-right a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);transition:color .2s;}
+    .footer-social a:hover{color:var(--navy);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    @media(max-width:860px){footer{padding:44px 28px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{align-items:flex-start;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;}}
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/situation-assessment" onclick="closeDrawer()">Situation Assessment</a>
+  <a href="/insights" onclick="closeDrawer()">Insights</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/insights" class="nav-pill">Insights</a>
+  <span class="nav-sep"></span>
+  <a href="/situation-assessment" class="nav-touch">Situation Assessment</a>
+</nav>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/" class="bc-crumb">Home</a>
+  <span class="bc-sep">›</span>
+  <a href="/insights" class="bc-crumb">Insights</a>
+  <span class="bc-sep">›</span>
+  <span class="bc-crumb active">14 days for biometrics, in practice</span>
+</nav>
+
+<div class="article-page">
+
+  <header class="article-header">
+    <div class="article-header-eye">
+      <span class="article-header-tag">Process Reality</span>
+      <span class="article-header-date">04 May 2026</span>
+      <span class="article-header-readtime">~ 7 min read</span>
+    </div>
+    <h1 class="article-title">What "<em>14 days for biometrics</em>" actually means in practice.</h1>
+    <p class="article-deck">SIRI's website is unambiguous about the deadline. The friction isn't in the rule — it's in the gap between submitting an application from your kitchen table and getting a fingerprint scanner to read your fingertips fourteen days later.</p>
+    <div class="article-byline">
+      <div class="article-byline-img">N</div>
+      <div class="article-byline-text">
+        <span class="article-byline-name">Nordic Anchor</span>
+        <span class="article-byline-role">Field Notes</span>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-body">
+
+    <p>The rule itself takes one sentence to state. When you submit a Danish residence permit application — whether for work, study, family reunification, or extension — you have fourteen days to record your biometric features. A facial photograph and fingerprints. If you miss the deadline, your application is rejected. Not paused. Not put on hold. <strong>Rejected.</strong> The fee is forfeit, the documents must be re-submitted, and the entire process restarts from the beginning.</p>
+
+    <p>This is one of the cleanest, most consequential rules in Danish immigration. It is also the single most common cause of self-inflicted application failure we see. Not because applicants don't know about it — most do — but because they don't appreciate the operational reality of how those fourteen days actually run.</p>
+
+    <h2>What the calendar actually looks like</h2>
+
+    <p>Fourteen days sounds like a comfortable buffer. It is not.</p>
+
+    <p>Suppose you submit your application online on a Monday afternoon. Your case order ID is generated, your fee is paid, and the SIRI clock starts. You now have until that Monday two weeks later to walk into a SIRI Citizen Centre in Denmark, a Danish embassy or consulate abroad, or a VFS Global visa centre — and have your biometric data captured.</p>
+
+    <p>From an applicant abroad, the squeeze comes in three places, often simultaneously.</p>
+
+    <h3>The VFS appointment lead time</h3>
+
+    <p>VFS Global, the third-party operator that handles biometrics for most countries, recommends booking <em>before</em> you submit your application — because the wait for a VFS appointment can itself be up to fourteen days. That advice exists for a reason. In countries with high volumes (India, Pakistan, the Philippines, Egypt, Nigeria) or limited centres (anywhere outside the capital), the next available slot is frequently a week or more out. If you submit your SIRI application before checking VFS availability, you can find yourself looking at a VFS slot on day fifteen — one day past the deadline — and there is nothing on the website that flags this as a problem.</p>
+
+    <h3>The Copenhagen bottleneck</h3>
+
+    <p>For applicants already in Denmark, the situation can be worse. SIRI Citizen Centre slots in Copenhagen routinely fill four to eight weeks ahead during peak periods — August through October when academic and corporate relocations cluster, and January through February when annual renewals stack. If you're applying in the wrong month, the next available Copenhagen appointment can be a full month past your deadline.</p>
+
+    <p>The well-known workaround is to travel to a less-busy SIRI office. Odense is roughly an hour and a half from Copenhagen by train, Aarhus and Aalborg further. Slots open weeks earlier at all three. A 300-kroner train ticket is a small price for not restarting a 4,000-kroner application from scratch — and we routinely advise clients to plan for the trip even if they live in Copenhagen, just to keep the deadline pressure off.</p>
+
+    <h3>The "I didn't know I'd booked the wrong thing" problem</h3>
+
+    <p>VFS centres handle visa applications for many countries simultaneously. The booking systems are not always clear about which appointment type covers Danish residence permit biometrics. Applicants regularly book what they believe is the right appointment, only to arrive and learn — at the counter — that they've booked a tourist visa appointment, or a Schengen short-stay biometrics slot, neither of which records data in a way SIRI accepts. The clock has been ticking the whole time.</p>
+
+    <h2>The escape valve, and why most people don't use it</h2>
+
+    <p>SIRI's own guidance contains an escape valve that very few applicants seem to notice. It says: <em>if you are not able to record your biometrics within 14 days, you must contact SIRI and inform when you will be able to do so, and send documentation of your booked appointment.</em></p>
+
+    <p>This is not a suggestion. It is a procedural pathway. If you have a confirmed VFS or embassy appointment for, say, day twenty-one — and you contact SIRI in writing before day fourteen with the appointment confirmation attached — your application will not be rejected. It will be held until biometrics are recorded.</p>
+
+    <div class="callout">
+      <span class="callout-label">In other words</span>
+      <p>The deadline is fourteen days <strong>or</strong> a documented commitment to a specific later date, made before the deadline expires. The rule punishes silence, not late biometrics.</p>
+    </div>
+
+    <p>This is the single most underused tool in the entire process. We have seen applicants forfeit fees, lose months, and miss employment start dates because they assumed the deadline was absolute and panicked themselves out of the obvious solution. <strong>If you cannot make the date, write to SIRI before the date.</strong> Reference your case order ID. Attach your booking confirmation. State your appointment date. That is all.</p>
+
+    <h2>Smaller frictions, all of which compound</h2>
+
+    <p>Beyond timing, there are smaller failures that turn what should be a five-minute appointment into a wasted journey. None of them are written about anywhere. They simply accumulate as practitioners' folklore.</p>
+
+    <h3>Fingerprints don't always read</h3>
+
+    <p>Dry skin, calluses, recent cuts, and certain manual occupations can make fingerprints difficult or impossible to capture cleanly. The scanners try multiple times; sometimes they simply can't get a usable read. If you work with your hands, moisturise for several days before your appointment. If you have a cut or a fresh blister on a finger, reschedule rather than risk a failed read that wastes the slot.</p>
+
+    <h3>The wrong photo can be worse than no photo</h3>
+
+    <p>Some VFS centres take the facial photograph on site. Others assume you'll bring one. The booking confirmation usually says, but it's the kind of detail that gets glossed over. Bring two passport-sized photos that meet ICAO standards (white background, neutral expression, no glasses, no head covering except for religious reasons) regardless of what the centre says. If they take their own, you've wasted a hundred kroner. If they don't, you've avoided a rebooking.</p>
+
+    <h3>Children require separate appointments</h3>
+
+    <p>If you're applying with family, every applicant requiring a residence card must attend separately. This is a routine source of confusion — parents arrive expecting a single appointment to cover the whole family and learn at the counter that each person needs their own slot. For a family of four during a busy month, that can mean four different appointments across two or three weeks. Plan accordingly.</p>
+
+    <h3>Some countries don't use biometrics</h3>
+
+    <p>A handful of jurisdictions (Brazil, Chile, South Korea, Sri Lanka are the ones we see most often) use a simplified identity verification process at the embassy rather than full biometric capture. If you're applying from one of these, the timeline rules are still important, but the appointment type is different, and the available locations are far more restricted. Confirm in advance.</p>
+
+    <h2>The pattern beneath all of this</h2>
+
+    <p>The 14-day rule is simple. The path to complying with it is not. The friction is mostly logistical — capacity, booking systems, geographic distance, the small mismatch between an applicant's assumptions and the operational reality of immigration infrastructure. None of this is unique to Denmark. Every immigration system has its version. What's notable about Denmark is that the consequence of getting it wrong (full restart, no partial credit) is unusually harsh, and the escape valve (write to SIRI before the deadline) is unusually well-hidden.</p>
+
+    <p>If you are about to submit a SIRI application, the practical sequence is: <strong>book your biometrics appointment first, get the confirmation in writing, and only then submit.</strong> If your appointment falls inside the fourteen days, proceed as normal. If it falls outside, write to SIRI before day fourteen with the appointment date and confirmation attached. Do not rely on memory, do not rely on phone calls, and do not assume that "I have a booking" without documented evidence will satisfy the requirement.</p>
+
+    <p>Most rejected applications we see could have been avoided by an applicant doing exactly this. The rule was not designed to fail people. It was designed to be a deadline with a documented exception path. It just happens to be one of those rules where the exception path is the bit that everyone misses.</p>
+
+    <p style="font-style:italic;color:var(--muted);font-size:16px;margin-top:48px;">— Nordic Anchor</p>
+
+  </article>
+
+  <!-- QUIET CTA — pointer, not pitch -->
+  <div class="quiet-cta">
+    <div class="quiet-cta-inner">
+      <p>If you're trying to work out whether your specific situation will fit within the deadline — or you've already submitted and want to think through your options — that's the kind of conversation the <a href="/situation-assessment">Situation Assessment Call</a> is for. <strong>Sixty minutes, DKK 500, no commitment to anything beyond the call.</strong></p>
+    </div>
+  </div>
+
+  <div class="article-back">
+    <a href="/insights" class="back-link">← Back to all Insights</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" class="footer-logo-img"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/situation-assessment">Situation Assessment</a>
+          <a href="/insights">Insights</a>
+          <a href="/about">Who We Are</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All rights reserved.</span>
+      <span class="footer-cvr">CVR: 46215540 · Copenhagen, Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function openDrawer(){document.getElementById('navDrawer').classList.add('open');document.getElementById('navOverlay').classList.add('open');document.body.style.overflow='hidden';}
+  function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.body.style.overflow='';}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+  window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);});
+</script>
+
+</body>
+</html>

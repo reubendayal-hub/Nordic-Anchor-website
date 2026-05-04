@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insights — Nordic Anchor</title>
+  <meta name="description" content="Practical interpretations and process realities of Danish immigration. The thinking that lives between the rules and how they actually work."/>
+  <link rel="icon" href="/favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;--cream:#f9f6f2;--warm:#f0ebe3;--white:#ffffff;--text:#2a2a2a;--muted:#888;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    @media(max-width:860px){.nav-logo-img{height:44px;}}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;white-space:nowrap;overflow:hidden;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+    .bc-crumb:hover{color:var(--gold-dk);}
+    .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
+    .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
+    @media(max-width:860px){.breadcrumb{display:none;}}
+
+    .opening{padding:120px 72px 56px;max-width:780px;margin-top:88px;margin-left:auto;margin-right:auto;}
+    .opening-eye{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);font-weight:500;margin-bottom:32px;display:block;}
+    .opening h1{font-size:clamp(34px,4.4vw,54px);font-weight:300;color:var(--navy);line-height:1.15;letter-spacing:-0.01em;margin-bottom:32px;}
+    .opening h1 em{font-style:italic;}
+    .opening-lead{font-size:20px;line-height:1.75;color:var(--text);font-weight:300;}
+    .opening-lead em{font-style:italic;}
+    .opening-lead strong{color:var(--navy);font-weight:500;}
+    @media(max-width:860px){.opening{padding:80px 28px 48px;}.opening-lead{font-size:18px;}}
+
+    .rule{height:1px;background:rgba(184,154,106,0.4);max-width:780px;margin:0 auto;}
+
+    .articles{padding:56px 72px 96px;max-width:780px;margin:0 auto;}
+    .articles-eye{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);font-weight:500;margin-bottom:32px;display:block;}
+
+    .article-list{display:flex;flex-direction:column;}
+    .article-card{display:grid;grid-template-columns:1fr;gap:14px;padding:32px 0;border-bottom:1px solid rgba(0,0,0,0.08);text-decoration:none;color:inherit;transition:padding-left .3s;position:relative;}
+    .article-card::before{content:'';position:absolute;left:-20px;top:0;bottom:0;width:2px;background:var(--gold-dk);opacity:0;transition:opacity .3s;}
+    .article-card:hover{padding-left:20px;}
+    .article-card:hover::before{opacity:1;}
+    .article-card:hover .article-title{color:var(--gold-dk);}
+
+    .article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+    .article-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);font-weight:600;}
+    .article-date{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+    .article-readtime{font-size:12px;color:var(--muted);font-style:italic;}
+
+    .article-title{font-size:clamp(22px,2.4vw,30px);font-weight:400;color:var(--navy);line-height:1.3;letter-spacing:-0.01em;transition:color .3s;}
+    .article-title em{font-style:italic;}
+    .article-excerpt{font-size:16px;line-height:1.75;color:var(--text);}
+
+    .article-card.upcoming{opacity:0.45;pointer-events:none;}
+    .article-card.upcoming .article-tag{color:var(--muted);}
+
+    @media(max-width:860px){.articles{padding:40px 28px 72px;}}
+
+    footer{background:var(--cream);padding:56px 72px 32px;border-top:1px solid rgba(184,154,106,0.25);}
+    .footer-inner{max-width:1200px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;gap:48px;align-items:start;padding-bottom:36px;border-bottom:1px solid rgba(184,154,106,0.25);}
+    .footer-logo-img{height:56px;width:auto;display:block;}
+    .footer-center{display:flex;justify-content:center;}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:24px;}
+    .footer-nav a{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .2s;}
+    .footer-nav a:hover{color:var(--gold-dk);}
+    .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+    .footer-right a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);transition:color .2s;}
+    .footer-social a:hover{color:var(--navy);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    @media(max-width:860px){footer{padding:44px 28px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{align-items:flex-start;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;}}
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/situation-assessment" onclick="closeDrawer()">Situation Assessment</a>
+  <a href="/insights" onclick="closeDrawer()">Insights</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/insights" class="nav-pill">Insights</a>
+  <span class="nav-sep"></span>
+  <a href="/situation-assessment" class="nav-touch">Situation Assessment</a>
+</nav>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/" class="bc-crumb">Home</a>
+  <span class="bc-sep">›</span>
+  <span class="bc-crumb active">Insights</span>
+</nav>
+
+<section class="opening">
+  <span class="opening-eye">Field Notes</span>
+  <h1>The thinking that lives <em>between the rules</em> and how they actually work.</h1>
+  <p class="opening-lead">SIRI's website tells you what's required. <strong>These notes tell you what to do about it.</strong> Process realities, situational deep-dives, and practical commentary on Danish immigration — written for the people who actually have to live with the decisions.</p>
+</section>
+
+<div class="rule"></div>
+
+<section class="articles">
+  <span class="articles-eye">All articles</span>
+  <div class="article-list">
+
+    <a href="/insights/14-days-biometrics" class="article-card">
+      <div class="article-meta">
+        <span class="article-tag">Process Reality</span>
+        <span class="article-date">04 May 2026</span>
+        <span class="article-readtime">~ 7 min read</span>
+      </div>
+      <h2 class="article-title">What "<em>14 days for biometrics</em>" actually means in practice.</h2>
+      <p class="article-excerpt">SIRI's deadline is unambiguous: fourteen days from application submission to record your biometric features, or your application is rejected and you start over. The friction isn't in the rule. It's in the gap between submitting from your kitchen table and getting a fingerprint scanner to read your fingertips two weeks later.</p>
+    </a>
+
+    <a href="#" class="article-card upcoming">
+      <div class="article-meta">
+        <span class="article-tag">Situational</span>
+        <span class="article-date">Coming soon</span>
+        <span class="article-readtime">~ 7 min read</span>
+      </div>
+      <h2 class="article-title">You've just been laid off in Denmark. <em>Here's the clock you're now on.</em></h2>
+      <p class="article-excerpt">Most expat employees don't know what happens to their permit when employment ends — and the timelines start running immediately. A clear walkthrough of what changes, what doesn't, and the deadlines that matter for staying lawfully in the country.</p>
+    </a>
+
+    <a href="#" class="article-card upcoming">
+      <div class="article-meta">
+        <span class="article-tag">For HR</span>
+        <span class="article-date">Coming soon</span>
+        <span class="article-readtime">~ 8 min read</span>
+      </div>
+      <h2 class="article-title">The hidden cost of <em>"we'll just use Fast-Track"</em>.</h2>
+      <p class="article-excerpt">Fast-Track certification is a powerful tool. It's also one of the most misunderstood routes in Danish immigration. A breakdown of when it pays off, when it doesn't, and what HR teams routinely get wrong about the four sub-schemes.</p>
+    </a>
+
+    <a href="#" class="article-card upcoming">
+      <div class="article-meta">
+        <span class="article-tag">Permanent Residence</span>
+        <span class="article-date">Coming soon</span>
+        <span class="article-readtime">~ 6 min read</span>
+      </div>
+      <h2 class="article-title">The <em>two-year gap</em> in your CPR record that nobody warns you about.</h2>
+      <p class="article-excerpt">Danish permanent residence requires a continuous record of lawful residence — but "continuous" has a specific definition that catches out applicants who left the country for what felt like a normal sabbatical or extended trip home.</p>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" class="footer-logo-img"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/situation-assessment">Situation Assessment</a>
+          <a href="/insights">Insights</a>
+          <a href="/about">Who We Are</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All rights reserved.</span>
+      <span class="footer-cvr">CVR: 46215540 · Copenhagen, Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function openDrawer(){document.getElementById('navDrawer').classList.add('open');document.getElementById('navOverlay').classList.add('open');document.body.style.overflow='hidden';}
+  function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.body.style.overflow='';}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+  window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);});
+</script>
+
+</body>
+</html>

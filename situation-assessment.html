@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Situation Assessment Call — Nordic Anchor</title>
+  <meta name="description" content="A 60-minute conversation with Nordic Anchor to talk through your immigration situation, weigh your options, and decide what makes sense to do next."/>
+  <link rel="icon" href="/favicon.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;--cream:#f9f6f2;--warm:#f0ebe3;--white:#ffffff;--text:#2a2a2a;--muted:#888;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    #mainNav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;padding:0 32px;height:88px;background:rgba(255,255,255,0.98);border-bottom:1px solid rgba(184,154,106,0.22);backdrop-filter:blur(12px);transition:box-shadow .3s;gap:10px;}
+    #mainNav.scrolled{box-shadow:0 2px 24px rgba(30,47,74,0.1);}
+    .nav-ham{display:flex;flex-direction:column;justify-content:space-between;width:20px;height:13px;cursor:pointer;flex-shrink:0;background:none;border:none;padding:14px;box-sizing:content-box;margin:-14px;}
+    .nav-ham span{display:block;height:1px;background:var(--navy);transition:width .22s;}
+    .nav-ham span:nth-child(2){width:60%;}
+    .nav-ham:hover span{width:100%;}
+    .nav-logo-link{display:flex;align-items:center;margin-right:auto;text-decoration:none;padding-left:10px;}
+    .nav-logo-img{height:64px;width:auto;display:block;}
+    @media(max-width:860px){.nav-logo-img{height:44px;}}
+    .nav-pill{font-family:'Newsreader',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:transparent;border:1px solid rgba(30,47,74,0.22);border-radius:2px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .22s,color .22s;white-space:nowrap;}
+    .nav-pill:hover{border-color:#B8860B;color:#B8860B;}
+    .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
+    .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
+    .nav-touch:hover{background:#2b3e5c;}
+    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+
+    /* DRAWER */
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
+    .nav-overlay.open{display:block;}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f9f6f2;z-index:300;padding:0 40px 48px;transform:translateX(-100%);transition:transform .32s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-right:3px solid #B8860B;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
+    .nav-drawer-logo-img{height:48px;width:auto;display:block;}
+    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close:hover{color:#1e2f4a;}
+    .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
+    .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
+    .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
+    .nav-drawer a:hover::before{opacity:1;}
+    .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
+    .nav-drawer-contact a::before{display:none;}
+
+    /* BREADCRUMB */
+    .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;white-space:nowrap;overflow:hidden;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+    .bc-crumb:hover{color:var(--gold-dk);}
+    .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
+    .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
+    @media(max-width:860px){.breadcrumb{display:none;}}
+
+    /* PAGE LAYOUT — single column, generous whitespace, low visual noise */
+    .page{margin-top:88px;}
+
+    /* OPENING */
+    .opening{padding:120px 72px 72px;max-width:740px;margin:0 auto;}
+    .opening-eye{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);font-weight:500;margin-bottom:32px;display:block;}
+    .opening-figure{margin:0 0 40px 0;padding:0;}
+    .opening-img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;object-position:center 35%;border-radius:3px;border:1px solid rgba(184,154,106,0.35);}
+    .opening h1{font-size:clamp(34px,4.4vw,54px);font-weight:300;color:var(--navy);line-height:1.15;letter-spacing:-0.01em;margin-bottom:20px;}
+    .opening h1 em{font-style:italic;color:var(--gold-dk);}
+    .opening-framing{font-size:18px;font-style:italic;color:var(--gold-dk);font-weight:400;margin-bottom:32px;line-height:1.5;letter-spacing:-0.005em;border-left:2px solid var(--gold-dk);padding-left:18px;}
+    .opening-lead{font-size:20px;line-height:1.75;color:var(--text);font-weight:300;}
+    .opening-lead em{font-style:italic;}
+    @media(max-width:860px){.opening{padding:80px 28px 56px;}.opening-lead{font-size:18px;}.opening-framing{font-size:17px;}.opening-figure{margin-bottom:32px;}}
+
+    /* RULE */
+    .rule{height:1px;background:rgba(184,154,106,0.4);max-width:740px;margin:0 auto;}
+    .rule-narrow{height:1px;background:rgba(184,154,106,0.4);max-width:60px;margin:0 auto;}
+
+    /* SECTION (reusable) */
+    .section{padding:64px 72px;max-width:740px;margin:0 auto;}
+    .section-eye{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);font-weight:500;margin-bottom:20px;display:block;}
+    .section h2{font-size:clamp(24px,2.6vw,32px);font-weight:300;color:var(--navy);line-height:1.3;letter-spacing:-0.01em;margin-bottom:24px;}
+    .section h2 em{font-style:italic;}
+    .section p{font-size:17px;line-height:1.85;color:var(--text);margin-bottom:20px;}
+    .section p:last-child{margin-bottom:0;}
+    .section p strong{color:var(--navy);font-weight:500;}
+    .section p em{font-style:italic;}
+    .section-sublead{font-size:17px;line-height:1.75;color:var(--text);margin-bottom:14px!important;}
+
+    /* Prose list — used inline in sections, dash bullets to match scope grid */
+    .prose-list{list-style:none;margin:0 0 24px 0;padding:0;}
+    .prose-list li{font-size:17px;line-height:1.75;color:var(--text);padding:6px 0 6px 22px;position:relative;}
+    .prose-list li::before{content:'—';position:absolute;left:0;top:6px;color:var(--gold-dk);font-weight:400;}
+
+    /* Proceed line */
+    .proceed-line{font-size:18px!important;line-height:1.7!important;color:var(--text);margin-bottom:0!important;}
+    .proceed-line strong{color:var(--navy);font-weight:500;}
+
+    @media(max-width:860px){.section{padding:48px 28px;}.section p{font-size:16px;}.prose-list li{font-size:16px;}.section-sublead{font-size:16px;}.proceed-line{font-size:17px!important;}}
+
+    /* WHAT IT IS — definition list style */
+    .define{padding:48px 72px 64px;max-width:740px;margin:0 auto;}
+    .define dl{display:grid;grid-template-columns:160px 1fr;gap:22px 36px;}
+    .define dt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:500;padding-top:6px;}
+    .define dd{font-size:17px;line-height:1.75;color:var(--text);}
+    .define dd strong{color:var(--navy);font-weight:500;}
+    .define dd em{font-style:italic;}
+    @media(max-width:860px){.define{padding:40px 28px 56px;}.define dl{grid-template-columns:1fr;gap:6px 0;}.define dt{padding-top:24px;}.define dt:first-child{padding-top:0;}}
+
+    /* SCOPE — modest, restrained */
+    .scope{padding:64px 72px;max-width:740px;margin:0 auto;}
+    .scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:8px;}
+    .scope-col h3{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-bottom:18px;color:var(--muted);}
+    .scope-col ul{list-style:none;}
+    .scope-col li{font-size:15px;line-height:1.7;color:var(--text);padding:8px 0;}
+    .scope-col li::before{content:'— ';color:var(--gold-dk);}
+    @media(max-width:860px){.scope{padding:48px 28px;}.scope-grid{grid-template-columns:1fr;gap:32px;}}
+
+    /* HOW TO BOOK — final block, clear and restrained */
+    .booking{padding:72px 72px 96px;max-width:740px;margin:0 auto;}
+    .booking-eye{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dk);font-weight:500;margin-bottom:18px;display:block;}
+    .booking h2{font-size:clamp(24px,2.6vw,32px);font-weight:300;color:var(--navy);line-height:1.3;letter-spacing:-0.01em;margin-bottom:24px;}
+    .booking h2 em{font-style:italic;}
+    .booking p{font-size:17px;line-height:1.85;color:var(--text);margin-bottom:24px;}
+    .booking p strong{color:var(--navy);font-weight:500;}
+
+    /* Contacts row — paired pills for email and phone */
+    .booking-contacts{display:flex;flex-direction:column;gap:12px;margin-top:36px;}
+    .booking-contact{display:flex;align-items:center;gap:14px;padding:18px 22px;border:1px solid rgba(184,154,106,0.4);border-radius:4px;text-decoration:none;color:var(--navy);transition:border-color .25s,background-color .25s,transform .25s;background:var(--white);}
+    .booking-contact:hover{border-color:var(--gold-dk);background:var(--cream);transform:translateX(2px);}
+    .booking-contact-icon{font-size:18px;line-height:1;flex-shrink:0;}
+    .booking-contact-value{font-size:17px;font-weight:400;color:var(--navy);letter-spacing:-0.005em;}
+    .booking-contact:hover .booking-contact-value{color:var(--gold-dk);}
+
+    @media(max-width:860px){.booking{padding:56px 28px 72px;}.booking p{font-size:16px;}.booking-contact-value{font-size:16px;}}
+
+    /* FOOTER */
+    footer{background:var(--cream);padding:56px 72px 32px;border-top:1px solid rgba(184,154,106,0.25);margin-top:48px;}
+    .footer-inner{max-width:1200px;margin:0 auto;}
+    .footer-top{display:grid;grid-template-columns:auto 1fr auto;gap:48px;align-items:start;padding-bottom:36px;border-bottom:1px solid rgba(184,154,106,0.25);}
+    .footer-logo-img{height:56px;width:auto;display:block;}
+    .footer-center{display:flex;justify-content:center;}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:24px;}
+    .footer-nav a{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:color .2s;}
+    .footer-nav a:hover{color:var(--gold-dk);}
+    .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+    .footer-right a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .footer-right a:hover{color:var(--gold-dk);}
+    .footer-social{display:flex;gap:16px;justify-content:flex-end;margin-top:14px;}
+    .footer-social a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid rgba(184,154,106,0.25);transition:color .2s;}
+    .footer-social a:hover{color:var(--navy);}
+    .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+    @media(max-width:860px){footer{padding:44px 28px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{align-items:flex-start;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;}}
+  </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
+    <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
+  </div>
+  <a href="/" onclick="closeDrawer()">Home</a>
+  <a href="/services" onclick="closeDrawer()">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
+  <a href="/situation-assessment" onclick="closeDrawer()">Situation Assessment</a>
+  <a href="/insights" onclick="closeDrawer()">Insights</a>
+  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <div class="nav-drawer-contact">
+    <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
+    <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
+  </div>
+</div>
+
+<nav id="mainNav">
+  <button class="nav-ham" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
+  <a href="/about" class="nav-pill">Who We Are</a>
+  <a href="/services" class="nav-pill">Services</a>
+  <a href="/insights" class="nav-pill">Insights</a>
+  <span class="nav-sep"></span>
+  <a href="/situation-assessment" class="nav-touch">Situation Assessment</a>
+</nav>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/" class="bc-crumb">Home</a>
+  <span class="bc-sep">›</span>
+  <span class="bc-crumb active">Situation Assessment Call</span>
+</nav>
+
+<div class="page">
+
+  <!-- OPENING -->
+  <section class="opening">
+    <span class="opening-eye">Situation Assessment Call</span>
+    <figure class="opening-figure">
+      <img src="/images/situation-assessment-hero.jpg" alt="" class="opening-img" loading="eager"/>
+    </figure>
+    <h1>Clarity before <em>commitment.</em></h1>
+    <p class="opening-framing">They have a decision to make, but not yet a service to buy.</p>
+    <p class="opening-lead">Most clients come to us at a point where clarity matters more than speed. Whether it's a job offer, a family member's permit, or a future application, this is about gaining clarity on your options before taking the next step.</p>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- WHAT IT IS -->
+  <section class="section">
+    <span class="section-eye">What this is</span>
+    <h2>A focused, one-hour <em>advisory session.</em></h2>
+    <p>You bring your situation — your plans, timelines, family context, and the questions that aren't easily answered through official guidance. We work through it with you and provide a clear, experience-based view of your options.</p>
+    <p class="section-sublead">We will cover:</p>
+    <ul class="prose-list">
+      <li>The permit routes realistically available to you</li>
+      <li>Options that may not be viable — and why</li>
+      <li>Key trade-offs, risks, and timelines</li>
+      <li>A practical recommendation based on your situation</li>
+    </ul>
+    <p>This is not a sales call. If a full-service engagement makes sense, we'll say so. If you can confidently proceed on your own, we'll tell you that too.</p>
+  </section>
+
+  <div class="rule-narrow"></div>
+
+  <!-- FORMAT & FEE -->
+  <section class="define">
+    <span class="section-eye" style="margin-bottom:32px;">Format & fee</span>
+    <dl>
+      <dt>Duration</dt>
+      <dd>60 minutes.</dd>
+      <dt>Format</dt>
+      <dd>Video call. In-person in central Copenhagen by arrangement.</dd>
+      <dt>Fee</dt>
+      <dd>DKK 500, including 25% VAT.</dd>
+      <dt>Payment</dt>
+      <dd>MobilePay, card, or bank transfer — prior to the session.</dd>
+    </dl>
+  </section>
+
+  <div class="rule-narrow"></div>
+
+  <!-- WHAT YOU RECEIVE -->
+  <section class="section">
+    <span class="section-eye">What you receive</span>
+    <ul class="prose-list">
+      <li>A structured discussion tailored to your situation</li>
+      <li>Clear guidance on viable permit pathways</li>
+      <li>A practical, experience-led recommendation</li>
+      <li>A concise written summary within 48 hours</li>
+    </ul>
+  </section>
+
+  <div class="rule-narrow"></div>
+
+  <!-- SCOPE -->
+  <section class="scope">
+    <span class="section-eye">Scope</span>
+    <div class="scope-grid">
+      <div class="scope-col">
+        <h3>Included</h3>
+        <ul>
+          <li>In-depth discussion of your situation</li>
+          <li>Identification of relevant permit options</li>
+          <li>Timeline and strategic considerations</li>
+          <li>Direct, honest guidance</li>
+        </ul>
+      </div>
+      <div class="scope-col">
+        <h3>Not included</h3>
+        <ul>
+          <li>Document review or formal legal assessment</li>
+          <li>Application drafting or submission</li>
+          <li>Representation before authorities</li>
+          <li>Ongoing case management</li>
+          <li>Outcome guarantees</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule-narrow"></div>
+
+  <!-- IF YOU PROCEED -->
+  <section class="section">
+    <span class="section-eye">If you choose to proceed</span>
+    <p class="proceed-line">If you engage Nordic Anchor for a full service within 30 days, <strong>we'll apply a 10% discount on the engagement.</strong></p>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- BOOKING -->
+  <section class="booking">
+    <span class="booking-eye">How to book</span>
+    <h2>Send a short email <em>with:</em></h2>
+    <ul class="prose-list">
+      <li>A brief outline of your situation</li>
+      <li>Two or three time windows that suit you</li>
+    </ul>
+    <p>We respond within one business day, and sessions are typically scheduled within the same week.</p>
+
+    <div class="booking-contacts">
+      <a href="mailto:rd@nordicanchor.dk?subject=Situation%20Assessment%20Call&body=Hello%2C%0A%0AI%27d%20like%20to%20book%20a%20Situation%20Assessment%20Call.%0A%0AA%20brief%20outline%20of%20my%20situation%3A%0A%0A%0A%0ATime%20windows%20that%20suit%20me%3A%0A%0A%0A%0AThanks." class="booking-contact">
+        <span class="booking-contact-icon" aria-hidden="true">📩</span>
+        <span class="booking-contact-value">rd@nordicanchor.dk</span>
+      </a>
+      <a href="tel:+4571396509" class="booking-contact">
+        <span class="booking-contact-icon" aria-hidden="true">📞</span>
+        <span class="booking-contact-value">+45 7139 6509</span>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="/"><img src="/logo-transparent.png" alt="Nordic Anchor" class="footer-logo-img"/></a>
+      <div class="footer-center">
+        <nav class="footer-nav">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/services/companies-employers">For Companies</a>
+          <a href="/services/individuals-family">For Individuals</a>
+          <a href="/situation-assessment">Situation Assessment</a>
+          <a href="/insights">Insights</a>
+          <a href="/about">Who We Are</a>
+        </nav>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a>
+        <a href="tel:+4571396509">+45 7139 6509</a>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Nordic Anchor. All rights reserved.</span>
+      <span class="footer-cvr">CVR: 46215540 · Copenhagen, Denmark</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function openDrawer(){document.getElementById('navDrawer').classList.add('open');document.getElementById('navOverlay').classList.add('open');document.body.style.overflow='hidden';}
+  function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.body.style.overflow='';}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+  window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20);});
+</script>
+
+</body>
+</html>
