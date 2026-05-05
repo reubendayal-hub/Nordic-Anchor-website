@@ -61,23 +61,24 @@
 
     /* HERO — full-bleed image with dark gradient, matching individuals-family.html */
     .hero{
-      position:relative;height:78vh;min-height:520px;
-      background-color:#0a1426;
-      display:flex;flex-direction:column;justify-content:flex-end;
-      padding:0 72px 64px;margin-top:88px;overflow:hidden;
+      position:relative;height:90vh;min-height:600px;
+      background-color:#1a1020;
+      display:flex;flex-direction:column;justify-content:flex-start;
+      padding:64px 72px 0;margin-top:88px;overflow:hidden;
     }
     .hero-img{
       position:absolute;inset:0;
-      background:url('/situation-assessment-hero.jpg') center 30%/contain no-repeat;
+      background:url('/situation-assessment-hero.jpg') center center/contain no-repeat;
       z-index:0;
     }
     .hero-img::before{
       content:'';position:absolute;inset:0;
-      background:linear-gradient(to right,#0a1426 0%,#0a1426 8%,transparent 25%,transparent 75%,#0a1426 92%,#0a1426 100%);
+      background:
+        linear-gradient(to right,#1a1020 0%,#1a1020 6%,rgba(26,16,32,0.4) 22%,transparent 40%,transparent 60%,rgba(26,16,32,0.4) 78%,#1a1020 94%,#1a1020 100%);
     }
     .hero-img::after{
       content:'';position:absolute;inset:0;
-      background:linear-gradient(to top,rgba(10,20,38,0.82) 0%,rgba(10,20,38,0.35) 35%,rgba(10,20,38,0.08) 65%,rgba(10,20,38,0) 100%);
+      background:linear-gradient(to bottom,rgba(10,20,38,0.55) 0%,rgba(10,20,38,0.1) 30%,rgba(10,20,38,0) 55%,rgba(10,20,38,0.45) 85%,rgba(10,20,38,0.7) 100%);
     }
     .hero-content{position:relative;z-index:1;max-width:820px;}
     .hero-tag{
