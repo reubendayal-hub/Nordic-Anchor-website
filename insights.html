@@ -27,7 +27,7 @@
     .nav-sep{width:1px;height:20px;background:rgba(184,154,106,0.3);flex-shrink:0;}
     .nav-touch{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--gold-eye);background:var(--navy);border:1px solid var(--navy);border-radius:2px;padding:9px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .22s;white-space:nowrap;}
     .nav-touch:hover{background:#2b3e5c;}
-    @media(max-width:860px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 20px;gap:8px;}}
+    @media(max-width:1100px){.nav-pill,.nav-sep{display:none;}#mainNav{padding:0 20px;gap:8px;}}
 
     .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:299;}
     .nav-overlay.open{display:block;}
@@ -105,7 +105,20 @@
     .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
     .footer-copy,.footer-cvr{font-size:11px;color:var(--muted);letter-spacing:.04em;}
     @media(max-width:860px){footer{padding:44px 28px 28px;}.footer-top{grid-template-columns:1fr;gap:32px;}.footer-right{align-items:flex-start;}.footer-social{justify-content:flex-start;}.footer-bottom{flex-direction:column;}}
-  </style>
+  
+    /* Situation Assessment button */
+    .nav-situation{font-family:'Newsreader',serif;font-size:clamp(8px,1.6vw,10px);letter-spacing:.16em;text-transform:uppercase;color:#f9f6f2;background:linear-gradient(180deg,#2b3e5c 0%,#1e2f4a 60%,#172438 100%);border:1px solid rgba(30,47,74,0.9);padding:10px 18px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .28s cubic-bezier(0.2,0,0,1);white-space:nowrap;flex-shrink:0;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),inset 0 -1px 0 rgba(0,0,0,0.25),0 2px 4px rgba(0,0,0,0.18);}
+    .nav-situation:hover{border-color:#B8860B;color:#DAA520;transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.2),0 6px 18px rgba(184,134,11,0.22),0 0 0 1px rgba(184,134,11,0.45);}
+    @media(max-width:1100px){.nav-pill,.nav-sep{display:none;}.nav-situation{font-size:9px;padding:9px 12px;gap:6px;}}
+    @media(max-width:480px){.nav-situation span{display:none;}.nav-situation{padding:9px 10px;}}
+    
+    .nav-drawer-link{display:block;font-family:'Newsreader',serif;font-size:14px;letter-spacing:.05em;color:#1e2f4a;text-decoration:none;padding:11px 32px;border-bottom:1px solid rgba(184,154,106,0.12);transition:color .2s;}
+    .nav-drawer-link:hover{color:#B8860B;}
+    .nav-drawer-sub{padding-left:44px;font-size:13px;color:#555;}
+    .nav-drawer-cta-sit{display:flex;align-items:center;gap:8px;background:rgba(184,154,106,0.06);color:#1e2f4a;font-weight:500;}
+    .nav-drawer-cta-sit svg{flex-shrink:0;}
+    .nav-drawer-cta-free{color:#B8860B;font-weight:500;}
+    </style>
 </head>
 <body>
 
@@ -115,17 +128,20 @@
     <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
     <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
   </div>
-  <a href="/" onclick="closeDrawer()">Home</a>
-  <a href="/services" onclick="closeDrawer()">Services</a>
-  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
-  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
-  <a href="/situation-assessment" onclick="closeDrawer()">Situation Assessment</a>
-  <a href="/insights" onclick="closeDrawer()">Insights</a>
-  <a href="/about" onclick="closeDrawer()">Who We Are</a>
+  <a href="/" onclick="closeDrawer()" class="nav-drawer-link">Home</a>
+  <a href="/about" onclick="closeDrawer()" class="nav-drawer-link">Who We Are</a>
+  <a href="/services" onclick="closeDrawer()" class="nav-drawer-link">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-sub">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-sub">For Individuals</a>
+  <a href="/insights" onclick="closeDrawer()" class="nav-drawer-link" style="display:flex;align-items:center;">Insights <span style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;background:rgba(184,154,106,0.15);color:#B8860B;padding:2px 5px;margin-left:auto;flex-shrink:0;">New</span></a>
+  <a href="/pricing" onclick="closeDrawer()" class="nav-drawer-link">Pricing</a>
+  <a href="/situation-assessment" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-sit"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
+  <a href="/get-started" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-free">→ Free Assessment</a>
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
     <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
   </div>
+</div>
 </div>
 
 <nav id="mainNav">
@@ -134,8 +150,10 @@
   <a href="/about" class="nav-pill">Who We Are</a>
   <a href="/services" class="nav-pill">Services</a>
   <a href="/insights" class="nav-pill">Insights</a>
-  <span class="nav-sep"></span>
-  <a href="/situation-assessment" class="nav-touch">Situation Assessment</a>
+  <a href="/pricing" class="nav-pill">Pricing</a>
+  <div class="nav-sep"></div>
+  <a href="/situation-assessment" class="nav-situation"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
+  <a href="/get-started" class="nav-gs">Free Assessment</a>
 </nav>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">

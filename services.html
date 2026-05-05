@@ -5,32 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Services — Nordic Anchor</title>
   <meta name="description" content="Danish immigration services for companies and individuals."/>
-
-  <!-- Open Graph / WhatsApp / Social preview -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="Nordic Anchor"/>
-  <meta property="og:title" content="Services — Nordic Anchor"/>
-  <meta property="og:description" content="Danish immigration services for companies and individuals. Fast-Track work permits, family permits, EU residence, permanent residence, job change and renewals."/>
-  <meta property="og:url" content="https://nordicanchor.dk/services"/>
-  <meta property="og:image" content="https://nordicanchor.dk/hero-bg.jpg"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta property="og:locale" content="en_GB"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Services — Nordic Anchor"/>
-  <meta name="twitter:description" content="Danish immigration services for companies and individuals. Fast-Track work permits, family permits, EU residence, permanent residence, job change and renewals."/>
-  <meta name="twitter:image" content="https://nordicanchor.dk/hero-bg.jpg"/>
-  <!-- Google Search Console -->
-  <meta name="google-site-verification" content="wKRYrUBXHZ31vKEEOzC8IIwP2jPDMuDXTmATgweHpK8"/>
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N95RWEMNNV"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-N95RWEMNNV', {'anonymize_ip': true, 'cookie_flags': 'SameSite=Strict;Secure'});
-  </script>
-  <link rel="icon" href="/favicon.jpg"/>
+  <link rel="icon" href="favicon.jpg"/>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -196,60 +171,34 @@
     .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
     .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
     .bc-home{width:10px;height:10px;flex-shrink:0;}
-    /* Breadcrumb — visible on all screens */
-    @media(max-width:860px){.breadcrumb{padding:7px 16px;top:88px;gap:3px;}
-      .breadcrumb a,.breadcrumb span{font-size:10px;letter-spacing:.08em;}
-    }
-    /* Floating back button removed */
-
-    /* ── TEXT SIZE TOGGLE ── */
-    .font-toggle{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;margin-left:12px;padding-left:12px;border-left:1px solid rgba(30,47,74,0.12);}
-    .font-toggle-label{font-family:Arial,sans-serif;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,47,74,0.32);white-space:nowrap;line-height:1;}
-    .font-toggle-btns{display:flex;align-items:center;gap:0;}
-    .font-toggle-btn{
-      -webkit-appearance:none;-moz-appearance:none;appearance:none;
-      background:none;border:none;outline:none;
-      box-shadow:none;-webkit-box-shadow:none;
-      cursor:pointer;
-      font-family:'Newsreader',serif;
-      color:rgba(30,47,74,0.35);
-      padding:2px 5px;line-height:1;
-      transition:color .18s;
-    }
-    .font-toggle-btn:first-child{font-size:11px;}
-    .font-toggle-btn:last-child{font-size:15px;}
-    .font-toggle-btn:focus{outline:none;box-shadow:none;}
-    .font-toggle-sep{width:1px;height:10px;background:rgba(30,47,74,0.15);flex-shrink:0;}
-    .font-toggle-btn.active{color:var(--navy,#1e2f4a);font-weight:600;}
-    .font-toggle-btn:hover{color:var(--navy,#1e2f4a);}
-    @media(max-width:860px){.font-toggle{display:none;}}
-    /* Mobile drawer version */
-    .font-toggle-mobile{display:none;}
+    /* Hide breadcrumb on mobile — use floating back button instead */
+    @media(max-width:860px){.breadcrumb{display:none;}}
+    /* FLOATING BACK BUTTON - mobile only */
+    #backBtn{display:none;}
     @media(max-width:860px){
-      .font-toggle-mobile{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0 0;border-top:1px solid rgba(184,134,11,0.15);margin-top:12px;}
-      .font-toggle-mobile-label{font-family:Arial,sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,47,74,0.4);white-space:nowrap;}
-      .font-toggle-mobile-btns{display:flex;align-items:center;gap:0;}
-      .font-toggle-mobile-btn{
-        -webkit-appearance:none;-moz-appearance:none;appearance:none;
-        background:none;border:none;outline:none;box-shadow:none;
-        cursor:pointer;font-family:'Newsreader',serif;
-        color:rgba(30,47,74,0.4);padding:4px 8px;line-height:1;transition:color .18s;
-      }
-      .font-toggle-mobile-btn:first-child{font-size:13px;}
-      .font-toggle-mobile-btn:last-child{font-size:17px;}
-      .font-toggle-mobile-btn:focus{outline:none;box-shadow:none;}
-      .font-toggle-mobile-sep{width:1px;height:13px;background:rgba(30,47,74,0.15);flex-shrink:0;}
-      .font-toggle-mobile-btn.active{color:var(--navy,#1e2f4a);font-weight:600;}
+      #backBtn{display:flex;align-items:center;gap:6px;position:fixed;bottom:24px;left:16px;z-index:300;
+        background:var(--navy);color:var(--gold-eye);font-family:'Newsreader',serif;
+        font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+        padding:10px 18px;border-radius:20px;border:1px solid #B8860B;
+        cursor:pointer;text-decoration:none;
+        box-shadow:0 4px 20px rgba(30,47,74,0.35);
+        transition:opacity .2s,transform .2s;}
+      #backBtn.hidden{opacity:0;pointer-events:none;transform:translateY(8px);}
     }
-    /* Large text mode */
-    body.large-text p,body.large-text li,body.large-text .svc-desc,
-    body.large-text .accordion-body,body.large-text .mv-body,
-    body.large-text .story-body p,body.large-text .story-left p,
-    body.large-text .cred-card p,body.large-text .trust-item,
-    body.large-text .tc-body,body.large-text .contact-left p,
-    body.large-text .contact-sub{font-size:17px!important;line-height:1.85!important;}
 
-</style>
+    /* Situation Assessment button */
+    .nav-situation{font-family:'Newsreader',serif;font-size:clamp(8px,1.6vw,10px);letter-spacing:.16em;text-transform:uppercase;color:#f9f6f2;background:linear-gradient(180deg,#2b3e5c 0%,#1e2f4a 60%,#172438 100%);border:1px solid rgba(30,47,74,0.9);padding:10px 18px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .28s cubic-bezier(0.2,0,0,1);white-space:nowrap;flex-shrink:0;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),inset 0 -1px 0 rgba(0,0,0,0.25),0 2px 4px rgba(0,0,0,0.18);}
+    .nav-situation:hover{border-color:#B8860B;color:#DAA520;transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.2),0 6px 18px rgba(184,134,11,0.22),0 0 0 1px rgba(184,134,11,0.45);}
+    @media(max-width:1100px){.nav-pill,.nav-sep{display:none;}.nav-situation{font-size:9px;padding:9px 12px;gap:6px;}}
+    @media(max-width:480px){.nav-situation span{display:none;}.nav-situation{padding:9px 10px;}}
+    
+    .nav-drawer-link{display:block;font-family:'Newsreader',serif;font-size:14px;letter-spacing:.05em;color:#1e2f4a;text-decoration:none;padding:11px 32px;border-bottom:1px solid rgba(184,154,106,0.12);transition:color .2s;}
+    .nav-drawer-link:hover{color:#B8860B;}
+    .nav-drawer-sub{padding-left:44px;font-size:13px;color:#555;}
+    .nav-drawer-cta-sit{display:flex;align-items:center;gap:8px;background:rgba(184,154,106,0.06);color:#1e2f4a;font-weight:500;}
+    .nav-drawer-cta-sit svg{flex-shrink:0;}
+    .nav-drawer-cta-free{color:#B8860B;font-weight:500;}
+    </style>
 </head>
 <body>
 
@@ -259,17 +208,20 @@
     <img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-drawer-logo-img"/>
     <button class="nav-drawer-close" onclick="closeDrawer()">&#x2715;</button>
   </div>
-  <a href="/" onclick="closeDrawer()">Home</a>
-  <a href="/services" onclick="closeDrawer()">Services</a>
-  <a href="/services/companies-employers" onclick="closeDrawer()">For Companies</a>
-  <a href="/services/individuals-family" onclick="closeDrawer()">For Individuals</a>
-  <a href="/pricing" onclick="openPricing(event);closeDrawer();">Pricing</a>
-  <a href="/about" onclick="closeDrawer()">Who We Are</a>
-  <a href="/get-started" onclick="closeDrawer()" style="font-family:'Newsreader',serif;font-size:14px;letter-spacing:.08em;color:#B8860B;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(184,134,11,0.2);margin-bottom:4px;display:block;">→ Free Assessment</a>
+  <a href="/" onclick="closeDrawer()" class="nav-drawer-link">Home</a>
+  <a href="/about" onclick="closeDrawer()" class="nav-drawer-link">Who We Are</a>
+  <a href="/services" onclick="closeDrawer()" class="nav-drawer-link">Services</a>
+  <a href="/services/companies-employers" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-sub">For Companies</a>
+  <a href="/services/individuals-family" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-sub">For Individuals</a>
+  <a href="/insights" onclick="closeDrawer()" class="nav-drawer-link" style="display:flex;align-items:center;">Insights <span style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;background:rgba(184,154,106,0.15);color:#B8860B;padding:2px 5px;margin-left:auto;flex-shrink:0;">New</span></a>
+  <a href="/pricing" onclick="closeDrawer()" class="nav-drawer-link">Pricing</a>
+  <a href="/situation-assessment" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-sit"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
+  <a href="/get-started" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-free">→ Free Assessment</a>
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
     <a href="tel:+4571396509" onclick="closeDrawer()">+45 7139 6509</a>
   </div>
+</div>
 </div>
   <a href="/" onclick="closeDrawer()">Home</a>
   <a href="/services" onclick="closeDrawer()">Services</a>
@@ -281,18 +233,11 @@
   <a href="/" class="nav-logo-link"><img src="/logo-transparent.png" alt="Nordic Anchor" class="nav-logo-img"/></a>
   <a href="/about" class="nav-pill">Who We Are</a>
   <a href="/services" class="nav-pill">Services</a>
+  <a href="/insights" class="nav-pill">Insights</a>
   <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
-  <a href="/#contact" class="nav-touch">Get in Touch</a>
+  <a href="/situation-assessment" class="nav-situation"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
   <a href="/get-started" class="nav-gs">Free Assessment</a>
-  <div class="font-toggle" role="group" aria-label="Text size">
-    <span class="font-toggle-label">Text size</span>
-    <div class="font-toggle-btns">
-      <button class="font-toggle-btn active" id="fontSmall" onclick="setFont('normal')" title="Regular text size">A</button>
-      <span class="font-toggle-sep" aria-hidden="true"></span>
-      <button class="font-toggle-btn" id="fontLarge" onclick="setFont('large')" title="Larger text size">A</button>
-    </div>
-  </div>
 </nav>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -301,6 +246,7 @@
   <span class="bc-crumb active">Services</span>
 </nav>
 
+<a id="backBtn" class="hidden" href="#" onclick="history.back();return false;">&#8592; Back</a>
 
 <section class="page-hero">
   <span class="section-eyebrow">Expert Danish Immigration Guidance</span>
@@ -416,15 +362,6 @@
         <span class="pricing-card-cta">View individual pricing &nbsp;→</span>
       </a>
     </div>
-
-  <div class="font-toggle-mobile" role="group" aria-label="Text size">
-    <span class="font-toggle-mobile-label">Text size</span>
-    <div class="font-toggle-mobile-btns">
-      <button class="font-toggle-mobile-btn active" id="fontSmallM" onclick="setFont('normal')" title="Regular">A</button>
-      <span class="font-toggle-mobile-sep" aria-hidden="true"></span>
-      <button class="font-toggle-mobile-btn" id="fontLargeM" onclick="setFont('large')" title="Large">A</button>
-    </div>
-  </div>
   </div>
 </div>
 
@@ -444,20 +381,6 @@
     if(!btn)return;
     if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
   })();
-
-  function setFont(size){
-    var large=size==='large';
-    document.body.classList.toggle('large-text',large);
-    ['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',!large);});
-    ['fontLarge','fontLargeM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle('active',large);});
-    localStorage.setItem('na_font_size',size);
-  }
-  (function(){
-    var s=localStorage.getItem('na_font_size');
-    if(s==='large'){setFont('large');}
-    else{['fontSmall','fontSmallM'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('active');});}
-  })();
-
 </script>
 </body>
 </html>
