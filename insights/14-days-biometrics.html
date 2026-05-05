@@ -13,7 +13,7 @@
 
 
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{--navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;--cream:#f9f6f2;--warm:#f0ebe3;--white:#ffffff;--text:#2a2a2a;--muted:#888;}
+    :root{--navy:#1e2f4a;--navy-mid:#2b3e5c;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;--cream:#f9f6f2;--warm:#f0ebe3;--white:#ffffff;--text:#2a2a2a;--muted:#555;}
     html{scroll-behavior:smooth;}
     body{font-family:'Newsreader',Georgia,serif;background:var(--white);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
@@ -41,20 +41,20 @@
     .nav-drawer.open{transform:translateX(0);}
     .nav-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 28px;border-bottom:1px solid rgba(184,134,11,0.25);margin-bottom:12px;}
     .nav-drawer-logo-img{height:48px;width:auto;display:block;}
-    .nav-drawer-close{background:none;border:none;color:#888;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
+    .nav-drawer-close{background:none;border:none;color:#555;font-size:22px;cursor:pointer;transition:color .2s;padding:4px;}
     .nav-drawer-close:hover{color:#1e2f4a;}
     .nav-drawer a{font-family:'Newsreader',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#1e2f4a;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(184,134,11,0.15);transition:color .2s,padding-left .2s;display:flex;align-items:center;gap:10px;}
     .nav-drawer a:hover{color:#B8860B;padding-left:6px;}
     .nav-drawer a::before{content:'';width:18px;height:1px;background:#B8860B;opacity:0;transition:opacity .2s;flex-shrink:0;}
     .nav-drawer a:hover::before{opacity:1;}
     .nav-drawer-contact{margin-top:auto;padding-top:28px;border-top:1px solid rgba(184,134,11,0.2);}
-    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#888;border-bottom:none;padding:6px 0;}
+    .nav-drawer-contact a{font-size:12px;letter-spacing:.04em;text-transform:none;color:#555;border-bottom:none;padding:6px 0;}
     .nav-drawer-contact a:hover{color:#B8860B;padding-left:0;}
     .nav-drawer-contact a::before{display:none;}
 
     /* BREADCRUMB */
     .breadcrumb{background:#fff;border-bottom:1px solid rgba(184,154,106,0.2);padding:9px 32px;display:flex;align-items:center;gap:6px;position:sticky;top:88px;z-index:100;white-space:nowrap;overflow:hidden;}
-    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#888;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+    .bc-crumb{font-size:10px;letter-spacing:.1em;color:#555;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
     .bc-crumb:hover{color:var(--gold-dk);}
     .bc-crumb.active{color:var(--navy);font-weight:500;pointer-events:none;}
     .bc-sep{font-size:9px;color:rgba(184,154,106,0.5);flex-shrink:0;}
@@ -135,7 +135,7 @@
       transition:border-color .25s,box-shadow .25s;
     }
     .card:hover{
-      border-color:rgba(184,134,11,0.5);
+      border-color:#9a6f00;
       box-shadow:0 6px 28px rgba(30,47,74,0.06);
     }
     .card::before{
@@ -206,7 +206,7 @@
     /* Card 05 — accent (gold-tinted background) */
     .card-accent{
       background:linear-gradient(180deg,#f7efde 0%,#fbf6eb 100%);
-      border-color:rgba(184,134,11,0.4);
+      border-color:#9a6f00;
     }
     .card-accent::before{opacity:1;}
     .card-proceed{font-size:19px!important;line-height:1.7!important;}
@@ -338,7 +338,7 @@
     }
     .form-success p{font-size:16px;line-height:1.7;color:var(--text);margin-bottom:14px;}
     .form-success p:last-child{margin-bottom:0;}
-    .form-success-meta{font-size:13px!important;color:var(--muted)!important;font-style:italic;}
+    .form-success-meta{font-size:13px!important;color:#555!important;font-style:italic;}
 
     @media(max-width:860px){
       .booking-flow{padding:60px 20px 72px;}
@@ -386,7 +386,7 @@
     
     /* TEXT SIZE TOGGLE */
     .nav-text-size{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;margin-left:8px;}
-    .nav-text-size-label{font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:#888;line-height:1;}
+    .nav-text-size-label{font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:#555;line-height:1;}
     .nav-text-size-btns{display:flex;align-items:baseline;gap:4px;}
     .nav-ts-btn{background:none;border:none;cursor:pointer;color:#1e2f4a;font-family:'Newsreader',serif;line-height:1;padding:0;transition:color .2s;}
     .nav-ts-btn:hover{color:#B8860B;}
@@ -446,7 +446,7 @@
     .articles-label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#B8860B;}
     .filter-row{display:flex;gap:8px;flex-wrap:wrap;}
     .filter-btn{font-family:'Newsreader',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-      background:none;border:1px solid rgba(30,47,74,0.2);color:#777;padding:5px 14px;cursor:pointer;transition:all .2s;}
+      background:none;border:1px solid rgba(30,47,74,0.2);color:#444;padding:5px 14px;cursor:pointer;transition:all .2s;}
     .filter-btn.active,.filter-btn:hover{border-color:#1e2f4a;color:#1e2f4a;}
 
     /* Featured card — full width horizontal */
@@ -461,8 +461,8 @@
     .feat-meta{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
     .article-tag{font-size:8px;letter-spacing:.2em;text-transform:uppercase;
       color:#fff;background:#1e2f4a;padding:4px 10px;}
-    .article-date{font-size:11px;color:#999;letter-spacing:.06em;}
-    .article-read{font-size:11px;color:#bbb;}
+    .article-date{font-size:11px;color:#555;letter-spacing:.06em;}
+    .article-read{font-size:11px;color:#666;}
     .feat-body h2{font-family:'Newsreader',serif;font-size:clamp(20px,2vw,28px);font-weight:300;
       color:#1e2f4a;line-height:1.25;margin-bottom:14px;}
     .feat-body h2 em{font-style:italic;}
@@ -618,8 +618,8 @@
     <div class="article-byline">
       <div class="article-byline-img">N</div>
       <div class="article-byline-text">
-        <span class="article-byline-name">Nordic Anchor</span>
-        <span class="article-byline-role">Field Notes</span>
+        <span class="article-byline-name">Reuben Dayal</span>
+        <span class="article-byline-role">Danish Immigration Consultant</span>
       </div>
     </div>
   </header>
@@ -693,7 +693,7 @@
 
     <p>Most rejected applications we see could have been avoided by an applicant doing exactly this. The rule was not designed to fail people. It was designed to be a deadline with a documented exception path. It just happens to be one of those rules where the exception path is the bit that everyone misses.</p>
 
-    <p style="font-style:italic;color:var(--muted);font-size:16px;margin-top:48px;">— Nordic Anchor</p>
+    
 
   </article>
 
