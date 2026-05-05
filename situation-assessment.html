@@ -61,11 +61,25 @@
 
     /* HERO — full-bleed image with dark gradient, matching individuals-family.html */
     .hero{
-      position:relative;height:62vh;min-height:440px;
-      background:linear-gradient(to bottom,rgba(10,20,38,0.78) 0%,rgba(10,20,38,0.55) 45%,rgba(10,20,38,0.18) 75%,rgba(10,20,38,0) 100%),url('/images/situation-assessment-hero.jpg') center 35%/cover no-repeat;
-      display:flex;flex-direction:column;justify-content:flex-start;
-      padding:64px 72px 0;margin-top:88px;
+      position:relative;height:78vh;min-height:520px;
+      background-color:#0a1426;
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:0 72px 64px;margin-top:88px;overflow:hidden;
     }
+    .hero-img{
+      position:absolute;inset:0;
+      background:url('/situation-assessment-hero.jpg') center 30%/contain no-repeat;
+      z-index:0;
+    }
+    .hero-img::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(to right,#0a1426 0%,#0a1426 8%,transparent 25%,transparent 75%,#0a1426 92%,#0a1426 100%);
+    }
+    .hero-img::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(10,20,38,0.82) 0%,rgba(10,20,38,0.35) 35%,rgba(10,20,38,0.08) 65%,rgba(10,20,38,0) 100%);
+    }
+    .hero-content{position:relative;z-index:1;max-width:820px;}
     .hero-tag{
       display:inline-block;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;
       color:var(--gold-eye);border:2px solid rgba(184,154,106,0.7);
@@ -74,11 +88,11 @@
     }
     .hero h1{
       font-size:clamp(34px,4.6vw,62px);font-weight:300;
-      color:var(--white);line-height:1.15;
+      color:var(--gold-eye);line-height:1.15;
       max-width:820px;letter-spacing:-0.01em;
-      text-shadow:0 2px 18px rgba(8,15,32,0.5);
+      text-shadow:0 2px 18px rgba(8,15,32,0.7);
     }
-    .hero h1 em{font-style:italic;color:var(--gold-eye);}
+    .hero h1 em{font-style:italic;color:#fff;}
     @media(max-width:860px){
       .hero{padding:48px 28px 0;height:auto;min-height:400px;}
     }
@@ -373,6 +387,7 @@
     .nav-drawer-cta-sit svg{flex-shrink:0;}
     .nav-drawer-cta-free{color:#B8860B;font-weight:500;}
     </style>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
 
@@ -420,137 +435,125 @@
 
   <!-- HERO -->
   <section class="hero">
-    <span class="hero-tag">Situation Assessment Call</span>
-    <h1>Clarity before <em>commitment.</em></h1>
-  </section>
-
-  <!-- INTRO STRIP -->
-  <section class="intro-strip">
-    <div class="intro-strip-inner">
-      <div class="intro-strip-left">
-        <span class="intro-strip-label">A standing invitation</span>
-        <p>They have a decision to make, but not yet a service to buy.</p>
-        <p class="intro-strip-lead">Most clients come to us at a point where clarity matters more than speed. Whether it's a job offer, a family member's permit, or a future application, this is about gaining clarity on your options before taking the next step.</p>
-      </div>
+    <div class="hero-img"></div>
+    <div class="hero-content">
+      <span class="hero-tag">Situation Assessment Call</span>
+      <h1 style="color:var(--gold-eye);">Clarity before <em>commitment.</em></h1>
+      <p style="font-size:clamp(15px,1.6vw,19px);font-style:italic;color:rgba(255,255,255,0.82);line-height:1.7;max-width:680px;margin-top:18px;text-shadow:0 1px 8px rgba(8,15,32,0.6);">Get a quick, clear overview of your situation and the options available, so you can confidently decide your next steps — without any obligation to commit to a specific service.</p>
     </div>
   </section>
 
-  <!-- CARD STACK -->
-  <section class="cards">
 
-    <!-- Card 01 — What this is -->
-    <article class="card">
-      <div class="card-num">01</div>
-      <span class="card-eye">What this is</span>
-      <h2 class="card-h">A focused, one-hour <em>advisory session.</em></h2>
-      <p>You bring your situation — your plans, timelines, family context, and the questions that aren't easily answered through official guidance. We work through it with you and provide a clear, experience-based view of your options.</p>
-      <p class="card-sublead">We will cover:</p>
-      <ul class="card-list">
-        <li>The permit routes realistically available to you</li>
-        <li>Options that may not be viable &mdash; and why</li>
-        <li>Key trade-offs, risks, and timelines</li>
-        <li>A practical recommendation based on your situation</li>
-      </ul>
-      <p>This is not a sales call. If a full-service engagement makes sense, we'll say so. If you can confidently proceed on your own, we'll tell you that too.</p>
-    </article>
 
-    <!-- Card 02 — What you receive -->
-    <article class="card">
-      <div class="card-num">02</div>
-      <span class="card-eye">What you receive</span>
-      <h2 class="card-h">A clear, practical <em>way forward.</em></h2>
-      <ul class="card-list">
-        <li>A structured discussion tailored to your situation</li>
-        <li>Clear guidance on viable permit pathways</li>
-        <li>A practical, experience-led recommendation</li>
-        <li>A concise written summary within 48 hours</li>
-      </ul>
-    </article>
+  <!-- CONTENT -->
+  <div style="max-width:1100px;margin:0 auto;padding:72px 72px 0;">
 
-    <!-- Card 03 — Format & Fee -->
-    <article class="card">
-      <div class="card-num">03</div>
-      <span class="card-eye">Format &amp; fee</span>
-      <h2 class="card-h">The practicalities, <em>at a glance.</em></h2>
-      <dl class="card-define">
-        <dt>Duration</dt>
-        <dd>60 minutes.</dd>
-        <dt>Format</dt>
-        <dd>Video call. In-person in Hørsholm by arrangement.</dd>
-        <dt>Fee</dt>
-        <dd>DKK 500, including 25% VAT.</dd>
-        <dt>Payment</dt>
-        <dd>MobilePay, card, or bank transfer &mdash; prior to the session.</dd>
-      </dl>
-    </article>
-
-    <!-- Card 04 — Scope -->
-    <article class="card">
-      <div class="card-num">04</div>
-      <span class="card-eye">Scope</span>
-      <h2 class="card-h">What's included, <em>and what isn't.</em></h2>
-      <div class="card-scope-grid">
-        <div class="card-scope-col card-scope-yes">
-          <h3>Included</h3>
-          <ul>
-            <li>In-depth discussion of your situation</li>
-            <li>Identification of relevant permit options</li>
-            <li>Timeline and strategic considerations</li>
-            <li>Direct, honest guidance</li>
-          </ul>
-        </div>
-        <div class="card-scope-col card-scope-no">
-          <h3>Not included</h3>
-          <ul>
-            <li>Document review or formal legal assessment</li>
-            <li>Application drafting or submission</li>
-            <li>Representation before authorities</li>
-            <li>Ongoing case management</li>
-            <li>Outcome guarantees</li>
-          </ul>
-        </div>
+    <!-- FACT ROW — compact stats strip -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(184,154,106,0.15);border:1px solid rgba(184,154,106,0.15);margin-bottom:72px;">
+      <div style="background:#fff;padding:28px 24px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b89a6a;margin-bottom:8px;">Duration</div>
+        <div style="font-size:22px;font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;">60 mins</div>
       </div>
-    </article>
-
-    <!-- Card 05 — If you proceed -->
-    <article class="card card-accent">
-      <div class="card-num">05</div>
-      <span class="card-eye">If you choose to proceed</span>
-      <h2 class="card-h">A small thank-you for <em>working with us.</em></h2>
-      <p class="card-proceed">If you engage Nordic Anchor for a full service within 30 days of your Situation Assessment Call, <strong>we'll apply a 10% discount on the engagement.</strong></p>
-    </article>
-
-  </section>
-
-  <!-- BOOKING — express flow -->
-  <section class="booking-flow">
-    <div class="booking-flow-header">
-      <span class="booking-flow-eye">Book your call</span>
-      <h2 class="booking-flow-h">Three steps. <em>Same week.</em></h2>
-      <p class="booking-flow-sub">Pick a slot, share a brief description of your situation, and we'll send you a payment link by email within hours. Once payment is confirmed, your call is locked in.</p>
+      <div style="background:#fff;padding:28px 24px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b89a6a;margin-bottom:8px;">Format</div>
+        <div style="font-size:22px;font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;">Video call</div>
+        <div style="font-size:12px;font-style:italic;color:#888;margin-top:4px;">In-person in Hørsholm by arrangement</div>
+      </div>
+      <div style="background:#fff;padding:28px 24px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b89a6a;margin-bottom:8px;">Fee</div>
+        <div style="font-size:22px;font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;">DKK 500</div>
+        <div style="font-size:12px;font-style:italic;color:#888;margin-top:4px;">incl. 25% VAT · paid before the call</div>
+      </div>
+      <div style="background:#fff;padding:28px 24px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b89a6a;margin-bottom:8px;">If you proceed</div>
+        <div style="font-size:22px;font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;">10% off</div>
+        <div style="font-size:12px;font-style:italic;color:#888;margin-top:4px;">any full service within 30 days</div>
+      </div>
     </div>
 
-    <!-- Step 1: Calendly -->
-    <div class="booking-step">
-      <div class="booking-step-num">1</div>
-      <div class="booking-step-body">
-        <h3 class="booking-step-h">Pick a time that suits you.</h3>
-        <p class="booking-step-p">Choose any available 60-minute slot below.</p>
-        <div class="calendly-wrap">
-          <div class="calendly-inline-widget" data-url="https://calendly.com/nordic-anchor/situation-assessment-call-60-mins?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=ffffff&text_color=1e2f4a&primary_color=b8860b" style="min-width:280px;height:680px;"></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- TWO COLUMN — what we cover + what you receive -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-bottom:72px;">
+      <div>
+        <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#B8860B;display:block;margin-bottom:18px;">What we cover</span>
+        <h2 style="font-size:clamp(22px,2.4vw,32px);font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;line-height:1.25;margin-bottom:20px;">A focused conversation about <em style="font-style:italic;">your</em> specific situation.</h2>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="font-size:15px;color:#444;padding:10px 0;border-bottom:1px solid rgba(184,154,106,0.15);display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>The permit routes realistically available to you</li>
+          <li style="font-size:15px;color:#444;padding:10px 0;border-bottom:1px solid rgba(184,154,106,0.15);display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>Options that may not be viable — and why</li>
+          <li style="font-size:15px;color:#444;padding:10px 0;border-bottom:1px solid rgba(184,154,106,0.15);display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>Key trade-offs, risks, and timelines</li>
+          <li style="font-size:15px;color:#444;padding:10px 0;display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>A practical recommendation based on your situation</li>
+        </ul>
+        <p style="font-size:13px;font-style:italic;color:#888;margin-top:20px;line-height:1.7;">This is not a sales call. If a full-service engagement makes sense, we'll say so. If you can confidently proceed on your own, we'll tell you that too.</p>
+      </div>
+      <div>
+        <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#B8860B;display:block;margin-bottom:18px;">What you receive</span>
+        <h2 style="font-size:clamp(22px,2.4vw,32px);font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;line-height:1.25;margin-bottom:20px;">Clarity — and a written <em style="font-style:italic;">summary to keep.</em></h2>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="font-size:15px;color:#444;padding:10px 0;border-bottom:1px solid rgba(184,154,106,0.15);display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>A structured discussion tailored to your situation</li>
+          <li style="font-size:15px;color:#444;padding:10px 0;border-bottom:1px solid rgba(184,154,106,0.15);display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>Clear guidance on viable permit pathways</li>
+          <li style="font-size:15px;color:#444;padding:10px 0;border-bottom:1px solid rgba(184,154,106,0.15);display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>A practical, experience-led recommendation</li>
+          <li style="font-size:15px;color:#444;padding:10px 0;display:flex;gap:12px;align-items:flex-start;"><span style="color:#B8860B;flex-shrink:0;">—</span>A concise written summary sent within 24 hours</li>
+        </ul>
+        <div style="margin-top:20px;padding:16px 20px;background:rgba(184,154,106,0.06);border-left:2px solid #B8860B;">
+          <p style="font-size:13px;color:#555;line-height:1.7;margin:0;font-style:italic;">Not included: document review, application drafting, formal legal assessment, or ongoing case management.</p>
         </div>
       </div>
     </div>
 
-    <!-- Step 2: Form -->
-    <div class="booking-step">
-      <div class="booking-step-num">2</div>
-      <div class="booking-step-body">
-        <h3 class="booking-step-h">Tell us briefly about your situation.</h3>
-        <p class="booking-step-p">A short outline helps us prepare for the call &mdash; nothing exhaustive needed.</p>
+  </div>
 
-        <form class="booking-form" id="acForm" action="https://formspree.io/f/mlgzbwep" method="POST">
+  <!-- BOOKING STRIP — navy, full width -->
+  <section style="background:#1e2f4a;padding:72px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 20%,#DAA520 50%,#b89a6a 80%,transparent);"></div>
+    <div style="max-width:1100px;margin:0 auto;">
+
+      <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#b89a6a;display:block;margin-bottom:18px;">Book your call</span>
+      <h2 style="font-size:clamp(24px,2.6vw,36px);font-weight:300;color:#f9f6f2;font-family:'Newsreader',serif;line-height:1.25;margin-bottom:12px;">Three steps. <em style="font-style:italic;color:#DAA520;">Same week.</em></h2>
+      <p style="font-size:15px;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:48px;line-height:1.65;">Pick a time, share a brief outline of your situation, and we'll send a payment link within one business day. Your slot is confirmed once payment is received.</p>
+
+      <!-- STEP 1 — Calendly -->
+      <div style="margin-bottom:48px;">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+          <span style="font-size:28px;font-weight:300;color:rgba(184,154,106,0.5);font-family:'Newsreader',serif;line-height:1;flex-shrink:0;">1</span>
+          <div>
+            <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#b89a6a;margin-bottom:4px;">Pick a time</div>
+            <p style="font-size:15px;color:rgba(255,255,255,0.8);margin:0;line-height:1.6;">Choose any available 60-minute slot below — no payment yet, just a preferred time.</p>
+          </div>
+        </div>
+        <div style="border:1px solid rgba(184,154,106,0.2);background:rgba(255,255,255,0.03);padding:4px;">
+          <div class="calendly-inline-widget"
+            data-url="https://calendly.com/nordic-anchor/situation-assessment-call-60-mins?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=1a2840&text_color=f0e8d8&primary_color=b8860b"
+            style="min-width:100%;height:660px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 — Form -->
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+          <span style="font-size:28px;font-weight:300;color:rgba(184,154,106,0.5);font-family:'Newsreader',serif;line-height:1;flex-shrink:0;">2</span>
+          <div>
+            <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#b89a6a;margin-bottom:4px;">Tell us about your situation</div>
+            <p style="font-size:15px;color:rgba(255,255,255,0.8);margin:0;line-height:1.6;">A short outline helps us prepare — nothing exhaustive. Once submitted, we'll send a payment link within one business day.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start;">
+          <!-- Step 3 explainer -->
+          <div style="padding-top:8px;">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+              <span style="font-size:28px;font-weight:300;color:rgba(184,154,106,0.5);font-family:'Newsreader',serif;line-height:1;flex-shrink:0;">3</span>
+              <div>
+                <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#b89a6a;margin-bottom:4px;">Confirm payment — we do the rest</div>
+                <p style="font-size:15px;color:rgba(255,255,255,0.8);margin:0;line-height:1.6;">DKK 500 secures your slot. Once paid, you'll receive a calendar invite with the call link. Reschedules are free up to 24 hours before the session.</p>
+              </div>
+            </div>
+            <div style="padding:20px 24px;border:1px solid rgba(184,154,106,0.2);background:rgba(184,154,106,0.05);margin-top:8px;">
+              <p style="font-size:13px;font-style:italic;color:rgba(255,255,255,0.55);line-height:1.75;margin:0;">If you go on to engage Nordic Anchor for a full service within 30 days of your call, we'll apply a <strong style="color:#DAA520;font-style:normal;">10% discount</strong> on the engagement fee.</p>
+            </div>
+          </div>
+          <!-- Form -->
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(184,154,106,0.2);padding:36px;">
+            <div id="booking-form">
+<form class="booking-form" id="acForm" action="https://formspree.io/f/mlgzbwep" method="POST">
           <input type="hidden" name="_subject" value="Situation Assessment Call booking">
 
           <div class="form-row">
@@ -588,30 +591,19 @@
           <input type="hidden" name="_format" value="plain">
           <button type="submit" class="booking-submit">Submit booking request &nbsp;&rarr;</button>
         </form>
-
-        <div class="form-success" id="acFormSuccess" style="display:none;">
-          <div class="form-success-icon">&check;</div>
-          <h3>Thank you &mdash; we'll be in touch shortly.</h3>
-          <p>Your booking request has been received. You'll get an email from <strong>rd@nordicanchor.dk</strong> within one business day with a payment link. Once payment is confirmed, your slot is locked in and we'll send the calendar invite with the call details.</p>
-          <p class="form-success-meta">If you don't see the email within 24 hours, please check your spam folder or contact us directly at +45 7139 6509.</p>
+            </div>
+            <div id="booking-ty" style="display:none;text-align:center;padding:32px 0;">
+              <div style="font-size:36px;color:#B8860B;margin-bottom:16px;">✓</div>
+              <h3 style="font-family:'Newsreader',serif;font-weight:300;font-size:24px;color:#f9f6f2;margin-bottom:12px;">Thank you — we'll be in touch shortly.</h3>
+              <p style="font-size:14px;font-style:italic;color:rgba(255,255,255,0.65);line-height:1.7;">Your booking request has been received. You'll get an email from rd@nordicanchor.dk within one business day with a payment link. Once payment is confirmed, your slot is locked in.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Step 3: explainer -->
-    <div class="booking-step">
-      <div class="booking-step-num">3</div>
-      <div class="booking-step-body">
-        <h3 class="booking-step-h">Confirm payment &mdash; we take it from there.</h3>
-        <p class="booking-step-p">You'll receive a payment link by email within one business day. Once you've paid, the slot is yours and we'll send the calendar invite with the call link. Reschedules are free up to 24 hours before the session.</p>
-      </div>
     </div>
-
   </section>
 
-</div>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
