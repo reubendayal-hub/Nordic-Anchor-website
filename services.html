@@ -198,6 +198,17 @@
     .nav-drawer-cta-sit{display:flex;align-items:center;gap:8px;background:rgba(184,154,106,0.06);color:#1e2f4a;font-weight:500;}
     .nav-drawer-cta-sit svg{flex-shrink:0;}
     .nav-drawer-cta-free{color:#B8860B;font-weight:500;}
+    
+    /* TEXT SIZE TOGGLE */
+    .nav-text-size{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;margin-left:8px;}
+    .nav-text-size-label{font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:#888;line-height:1;}
+    .nav-text-size-btns{display:flex;align-items:baseline;gap:4px;}
+    .nav-ts-btn{background:none;border:none;cursor:pointer;color:#1e2f4a;font-family:'Newsreader',serif;line-height:1;padding:0;transition:color .2s;}
+    .nav-ts-btn:hover{color:#B8860B;}
+    .nav-ts-btn.ts-small{font-size:12px;}
+    .nav-ts-btn.ts-large{font-size:16px;}
+    .nav-ts-btn.active{color:#B8860B;}
+    @media(max-width:1100px){.nav-text-size{display:none;}}
     </style>
 </head>
 <body>
@@ -215,7 +226,7 @@
   <a href="/services/individuals-family" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-sub">For Individuals</a>
   <a href="/insights" onclick="closeDrawer()" class="nav-drawer-link" style="display:flex;align-items:center;">Insights <span style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;background:rgba(184,154,106,0.15);color:#B8860B;padding:2px 5px;margin-left:auto;flex-shrink:0;">New</span></a>
   <a href="/pricing" onclick="closeDrawer()" class="nav-drawer-link">Pricing</a>
-  <a href="/situation-assessment" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-sit"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
+  <a href="/situation-assessment" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-sit" style="display:flex;align-items:center;"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment <span style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;background:rgba(184,154,106,0.15);color:#B8860B;padding:2px 5px;margin-left:auto;flex-shrink:0;">New</span></a>
   <a href="/get-started" onclick="closeDrawer()" class="nav-drawer-link nav-drawer-cta-free">→ Free Assessment</a>
   <div class="nav-drawer-contact">
     <a href="mailto:rd@nordicanchor.dk" onclick="closeDrawer()">rd@nordicanchor.dk</a>
@@ -238,6 +249,7 @@
   <div class="nav-sep"></div>
   <a href="/situation-assessment" class="nav-situation"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
   <a href="/get-started" class="nav-gs">Free Assessment</a>
+  <div class="nav-text-size"><span class="nav-text-size-label">Text Size</span><div class="nav-text-size-btns"><button class="nav-ts-btn ts-small" onclick="setTextSize('small')" title="Smaller text">A</button><button class="nav-ts-btn ts-large active" onclick="setTextSize('large')" title="Larger text">A</button></div></div>
 </nav>
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -380,6 +392,20 @@
     var btn=document.getElementById('backBtn');
     if(!btn)return;
     if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1){btn.classList.remove('hidden');}
+  })();
+
+  // TEXT SIZE TOGGLE
+  function setTextSize(size){
+    var root=document.documentElement;
+    if(size==='small'){root.style.fontSize='14px';}
+    else{root.style.fontSize='';}
+    document.querySelectorAll('.nav-ts-btn').forEach(function(b){b.classList.remove('active');});
+    var active=document.querySelector('.nav-ts-btn.'+(size==='small'?'ts-small':'ts-large'));
+    if(active)active.classList.add('active');
+    try{localStorage.setItem('na_text_size',size);}catch(e){}
+  }
+  (function(){
+    try{var s=localStorage.getItem('na_text_size');if(s)setTextSize(s);}catch(e){}
   })();
 </script>
 </body>
