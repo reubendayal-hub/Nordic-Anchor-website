@@ -184,7 +184,7 @@
   <a href="/about" class="nav-pill">Who We Are</a>
   <a href="/services" class="nav-pill">Services</a>
   <a href="/insights" class="nav-pill">Insights</a>
-  <a href="/pricing" class="nav-pill">Pricing</a>
+  <a href="/pricing" class="nav-pill" onclick="openPricing(event)">Pricing</a>
   <div class="nav-sep"></div>
   <a href="/situation-assessment" class="nav-situation"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="#B8860B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5C2 2.5 3.5 1 5 2.5L6.2 4c.4.5.3 1.2-.2 1.6L5.4 6c.3.7.8 1.4 1.6 2.2.8.8 1.5 1.3 2.2 1.6l.4-.6c.4-.5 1.1-.6 1.6-.2l1.5 1.2C13 11.5 11.5 13 11.5 13c-5 0-9.5-4.5-9.5-10.5z"/></svg> Situation Assessment</a>
   <a href="/get-started" class="nav-gs">Free Assessment</a>
@@ -356,6 +356,32 @@
   (function(){
     try{var s=localStorage.getItem('na_text_size');if(s)setTextSize(s);}catch(e){}
   })();
+
+  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
 </script>
+<div class="pricing-modal" id="pricingModal">
+    <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
+    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
+    <h2>Which best describes you?</h2>
+    <p>Select your situation and we'll show you the full pricing for every service &mdash; no hidden fees, no surprises.</p>
+    <div class="pricing-cards">
+      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Companies &amp; Employers</span>
+        <h3>Hiring internationally<br><em>with confidence.</em></h3>
+        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
+        <div class="pricing-card-range">From DKK 3,500 / mo</div>
+        <span class="pricing-card-cta">View employer services &nbsp;&rarr;</span>
+      </a>
+      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Individuals &amp; Families</span>
+        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
+        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
+        <div class="pricing-card-range">From DKK 2,500</div>
+        <span class="pricing-card-cta">View individual services &nbsp;&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
