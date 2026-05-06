@@ -558,6 +558,28 @@
     .article-back{padding:24px 72px 80px;max-width:780px;margin:0 auto;}
     .back-link:hover{color:var(--gold-dk);gap:14px;}
     @media(max-width:860px){.article-back{padding:24px 28px 60px;}}
+  
+    /* ── MOBILE NAV FIX ── */
+    @media(max-width:1100px){
+      #mainNav{align-items:flex-end;padding:0 16px 0;}
+      .nav-ham{align-self:flex-end;margin-bottom:10px;}
+      .nav-logo-link{align-self:center;margin-bottom:0;}
+      .nav-situation{
+        white-space:normal;
+        text-align:center;
+        line-height:1.35;
+        font-size:9px;
+        padding:8px 10px;
+        max-width:108px;
+        align-self:flex-end;
+        margin-bottom:6px;
+        gap:5px;
+      }
+      .nav-text-size{display:none;}
+    }
+    @media(max-width:400px){
+      .nav-situation{font-size:8px;padding:7px 8px;max-width:90px;}
+    }
   </style>
 </head>
 <body>
