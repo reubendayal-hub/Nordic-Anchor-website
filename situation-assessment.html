@@ -817,7 +817,8 @@
   function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
   function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
 </script>
-
+</div>
+<div id="pricingOverlay" onclick="closePricing()"></div>
 <div class="pricing-modal" id="pricingModal">
     <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
     <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
@@ -840,6 +841,5 @@
       </a>
     </div>
   </div>
-</div>
 </body>
 </html>
