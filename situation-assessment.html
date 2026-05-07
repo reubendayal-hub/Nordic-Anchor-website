@@ -435,7 +435,7 @@
     /* ── SA PAGE MOBILE ── */
     @media(max-width:700px){
       /* Hero clears the 2-row nav */
-      .hero{margin-top:115px!important;padding:0 20px 40px!important;}
+      .hero{margin-top:128px!important;padding:0 20px 40px!important;}
 
       /* Stat row: 4-col → 2x2 */
       .fact-row{grid-template-columns:1fr 1fr!important;}
@@ -471,6 +471,35 @@
         padding:40px 20px!important;
       }
     }
+  
+    /* ── BOOKING FORM CONTRAST ── */
+    .booking-form .form-label,
+    .booking-form label{color:rgba(255,255,255,0.92)!important;font-weight:400;}
+    .booking-form .form-input,
+    .booking-form input,
+    .booking-form textarea,
+    .booking-form select{
+      background:rgba(255,255,255,0.12)!important;
+      border:1px solid rgba(184,154,106,0.4)!important;
+      color:#ffffff!important;
+      font-size:15px!important;
+    }
+    .booking-form input::placeholder,
+    .booking-form textarea::placeholder{color:rgba(255,255,255,0.45)!important;}
+    .booking-form .form-field-checkbox label,
+    .booking-form .checkbox-label{color:rgba(255,255,255,0.85)!important;font-style:italic;}
+    .booking-form .form-field-label{color:rgba(255,255,255,0.75)!important;}
+    .booking-section input,
+    .booking-section textarea{
+      background:rgba(255,255,255,0.12)!important;
+      color:#ffffff!important;
+      border-color:rgba(184,154,106,0.4)!important;
+    }
+    .booking-section input::placeholder,
+    .booking-section textarea::placeholder{color:rgba(255,255,255,0.45)!important;}
+    .booking-section label,
+    .booking-section .form-label{color:rgba(255,255,255,0.9)!important;}
+    .booking-section .form-field-checkbox label{color:rgba(255,255,255,0.85)!important;}
   </style>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
