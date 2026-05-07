@@ -383,28 +383,5 @@
   function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
   function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
 </script>
-<div class="pricing-modal" id="pricingModal">
-    <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
-    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
-    <h2>Which best describes you?</h2>
-    <p>Select your situation and we'll show you the full pricing for every service &mdash; no hidden fees, no surprises.</p>
-    <div class="pricing-cards">
-      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
-        <span class="pricing-card-tag">For Companies &amp; Employers</span>
-        <h3>Hiring internationally<br><em>with confidence.</em></h3>
-        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
-        <div class="pricing-card-range">From DKK 3,500 / mo</div>
-        <span class="pricing-card-cta">View employer services &nbsp;&rarr;</span>
-      </a>
-      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
-        <span class="pricing-card-tag">For Individuals &amp; Families</span>
-        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
-        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
-        <div class="pricing-card-range">From DKK 2,500</div>
-        <span class="pricing-card-cta">View individual services &nbsp;&rarr;</span>
-      </a>
-    </div>
-  </div>
-</div>
 </body>
 </html>
