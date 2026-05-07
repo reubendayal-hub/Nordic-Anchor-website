@@ -431,47 +431,45 @@
     @media(max-width:380px){.nav-situation,.nav-gs{font-size:8px;padding:8px 6px;}}
   
   
-    /* ── SITUATION ASSESSMENT MOBILE ── */
+  
+    /* ── SA PAGE MOBILE ── */
     @media(max-width:700px){
-      /* Hero padding */
-      .hero{padding:0 20px 40px!important;margin-top:112px!important;}
+      /* Hero clears the 2-row nav */
+      .hero{margin-top:115px!important;padding:0 20px 40px!important;}
 
-      /* Stat tiles: 2x2 grid instead of 4 col */
+      /* Stat row: 4-col → 2x2 */
       .fact-row{grid-template-columns:1fr 1fr!important;}
 
-      /* What we cover / receive: stack */
+      /* Cover/receive 2-col → single col */
       .cover-grid{grid-template-columns:1fr!important;gap:32px!important;}
 
-      /* Booking section padding */
-      .booking-strip{padding:40px 20px!important;}
+      /* Booking section: full-width padding */
+      .booking-section{padding:40px 20px!important;}
 
-      /* Booking 3-col: stack all */
-      .booking-steps{grid-template-columns:1fr!important;gap:24px!important;}
-      .booking-form-wrap{grid-template-columns:1fr!important;gap:24px!important;}
+      /* Step 2 form grid: 2-col → single col */
+      .booking-form-grid{grid-template-columns:1fr!important;gap:24px!important;}
 
-      /* General inline grid overrides */
-      div[style*="grid-template-columns:1fr 1.2fr"],
-      div[style*="grid-template-columns:1fr 1fr;gap:48"],
-      div[style*="grid-template-columns:1fr 1fr;gap:64"],
-      div[style*="grid-template-columns:1fr 1fr;gap:80"]{
+      /* Calendly height on mobile */
+      .calendly-inline-widget{height:500px!important;}
+
+      /* Override all inline grids inside the page content */
+      .page div[style*="grid-template-columns:1fr 1fr"],
+      .page div[style*="grid-template-columns:1fr 1.2fr"]{
         grid-template-columns:1fr!important;
         gap:24px!important;
       }
-      div[style*="grid-template-columns:repeat(4,1fr)"]{
+      .page div[style*="grid-template-columns:repeat(4"]{
         grid-template-columns:1fr 1fr!important;
+        gap:1px!important;
       }
-      /* Section padding */
-      div[style*="max-width:1100px;margin:0 auto;padding:72px"]{
+      /* Section inner padding */
+      .page > section[style*="padding:72px"],
+      .page > div > div[style*="padding:72px 72px"]{
         padding:40px 20px 0!important;
       }
-      section[style*="padding:72px"]{
+      .page section[style*="background:#1e2f4a"][style*="padding:72px"]{
         padding:40px 20px!important;
       }
-    }
-  
-    @media(max-width:1100px){
-      .hero,[class*="hero"]{margin-top:115px!important;}
-      section.hero,div.hero{margin-top:115px!important;}
     }
   </style>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -541,7 +539,7 @@
   <div style="max-width:1100px;margin:0 auto;padding:72px 72px 0;">
 
     <!-- FACT ROW — compact stats strip -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(184,154,106,0.15);border:1px solid rgba(184,154,106,0.15);margin-bottom:72px;">
+    <div class="fact-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(184,154,106,0.15);border:1px solid rgba(184,154,106,0.15);margin-bottom:72px;">
       <div style="background:#fff;padding:28px 24px;">
         <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b89a6a;margin-bottom:8px;">Duration</div>
         <div style="font-size:22px;font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;">60 mins</div>
@@ -564,7 +562,7 @@
     </div>
 
     <!-- TWO COLUMN — what we cover + what you receive -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-bottom:72px;">
+    <div class="cover-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-bottom:72px;">
       <div>
         <span style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#B8860B;display:block;margin-bottom:18px;">What we cover</span>
         <h2 style="font-size:clamp(22px,2.4vw,32px);font-weight:300;color:#1e2f4a;font-family:'Newsreader',serif;line-height:1.25;margin-bottom:20px;">A focused conversation about <em style="font-style:italic;">your</em> specific situation.</h2>
@@ -594,7 +592,7 @@
   </div>
 
   <!-- BOOKING STRIP — navy, full width -->
-  <section style="background:#1e2f4a;padding:72px;position:relative;overflow:hidden;">
+  <section class="booking-section" style="background:#1e2f4a;padding:72px;position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 20%,#DAA520 50%,#b89a6a 80%,transparent);"></div>
     <div style="max-width:1100px;margin:0 auto;">
 
@@ -628,7 +626,7 @@
             <p style="font-size:15px;color:rgba(255,255,255,0.8);margin:0;line-height:1.6;">A short outline helps us prepare — nothing exhaustive. Once submitted, we'll send a payment link within one business day.</p>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start;">
+        <div class="booking-form-grid" style="display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start;">
           <!-- Step 3 explainer -->
           <div style="padding-top:8px;">
             <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
