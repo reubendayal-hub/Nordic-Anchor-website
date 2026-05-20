@@ -242,6 +242,18 @@
     @media(max-width:860px){.breadcrumb{display:none;}}
     /* FLOATING BACK BUTTON - mobile only */
     @media(max-width:860px){
+      .hero{height:auto;min-height:100svh;padding:100px 28px 60px;}
+      .hero h1{font-size:clamp(28px,7.5vw,42px);line-height:1.15;margin-bottom:16px;}
+      .hero-eyebrow{font-size:9px;padding:6px 14px;margin-bottom:18px;}
+      .hero-sub{font-size:clamp(14px,3.8vw,16px);margin-bottom:36px;max-width:100%;}
+    }
+    @media(max-width:480px){
+      .hero{padding:88px 22px 52px;}
+      .hero h1{font-size:clamp(26px,8vw,36px);line-height:1.18;}
+      .hero-sub{font-size:14px;}
+    }
+    @media(max-width:380px){
+      .hero h1{font-size:clamp(24px,8.5vw,32px);}
     }
 
     /* Situation Assessment button */
