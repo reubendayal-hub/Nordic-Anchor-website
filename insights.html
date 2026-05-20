@@ -769,9 +769,7 @@ function filterIns(btn, tag) {
   }
 }
 
-  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
-  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
-  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
+}
 </script>
 
 <div class="pricing-overlay" id="pricingOverlay" onclick="closePricingOutside(event)">
@@ -797,6 +795,12 @@ function filterIns(btn, tag) {
       </a>
     </div>
   </div>
+</div>
 
+<script>
+  function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
+</script>
 </body>
 </html>
