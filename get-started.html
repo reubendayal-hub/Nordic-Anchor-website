@@ -148,6 +148,9 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--page-bg);color:var(
 .btn-primary:disabled{opacity:.45;cursor:not-allowed;filter:none;}
 .btn-back{font-family:'Newsreader',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--body);background:transparent;border:1px solid var(--border);padding:13px 24px;cursor:pointer;transition:all .2s;}
 .btn-back:hover{border-color:var(--navy);color:var(--navy);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+    .step-eyebrow{opacity:0;animation:fadeUp .8s ease .2s forwards;}
+    .step-heading{opacity:0;animation:fadeUp .8s ease .35s forwards;}
 </style>
 
   <!-- ═══ SEO & ANALYTICS ══════════════════════════════════════
