@@ -65,10 +65,10 @@
 
     /* PAGE HERO — white, centred, matching screenshot */
     .page-hero{background:var(--white);padding:80px 72px 64px;margin-top:72px;text-align:center;}
-    .section-eyebrow{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;font-weight:500;}
-    .page-hero h1{font-size:clamp(36px,5.5vw,68px);font-weight:300;color:var(--navy);line-height:1.12;margin-bottom:0;letter-spacing:-.01em;}
-    .gold-rule{width:52px;height:1.5px;background:var(--gold);opacity:.55;margin:28px auto 0;}
-    @keyframes fadeUp{to{opacity:1;transform:translateY(0);}from{opacity:0;transform:translateY(16px);}}
+    .section-eyebrow{display:block;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;font-weight:500;opacity:0;animation:fadeUp .8s ease .15s forwards;}
+    .page-hero h1{font-size:clamp(36px,5.5vw,68px);font-weight:300;color:var(--navy);line-height:1.12;margin-bottom:0;letter-spacing:-.01em;opacity:0;animation:fadeUp .8s ease .3s forwards;}
+    .gold-rule{width:52px;height:1.5px;background:var(--gold);margin:28px auto 0;opacity:0;animation:fadeUp .8s ease .42s forwards;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
     /* SPLIT PANELS — gap with gold divider centred in it */
     .split-panels{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:28px 20px 0;background:var(--white);position:relative;}
@@ -243,7 +243,7 @@
         margin-top:118px!important;
       }
     }
-  </style>
+</style>
 </head>
 <body>
 

@@ -537,6 +537,26 @@
       @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
     .hero-tag{opacity:0;animation:fadeUp .8s ease .15s forwards;}
     .hero h1{opacity:0;animation:fadeUp .8s ease .35s forwards;}
+    .pricing-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,25,40,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
+    .pricing-overlay.open{display:flex;}
+    .pricing-modal{background:var(--white);max-width:720px;width:100%;padding:56px 52px;position:relative;}
+    .pricing-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;transition:color .2s;}
+    .pricing-modal-close:hover{color:var(--navy);}
+    .pricing-modal-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:16px;display:block;}
+    .pricing-modal h2{font-size:clamp(24px,3vw,36px);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:12px;}
+    .pricing-modal p{font-size:15px;font-style:italic;color:#666;margin-bottom:40px;line-height:1.75;}
+    .pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .pricing-card{display:flex;flex-direction:column;padding:32px 28px;text-decoration:none;border:1px solid rgba(184,134,11,0.3);transition:all .25s;position:relative;}
+    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#b89a6a 30%,#DAA520 50%,#b89a6a 70%,transparent);}
+    .pricing-card:hover{border-color:var(--gold-dk);background:rgba(184,134,11,0.03);transform:translateY(-2px);}
+    .pricing-card-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:14px;}
+    .pricing-card h3{font-size:20px;font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+    .pricing-card h3 em{font-style:italic;}
+    .pricing-card p{font-size:13px;font-style:italic;color:#666;line-height:1.65;margin-bottom:20px;flex:1;}
+    .pricing-card-range{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:16px;}
+    .pricing-card-cta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);display:inline-flex;align-items:center;gap:8px;transition:gap .2s;}
+    .pricing-card:hover .pricing-card-cta{gap:14px;}
+    @media(max-width:600px){.pricing-cards{grid-template-columns:1fr;}
 </style>
 </head>
 <body>
@@ -751,6 +771,32 @@ function filterIns(btn, tag) {
 
   function openPricing(e) { e.preventDefault(); document.getElementById('pricingOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
   function closePricing() { document.getElementById('pricingOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closePricingOutside(e) { if(e.target === document.getElementById('pricingOverlay')) closePricing(); }
 </script>
+
+<div class="pricing-overlay" id="pricingOverlay" onclick="closePricingOutside(event)">
+  <div class="pricing-modal" id="pricingModal">
+    <button class="pricing-modal-close" onclick="closePricing()">&#x2715;</button>
+    <span class="pricing-modal-eyebrow">Transparent Flat-Fee Pricing</span>
+    <h2>Which best describes you?</h2>
+    <p>Select your situation and we'll show you the full pricing for every service &mdash; no hidden fees, no surprises.</p>
+    <div class="pricing-cards">
+      <a href="/services/companies-employers" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Companies &amp; Employers</span>
+        <h3>Hiring internationally<br><em>with confidence.</em></h3>
+        <p>Fast-Track certification, work permits, right-to-work audits and HR retainer packages.</p>
+        <div class="pricing-card-range">From DKK 3,500 / mo</div>
+        <span class="pricing-card-cta">View employer services &nbsp;&rarr;</span>
+      </a>
+      <a href="/services/individuals-family" onclick="closePricing()" class="pricing-card">
+        <span class="pricing-card-tag">For Individuals &amp; Families</span>
+        <h3>Moving to Denmark<br><em>or continued residence.</em></h3>
+        <p>Work permits, family reunification, EU residence, permanent residence and more.</p>
+        <div class="pricing-card-range">From DKK 2,500</div>
+        <span class="pricing-card-cta">View individual services &nbsp;&rarr;</span>
+      </a>
+    </div>
+  </div>
+
 </body>
 </html>
