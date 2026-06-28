@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Case Information — Nordic Anchor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1e2f4a;--gold:#b89a6a;--gold-dk:#B8860B;--gold-eye:#DAA520;
+  --cream:#f9f6f2;--white:#ffffff;--text:#2a2a2a;--muted:#888888;
+  --border:rgba(184,154,106,0.22);--border-strong:rgba(184,154,106,0.45);
+  --gold-grad:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);
+}
+body{font-family:'Newsreader',Georgia,serif;background:var(--cream);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+nav{background:var(--navy);padding:0 32px;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{height:34px;}
+.nav-domain{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.hero{background:var(--navy);padding:56px 32px 48px;text-align:center;}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-eye);margin-bottom:18px;display:block;}
+.hero-title{font-size:clamp(26px,4vw,42px);font-weight:300;color:#fff;line-height:1.25;margin-bottom:12px;}
+.hero-rule{width:44px;height:1.5px;background:var(--gold);opacity:.55;margin:18px auto;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto;line-height:1.8;}
+#access-gate{max-width:520px;margin:48px auto;padding:0 24px;}
+.gate-card{background:var(--white);border:1px solid var(--border);padding:40px;}
+.gate-title{font-size:22px;font-weight:300;color:var(--navy);margin-bottom:10px;}
+.gate-hint{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:24px;}
+.gate-input{width:100%;font-family:'Newsreader',Georgia,serif;font-size:16px;color:var(--text);background:#fff;border:1px solid var(--border-strong);padding:13px 16px;outline:none;border-radius:2px;margin-bottom:12px;transition:border-color .2s;}
+.gate-input:focus{border-color:var(--gold-dk);}
+.gate-error{font-size:13px;color:#c0392b;margin-bottom:12px;display:none;padding:10px 14px;background:#fdf0f0;border-left:3px solid #c0392b;}
+.gate-btn{width:100%;background:var(--gold-grad);border:none;cursor:pointer;font-family:'Newsreader',Georgia,serif;font-size:15px;font-weight:500;color:var(--navy);padding:14px;letter-spacing:.08em;border-radius:2px;}
+.gate-note{font-size:12px;color:var(--muted);margin-top:14px;text-align:center;line-height:1.7;}
+#form-wrap{display:none;max-width:680px;margin:0 auto;padding:40px 24px 80px;}
+.card{background:var(--white);border:1px solid var(--border);padding:36px 40px;margin-bottom:28px;}
+.card-title{font-size:19px;font-weight:300;color:var(--navy);margin-bottom:6px;}
+.card-hint{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.7;}
+.field{margin-bottom:20px;}
+label.fl{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:7px;font-weight:500;}
+label.fl .opt{font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;}
+input[type=text],input[type=email],input[type=tel],input[type=date],textarea{width:100%;font-family:'Newsreader',Georgia,serif;font-size:15px;color:var(--text);background:#fff;border:1px solid var(--border-strong);padding:11px 14px;outline:none;border-radius:2px;transition:border-color .2s;}
+input:focus,textarea:focus{border-color:var(--gold-dk);box-shadow:0 0 0 3px rgba(184,134,11,.1);}
+textarea{resize:vertical;min-height:90px;line-height:1.7;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.rg{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+.rp{display:flex;align-items:center;gap:7px;padding:8px 14px;border:1px solid var(--border-strong);cursor:pointer;border-radius:2px;font-size:14px;}
+.rp:hover{border-color:var(--gold-dk);}
+.rp input{accent-color:var(--gold-dk);}
+.nb{background:var(--cream);border-left:3px solid var(--gold);padding:12px 16px;font-size:13px;line-height:1.75;margin-bottom:20px;}
+.gdpr-block{background:#f0ede6;border:1px solid var(--border-strong);padding:24px;margin-bottom:24px;}
+.gdpr-block h4{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);margin-bottom:14px;}
+.gdpr-row{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.gdpr-row:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.gdpr-rt{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.gdpr-rb{font-size:13px;color:var(--text);line-height:1.75;}
+.gdpr-rb a{color:var(--gold-dk);}
+.cc{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--border-strong);background:var(--white);margin-top:14px;cursor:pointer;}
+.cc input{accent-color:var(--gold-dk);width:16px;height:16px;flex-shrink:0;margin-top:2px;}
+.cc span{font-size:13px;color:var(--text);line-height:1.75;}
+.cc span a{color:var(--gold-dk);}
+.submit-wrap{text-align:center;margin-top:8px;}
+.btn-submit{background:var(--gold-grad);border:none;cursor:pointer;font-family:'Newsreader',Georgia,serif;font-size:15px;font-weight:500;color:var(--navy);padding:15px 44px;letter-spacing:.08em;border-radius:2px;box-shadow:0 2px 14px rgba(184,134,11,.28);}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed;}
+#success-msg{display:none;text-align:center;padding:56px 24px;}
+.sicon{font-size:44px;margin-bottom:16px;}
+.stitle{font-size:26px;font-weight:300;color:var(--navy);margin-bottom:10px;}
+.ssub{font-size:15px;color:var(--muted);line-height:1.8;max-width:460px;margin:0 auto;}
+footer{margin-top:auto;background:var(--navy);padding:28px 32px;text-align:center;}
+.ft{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.ft a{color:var(--gold);text-decoration:none;}
+@media(max-width:600px){.card{padding:22px 18px;}.fr{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <img src="https://www.nordicanchor.dk/logo-transparent.png" alt="Nordic Anchor" class="nav-logo"/>
+  <span class="nav-domain">nordicanchor.dk</span>
+</nav>
+<div class="hero">
+  <span class="eyebrow">Secure Case Information Form</span>
+  <h1 class="hero-title">A few more details<br><em>to complete your file.</em></h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">This form is private and accessible only with the access code provided to you personally by Nordic Anchor. Please do not share this link or your code with anyone.</p>
+</div>
+
+<div id="access-gate">
+  <div class="gate-card">
+    <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Secure Access</span>
+    <div class="gate-title">Enter your access code</div>
+    <div class="gate-hint">Nordic Anchor has sent you a personal access code by a separate channel (WhatsApp or phone). Enter it below to access your questionnaire. This protects your sensitive immigration data from unauthorised access.</div>
+    <div class="gate-error" id="gate-error">Incorrect access code. Please check the code sent to you, or contact rd@nordicanchor.dk.</div>
+    <input type="text" id="access-input" class="gate-input" placeholder="e.g. NA-2026-XXXX" autocomplete="off" onkeydown="if(event.key==='Enter')checkAccess()"/>
+    <button class="gate-btn" onclick="checkAccess()">Access my questionnaire &nbsp;&#x2192;</button>
+    <p class="gate-note">Code not received? Email <a href="mailto:rd@nordicanchor.dk" style="color:var(--gold-dk);">rd@nordicanchor.dk</a> or call +45 7139 6509</p>
+  </div>
+</div>
+
+<div id="form-wrap">
+  <form id="caseForm" onsubmit="handleSubmit(event)" novalidate>
+    <input type="hidden" name="_subject" value="Case Clarification - Tracy and Michael Family Reunification FA1"/>
+    <input type="hidden" name="case_ref" value="TRACY-MICHAEL-FR"/>
+    <input type="hidden" name="access_verified" value="true"/>
+    <input type="hidden" name="gdpr_consent_recorded" value=""/>
+    <input type="hidden" name="gdpr_consent_timestamp" value=""/>
+
+    <!-- GDPR CONSENT CARD -->
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Before you begin</span>
+      <div class="card-title">Data protection &amp; your rights</div>
+      <div class="card-hint">Nordic Anchor is required under GDPR (EU) 2016/679 to inform you about how your personal data is collected, used and stored before you provide it. Please read the following carefully and tick both boxes to proceed.</div>
+      <div class="gdpr-block">
+        <h4>How Nordic Anchor handles your data</h4>
+        <div class="gdpr-row">
+          <div class="gdpr-rt">What we collect and why</div>
+          <div class="gdpr-rb">This form collects personal and immigration-related information including names, dates of birth, passport details, employment history, permit history and family information, solely to prepare and submit your Family Reunification (FA1) application to Udlændingestyrelsen. Legal basis: <strong>Article 6(1)(b) GDPR</strong> (performance of a contract) and <strong>Article 9(2)(b)</strong> for immigration status data.</div>
+        </div>
+        <div class="gdpr-row">
+          <div class="gdpr-rt">Confidentiality</div>
+          <div class="gdpr-rb">All information is strictly confidential. It will not be disclosed to any third party without your explicit consent, except where submission to Udlændingestyrelsen or SIRI is required as part of your application. Nordic Anchor personnel are bound by confidentiality obligations.</div>
+        </div>
+        <div class="gdpr-row">
+          <div class="gdpr-rt">How long we keep your data</div>
+          <div class="gdpr-rb">Case data is retained for the duration of your engagement and <strong>5 years</strong> thereafter under Danish bookkeeping law (Bogføringsloven §10). After this period, data is securely deleted. You may request earlier deletion of any data not subject to legal retention obligations.</div>
+        </div>
+        <div class="gdpr-row">
+          <div class="gdpr-rt">Where your data is stored</div>
+          <div class="gdpr-rb">Responses are transmitted via Formspree (a GDPR-compliant processor operating under Standard Contractual Clauses) and stored within Nordic Anchor's case management system, accessible only to authorised personnel. All transmission is TLS-encrypted (HTTPS).</div>
+        </div>
+        <div class="gdpr-row">
+          <div class="gdpr-rt">Your rights</div>
+          <div class="gdpr-rb">Under GDPR you have the right to access, correct, restrict, port or request deletion of your data. Contact <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> to exercise any right. You may also lodge a complaint with <a href="https://www.datatilsynet.dk" target="_blank">Datatilsynet</a>. Full details: <a href="https://www.nordicanchor.dk/privacy" target="_blank">nordicanchor.dk/privacy</a>.</div>
+        </div>
+        <div class="gdpr-row">
+          <div class="gdpr-rt">Minor child — Sienna</div>
+          <div class="gdpr-rb">This form will collect information about your minor child. As her legal guardians, you are authorised to provide consent for the collection and processing of her personal data for the purposes of this application.</div>
+        </div>
+      </div>
+      <label class="cc">
+        <input type="checkbox" id="consent-gdpr" onchange="checkConsents()"/>
+        <span>We — <strong>Tracy</strong> and <strong>Michael</strong> — have read and understood the above. We consent to Nordic Anchor collecting, storing and processing our personal data (and our minor child Sienna's data, as her legal guardians) for the purpose of preparing and submitting our Family Reunification application. We confirm we are 18 years or older.</span>
+      </label>
+      <label class="cc" style="margin-top:10px;">
+        <input type="checkbox" id="consent-terms" onchange="checkConsents()"/>
+        <span>We confirm we have read and accept Nordic Anchor's <a href="https://www.nordicanchor.dk/terms" target="_blank">Terms &amp; Conditions</a> and <a href="https://www.nordicanchor.dk/privacy" target="_blank">Privacy Policy</a>, and understand that information provided here will be used solely in connection with our immigration case.</span>
+      </label>
+    </div>
+
+    <!-- SECTIONS (hidden until consent) -->
+    <div id="form-sections" style="display:none;">
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Section 1</span>
+      <div class="card-title">Current Immigration Status</div>
+      <div class="card-hint">Clarifications on Tracy's current permit and any pending authority communications.</div>
+      <div class="nb"><strong>Context:</strong> Tracy's Fast-Track work permit is valid until 31 August 2027 and has not been revoked, despite employment with Novo ending 31 January 2026.</div>
+      <div class="field">
+        <label class="fl">Has Tracy received any new written correspondence from SIRI since the re-entry permit was declined?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="siri_new_letters" value="yes"/> Yes</label><label class="rp"><input type="radio" name="siri_new_letters" value="no"/> No</label><label class="rp"><input type="radio" name="siri_new_letters" value="unsure"/> Unsure</label></div>
+      </div>
+      <div class="field"><label class="fl">If yes — brief summary of the letter <span class="opt">(optional)</span></label><textarea name="siri_letter_detail" placeholder="Brief description..."></textarea></div>
+      <div class="field">
+        <label class="fl">Has Tracy been using her current residence card when travelling since January 2026?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="card_used_travel" value="yes"/> Yes</label><label class="rp"><input type="radio" name="card_used_travel" value="no_travel"/> No — has not travelled</label><label class="rp"><input type="radio" name="card_used_travel" value="other"/> Other</label></div>
+      </div>
+      <div class="field"><label class="fl">Current status of the application filed under Sienna at Udlaendingestyrelsen</label><textarea name="daughter_case_status" placeholder="e.g. Still on hold as of [date]. Last update received [date]..."></textarea></div>
+      <div class="field"><label class="fl">Date of most recent written update from Udlaendingestyrelsen on Sienna's case</label><input type="date" name="daughter_case_last_update"/></div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Section 2</span>
+      <div class="card-title">Integration Points — Documentation</div>
+      <div class="card-hint">Confirming certificates and employment records are available or obtainable before filing.</div>
+      <div class="nb"><strong>Points confirmed:</strong> Michael HHX (language) &#x2713; &nbsp;Tracy PD2 cert pending &#x2713; &nbsp;Tracy Masters degree &#x2713; &nbsp;Tracy employment Jan 2022-Jan 2026 &#x2713; &mdash; 4+ points confirmed, all need documentation.</div>
+      <div class="field">
+        <label class="fl">Status of Tracy's Preve i Dansk 2 certificate</label>
+        <div class="rg"><label class="rp"><input type="radio" name="pd2_status" value="contacted"/> Contacted school — awaiting</label><label class="rp"><input type="radio" name="pd2_status" value="received"/> Received</label><label class="rp"><input type="radio" name="pd2_status" value="not_yet"/> Not yet contacted</label></div>
+      </div>
+      <div class="field"><label class="fl">Expected date Tracy will receive the PD2 certificate</label><input type="date" name="pd2_expected_date"/></div>
+      <div class="field">
+        <label class="fl">Tracy's Master's degree — full details</label>
+        <div class="fr"><div class="field"><label class="fl">Degree title</label><input type="text" name="masters_degree_title" placeholder="e.g. MSc International Business"/></div><div class="field"><label class="fl">Institution</label><input type="text" name="masters_institution" placeholder="e.g. McGill University"/></div></div>
+        <div class="fr" style="margin-top:12px;"><div class="field"><label class="fl">Country</label><input type="text" name="masters_country" placeholder="e.g. Canada"/></div><div class="field"><label class="fl">Year of completion</label><input type="text" name="masters_year" placeholder="e.g. 2001"/></div></div>
+      </div>
+      <div class="field">
+        <label class="fl">Master's degree certificate available?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="masters_cert_available" value="yes"/> Have it</label><label class="rp"><input type="radio" name="masters_cert_available" value="can_obtain"/> Can obtain it</label><label class="rp"><input type="radio" name="masters_cert_available" value="no"/> Lost / not available</label></div>
+      </div>
+      <div class="field">
+        <label class="fl">Tracy's employment at ISS — start date, end date, hours per week</label>
+        <div class="fr"><div class="field"><label class="fl">Start date</label><input type="date" name="iss_start"/></div><div class="field"><label class="fl">End date</label><input type="date" name="iss_end"/></div></div>
+        <div class="field" style="margin-top:12px;"><label class="fl">Contracted hours per week</label><input type="text" name="iss_hours" placeholder="e.g. 37 hours / week"/></div>
+      </div>
+      <div class="field">
+        <label class="fl">Tracy's employment at Novo Nordisk — start date, end date, hours per week</label>
+        <div class="fr"><div class="field"><label class="fl">Start date</label><input type="date" name="novo_start"/></div><div class="field"><label class="fl">End date</label><input type="date" name="novo_end"/></div></div>
+        <div class="field" style="margin-top:12px;"><label class="fl">Contracted hours per week</label><input type="text" name="novo_hours" placeholder="e.g. 37 hours / week"/></div>
+      </div>
+      <div class="field">
+        <label class="fl">Novo Nordisk documentation — payslips and termination letter available?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="novo_docs" value="both"/> Both</label><label class="rp"><input type="radio" name="novo_docs" value="payslips_only"/> Payslips only</label><label class="rp"><input type="radio" name="novo_docs" value="letter_only"/> Letter only</label><label class="rp"><input type="radio" name="novo_docs" value="can_obtain"/> Can obtain</label><label class="rp"><input type="radio" name="novo_docs" value="no"/> Not available</label></div>
+      </div>
+      <div class="field"><label class="fl">Michael's total employment at NGG/NIS School (full-time) — approximate total</label><input type="text" name="michael_ngg_years" placeholder="e.g. 3 years 4 months from January 2022"/></div>
+      <div class="field">
+        <label class="fl">Michael's NGG/NIS payslips and employment contract available?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="michael_ngg_docs" value="yes"/> Yes</label><label class="rp"><input type="radio" name="michael_ngg_docs" value="can_obtain"/> Can obtain</label><label class="rp"><input type="radio" name="michael_ngg_docs" value="no"/> No</label></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Section 3</span>
+      <div class="card-title">Self-Support Requirement — Michael</div>
+      <div class="card-hint">Mandatory. Any qualifying benefit in the past 3 years disqualifies the case. Michael should verify via e-Boks or tax records if unsure.</div>
+      <div class="field">
+        <label class="fl">Has Michael received any benefit under the Active Social Policy Act in the past 3 years? <span class="opt">(kontanthjælp, aktiveringstilskud etc.)</span></label>
+        <div class="rg"><label class="rp"><input type="radio" name="michael_active_social" value="no"/> No — confirmed</label><label class="rp"><input type="radio" name="michael_active_social" value="yes"/> Yes</label><label class="rp"><input type="radio" name="michael_active_social" value="checking"/> Checking</label></div>
+      </div>
+      <div class="field">
+        <label class="fl">Has Michael received any benefit under the Integration Act in the past 3 years? <span class="opt">(integrationydelse etc.)</span></label>
+        <div class="rg"><label class="rp"><input type="radio" name="michael_integration_act" value="no"/> No — confirmed</label><label class="rp"><input type="radio" name="michael_integration_act" value="yes"/> Yes</label><label class="rp"><input type="radio" name="michael_integration_act" value="checking"/> Checking</label></div>
+      </div>
+      <div class="field"><label class="fl">Michael's approximate monthly gross salary at NGG/NIS School</label><input type="text" name="michael_salary" placeholder="e.g. DKK 45,000 / month gross"/></div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Section 4</span>
+      <div class="card-title">Housing Requirement</div>
+      <div class="card-hint">Nordic Anchor will verify the address against the housing requirement list. Please confirm the details below.</div>
+      <div class="field"><label class="fl">Full address including postcode</label><input type="text" name="housing_address" value="Solbakkevej 3, 3050 Humlebaek"/></div>
+      <div class="field">
+        <label class="fl">Floor area</label>
+        <div class="fr"><div class="field"><label class="fl">Primary living area (m2)</label><input type="text" name="housing_sqm_main" placeholder="e.g. 150"/></div><div class="field"><label class="fl">Additional area (m2) if any</label><input type="text" name="housing_sqm_extra" placeholder="e.g. 70"/></div></div>
+      </div>
+      <div class="field"><label class="fl">Number of rooms <span class="opt">(excluding kitchen and bathrooms)</span></label><input type="text" name="housing_rooms" placeholder="e.g. 5"/></div>
+      <div class="field"><label class="fl">Number of people currently living there</label><input type="text" name="housing_occupants" placeholder="e.g. 3 — Michael, Tracy, Sienna"/></div>
+      <div class="field">
+        <label class="fl">Title deed (skode) or proof of ownership available?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="housing_title_deed" value="yes"/> Yes</label><label class="rp"><input type="radio" name="housing_title_deed" value="can_obtain"/> Can obtain it</label><label class="rp"><input type="radio" name="housing_title_deed" value="no"/> No</label></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Section 5</span>
+      <div class="card-title">Financial Guarantee</div>
+      <div class="card-hint">Required: DKK 61,709 as a demand guarantee (anfordringsgaranti) via a Danish bank. Do not arrange this yet — Nordic Anchor will provide exact instructions at the right stage.</div>
+      <div class="field"><label class="fl">Which bank does Michael hold his primary account with?</label><input type="text" name="michael_bank" placeholder="e.g. Danske Bank, Nordea..."/></div>
+      <div class="field">
+        <label class="fl">Has Michael spoken to his bank about a demand guarantee?</label>
+        <div class="rg"><label class="rp"><input type="radio" name="bank_guarantee_contact" value="yes"/> Yes</label><label class="rp"><input type="radio" name="bank_guarantee_contact" value="no"/> Not yet</label></div>
+      </div>
+      <div class="field"><label class="fl">Any questions about the guarantee process? <span class="opt">(Nordic Anchor will address)</span></label><textarea name="guarantee_questions" placeholder="e.g. How long must the funds be locked away?..."></textarea></div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Section 6</span>
+      <div class="card-title">Document Availability</div>
+      <div class="card-hint">Indicate what is currently available and what still needs to be collected.</div>
+      <div class="field"><label class="fl">EU permit rejection letter (May 2026)</label><div class="rg"><label class="rp"><input type="radio" name="doc_eu_rejection" value="have_it"/> Have it</label><label class="rp"><input type="radio" name="doc_eu_rejection" value="can_obtain"/> Can obtain</label><label class="rp"><input type="radio" name="doc_eu_rejection" value="lost"/> Cannot locate</label></div></div>
+      <div class="field"><label class="fl">Tracy's Canadian passport (all pages)</label><div class="rg"><label class="rp"><input type="radio" name="doc_passport" value="available"/> Available</label><label class="rp"><input type="radio" name="doc_passport" value="expired"/> Expired</label></div></div>
+      <div class="field"><label class="fl">Marriage certificate — Canada, 20 December 1995</label><div class="rg"><label class="rp"><input type="radio" name="doc_marriage_cert" value="original"/> Original</label><label class="rp"><input type="radio" name="doc_marriage_cert" value="copy"/> Copy only</label><label class="rp"><input type="radio" name="doc_marriage_cert" value="need_to_obtain"/> Need to obtain</label></div></div>
+      <div class="field"><label class="fl">Sienna's Danish passport or CPR documentation</label><div class="rg"><label class="rp"><input type="radio" name="doc_sienna_passport" value="available"/> Available</label><label class="rp"><input type="radio" name="doc_sienna_passport" value="expired"/> Expired</label><label class="rp"><input type="radio" name="doc_sienna_passport" value="no"/> Not available</label></div></div>
+      <div class="field"><label class="fl">Michael's HHX certificate</label><div class="rg"><label class="rp"><input type="radio" name="doc_hhx" value="have_it"/> Have it</label><label class="rp"><input type="radio" name="doc_hhx" value="can_obtain"/> Can obtain</label><label class="rp"><input type="radio" name="doc_hhx" value="lost"/> Cannot locate</label></div></div>
+      <div class="field"><label class="fl">Anything else to share with Nordic Anchor? <span class="opt">(optional)</span></label><textarea name="additional_notes" placeholder="Any further information, questions or concerns..."></textarea></div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow" style="color:var(--gold-eye);font-size:10px;">Confirm your details</span>
+      <div class="card-title">Contact information</div>
+      <div class="card-hint">So Nordic Anchor can link this response to your case file.</div>
+      <div class="fr"><div class="field"><label class="fl">First name</label><input type="text" name="contact_first" placeholder="Tracy" required/></div><div class="field"><label class="fl">Last name</label><input type="text" name="contact_last" required/></div></div>
+      <div class="field"><label class="fl">Email address</label><input type="email" name="email" required/></div>
+      <div class="field"><label class="fl">Phone <span class="opt">(optional)</span></label><input type="tel" name="phone" placeholder="+45..."/></div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit" id="btn-submit">Submit to Nordic Anchor &#x2192;</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.7;">Submitted securely over HTTPS &nbsp;&#xB7;&nbsp; GDPR Art. 6(1)(b) &nbsp;&#xB7;&nbsp; Nordic Anchor CVR 46215540</p>
+    </div>
+
+    </div><!-- /form-sections -->
+  </form>
+  <div id="success-msg">
+    <div class="sicon">&#x2713;</div>
+    <div class="stitle">Thank you — information received.</div>
+    <p class="ssub">Nordic Anchor will review your responses and be in touch within one business day.<br/><br/>rd@nordicanchor.dk &nbsp;&#xB7;&nbsp; +45 7139 6509</p>
+  </div>
+</div>
+
+<footer><p class="ft">Nordic Anchor &nbsp;&#xB7;&nbsp; CVR 46215540 &nbsp;&#xB7;&nbsp; <a href="https://www.nordicanchor.dk/privacy">Privacy Policy</a> &nbsp;&#xB7;&nbsp; <a href="https://www.nordicanchor.dk">nordicanchor.dk</a></p></footer>
+
+<script>
+var ACCESS_CODE = 'NA-2026-TM47';
+
+function checkAccess(){
+  var v = document.getElementById('access-input').value.trim().toUpperCase();
+  if(v === ACCESS_CODE){
+    document.getElementById('access-gate').style.display = 'none';
+    document.getElementById('form-wrap').style.display = 'block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    document.getElementById('gate-error').style.display = 'block';
+  }
+}
+
+function checkConsents(){
+  var g = document.getElementById('consent-gdpr').checked;
+  var t = document.getElementById('consent-terms').checked;
+  var show = g && t;
+  document.getElementById('form-sections').style.display = show ? 'block' : 'none';
+  if(show){
+    var ts = new Date().toISOString();
+    document.querySelector('[name="gdpr_consent_recorded"]').value = 'yes';
+    document.querySelector('[name="gdpr_consent_timestamp"]').value = ts;
+  }
+}
+
+async function handleSubmit(e){
+  e.preventDefault();
+  var btn = document.getElementById('btn-submit');
+  btn.disabled = true; btn.textContent = 'Submitting...';
+  var data = new FormData(document.getElementById('caseForm'));
+  try {
+    var res = await fetch('https://formspree.io/f/mlgzbwep',{method:'POST',body:data,headers:{'Accept':'application/json'}});
+    if(res.ok){
+      document.getElementById('caseForm').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else {
+      btn.disabled=false; btn.textContent='Submit to Nordic Anchor';
+      alert('Submission error. Please email rd@nordicanchor.dk directly.');
+    }
+  } catch(err){
+    btn.disabled=false; btn.textContent='Submit to Nordic Anchor';
+    alert('Network error. Please email rd@nordicanchor.dk directly.');
+  }
+}
+</script>
+</body>
+</html>
