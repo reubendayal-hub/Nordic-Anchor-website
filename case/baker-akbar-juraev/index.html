@@ -141,21 +141,29 @@
   /* ---- Site bar (matches nordicanchor.dk chrome) ---- */
   .site-bar{
     background:var(--navy);
-    padding:16px 24px;
+    padding:18px 24px;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:12px;
   }
-  .site-bar img{height:32px;width:auto;}
-  .site-bar .wordmark{
-    color:var(--white);
-    font-size:16px;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-    font-weight:500;
+  /* Logo pill — same treatment nordicanchor.dk uses for the logo on dark
+     backgrounds (see process pages, dark theme .nav-logo-wrap): a soft
+     cream backing with a gold glow, so the transparent PNG never washes
+     out against navy. Do not place the logo directly on navy without this. */
+  .site-bar .logo-pill{
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(245,242,234,0.92);
+    border-radius:999px;
+    padding:10px 26px;
+    box-shadow:0 0 0 1px rgba(212,184,120,0.45),
+               0 6px 22px -6px rgba(212,184,120,0.55),
+               0 0 40px -10px rgba(212,184,120,0.35);
   }
-  .site-bar .wordmark span{color:var(--gold-eye);}
+  .site-bar img{height:72px;width:auto;display:block;}
+  @media(max-width:600px){
+    .site-bar img{height:52px;}
+    .site-bar .logo-pill{padding:8px 18px;}
+  }
 
   #successMsg{display:none;text-align:center;padding:60px 20px;}
   #successMsg h2{color:var(--navy);font-weight:300;font-size:26px;}
@@ -165,8 +173,9 @@
 
 <!-- ===== BRANDED SITE BAR ===== -->
 <div class="site-bar">
-  <img src="https://www.nordicanchor.dk/logo-transparent.png" alt="Nordic Anchor logo">
-  <span class="wordmark">Nordic <span>Anchor</span></span>
+  <div class="logo-pill">
+    <img src="https://www.nordicanchor.dk/logo-transparent.png" alt="Nordic Anchor">
+  </div>
 </div>
 
 <!-- ===== ACCESS GATE ===== -->
