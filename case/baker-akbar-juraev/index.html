@@ -28,19 +28,25 @@
   .wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
 
   /* ---- Gate screen ---- */
-  #gate{
+  .gate-screen{
     min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:var(--navy);
+  }
+  #gate{
+    flex:1;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:var(--navy);
     padding:24px;
+    min-height:0; /* allow shrinking instead of forcing extra scroll */
   }
   .gate-card{
     background:var(--white);
     max-width:420px;
     width:100%;
-    padding:44px 36px;
+    padding:36px 36px 28px;
     border-radius:2px;
     text-align:center;
   }
@@ -51,6 +57,7 @@
     border:1px solid rgba(30,47,74,0.22);border-radius:2px;margin-bottom:14px;
   }
   .gate-error{color:#a33;font-size:13px;display:none;margin-bottom:10px;}
+  .gate-version{font-size:11px;color:var(--muted);margin-top:20px;}
 
   /* ---- Header ---- */
   header{text-align:center;margin-bottom:12px;}
@@ -161,6 +168,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    flex-shrink:0;
   }
   /* Logo pill — same treatment nordicanchor.dk uses for the logo on dark
      backgrounds (see process pages, dark theme .nav-logo-wrap): a soft
@@ -187,26 +195,34 @@
 </head>
 <body>
 
-<!-- ===== BRANDED SITE BAR ===== -->
-<div class="site-bar">
+<!-- ===== GATE SCREEN (logo + access box, sized to fit one viewport) ===== -->
+<div class="gate-screen" id="gateScreen">
+  <div class="site-bar">
+    <div class="logo-pill">
+      <img src="https://www.nordicanchor.dk/logo-transparent.png" alt="Nordic Anchor">
+    </div>
+  </div>
+
+  <div id="gate">
+    <div class="gate-card">
+      <div class="eyebrow">NORDIC ANCHOR</div>
+      <h1>Case Access</h1>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">Enter the access code provided by Nordic Anchor to continue.</p>
+      <input type="text" id="codeInput" placeholder="Access code">
+      <div class="gate-error" id="gateError">Incorrect code — please check and try again.</div>
+      <button class="submit-btn" onclick="checkCode()">Continue</button>
+      <div class="gate-version" id="gateVersion">Form version: v1.7 — 10 Aug 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN FORM (own copy of the site bar, shown after access) ===== -->
+<div id="mainSiteBar" class="site-bar" style="display:none;">
   <div class="logo-pill">
     <img src="https://www.nordicanchor.dk/logo-transparent.png" alt="Nordic Anchor">
   </div>
 </div>
 
-<!-- ===== ACCESS GATE ===== -->
-<div id="gate">
-  <div class="gate-card">
-    <div class="eyebrow">NORDIC ANCHOR</div>
-    <h1>Case Access</h1>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">Enter the access code provided by Nordic Anchor to continue.</p>
-    <input type="text" id="codeInput" placeholder="Access code">
-    <div class="gate-error" id="gateError">Incorrect code — please check and try again.</div>
-    <button class="submit-btn" onclick="checkCode()">Continue</button>
-  </div>
-</div>
-
-<!-- ===== MAIN FORM ===== -->
 <div class="wrap" id="mainForm" style="display:none;">
 
   <header>
@@ -399,7 +415,7 @@
   <footer>
     Nordic Anchor · Reuben Geoffrey Dayal · CVR 46215540<br>
     <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> · +45 7139 6509
-    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v1.6 — 10 Aug 2026</div>
+    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v1.7 — 10 Aug 2026</div>
   </footer>
 </div>
 
@@ -414,13 +430,14 @@
 
 <script>
   const ACCESS_CODE = "NA-2026-AJ83"; // change this per case
-  const FORM_VERSION = "v1.6 — 10 Aug 2026";
+  const FORM_VERSION = "v1.7 — 10 Aug 2026";
   console.log('Nordic Anchor intake form —', FORM_VERSION);
 
   function checkCode(){
     const val = document.getElementById('codeInput').value.trim();
     if (val === ACCESS_CODE){
-      document.getElementById('gate').style.display = 'none';
+      document.getElementById('gateScreen').style.display = 'none';
+      document.getElementById('mainSiteBar').style.display = 'flex';
       document.getElementById('mainForm').style.display = 'block';
       restoreProgress();
     } else {
