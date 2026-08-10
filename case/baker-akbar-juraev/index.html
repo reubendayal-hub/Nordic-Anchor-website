@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nordic Anchor — Case Intake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1e2f4a;
+    --gold:#b89a6a;
+    --gold-dk:#B8860B;
+    --gold-eye:#DAA520;
+    --cream:#f9f6f2;
+    --white:#ffffff;
+    --text:#2a2a2a;
+    --muted:#888888;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Newsreader',Georgia,serif;
+    color:var(--text);
+    background:var(--white);
+    line-height:1.8;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
+
+  /* ---- Gate screen ---- */
+  #gate{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--navy);
+    padding:24px;
+  }
+  .gate-card{
+    background:var(--white);
+    max-width:420px;
+    width:100%;
+    padding:44px 36px;
+    border-radius:2px;
+    text-align:center;
+  }
+  .gate-card .eyebrow{color:var(--gold-dk);}
+  .gate-card h1{font-size:26px;font-weight:300;color:var(--navy);margin:8px 0 20px;}
+  .gate-card input{
+    width:100%;padding:12px 14px;font-family:inherit;font-size:16px;
+    border:1px solid rgba(30,47,74,0.22);border-radius:2px;margin-bottom:14px;
+  }
+  .gate-error{color:#a33;font-size:13px;display:none;margin-bottom:10px;}
+
+  /* ---- Header ---- */
+  header{text-align:center;margin-bottom:12px;}
+  .eyebrow{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold-dk);font-weight:500;
+  }
+  h1{
+    font-size:clamp(30px,5vw,42px);font-weight:300;color:var(--navy);
+    margin:10px 0 6px;text-align:center;
+  }
+  h1 em{font-style:italic;font-weight:300;}
+  .subtitle{text-align:center;color:var(--muted);font-style:italic;font-size:16px;margin-bottom:28px;}
+  .rule{width:44px;height:1.5px;background:var(--gold);opacity:.55;margin:20px auto;}
+
+  .intro{
+    background:var(--cream);border-left:3px solid var(--gold);
+    padding:20px 24px;font-size:15px;color:var(--text);margin-bottom:40px;
+  }
+  .intro strong{color:var(--navy);}
+
+  /* ---- Tabs ---- */
+  .tabs{display:flex;gap:8px;margin-bottom:32px;border-bottom:1px solid rgba(30,47,74,0.14);}
+  .tab-btn{
+    flex:1;padding:14px 10px;background:none;border:none;cursor:pointer;
+    font-family:inherit;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);border-bottom:2px solid transparent;transition:.2s;
+  }
+  .tab-btn.active{color:var(--navy);border-bottom-color:var(--gold-dk);font-weight:500;}
+
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  /* ---- Section blocks ---- */
+  .section{margin-bottom:36px;}
+  .section h2{
+    font-size:20px;font-weight:500;color:var(--navy);margin:0 0 4px;
+  }
+  .section .hint{font-size:13.5px;color:var(--muted);margin-bottom:16px;font-style:italic;}
+
+  label{display:block;font-size:13px;letter-spacing:.06em;color:var(--navy);margin-bottom:6px;font-weight:500;}
+  .field{margin-bottom:18px;}
+  input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],select,textarea{
+    width:100%;padding:11px 13px;font-family:inherit;font-size:15px;
+    border:1px solid rgba(30,47,74,0.22);border-radius:2px;background:var(--white);
+  }
+  textarea{resize:vertical;min-height:70px;}
+  input[type=file]{
+    width:100%;padding:10px;border:1px dashed rgba(30,47,74,0.3);border-radius:2px;
+    font-family:inherit;font-size:14px;background:var(--cream);
+  }
+  .filehint{font-size:12px;color:var(--muted);margin-top:4px;}
+
+  .radio-group{display:flex;flex-direction:column;gap:8px;margin-bottom:6px;}
+  .radio-group label{
+    display:flex;align-items:flex-start;gap:8px;font-weight:400;font-size:14.5px;
+    color:var(--text);letter-spacing:normal;cursor:pointer;
+  }
+  .radio-group input{margin-top:3px;}
+
+  .checkbox-line{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;}
+  .checkbox-line input{margin-top:4px;}
+  .checkbox-line span{font-size:14.5px;}
+
+  .poa-box{
+    background:var(--cream);border:1px solid rgba(184,154,106,0.4);
+    border-radius:2px;padding:20px;margin-bottom:24px;font-size:14.5px;
+  }
+  .poa-box strong{color:var(--navy);}
+  .poa-box a{color:var(--gold-dk);}
+
+  .submit-btn{
+    width:100%;padding:16px;margin-top:8px;
+    border:none;border-radius:2px;cursor:pointer;
+    font-family:inherit;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+    background:linear-gradient(108deg,#b8860b 0%,#d4a520 16%,#f0ca50 30%,#fde882 42%,#ffe488 47%,#f5d060 54%,#d09010 70%,#b07808 86%,#c8920e 100%);
+    color:var(--navy);font-weight:600;
+    box-shadow:0 2px 14px rgba(184,134,11,0.28);
+  }
+
+  footer{
+    text-align:center;margin-top:56px;padding-top:24px;
+    border-top:1px solid rgba(30,47,74,0.12);
+    font-size:12.5px;color:var(--muted);
+  }
+  footer a{color:var(--gold-dk);text-decoration:none;}
+
+  /* ---- Site bar (matches nordicanchor.dk chrome) ---- */
+  .site-bar{
+    background:var(--navy);
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+  }
+  .site-bar img{height:32px;width:auto;}
+  .site-bar .wordmark{
+    color:var(--white);
+    font-size:16px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .site-bar .wordmark span{color:var(--gold-eye);}
+
+  #successMsg{display:none;text-align:center;padding:60px 20px;}
+  #successMsg h2{color:var(--navy);font-weight:300;font-size:26px;}
+</style>
+</head>
+<body>
+
+<!-- ===== BRANDED SITE BAR ===== -->
+<div class="site-bar">
+  <img src="https://www.nordicanchor.dk/logo-transparent.png" alt="Nordic Anchor logo">
+  <span class="wordmark">Nordic <span>Anchor</span></span>
+</div>
+
+<!-- ===== ACCESS GATE ===== -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="eyebrow">NORDIC ANCHOR</div>
+    <h1>Case Access</h1>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">Enter the access code provided by Nordic Anchor to continue.</p>
+    <input type="text" id="codeInput" placeholder="Access code">
+    <div class="gate-error" id="gateError">Incorrect code — please check and try again.</div>
+    <button class="submit-btn" onclick="checkCode()">Continue</button>
+  </div>
+</div>
+
+<!-- ===== MAIN FORM ===== -->
+<div class="wrap" id="mainForm" style="display:none;">
+
+  <header>
+    <div class="eyebrow">Nordic Anchor · Case Intake</div>
+    <h1>Positive List <em>Application</em></h1>
+    <div class="subtitle">Baker permit — Akbarjon Juraev &amp; Konditorbager Haarby</div>
+    <div class="rule"></div>
+  </header>
+
+  <div class="intro">
+    This page collects everything needed to prepare and submit the application on your behalf,
+    including <strong>power of attorney</strong> from both the employer and the applicant.
+    Please complete <strong>only the section that applies to you</strong> — Employer or Applicant.
+    All documents are handled confidentially and used solely for this application.
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showPanel('employer')">For the Employer</button>
+    <button class="tab-btn" onclick="showPanel('applicant')">For Akbar</button>
+  </div>
+
+  <form id="intakeForm" action="https://formspree.io/f/mlgzbwep" method="POST" enctype="multipart/form-data">
+
+    <!-- ============ EMPLOYER PANEL ============ -->
+    <div class="panel active" id="panel-employer">
+
+      <div class="section">
+        <h2>Company details</h2>
+        <div class="field">
+          <label>Company name</label>
+          <input type="text" name="employer_company_name" value="Konditorbager Haarby">
+        </div>
+        <div class="field">
+          <label>CVR number</label>
+          <input type="text" name="employer_cvr">
+        </div>
+        <div class="field">
+          <label>Company address</label>
+          <input type="text" name="employer_address" placeholder="Algade 28, 5683 Haarby">
+        </div>
+        <div class="field">
+          <label>Workplace address (if different from above — needed if there's a separate P-number)</label>
+          <input type="text" name="employer_workplace_address">
+        </div>
+        <div class="field">
+          <label>Contact person — name</label>
+          <input type="text" name="employer_contact_name">
+        </div>
+        <div class="field">
+          <label>Contact person — email</label>
+          <input type="email" name="employer_contact_email">
+        </div>
+        <div class="field">
+          <label>Contact person — phone</label>
+          <input type="tel" name="employer_contact_phone">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Employment contract</h2>
+        <p class="hint">Please upload the final, signed version — job title must read Baker / Konditor.</p>
+        <div class="field">
+          <label>Upload signed employment contract (all pages)</label>
+          <input type="file" name="employer_contract_upload" multiple>
+          <div class="filehint">PDF or clear photos of every page, please.</div>
+        </div>
+        <div class="field">
+          <label>Confirmed monthly salary (DKK)</label>
+          <input type="number" name="employer_salary">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Apprentice training obligation (Læreplads-AUB)</h2>
+        <p class="hint">Please check your status on your Læreplads-AUB self-service (via Virk.dk) before answering — this is a hard requirement with no exceptions.</p>
+        <div class="radio-group">
+          <label><input type="radio" name="employer_aub_status" value="Met target in latest contribution year, no merbidrag"> Met our apprentice training target in the latest contribution year, and were not charged merbidrag that year</label>
+          <label><input type="radio" name="employer_aub_status" value="Met target in 2 of last 3 years, no merbidrag in those years"> Met our target in 2 of the last 3 contribution years, and were not charged merbidrag in those 2 years</label>
+          <label><input type="radio" name="employer_aub_status" value="Not sure / need to check"> Not sure yet — need to check</label>
+          <label><input type="radio" name="employer_aub_status" value="Do not meet the requirement"> We do not currently meet this requirement</label>
+        </div>
+        <div class="field">
+          <label>Optional — upload a screenshot of your AUB self-service status</label>
+          <input type="file" name="employer_aub_evidence">
+        </div>
+      </div>
+
+      <div class="poa-box">
+        <strong>Power of attorney required.</strong> To submit this application on your behalf, Nordic Anchor needs
+        a signed power of attorney from the company. Please download, sign, and upload the form below.
+        <br><br>
+        <a href="https://www.nyidanmark.dk/pl-PL/Words-and-concepts/SIRI/Power-of-attorney-when-you-submit-an-application-to-SIRI" target="_blank">Download the standard SIRI authorisation form here</a>
+      </div>
+      <div class="field">
+        <label>Upload signed power of attorney (employer)</label>
+        <input type="file" name="employer_poa_upload">
+      </div>
+
+      <div class="checkbox-line">
+        <input type="checkbox" name="employer_confirm" id="employer_confirm" required>
+        <span>I confirm the information above is accurate to the best of my knowledge, and I authorise Nordic Anchor to act as our representative for this application.</span>
+      </div>
+    </div>
+
+    <!-- ============ APPLICANT PANEL ============ -->
+    <div class="panel" id="panel-applicant">
+
+      <div class="section">
+        <h2>Personal details</h2>
+        <div class="field">
+          <label>Full name</label>
+          <input type="text" name="applicant_name" value="Akbarjon Juraev">
+        </div>
+        <div class="field">
+          <label>Date of birth</label>
+          <input type="date" name="applicant_dob">
+        </div>
+        <div class="field">
+          <label>Danish CPR number</label>
+          <input type="text" name="applicant_cpr" placeholder="250699-XXXX">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" name="applicant_email">
+        </div>
+        <div class="field">
+          <label>Phone (WhatsApp preferred)</label>
+          <input type="tel" name="applicant_phone">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Passport</h2>
+        <div class="field">
+          <label>Upload passport — every page, including blank pages, front and back cover</label>
+          <input type="file" name="applicant_passport_upload" multiple>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Baking / pastry work experience</h2>
+        <p class="hint">This determines which salary bracket your application is measured against — please be thorough.</p>
+        <div class="field">
+          <label>Describe your relevant baking/pastry experience (employers, dates, role)</label>
+          <textarea name="applicant_experience_description"></textarea>
+        </div>
+        <div class="field">
+          <label>Upload supporting documents (reference letters, employment certificates)</label>
+          <input type="file" name="applicant_experience_upload" multiple>
+          <div class="filehint">If documents are not in Danish/English, please also upload the original — we will arrange translation.</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Education (optional)</h2>
+        <div class="field">
+          <label>Upload any vocational or trade certificates relevant to baking</label>
+          <input type="file" name="applicant_education_upload" multiple>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Current residence status</h2>
+        <div class="field">
+          <label>Upload your current Danish residence permit / residence card (both sides)</label>
+          <input type="file" name="applicant_current_permit_upload" multiple>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Danish bank account</h2>
+        <div class="radio-group">
+          <label><input type="radio" name="applicant_bank_status" value="Already have one"> I already have a Danish bank account</label>
+          <label><input type="radio" name="applicant_bank_status" value="Do not have one yet"> I do not have one yet</label>
+        </div>
+      </div>
+
+      <div class="poa-box">
+        <strong>Power of attorney required.</strong> To submit this application on your behalf, Nordic Anchor needs
+        a signed power of attorney from you personally. Please download, sign, and upload the form below.
+        <br><br>
+        <a href="https://www.nyidanmark.dk/pl-PL/Words-and-concepts/SIRI/Power-of-attorney-when-you-submit-an-application-to-SIRI" target="_blank">Download the standard SIRI authorisation form here</a>
+      </div>
+      <div class="field">
+        <label>Upload signed power of attorney (applicant)</label>
+        <input type="file" name="applicant_poa_upload">
+      </div>
+
+      <div class="checkbox-line">
+        <input type="checkbox" name="applicant_confirm" id="applicant_confirm" required>
+        <span>I confirm the information above is accurate to the best of my knowledge, and I authorise Nordic Anchor to act as my representative for this application.</span>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit to Nordic Anchor</button>
+  </form>
+
+  <footer>
+    Nordic Anchor · Reuben Geoffrey Dayal · CVR 46215540<br>
+    <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> · +45 7139 6509
+  </footer>
+</div>
+
+<!-- ===== SUCCESS STATE ===== -->
+<div id="successMsg">
+  <div class="eyebrow">Nordic Anchor</div>
+  <h2>Received — thank you.</h2>
+  <p style="color:var(--muted);">We'll review everything and be in touch shortly.</p>
+</div>
+
+<script>
+  const ACCESS_CODE = "NA-2026-AJ83"; // change this per case
+
+  function checkCode(){
+    const val = document.getElementById('codeInput').value.trim();
+    if (val === ACCESS_CODE){
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('mainForm').style.display = 'block';
+    } else {
+      document.getElementById('gateError').style.display = 'block';
+    }
+  }
+  document.getElementById('codeInput').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') checkCode();
+  });
+
+  function showPanel(which){
+    document.getElementById('panel-employer').classList.toggle('active', which === 'employer');
+    document.getElementById('panel-applicant').classList.toggle('active', which === 'applicant');
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+
+  document.getElementById('intakeForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok){
+        document.getElementById('mainForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        alert('Something went wrong submitting the form — please try again or contact rd@nordicanchor.dk directly.');
+      }
+    }).catch(() => {
+      alert('Something went wrong submitting the form — please try again or contact rd@nordicanchor.dk directly.');
+    });
+  });
+</script>
+
+</body>
+</html>
