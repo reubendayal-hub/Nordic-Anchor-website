@@ -399,6 +399,7 @@
   <footer>
     Nordic Anchor · Reuben Geoffrey Dayal · CVR 46215540<br>
     <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> · +45 7139 6509
+    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v1.6 — 10 Aug 2026</div>
   </footer>
 </div>
 
@@ -413,6 +414,8 @@
 
 <script>
   const ACCESS_CODE = "NA-2026-AJ83"; // change this per case
+  const FORM_VERSION = "v1.6 — 10 Aug 2026";
+  console.log('Nordic Anchor intake form —', FORM_VERSION);
 
   function checkCode(){
     const val = document.getElementById('codeInput').value.trim();
