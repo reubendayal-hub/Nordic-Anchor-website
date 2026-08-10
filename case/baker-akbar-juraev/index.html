@@ -131,6 +131,22 @@
     box-shadow:0 2px 14px rgba(184,134,11,0.28);
   }
 
+  .save-bar{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    background:var(--cream);border:1px solid rgba(184,154,106,0.35);border-radius:2px;
+    padding:14px 18px;margin-bottom:20px;
+  }
+  .save-bar .save-status{font-size:12.5px;color:var(--muted);font-style:italic;}
+  .save-bar .save-actions{display:flex;gap:8px;}
+  .save-btn, .clear-btn{
+    padding:9px 16px;font-family:inherit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    border-radius:2px;cursor:pointer;background:var(--white);
+  }
+  .save-btn{border:1px solid var(--gold-dk);color:var(--gold-dk);}
+  .save-btn:hover{background:var(--gold-dk);color:var(--white);}
+  .clear-btn{border:1px solid rgba(30,47,74,0.22);color:var(--muted);}
+  .clear-btn:hover{border-color:#a33;color:#a33;}
+
   footer{
     text-align:center;margin-top:56px;padding-top:24px;
     border-top:1px solid rgba(30,47,74,0.12);
@@ -201,10 +217,12 @@
   </header>
 
   <div class="intro">
-    This page collects everything needed to prepare and submit the application on your behalf,
-    including <strong>power of attorney</strong> from both the employer and the applicant.
+    This page collects the documents and information needed to prepare the application.
     Please complete <strong>only the section that applies to you</strong> — Employer or Applicant.
+    A <strong>power of attorney</strong> will be sent separately, prefilled and ready to sign — no action needed on that here.
     All documents are handled confidentially and used solely for this application.
+    <br><br>
+    <strong>You can save your progress and come back later</strong> — see the button at the bottom of the form.
   </div>
 
   <div class="tabs">
@@ -278,20 +296,9 @@
         </div>
       </div>
 
-      <div class="poa-box">
-        <strong>Power of attorney required.</strong> To submit this application on your behalf, Nordic Anchor needs
-        a signed power of attorney from the company. Please download, sign, and upload the form below.
-        <br><br>
-        <a href="https://www.nyidanmark.dk/pl-PL/Words-and-concepts/SIRI/Power-of-attorney-when-you-submit-an-application-to-SIRI" target="_blank">Download the standard SIRI authorisation form here</a>
-      </div>
-      <div class="field">
-        <label>Upload signed power of attorney (employer)</label>
-        <input type="file" name="employer_poa_upload">
-      </div>
-
       <div class="checkbox-line">
         <input type="checkbox" name="employer_confirm" id="employer_confirm" required>
-        <span>I confirm the information above is accurate to the best of my knowledge, and I authorise Nordic Anchor to act as our representative for this application.</span>
+        <span>I confirm the information above is accurate to the best of my knowledge.</span>
       </div>
     </div>
 
@@ -353,10 +360,11 @@
       </div>
 
       <div class="section">
-        <h2>Current residence status</h2>
+        <h2>SIRI ruling letter</h2>
+        <p class="hint">This is the official decision letter SIRI sent when your current permit was granted — different from your residence card. We already have your residence card copies; we need this to double-check the exact terms of your current permit.</p>
         <div class="field">
-          <label>Upload your current Danish residence permit / residence card (both sides)</label>
-          <input type="file" name="applicant_current_permit_upload" multiple>
+          <label>Upload your SIRI ruling letter (afgørelse)</label>
+          <input type="file" name="applicant_ruling_letter_upload" multiple>
         </div>
       </div>
 
@@ -368,20 +376,20 @@
         </div>
       </div>
 
-      <div class="poa-box">
-        <strong>Power of attorney required.</strong> To submit this application on your behalf, Nordic Anchor needs
-        a signed power of attorney from you personally. Please download, sign, and upload the form below.
-        <br><br>
-        <a href="https://www.nyidanmark.dk/pl-PL/Words-and-concepts/SIRI/Power-of-attorney-when-you-submit-an-application-to-SIRI" target="_blank">Download the standard SIRI authorisation form here</a>
-      </div>
-      <div class="field">
-        <label>Upload signed power of attorney (applicant)</label>
-        <input type="file" name="applicant_poa_upload">
-      </div>
-
       <div class="checkbox-line">
         <input type="checkbox" name="applicant_confirm" id="applicant_confirm" required>
-        <span>I confirm the information above is accurate to the best of my knowledge, and I authorise Nordic Anchor to act as my representative for this application.</span>
+        <span>I confirm the information above is accurate to the best of my knowledge.</span>
+      </div>
+    </div>
+
+    <div class="save-bar">
+      <div>
+        <div class="save-status" id="saveStatus">Not saved yet.</div>
+        <div class="save-status">Note: file uploads aren't saved — only text answers. You'll need to re-attach files when you return.</div>
+      </div>
+      <div class="save-actions">
+        <button type="button" class="save-btn" onclick="saveProgress(true)">Save progress</button>
+        <button type="button" class="clear-btn" onclick="clearProgress()">Clear saved data</button>
       </div>
     </div>
 
@@ -409,6 +417,7 @@
     if (val === ACCESS_CODE){
       document.getElementById('gate').style.display = 'none';
       document.getElementById('mainForm').style.display = 'block';
+      restoreProgress();
     } else {
       document.getElementById('gateError').style.display = 'block';
     }
@@ -424,6 +433,64 @@
     event.currentTarget.classList.add('active');
   }
 
+  /* ---- Save / resume progress (text fields only — file inputs cannot
+     be restored programmatically for security reasons, so they're
+     excluded and the person is told to re-attach files on return) ---- */
+  const STORAGE_KEY = 'na_intake_' + ACCESS_CODE;
+
+  function saveProgress(manual){
+    const form = document.getElementById('intakeForm');
+    const data = {};
+    Array.from(form.elements).forEach(el => {
+      if (!el.name || el.type === 'file' || el.type === 'submit' || el.type === 'button') return;
+      if (el.type === 'checkbox'){
+        data[el.name] = el.checked;
+      } else if (el.type === 'radio'){
+        if (el.checked) data[el.name] = el.value;
+      } else {
+        data[el.name] = el.value;
+      }
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, savedAt: new Date().toISOString() }));
+    if (manual) updateSaveStatus();
+  }
+
+  function restoreProgress(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const { data, savedAt } = JSON.parse(raw);
+      const form = document.getElementById('intakeForm');
+      Array.from(form.elements).forEach(el => {
+        if (!el.name || !(el.name in data) || el.type === 'file') return;
+        if (el.type === 'checkbox'){
+          el.checked = !!data[el.name];
+        } else if (el.type === 'radio'){
+          el.checked = (el.value === data[el.name]);
+        } else {
+          el.value = data[el.name];
+        }
+      });
+      updateSaveStatus(savedAt);
+    } catch(e){ /* ignore corrupt saved data */ }
+  }
+
+  function updateSaveStatus(savedAt){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const el = document.getElementById('saveStatus');
+    if (!raw){ el.textContent = 'Not saved yet.'; return; }
+    const ts = savedAt || JSON.parse(raw).savedAt;
+    const d = new Date(ts);
+    el.textContent = 'Progress saved — ' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) + ' (this browser only).';
+  }
+
+  function clearProgress(){
+    if (!confirm('Clear all saved progress on this form? This cannot be undone.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    document.getElementById('intakeForm').reset();
+    updateSaveStatus();
+  }
+
   document.getElementById('intakeForm').addEventListener('submit', function(e){
     e.preventDefault();
     const form = e.target;
@@ -434,6 +501,7 @@
       headers: { 'Accept': 'application/json' }
     }).then(response => {
       if (response.ok){
+        localStorage.removeItem(STORAGE_KEY);
         document.getElementById('mainForm').style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
       } else {
@@ -442,6 +510,14 @@
     }).catch(() => {
       alert('Something went wrong submitting the form — please try again or contact rd@nordicanchor.dk directly.');
     });
+  });
+
+  // Autosave (debounced) on any field change, so progress isn't lost even
+  // if the person forgets to click "Save progress" manually.
+  let autosaveTimer;
+  document.getElementById('intakeForm').addEventListener('input', function(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(() => saveProgress(true), 800);
   });
 </script>
 
