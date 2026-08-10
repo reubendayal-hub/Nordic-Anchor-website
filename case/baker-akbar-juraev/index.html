@@ -407,6 +407,8 @@
   <div class="eyebrow">Nordic Anchor</div>
   <h2>Received — thank you.</h2>
   <p style="color:var(--muted);">We'll review everything and be in touch shortly.</p>
+  <p style="color:var(--muted);font-size:14px;margin-top:18px;">Have more to add — a missing document, an answer that's changed? You can go back in and submit an update any time.</p>
+  <button type="button" class="submit-btn" style="max-width:320px;margin-top:16px;" onclick="returnToForm()">I have more to add</button>
 </div>
 
 <script>
@@ -501,7 +503,11 @@
       headers: { 'Accept': 'application/json' }
     }).then(response => {
       if (response.ok){
-        localStorage.removeItem(STORAGE_KEY);
+        // Note: progress is intentionally kept saved (not cleared) so the
+        // person can return and submit an update/addition later without
+        // re-entering everything. Each submit creates a new, separate
+        // entry in Formspree — it does not overwrite the previous one.
+        saveProgress(false);
         document.getElementById('mainForm').style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
       } else {
@@ -511,6 +517,12 @@
       alert('Something went wrong submitting the form — please try again or contact rd@nordicanchor.dk directly.');
     });
   });
+
+  function returnToForm(){
+    document.getElementById('successMsg').style.display = 'none';
+    document.getElementById('mainForm').style.display = 'block';
+    restoreProgress();
+  }
 
   // Autosave (debounced) on any field change, so progress isn't lost even
   // if the person forgets to click "Save progress" manually.
