@@ -497,24 +497,36 @@
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
     fetch(form.action, {
       method: 'POST',
       body: data,
       headers: { 'Accept': 'application/json' }
-    }).then(response => {
+    }).then(async response => {
       if (response.ok){
-        // Note: progress is intentionally kept saved (not cleared) so the
-        // person can return and submit an update/addition later without
-        // re-entering everything. Each submit creates a new, separate
-        // entry in Formspree — it does not overwrite the previous one.
         saveProgress(false);
         document.getElementById('mainForm').style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
       } else {
-        alert('Something went wrong submitting the form — please try again or contact rd@nordicanchor.dk directly.');
+        let detail = 'HTTP ' + response.status;
+        try {
+          const json = await response.json();
+          if (json && json.errors && json.errors.length){
+            detail = json.errors.map(er => er.message || JSON.stringify(er)).join('; ');
+          } else if (json && json.error){
+            detail = json.error;
+          }
+        } catch(parseErr){ /* response wasn't JSON — keep the HTTP status */ }
+        alert('Submission failed: ' + detail + '\n\nPlease screenshot this and send it to rd@nordicanchor.dk, or try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit to Nordic Anchor';
       }
-    }).catch(() => {
-      alert('Something went wrong submitting the form — please try again or contact rd@nordicanchor.dk directly.');
+    }).catch(err => {
+      alert('Network error submitting the form: ' + err.message + '\n\nPlease check your connection and try again, or contact rd@nordicanchor.dk directly.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit to Nordic Anchor';
     });
   });
 
