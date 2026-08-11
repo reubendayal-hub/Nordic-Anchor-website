@@ -216,7 +216,7 @@
       <input type="text" id="codeInput" placeholder="Access code">
       <div class="gate-error" id="gateError">Incorrect code — please check and try again.</div>
       <button class="submit-btn" onclick="checkCode()">Continue</button>
-      <div class="gate-version" id="gateVersion">Form version: v2.0 — 10 Aug 2026</div>
+      <div class="gate-version" id="gateVersion">Form version: v2.1 — 10 Aug 2026</div>
     </div>
   </div>
 </div>
@@ -336,7 +336,7 @@
       </div>
 
       <div class="checkbox-line">
-        <input type="checkbox" name="employer_confirm" id="employer_confirm" required>
+        <input type="checkbox" name="employer_confirm" id="employer_confirm">
         <span>I confirm the information above is accurate to the best of my knowledge.</span>
       </div>
     </div>
@@ -445,7 +445,7 @@
       </div>
 
       <div class="checkbox-line">
-        <input type="checkbox" name="applicant_confirm" id="applicant_confirm" required>
+        <input type="checkbox" name="applicant_confirm" id="applicant_confirm">
         <span>I confirm the information above is accurate to the best of my knowledge.</span>
       </div>
     </div>
@@ -467,7 +467,7 @@
   <footer>
     Nordic Anchor · Reuben Geoffrey Dayal · CVR 46215540<br>
     <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> · +45 7139 6509
-    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v2.0 — 10 Aug 2026</div>
+    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v2.1 — 10 Aug 2026</div>
   </footer>
 </div>
 
@@ -482,7 +482,7 @@
 
 <script>
   const ACCESS_CODE = "NA-2026-AJ83"; // change this per case
-  const FORM_VERSION = "v2.0 — 10 Aug 2026";
+  const FORM_VERSION = "v2.1 — 10 Aug 2026";
   console.log('Nordic Anchor intake form —', FORM_VERSION);
 
   function checkCode(){
@@ -568,6 +568,20 @@
   document.getElementById('intakeForm').addEventListener('submit', function(e){
     e.preventDefault();
     const form = e.target;
+
+    // Explicit check on whichever panel is actually active — replaces the
+    // native `required` attribute, which could silently block submission
+    // when the confirmation checkbox sat in a hidden (display:none) panel.
+    const employerActive = document.getElementById('panel-employer').classList.contains('active');
+    const activeCheckbox = employerActive
+      ? document.getElementById('employer_confirm')
+      : document.getElementById('applicant_confirm');
+    if (!activeCheckbox.checked){
+      alert('Please tick the confirmation checkbox at the bottom of your section before submitting.');
+      activeCheckbox.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+
     const data = new FormData(form);
     const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = true;
