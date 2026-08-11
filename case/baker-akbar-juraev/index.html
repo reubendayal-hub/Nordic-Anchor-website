@@ -216,7 +216,7 @@
       <input type="text" id="codeInput" placeholder="Access code">
       <div class="gate-error" id="gateError">Incorrect code — please check and try again.</div>
       <button class="submit-btn" onclick="checkCode()">Continue</button>
-      <div class="gate-version" id="gateVersion">Form version: v1.9 — 10 Aug 2026</div>
+      <div class="gate-version" id="gateVersion">Form version: v2.0 — 10 Aug 2026</div>
     </div>
   </div>
 </div>
@@ -242,7 +242,8 @@
     Please complete <strong>only the section that applies to you</strong> — Employer or Applicant.
     A <strong>power of attorney</strong> will be sent separately, prefilled and ready to sign — no action needed on that here.
     <br><br>
-    <strong>Document upload is temporarily paused</strong> while we upgrade it — for now, please complete the text sections here and email any documents directly to <a href="mailto:rd@nordicanchor.dk" style="color:var(--gold-dk);">rd@nordicanchor.dk</a>.
+    <strong>Upload your documents here:</strong>
+    <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank" style="color:var(--gold-dk);font-weight:600;">Nordic Anchor secure upload folder →</a>
     <br><br>
     <strong>You can save your progress and come back later</strong> — see the button at the bottom of the form.
   </div>
@@ -296,7 +297,7 @@
           <label>Upload signed employment contract (all pages)</label>
           <input type="file" name="employer_contract_upload" multiple disabled>
           <div class="filehint">PDF or clear photos of every page, please.</div>
-          <div class="upload-paused">Document upload is being upgraded — please email this to <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> for now.</div>
+          <div class="upload-paused">Please upload this file via our <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank">secure upload folder</a>.</div>
         </div>
         <div class="field">
           <label>Confirmed monthly salary (DKK)</label>
@@ -330,7 +331,7 @@
         <div class="field">
           <label>Optional — upload a screenshot of your AUB self-service status</label>
           <input type="file" name="employer_aub_evidence" disabled>
-          <div class="upload-paused">Document upload is being upgraded — please email this to <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> for now.</div>
+          <div class="upload-paused">Please upload this file via our <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank">secure upload folder</a>.</div>
         </div>
       </div>
 
@@ -397,7 +398,7 @@
         <div class="field">
           <label>Upload passport — every page, including blank pages, front and back cover</label>
           <input type="file" name="applicant_passport_upload" multiple disabled>
-          <div class="upload-paused">Document upload is being upgraded — please email this to <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> for now.</div>
+          <div class="upload-paused">Please upload this file via our <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank">secure upload folder</a>.</div>
         </div>
       </div>
 
@@ -412,7 +413,7 @@
           <label>Upload supporting documents (reference letters, employment certificates)</label>
           <input type="file" name="applicant_experience_upload" multiple disabled>
           <div class="filehint">If documents are not in Danish/English, please also upload the original — we will arrange translation.</div>
-          <div class="upload-paused">Document upload is being upgraded — please email this to <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> for now.</div>
+          <div class="upload-paused">Please upload this file via our <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank">secure upload folder</a>.</div>
         </div>
       </div>
 
@@ -421,7 +422,7 @@
         <div class="field">
           <label>Upload any vocational or trade certificates relevant to baking</label>
           <input type="file" name="applicant_education_upload" multiple disabled>
-          <div class="upload-paused">Document upload is being upgraded — please email this to <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> for now.</div>
+          <div class="upload-paused">Please upload this file via our <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank">secure upload folder</a>.</div>
         </div>
       </div>
 
@@ -431,7 +432,7 @@
         <div class="field">
           <label>Upload your SIRI ruling letter (afgørelse)</label>
           <input type="file" name="applicant_ruling_letter_upload" multiple disabled>
-          <div class="upload-paused">Document upload is being upgraded — please email this to <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> for now.</div>
+          <div class="upload-paused">Please upload this file via our <a href="https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71" target="_blank">secure upload folder</a>.</div>
         </div>
       </div>
 
@@ -466,7 +467,7 @@
   <footer>
     Nordic Anchor · Reuben Geoffrey Dayal · CVR 46215540<br>
     <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> · +45 7139 6509
-    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v1.9 — 10 Aug 2026</div>
+    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v2.0 — 10 Aug 2026</div>
   </footer>
 </div>
 
@@ -481,7 +482,7 @@
 
 <script>
   const ACCESS_CODE = "NA-2026-AJ83"; // change this per case
-  const FORM_VERSION = "v1.9 — 10 Aug 2026";
+  const FORM_VERSION = "v2.0 — 10 Aug 2026";
   console.log('Nordic Anchor intake form —', FORM_VERSION);
 
   function checkCode(){
