@@ -216,7 +216,7 @@
       <input type="text" id="codeInput" placeholder="Access code">
       <div class="gate-error" id="gateError">Incorrect code — please check and try again.</div>
       <button class="submit-btn" onclick="checkCode()">Continue</button>
-      <div class="gate-version" id="gateVersion">Form version: v1.8 — 10 Aug 2026</div>
+      <div class="gate-version" id="gateVersion">Form version: v1.9 — 10 Aug 2026</div>
     </div>
   </div>
 </div>
@@ -302,6 +302,20 @@
           <label>Confirmed monthly salary (DKK)</label>
           <input type="number" name="employer_salary">
         </div>
+        <div class="field">
+          <label>Proposed employment start date</label>
+          <input type="date" name="employer_start_date">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>SIRI processing fee</h2>
+        <p class="hint">The government fee is DKK 6,810 — separate from Nordic Anchor's own fee. Please confirm who will cover it.</p>
+        <div class="radio-group">
+          <label><input type="radio" name="fee_payer" value="Employer"> Employer will pay</label>
+          <label><input type="radio" name="fee_payer" value="Applicant"> Akbar will pay</label>
+          <label><input type="radio" name="fee_payer" value="Split"> Split between both</label>
+        </div>
       </div>
 
       <div class="section">
@@ -340,8 +354,24 @@
           <input type="date" name="applicant_dob">
         </div>
         <div class="field">
+          <label>Nationality</label>
+          <input type="text" name="applicant_nationality" value="Uzbekistan">
+        </div>
+        <div class="field">
           <label>Danish CPR number</label>
           <input type="text" name="applicant_cpr" placeholder="250699-XXXX">
+        </div>
+        <div class="field">
+          <label>Passport number</label>
+          <input type="text" name="applicant_passport_number">
+        </div>
+        <div class="field">
+          <label>Passport expiry date</label>
+          <input type="date" name="applicant_passport_expiry">
+        </div>
+        <div class="field">
+          <label>Current residential address in Denmark</label>
+          <input type="text" name="applicant_dk_address" placeholder="Street, house number, postcode, city">
         </div>
         <div class="field">
           <label>Email</label>
@@ -350,6 +380,15 @@
         <div class="field">
           <label>Phone (WhatsApp preferred)</label>
           <input type="tel" name="applicant_phone">
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Family</h2>
+        <p class="hint">This affects whether separate applications are needed — please answer even if the answer is no.</p>
+        <div class="radio-group">
+          <label><input type="radio" name="applicant_family_accompanying" value="Yes"> Yes — I have a spouse/partner and/or children who will also apply to join me in Denmark</label>
+          <label><input type="radio" name="applicant_family_accompanying" value="No"> No — I am applying alone for now</label>
         </div>
       </div>
 
@@ -427,7 +466,7 @@
   <footer>
     Nordic Anchor · Reuben Geoffrey Dayal · CVR 46215540<br>
     <a href="mailto:rd@nordicanchor.dk">rd@nordicanchor.dk</a> · +45 7139 6509
-    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v1.8 — 10 Aug 2026</div>
+    <div style="margin-top:14px;font-size:11px;color:#c4c4c4;">Form version: v1.9 — 10 Aug 2026</div>
   </footer>
 </div>
 
@@ -442,7 +481,7 @@
 
 <script>
   const ACCESS_CODE = "NA-2026-AJ83"; // change this per case
-  const FORM_VERSION = "v1.8 — 10 Aug 2026";
+  const FORM_VERSION = "v1.9 — 10 Aug 2026";
   console.log('Nordic Anchor intake form —', FORM_VERSION);
 
   function checkCode(){
