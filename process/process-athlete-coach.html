@@ -196,7 +196,11 @@ body{
 .route-sec{padding:36px 0 0;}
 .section-lbl{
   font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:14px;
+  color:var(--gold);margin-bottom:6px;
+}
+.route-hint{
+  font-size:13px;color:var(--ink-3);margin-bottom:14px;
+  font-family:'Newsreader',Georgia,serif;font-style:italic;
 }
 .route-row{display:flex;gap:10px;}
 .rbtn{
@@ -461,8 +465,9 @@ body{
 <main class="main">
   <div class="route-sec">
     <div class="section-lbl" id="route-lbl-full">Select your starting situation</div>
+    <div class="route-hint" id="route-hint">This determines which requirements and steps you'll see below.</div>
     <div class="route-row" id="route-row">
-      <button class="rbtn active" id="btn-abroad">
+      <button class="rbtn" id="btn-abroad">
         <span class="rbtn-t">Applicant is abroad</span>
         <span class="rbtn-s">New arrival to Denmark &middot; First permit under this scheme</span>
       </button>
@@ -850,7 +855,8 @@ function playIntroHint(){
 }
 
 renderStrip();
-selectRoute('abroad');
+renderPanel();
+refreshProgMeta();
 toggleStep(0,true);
 playIntroHint();
 </script>
