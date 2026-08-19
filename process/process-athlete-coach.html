@@ -206,14 +206,41 @@ body{
 /* ─── JOURNEY SKELETON — shown until a route is chosen ───────────── */
 .journey-area{position:relative;}
 .journey-skeleton{
-  position:absolute;inset:0;z-index:8;
+  position:absolute;inset:0;z-index:8;overflow:hidden;
   background:var(--bg);
   display:flex;align-items:center;justify-content:center;
   padding:28px 24px;
-  opacity:1;transition:opacity .45s ease;
+  opacity:1;transition:opacity .5s ease;
 }
 .journey-skeleton.dismissed{opacity:0;pointer-events:none;}
-.jsk-inner{width:100%;max-width:640px;display:flex;flex-direction:column;gap:20px;align-items:center;}
+/* Ambient drifting colour wash — the "pigment mixing" backdrop */
+.journey-skeleton::before,
+.journey-skeleton::after{
+  content:'';position:absolute;border-radius:50%;
+  filter:blur(70px);opacity:.28;pointer-events:none;z-index:0;
+  mix-blend-mode:var(--jsk-blend,normal);
+}
+.journey-skeleton::before{
+  width:440px;height:440px;left:-140px;top:-160px;
+  background:radial-gradient(circle,var(--gold) 0%,transparent 72%);
+  animation:jskDrift1 10s ease-in-out infinite;
+}
+.journey-skeleton::after{
+  width:400px;height:400px;right:-120px;bottom:-160px;
+  background:radial-gradient(circle,#c98fa3 0%,transparent 72%);
+  animation:jskDrift2 12s ease-in-out infinite;
+}
+:root[data-theme="dark"] .journey-skeleton{--jsk-blend:screen;}
+:root[data-theme="light"] .journey-skeleton{--jsk-blend:multiply;}
+@keyframes jskDrift1{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(70px,50px) scale(1.18);}
+}
+@keyframes jskDrift2{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(-60px,-40px) scale(1.12);}
+}
+.jsk-inner{position:relative;z-index:1;width:100%;max-width:640px;display:flex;flex-direction:column;gap:20px;align-items:center;}
 .jsk-track{width:100%;height:5px;border-radius:999px;}
 .jsk-row{display:flex;gap:10px;width:100%;}
 .jsk-icon{flex:1;aspect-ratio:1;max-width:100px;border-radius:16px;border:1px solid var(--line-2);}
@@ -223,15 +250,29 @@ body{
 .jsk-line.jsk-w80{width:82%;}
 .jsk-line.jsk-w60{width:58%;}
 .jsk-track,.jsk-icon,.jsk-line{
-  background:linear-gradient(100deg,var(--bg-soft) 20%,var(--gold-soft) 50%,var(--bg-soft) 80%);
-  background-size:250% 100%;
-  animation:jskShimmer 1.7s ease-in-out infinite;
+  background:linear-gradient(110deg,
+    var(--bg-soft) 15%,
+    var(--gold-soft) 38%,
+    rgba(201,143,163,0.22) 50%,
+    var(--gold-soft) 62%,
+    var(--bg-soft) 85%);
+  background-size:280% 100%;
+  animation:jskShimmer 2.4s cubic-bezier(.45,0,.2,1) infinite;
 }
+.jsk-row .jsk-icon:nth-child(1){animation-delay:0s;}
+.jsk-row .jsk-icon:nth-child(2){animation-delay:.12s;}
+.jsk-row .jsk-icon:nth-child(3){animation-delay:.24s;}
+.jsk-row .jsk-icon:nth-child(4){animation-delay:.36s;}
+.jsk-row .jsk-icon:nth-child(5){animation-delay:.48s;}
+.jsk-card .jsk-line:nth-child(2){animation-delay:.08s;}
+.jsk-card .jsk-line:nth-child(3){animation-delay:.16s;}
+.jsk-card .jsk-line:nth-child(4){animation-delay:.24s;}
 @keyframes jskShimmer{
-  0%{background-position:180% 0;}
-  100%{background-position:-80% 0;}
+  0%{background-position:200% 0;}
+  100%{background-position:-100% 0;}
 }
 .jsk-prompt{
+  position:relative;z-index:1;
   display:flex;align-items:center;gap:8px;
   font-family:'Newsreader',Georgia,serif;font-style:italic;
   font-size:14px;color:var(--ink-3);text-align:center;
