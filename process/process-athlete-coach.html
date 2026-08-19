@@ -202,6 +202,42 @@ body{
   font-size:13px;color:var(--ink-3);margin-bottom:14px;
   font-family:'Newsreader',Georgia,serif;font-style:italic;
 }
+
+/* ─── JOURNEY SKELETON — shown until a route is chosen ───────────── */
+.journey-area{position:relative;}
+.journey-skeleton{
+  position:absolute;inset:0;z-index:8;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  padding:28px 24px;
+  opacity:1;transition:opacity .45s ease;
+}
+.journey-skeleton.dismissed{opacity:0;pointer-events:none;}
+.jsk-inner{width:100%;max-width:640px;display:flex;flex-direction:column;gap:20px;align-items:center;}
+.jsk-track{width:100%;height:5px;border-radius:999px;}
+.jsk-row{display:flex;gap:10px;width:100%;}
+.jsk-icon{flex:1;aspect-ratio:1;max-width:100px;border-radius:16px;border:1px solid var(--line-2);}
+.jsk-card{width:100%;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:11px;border:1px solid var(--line);}
+.jsk-line{height:11px;border-radius:6px;width:100%;border:1px solid var(--line-2);}
+.jsk-line.jsk-title{height:17px;width:50%;margin-bottom:3px;}
+.jsk-line.jsk-w80{width:82%;}
+.jsk-line.jsk-w60{width:58%;}
+.jsk-track,.jsk-icon,.jsk-line{
+  background:linear-gradient(100deg,var(--bg-soft) 20%,var(--gold-soft) 50%,var(--bg-soft) 80%);
+  background-size:250% 100%;
+  animation:jskShimmer 1.7s ease-in-out infinite;
+}
+@keyframes jskShimmer{
+  0%{background-position:180% 0;}
+  100%{background-position:-80% 0;}
+}
+.jsk-prompt{
+  display:flex;align-items:center;gap:8px;
+  font-family:'Newsreader',Georgia,serif;font-style:italic;
+  font-size:14px;color:var(--ink-3);text-align:center;
+}
+.jsk-prompt svg{width:15px;height:15px;color:var(--gold);flex-shrink:0;animation:jskBounce 1.6s ease-in-out infinite;}
+@keyframes jskBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
 .route-row{display:flex;gap:10px;}
 .rbtn{
   flex:1;padding:16px 20px;border-radius:12px;
@@ -466,6 +502,18 @@ body{
   <div class="route-sec">
     <div class="section-lbl" id="route-lbl-full">Select your starting situation</div>
     <div class="route-hint" id="route-hint">This determines which requirements and steps you'll see below.</div>
+    <div class="coach-mark" id="route-coach">
+      <div class="coach-bubble">
+        <div class="coach-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><line x1="13" y1="13" x2="19" y2="19"/></svg>
+        </div>
+        <div>
+          <div class="coach-title">Start here</div>
+          <div class="coach-sub">Pick the option that matches you</div>
+        </div>
+      </div>
+      <div class="coach-tail"></div>
+    </div>
     <div class="route-row" id="route-row">
       <button class="rbtn" id="btn-abroad">
         <span class="rbtn-t">Applicant is abroad</span>
@@ -483,33 +531,58 @@ body{
     </div>
   </div>
 
-  <div class="prog-sec">
-    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
-    <div class="prog-meta">
-      <span id="prog-label">Your permit journey</span>
-      <span id="prog-count">1 of 5</span>
-    </div>
-  </div>
-
-  <div class="strip-sec">
-    <div class="coach-wrap">
-      <div class="coach-mark" id="coach-mark">
-        <div class="coach-bubble">
-          <div class="coach-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><line x1="13" y1="13" x2="19" y2="19"/></svg>
-          </div>
-          <div>
-            <div class="coach-title">Tap a stage to explore</div>
-            <div class="coach-sub">Select any icon below</div>
-          </div>
-        </div>
-        <div class="coach-tail"></div>
+  <div class="journey-area" id="journey-area">
+    <div class="prog-sec">
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-meta">
+        <span id="prog-label">Your permit journey</span>
+        <span id="prog-count">1 of 5</span>
       </div>
-      <div class="strip" id="step-strip"></div>
+    </div>
+
+    <div class="strip-sec">
+      <div class="coach-wrap">
+        <div class="coach-mark" id="coach-mark">
+          <div class="coach-bubble">
+            <div class="coach-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><line x1="13" y1="13" x2="19" y2="19"/></svg>
+            </div>
+            <div>
+              <div class="coach-title">Tap a stage to explore</div>
+              <div class="coach-sub">Select any icon below</div>
+            </div>
+          </div>
+          <div class="coach-tail"></div>
+        </div>
+        <div class="strip" id="step-strip"></div>
+      </div>
+    </div>
+
+    <div class="panel-wrap" id="panel-wrap"></div>
+
+    <div class="journey-skeleton" id="journey-skeleton">
+      <div class="jsk-inner">
+        <div class="jsk-track"></div>
+        <div class="jsk-row">
+          <div class="jsk-icon"></div>
+          <div class="jsk-icon"></div>
+          <div class="jsk-icon"></div>
+          <div class="jsk-icon"></div>
+          <div class="jsk-icon"></div>
+        </div>
+        <div class="jsk-card">
+          <div class="jsk-line jsk-title"></div>
+          <div class="jsk-line"></div>
+          <div class="jsk-line jsk-w80"></div>
+          <div class="jsk-line jsk-w60"></div>
+        </div>
+        <div class="jsk-prompt">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Choose your situation above to reveal your journey
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="panel-wrap" id="panel-wrap"></div>
 </main>
 
 <div class="guide-footer">
@@ -624,6 +697,12 @@ function dismissCoach(){
   var cm=document.getElementById('coach-mark');
   if(cm) cm.classList.add('dismissed');
 }
+function dismissRouteCoach(){
+  var rc=document.getElementById('route-coach');
+  if(rc) rc.classList.add('dismissed');
+  var sk=document.getElementById('journey-skeleton');
+  if(sk) sk.classList.add('dismissed');
+}
 
 document.getElementById('themeToggle').addEventListener('click',function(){
   var cur=document.documentElement.getAttribute('data-theme');
@@ -669,6 +748,7 @@ function selectRoute(r){
   document.getElementById('route-row').classList.add('hidden');
   document.getElementById('route-lbl-full').classList.add('hidden');
   document.getElementById('route-summary').classList.remove('hidden');
+  dismissRouteCoach();
   renderStrip();
   renderPanel();
   refreshProgMeta();
