@@ -12,10 +12,13 @@ window.NA_CASE_CONFIG = {
   schemes: ['positive-list-skilled'],
 
   workdrive: {
-    // Dedicated shared folder for this case (Collect Files needs a paid
-    // Team/Business WorkDrive plan — not available on the current Starter
-    // plan — so we use a plain per-case shared folder with upload
-    // permission instead. Never reuse this link for another case).
+    // Dedicated shared folder for this case. NOTE: this account's external
+    // permalinks are locked to View-only — no public "anyone can upload"
+    // link is possible on this plan. This link only works because Akbar
+    // and the employer contact were each individually added as members
+    // (Share → "Add members by email address" → Access Level: Edit) —
+    // not because the link itself is public. Never reuse this link for
+    // another case; anyone new needs the same per-email invite step.
     uploadFolderUrl: 'https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71'
   },
 

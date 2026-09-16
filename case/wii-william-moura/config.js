@@ -8,17 +8,23 @@ window.NA_CASE_CONFIG = {
   formVersion: 'v1.0 — 16 Sep 2026',
 
   title: { line1: 'Pay Limit', line2: 'Application' },
-  subtitle: 'Pay Limit permit — William Felipe Dos Santos Moura & WII Group',
+  // TODO(Reuben): confirm "WII Group" vs the legal entity found on the
+  // draft POA — "Digiproman.dk ApS", CVR 46654765. Shown here as both
+  // until confirmed, since they may not be the same thing to the client.
+  subtitle: 'Pay Limit permit — William Felipe Dos Santos Moura & WII Group (Digiproman.dk ApS)',
 
   schemes: ['pay-limit'],
 
   workdrive: {
-    // TODO(Reuben): create a new folder for this case in WorkDrive
-    // (My Folders → New → Folder), share it with "Anyone with the link
-    // can upload" permission, and paste that link here. (Collect Files
-    // needs a paid Team/Business plan — not available on the current
-    // Starter plan — so we use a plain per-case shared folder instead,
-    // same as the Baker case. Never reuse Baker's folder link here.)
+    // TODO(Reuben): create a new folder for this case in WorkDrive, then
+    // paste its link here. IMPORTANT — the account's external permalinks
+    // are locked to View-only (no plan upgrade fixes this), so a public
+    // "anyone can upload" link does NOT work. Instead, replicate the
+    // Baker-case process: once you have William's and the employer
+    // contact's email addresses (from their form submission), go to the
+    // folder → Share → "Add members by email address" → set Access Level
+    // to Edit → Share, for EACH of them individually. Only then will this
+    // link actually let them upload. Never reuse Baker's folder link here.
     uploadFolderUrl: 'PASTE-SHARED-FOLDER-UPLOAD-LINK-HERE'
   },
 
@@ -34,10 +40,11 @@ window.NA_CASE_CONFIG = {
     tabLabel: 'For William'
   },
   employer: {
-    // CVR and full registered address intentionally left blank — please
-    // confirm WII Group's exact legal name, CVR, and address before this
-    // case goes live so the prefill matches the AR6 filing exactly.
-    prefill: { companyName: 'WII Group', address: '' },
+    // Company name and CVR taken from the draft POA (Digiproman.dk ApS,
+    // CVR 46654765) — TODO(Reuben): confirm this is the correct legal
+    // entity for "WII Group" before this case goes live. Registered
+    // address still blank — not on the POA, please add it.
+    prefill: { companyName: 'Digiproman.dk ApS', cvr: '46654765', address: '' },
     tabLabel: 'For the Employer'
   }
 };
