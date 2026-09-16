@@ -22,6 +22,10 @@ window.NA_CASE_CONFIG = {
     uploadFolderUrl: 'https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71'
   },
 
+  // Shared standard form ("Employee & Employer Questionnaire") — reused
+  // across cases by design. Every submission carries explicit case_id /
+  // case_name / case_schemes fields (see template.js's submit handler) so
+  // downstream processing can split by case_id rather than by form.
   formspreeEndpoint: 'https://formspree.io/f/xoeadnqn',
 
   applicant: {

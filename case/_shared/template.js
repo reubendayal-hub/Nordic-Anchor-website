@@ -660,6 +660,13 @@
 
     const fieldData = collectFieldData(form);
     const data = new FormData(form);
+    // Explicit, structured case identifiers — several cases may share one
+    // Formspree endpoint, so anything processing submissions downstream
+    // needs a reliable field to split on, not just text buried in the
+    // summary below.
+    data.append('case_id', config.caseId);
+    data.append('case_name', config.subtitle || config.caseId);
+    data.append('case_schemes', (config.schemes || []).join(', '));
     if (window.NA_buildSummary){
       data.append('application_summary_readable', window.NA_buildSummary(fieldData, config));
     }

@@ -23,11 +23,13 @@ window.NA_CASE_CONFIG = {
     uploadFolderUrl: 'https://workdrive.zohopublic.eu/folder/q49ty3db6ad1d687f4c8ab071'
   },
 
-  // TODO(Reuben): create a new, dedicated Formspree form for this case
-  // (never reuse the Baker case's endpoint — a shared endpoint leaks its
-  // original form name into notification subject lines) and paste the
-  // endpoint URL here, e.g. https://formspree.io/f/xxxxxxxx
-  formspreeEndpoint: 'PASTE-DEDICATED-FORMSPREE-ENDPOINT-HERE',
+  // Reuben chose to reuse one standard Formspree form ("Employee &
+  // Employer Questionnaire") across cases, rather than a new form per
+  // case. This only works because every submission also carries explicit
+  // case_id / case_name / case_schemes fields (see template.js's submit
+  // handler) — whatever downstream process reads these submissions must
+  // split on case_id, not assume one form == one case.
+  formspreeEndpoint: 'https://formspree.io/f/xoeadnqn',
 
   applicant: {
     // Nationality intentionally left blank — not yet confirmed.
