@@ -32,7 +32,7 @@
     return `
       <input type="file" name="${name}"${multiple} disabled>
       ${opts.hint ? `<div class="filehint">${opts.hint}</div>` : ''}
-      <div class="upload-paused">Please upload this file via our <a href="${esc(url)}" target="_blank">secure upload folder</a>.</div>`;
+      <div class="upload-paused">Please upload this file via the Zoho WorkDrive access email we sent you (see note above) — or <a href="${esc(url)}" target="_blank">this link</a> if you're already signed in to Zoho.</div>`;
   }
 
   function renderSchemeSections(panel){
@@ -89,8 +89,12 @@
     Please complete <strong>only the section that applies to you</strong> — Employer or Applicant.
     A <strong>power of attorney</strong> will be sent separately, prefilled and ready to sign — no action needed on that here.
     <br><br>
-    <strong>Upload your documents here:</strong>
-    <a href="${esc(config.workdrive && config.workdrive.uploadFolderUrl)}" target="_blank" style="color:var(--gold-dk);font-weight:600;">Nordic Anchor secure upload folder →</a>
+    <strong>Uploading your documents:</strong> we've shared a secure Zoho WorkDrive folder with your email address.
+    Look for an access email from Zoho WorkDrive — since you may not have a Zoho account, it will ask for a
+    one-time code (OTP) sent to your email to confirm it's you. Use that to open the folder and upload everything
+    there. Already signed in to Zoho? You can also go straight to the
+    <a href="${esc(config.workdrive && config.workdrive.uploadFolderUrl)}" target="_blank" style="color:var(--gold-dk);font-weight:600;">folder link</a> directly.
+    Haven't received the access email? Contact us at <a href="mailto:rd@nordicanchor.dk" style="color:var(--gold-dk);">rd@nordicanchor.dk</a>.
     <br><br>
     <strong>You can save your progress and come back later</strong> — see the button at the bottom of the form.
   </div>
