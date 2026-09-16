@@ -15,16 +15,12 @@ window.NA_CASE_CONFIG = {
   schemes: ['pay-limit'],
 
   workdrive: {
-    // TODO(Reuben): create a new folder for this case in WorkDrive, then
-    // paste its link here. IMPORTANT — the account's external permalinks
-    // are locked to View-only (no plan upgrade fixes this), so a public
-    // "anyone can upload" link does NOT work. Instead, replicate the
-    // Baker-case process: once you have William's and the employer
-    // contact's email addresses (from their form submission), go to the
-    // folder → Share → "Add members by email address" → set Access Level
-    // to Edit → Share, for EACH of them individually. Only then will this
-    // link actually let them upload. Never reuse Baker's folder link here.
-    uploadFolderUrl: 'PASTE-SHARED-FOLDER-UPLOAD-LINK-HERE'
+    // Folder created ("William Moura - WII Group"). REMAINING STEP: this
+    // link only works for people added as members — go to the folder →
+    // Share → "Add members by email address" → Access Level: Edit → Share,
+    // once William's and the employer contact's emails are known. Until
+    // that's done for each of them, they'll hit an access wall here.
+    uploadFolderUrl: 'https://workdrive.zohopublic.eu/folder/q49ty3db6ad1d687f4c8ab071'
   },
 
   // TODO(Reuben): create a new, dedicated Formspree form for this case
