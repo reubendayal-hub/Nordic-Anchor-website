@@ -12,10 +12,11 @@ window.NA_CASE_CONFIG = {
   schemes: ['positive-list-skilled'],
 
   workdrive: {
-    // TODO(Reuben): replace with this case's dedicated Zoho WorkDrive
-    // "Collect Files" link (WorkDrive → Collect Files → Create Collection →
-    // External). Currently still the old shared public folder link.
-    collectFilesUrl: 'https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71'
+    // Dedicated shared folder for this case (Collect Files needs a paid
+    // Team/Business WorkDrive plan — not available on the current Starter
+    // plan — so we use a plain per-case shared folder with upload
+    // permission instead. Never reuse this link for another case).
+    uploadFolderUrl: 'https://workdrive.zohopublic.eu/folder/mialt0978c3049b764a508ce163b0d963eb71'
   },
 
   formspreeEndpoint: 'https://formspree.io/f/xoeadnqn',

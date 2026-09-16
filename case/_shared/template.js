@@ -19,13 +19,16 @@
     return (v === undefined || v === null) ? '' : String(v);
   }
 
-  // Disabled file input + link out to this case's WorkDrive Collect Files
-  // link. File selections cannot be restored on save/resume (browser
-  // security limitation) so uploads are intentionally routed off-form.
+  // Disabled file input + link out to this case's dedicated WorkDrive
+  // shared-folder link (Collect Files needs a paid Team/Business plan, so
+  // each case gets its own plain shared folder instead — never reuse one
+  // case's folder link for another). File selections cannot be restored
+  // on save/resume (browser security limitation) so uploads are
+  // intentionally routed off-form.
   function fileField(name, cfg, opts){
     opts = opts || {};
     const multiple = opts.multiple ? ' multiple' : '';
-    const url = cfg.workdrive && cfg.workdrive.collectFilesUrl;
+    const url = cfg.workdrive && cfg.workdrive.uploadFolderUrl;
     return `
       <input type="file" name="${name}"${multiple} disabled>
       ${opts.hint ? `<div class="filehint">${opts.hint}</div>` : ''}
@@ -87,7 +90,7 @@
     A <strong>power of attorney</strong> will be sent separately, prefilled and ready to sign — no action needed on that here.
     <br><br>
     <strong>Upload your documents here:</strong>
-    <a href="${esc(config.workdrive && config.workdrive.collectFilesUrl)}" target="_blank" style="color:var(--gold-dk);font-weight:600;">Nordic Anchor secure upload folder →</a>
+    <a href="${esc(config.workdrive && config.workdrive.uploadFolderUrl)}" target="_blank" style="color:var(--gold-dk);font-weight:600;">Nordic Anchor secure upload folder →</a>
     <br><br>
     <strong>You can save your progress and come back later</strong> — see the button at the bottom of the form.
   </div>

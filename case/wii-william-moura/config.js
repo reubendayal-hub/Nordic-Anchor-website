@@ -13,10 +13,13 @@ window.NA_CASE_CONFIG = {
   schemes: ['pay-limit'],
 
   workdrive: {
-    // TODO(Reuben): create a dedicated Zoho WorkDrive "Collect Files" link
-    // for this case (WorkDrive → Collect Files → Create Collection →
-    // External) and paste the URL here. No link exists yet for this case.
-    collectFilesUrl: 'PASTE-COLLECT-FILES-LINK-HERE'
+    // TODO(Reuben): create a new folder for this case in WorkDrive
+    // (My Folders → New → Folder), share it with "Anyone with the link
+    // can upload" permission, and paste that link here. (Collect Files
+    // needs a paid Team/Business plan — not available on the current
+    // Starter plan — so we use a plain per-case shared folder instead,
+    // same as the Baker case. Never reuse Baker's folder link here.)
+    uploadFolderUrl: 'PASTE-SHARED-FOLDER-UPLOAD-LINK-HERE'
   },
 
   // TODO(Reuben): create a new, dedicated Formspree form for this case
