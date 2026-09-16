@@ -8,9 +8,8 @@ window.NA_CASE_CONFIG = {
   formVersion: 'v1.0 — 16 Sep 2026',
 
   title: { line1: 'Pay Limit', line2: 'Application' },
-  // TODO(Reuben): confirm "WII Group" vs the legal entity found on the
-  // draft POA — "Digiproman.dk ApS", CVR 46654765. Shown here as both
-  // until confirmed, since they may not be the same thing to the client.
+  // Digiproman.dk ApS is WII Group's legal Danish entity (confirmed) — the
+  // one that actually appears on the AR6 filing and the POA.
   subtitle: 'Pay Limit permit — William Felipe Dos Santos Moura & WII Group (Digiproman.dk ApS)',
 
   schemes: ['pay-limit'],
@@ -40,10 +39,9 @@ window.NA_CASE_CONFIG = {
     tabLabel: 'For William'
   },
   employer: {
-    // Company name and CVR taken from the draft POA (Digiproman.dk ApS,
-    // CVR 46654765) — TODO(Reuben): confirm this is the correct legal
-    // entity for "WII Group" before this case goes live. Registered
-    // address still blank — not on the POA, please add it.
+    // Company name and CVR confirmed from the draft POA (Digiproman.dk
+    // ApS, CVR 46654765). Registered address still blank — not on the
+    // POA — TODO(Reuben): add it.
     prefill: { companyName: 'Digiproman.dk ApS', cvr: '46654765', address: '' },
     tabLabel: 'For the Employer'
   }
