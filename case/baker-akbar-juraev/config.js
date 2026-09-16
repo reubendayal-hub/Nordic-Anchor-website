@@ -4,7 +4,7 @@
 window.NA_CASE_CONFIG = {
   caseId: 'baker-akbar-juraev',
   accessCode: 'NA-2026-AJ83',
-  formVersion: 'v3.0 — 16 Sep 2026',
+  formVersion: 'v4.0 — 16 Sep 2026',
 
   title: { line1: 'Positive List', line2: 'Application' },
   subtitle: 'Baker permit — Akbarjon Juraev & Konditorbager Haarby',

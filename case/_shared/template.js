@@ -1,7 +1,8 @@
 /* Nordic Anchor — shared case-intake template engine.
-   A case's index.html only loads schemes.js + its own config.js + this file.
-   Everything else is built here from window.NA_CASE_CONFIG. New case = new
-   config, never a template edit. New scheme module = edit schemes.js only. */
+   A case's index.html only loads schemes.js + summary.js + its own
+   config.js + this file. Everything else is built here from
+   window.NA_CASE_CONFIG. New case = new config, never a template edit.
+   New scheme module = edit schemes.js only. */
 
 (function(){
   const config = window.NA_CASE_CONFIG;
@@ -102,6 +103,14 @@
     <div class="panel active" id="panel-employer">
 
       <div class="section">
+        <h2>What is the applicant applying for?</h2>
+        <div class="radio-group">
+          <label><input type="radio" name="case_permit_type" value="A residence permit as well as a work permit (applicant will live in Denmark)"> A residence permit as well as a work permit — the applicant will live in Denmark</label>
+          <label><input type="radio" name="case_permit_type" value="Only a work permit (applicant will live abroad and commute)"> Only a work permit — the applicant will live abroad and commute to Denmark</label>
+        </div>
+      </div>
+
+      <div class="section">
         <h2>Company details</h2>
         <div class="field">
           <label>Company name</label>
@@ -134,31 +143,72 @@
       </div>
 
       <div class="section">
-        <h2>Employment contract</h2>
-        <p class="hint">Please upload the final, signed version once complete.</p>
+        <h2>Job function &amp; DISCO classification</h2>
+        <p class="hint">SIRI checks every scheme's salary and terms against Danish standards using the job's six-digit DISCO-08 code — asked regardless of which scheme applies.</p>
         <div class="field">
-          <label>Job title (as stated in the contract)</label>
+          <label>DISCO-08 code</label>
+          <input type="text" name="employer_disco_code" placeholder="e.g. 751200">
+        </div>
+        <div class="field">
+          <label>Job function related to the DISCO code</label>
+          <input type="text" name="employer_job_function">
+        </div>
+      </div>
+
+      ${renderSchemeSections('employer')}
+
+      <div class="section">
+        <h2>The offered employment</h2>
+        <p class="hint">Terms stated here must match the signed contract you attach.</p>
+        <div class="field">
+          <label>Job position / title</label>
           <input type="text" name="employer_job_title">
         </div>
         <div class="field">
-          <label>Job duties (summary)</label>
+          <label>Job description (work tasks and roles)</label>
           <textarea name="employer_job_duties"></textarea>
+        </div>
+        <div class="field">
+          <label>Does the job require a Danish authorisation?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="employer_requires_authorisation" value="Yes"> Yes</label>
+            <label><input type="radio" name="employer_requires_authorisation" value="No"> No</label>
+          </div>
         </div>
         <div class="field">
           <label>Weekly working hours</label>
           <input type="number" step="0.5" name="employer_weekly_hours">
         </div>
         <div class="field">
+          <label>When does employment start?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="employer_start_type" value="As soon as possible"> As soon as possible</label>
+            <label><input type="radio" name="employer_start_type" value="Specific start date"> Specific start date</label>
+          </div>
+          <input type="date" name="employer_start_date" placeholder="Only if a specific date was selected">
+        </div>
+        <div class="field">
+          <label>When does employment end?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="employer_end_type" value="Indefinite"> Indefinite</label>
+            <label><input type="radio" name="employer_end_type" value="Specific end date"> Specific end date</label>
+          </div>
+          <input type="date" name="employer_end_date" placeholder="Only if a specific date was selected">
+        </div>
+        <div class="field">
+          <label>Is the employment covered by a collective agreement?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="employer_collective_agreement_status" value="Yes"> Yes</label>
+            <label><input type="radio" name="employer_collective_agreement_status" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Which collective agreement (if yes)</label>
+          <input type="text" name="employer_collective_agreement_name">
+        </div>
+        <div class="field">
           <label>Upload signed employment contract (all pages)</label>
           ${fileField('employer_contract_upload', config, {multiple:true, hint:'PDF or clear photos of every page, please.'})}
-        </div>
-        <div class="field">
-          <label>Confirmed monthly salary (DKK)</label>
-          <input type="number" name="employer_salary">
-        </div>
-        <div class="field">
-          <label>Proposed employment start date</label>
-          <input type="date" name="employer_start_date">
         </div>
         <div class="field">
           <label>Holiday terms (days/year, holiday pay arrangement)</label>
@@ -168,19 +218,78 @@
           <label>Termination terms (notice period)</label>
           <input type="text" name="employer_termination_terms">
         </div>
+        <div class="field">
+          <label>Does the applicant need a residence permit valid 1 month before employment starts?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="employer_pre_employment_permit" value="Yes"> Yes</label>
+            <label><input type="radio" name="employer_pre_employment_permit" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Salary</h2>
+        <p class="hint">Amounts should be actual payroll costs before tax, in DKK, monthly, rounded.</p>
+        <div class="field">
+          <label>Base salary (DKK/month)</label>
+          <input type="number" name="employer_salary">
+        </div>
+        <div class="field">
+          <label>Fixed allowances (DKK/month)</label>
+          <input type="number" name="employer_fixed_allowances">
+        </div>
+        <div class="field">
+          <label>Employer-paid share of pension (DKK/month)</label>
+          <input type="number" name="employer_pension_contribution">
+        </div>
+        <div class="field">
+          <label>Holiday pay allowance (DKK/month or %)</label>
+          <input type="text" name="employer_holiday_pay_allowance">
+        </div>
+        <div class="field">
+          <label>Does the applicant receive other employer-paid benefits?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="employer_other_benefits" value="Yes"> Yes</label>
+            <label><input type="radio" name="employer_other_benefits" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>If yes, describe the other benefits</label>
+          <input type="text" name="employer_other_benefits_desc">
+        </div>
       </div>
 
       <div class="section">
         <h2>SIRI processing fee</h2>
-        <p class="hint">The government fee is DKK 6,810 — separate from Nordic Anchor's own fee. Please confirm who will cover it.</p>
-        <div class="radio-group">
-          <label><input type="radio" name="fee_payer" value="Employer"> Employer will pay</label>
-          <label><input type="radio" name="fee_payer" value="Applicant"> Applicant will pay</label>
-          <label><input type="radio" name="fee_payer" value="Split"> Split between both</label>
+        <p class="hint">The government fee is DKK 6,810 — separate from Nordic Anchor's own fee.</p>
+        <div class="field">
+          <label>Have you paid the SIRI fee on the government portal?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="fee_paid_status" value="We have paid the fee"> We have paid the fee</label>
+            <label><input type="radio" name="fee_paid_status" value="We are exempt from paying the fee"> We are exempt from paying the fee</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Case order ID (from the payment)</label>
+          <input type="text" name="fee_case_order_id" placeholder="e.g. CS-3211-CQ">
+        </div>
+        <div class="field">
+          <label>Who is covering the fee internally?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="fee_payer" value="Employer"> Employer will pay</label>
+            <label><input type="radio" name="fee_payer" value="Applicant"> Applicant will pay</label>
+            <label><input type="radio" name="fee_payer" value="Split"> Split between both</label>
+          </div>
         </div>
       </div>
 
-      ${renderSchemeSections('employer')}
+      <div class="section">
+        <h2>Anything else we should know?</h2>
+        <div class="field">
+          <label>Additional comments (optional)</label>
+          <textarea name="employer_additional_comments"></textarea>
+        </div>
+      </div>
 
       <div class="checkbox-line">
         <input type="checkbox" name="employer_confirm" id="employer_confirm">
@@ -202,7 +311,19 @@
           <input type="date" name="applicant_dob">
         </div>
         <div class="field">
-          <label>Nationality</label>
+          <label>Sex</label>
+          <select name="applicant_sex">
+            <option value="">— Select —</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Country of birth</label>
+          <input type="text" name="applicant_country_of_birth">
+        </div>
+        <div class="field">
+          <label>Citizenship / nationality</label>
           <input type="text" name="applicant_nationality" value="${esc(appPrefill.nationality)}">
         </div>
         <div class="field">
@@ -217,6 +338,13 @@
           </select>
         </div>
         <div class="field">
+          <label>Does the applicant have children?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="applicant_has_children" value="Yes"> Yes</label>
+            <label><input type="radio" name="applicant_has_children" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
           <label>Danish CPR number</label>
           <input type="text" name="applicant_cpr" placeholder="250699-XXXX">
         </div>
@@ -227,10 +355,6 @@
         <div class="field">
           <label>Passport expiry date</label>
           <input type="date" name="applicant_passport_expiry">
-        </div>
-        <div class="field">
-          <label>Current residential address in Denmark</label>
-          <input type="text" name="applicant_dk_address" placeholder="Street, house number, postcode, city">
         </div>
         <div class="field">
           <label>Email</label>
@@ -252,6 +376,36 @@
       </div>
 
       <div class="section">
+        <h2>The applicant's current address</h2>
+        <div class="field">
+          <label>Is the applicant already in Denmark?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="applicant_already_in_dk" value="Yes"> Yes</label>
+            <label><input type="radio" name="applicant_already_in_dk" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Does the applicant expect to stay in Denmark until the case is processed?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="applicant_stay_during_processing" value="Yes"> Yes</label>
+            <label><input type="radio" name="applicant_stay_during_processing" value="No"> No</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Date of entry into Denmark (if applicable)</label>
+          <input type="date" name="applicant_dk_entry_date">
+        </div>
+        <div class="field">
+          <label>Current residential address in Denmark</label>
+          <input type="text" name="applicant_dk_address" placeholder="Street, house number, postcode, city">
+        </div>
+        <div class="field">
+          <label>Living with (c/o) — optional</label>
+          <input type="text" name="applicant_dk_address_co">
+        </div>
+      </div>
+
+      <div class="section">
         <h2>Passport</h2>
         <div class="field">
           <label>Upload passport — every page, including blank pages, front and back cover</label>
@@ -260,15 +414,26 @@
       </div>
 
       <div class="section">
-        <h2>Education &amp; work experience</h2>
-        <p class="hint">This determines which salary bracket your application is measured against — please be thorough.</p>
+        <h2>Education</h2>
         <div class="field">
-          <label>Describe your relevant experience (employers, dates, role)</label>
-          <textarea name="applicant_experience_description"></textarea>
+          <label>Highest level of education completed</label>
+          <input type="text" name="applicant_education_level" placeholder="e.g. Vocational education at skilled level">
         </div>
         <div class="field">
-          <label>Upload supporting documents (reference letters, employment certificates)</label>
-          ${fileField('applicant_experience_upload', config, {multiple:true, hint:'If documents are not in Danish/English, please also upload the original — we will arrange translation.'})}
+          <label>Institution name &amp; country</label>
+          <input type="text" name="applicant_education_institution">
+        </div>
+        <div class="field">
+          <label>Programme name</label>
+          <input type="text" name="applicant_education_programme">
+        </div>
+        <div class="field">
+          <label>Completed in year</label>
+          <input type="text" name="applicant_education_year" placeholder="e.g. 2018">
+        </div>
+        <div class="field">
+          <label>Length of education</label>
+          <input type="text" name="applicant_education_length" placeholder="e.g. 3 years">
         </div>
         <div class="field">
           <label>Upload any vocational, trade, or education certificates</label>
@@ -276,11 +441,52 @@
         </div>
       </div>
 
+      <div class="section">
+        <h2>Most recent relevant employment</h2>
+        <p class="hint">SIRI needs this to assess whether salary and terms correspond to Danish standards. If there's more than one past employer worth mentioning, use the notes field below for the rest.</p>
+        <div class="field">
+          <label>Employer's name</label>
+          <input type="text" name="applicant_prev_employer_name">
+        </div>
+        <div class="field">
+          <label>Employer's address or website</label>
+          <input type="text" name="applicant_prev_employer_address">
+        </div>
+        <div class="field">
+          <label>From</label>
+          <input type="date" name="applicant_prev_employment_from">
+        </div>
+        <div class="field">
+          <label>To</label>
+          <input type="date" name="applicant_prev_employment_to">
+        </div>
+        <div class="field">
+          <label>Job title</label>
+          <input type="text" name="applicant_prev_job_title">
+        </div>
+        <div class="field">
+          <label>Work tasks</label>
+          <textarea name="applicant_prev_work_tasks"></textarea>
+        </div>
+        <div class="field">
+          <label>Additional / other experience notes (if more than one past employer, or more detail is useful)</label>
+          <textarea name="applicant_experience_description"></textarea>
+        </div>
+        <div class="field">
+          <label>Total years of relevant work experience</label>
+          <input type="text" name="applicant_total_experience_years" placeholder="e.g. 1.7">
+        </div>
+        <div class="field">
+          <label>Upload supporting documents (reference letters, employment certificates)</label>
+          ${fileField('applicant_experience_upload', config, {multiple:true, hint:'If documents are not in Danish/English, please also upload the original — we will arrange translation.'})}
+        </div>
+      </div>
+
       ${renderSchemeSections('applicant')}
 
       <div class="section">
         <h2>SIRI ruling letter</h2>
-        <p class="hint">This is the official decision letter SIRI sent when your current permit was granted — different from your residence card. We already have your residence card copies; we need this to double-check the exact terms of your current permit.</p>
+        <p class="hint">This is the official decision letter SIRI sent when your current permit was granted — different from your residence card. We already have your residence card copies; we need this to double-check the exact terms of your current permit. Skip if this is your first Danish permit.</p>
         <div class="field">
           <label>Upload your SIRI ruling letter (afgørelse) — if applicable</label>
           ${fileField('applicant_ruling_letter_upload', config, {multiple:true})}
@@ -361,11 +567,8 @@
     });
   });
 
-  // ---- Save / resume (text fields only — file inputs cannot be restored
-  // programmatically for security reasons, so they're excluded and the
-  // person is told to re-attach files on return) ----
-  function saveProgress(manual){
-    const form = document.getElementById('intakeForm');
+  // ---- Field extraction shared by save/resume and the submission summary ----
+  function collectFieldData(form){
     const data = {};
     Array.from(form.elements).forEach(function(el){
       if (!el.name || el.type === 'file' || el.type === 'submit' || el.type === 'button') return;
@@ -377,6 +580,15 @@
         data[el.name] = el.value;
       }
     });
+    return data;
+  }
+
+  // ---- Save / resume (text fields only — file inputs cannot be restored
+  // programmatically for security reasons, so they're excluded and the
+  // person is told to re-attach files on return) ----
+  function saveProgress(manual){
+    const form = document.getElementById('intakeForm');
+    const data = collectFieldData(form);
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ data: data, savedAt: new Date().toISOString() }));
     if (manual) updateSaveStatus();
   }
@@ -439,7 +651,12 @@
       return;
     }
 
+    const fieldData = collectFieldData(form);
     const data = new FormData(form);
+    if (window.NA_buildSummary){
+      data.append('application_summary_readable', window.NA_buildSummary(fieldData, config));
+    }
+
     const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting…';
