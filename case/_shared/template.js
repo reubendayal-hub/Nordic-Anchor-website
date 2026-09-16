@@ -659,17 +659,27 @@
     }
 
     const fieldData = collectFieldData(form);
-    const data = new FormData(form);
-    // Explicit, structured case identifiers — several cases may share one
-    // Formspree endpoint, so anything processing submissions downstream
-    // needs a reliable field to split on, not just text buried in the
-    // summary below.
+
+    // Built manually (not `new FormData(form)`) so the readable summary and
+    // case identifiers land FIRST in the submission — Formspree's default
+    // email lists fields in the order they're added, and nobody should have
+    // to scroll past ~50 raw field rows to reach the part that matters.
+    // The raw fields still follow, as a backup/audit trail.
+    const data = new FormData();
     data.append('case_id', config.caseId);
     data.append('case_name', config.subtitle || config.caseId);
     data.append('case_schemes', (config.schemes || []).join(', '));
     if (window.NA_buildSummary){
       data.append('application_summary_readable', window.NA_buildSummary(fieldData, config));
     }
+    Array.from(form.elements).forEach(function(el){
+      if (!el.name || el.disabled || el.type === 'submit' || el.type === 'button') return;
+      if (el.type === 'checkbox' || el.type === 'radio'){
+        if (el.checked) data.append(el.name, el.value);
+      } else {
+        data.append(el.name, el.value);
+      }
+    });
 
     const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = true;
