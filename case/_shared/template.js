@@ -590,6 +590,89 @@
     return data;
   }
 
+  // ---- Mandatory-field validation, scoped to whichever panel is being
+  // submitted. Deliberately NOT native `required` (see known bug #1 — a
+  // required field inside a hidden tab panel can silently block submission
+  // with no visible error). This only checks the fields SIRI's own AR6
+  // form actually treats as required, based on a real completed
+  // application, not every field in the section. ----
+  const FIELD_LABELS = {
+    case_permit_type: 'What are you applying for',
+    employer_company_name: 'Company name',
+    employer_cvr: 'CVR number',
+    employer_address: 'Company address',
+    employer_contact_name: 'Contact person — name',
+    employer_contact_email: 'Contact person — email',
+    employer_contact_phone: 'Contact person — phone',
+    employer_disco_code: 'DISCO-08 code',
+    employer_job_function: 'Job function related to the DISCO code',
+    scheme_aub_maluddannelsesratio: 'Apprentice training obligation — måluddannelsesratio question',
+    scheme_aub_merbidrag: 'Apprentice training obligation — merbidrag question',
+    employer_job_title: 'Job position / title',
+    employer_job_duties: 'Job description (work tasks and roles)',
+    employer_requires_authorisation: 'Does the job require a Danish authorisation?',
+    employer_weekly_hours: 'Weekly working hours',
+    employer_start_type: 'When does employment start?',
+    employer_start_date: 'Specific start date',
+    employer_end_type: 'When does employment end?',
+    employer_end_date: 'Specific end date',
+    employer_collective_agreement_status: 'Is the employment covered by a collective agreement?',
+    employer_collective_agreement_name: 'Which collective agreement',
+    employer_salary: 'Base salary (DKK/month)',
+    employer_other_benefits: 'Does the applicant receive other employer-paid benefits?',
+    employer_other_benefits_desc: 'Other benefits detail',
+    fee_paid_status: 'Have you paid the SIRI fee on the government portal?',
+    fee_case_order_id: 'Case order ID',
+    applicant_name: 'Full name',
+    applicant_dob: 'Date of birth',
+    applicant_sex: 'Sex',
+    applicant_country_of_birth: 'Country of birth',
+    applicant_nationality: 'Citizenship / nationality',
+    applicant_marital_status: 'Marital status',
+    applicant_has_children: 'Does the applicant have children?',
+    applicant_passport_number: 'Passport number',
+    applicant_passport_expiry: 'Passport expiry date',
+    applicant_phone: 'Phone',
+    applicant_email: 'Email',
+    applicant_already_in_dk: 'Is the applicant already in Denmark?',
+    applicant_stay_during_processing: 'Expects to stay in Denmark until the case is processed?',
+    applicant_dk_entry_date: 'Date of entry into Denmark',
+    applicant_dk_address: 'Current residential address in Denmark',
+    applicant_education_level: 'Highest level of education completed',
+    applicant_total_experience_years: 'Total years of relevant work experience'
+  };
+
+  function getMandatoryFields(panel, schemes, data){
+    if (panel === 'employer'){
+      const fields = [
+        'case_permit_type', 'employer_company_name', 'employer_cvr', 'employer_address',
+        'employer_contact_name', 'employer_contact_email', 'employer_contact_phone',
+        'employer_disco_code', 'employer_job_function', 'employer_job_title', 'employer_job_duties',
+        'employer_requires_authorisation', 'employer_weekly_hours', 'employer_start_type', 'employer_end_type',
+        'employer_collective_agreement_status', 'employer_salary', 'employer_other_benefits',
+        'fee_paid_status', 'fee_case_order_id'
+      ];
+      if (data.employer_start_type === 'Specific start date') fields.push('employer_start_date');
+      if (data.employer_end_type === 'Specific end date') fields.push('employer_end_date');
+      if (data.employer_collective_agreement_status === 'Yes') fields.push('employer_collective_agreement_name');
+      if (data.employer_other_benefits === 'Yes') fields.push('employer_other_benefits_desc');
+      if ((schemes || []).indexOf('positive-list-skilled') !== -1){
+        fields.push('scheme_aub_maluddannelsesratio', 'scheme_aub_merbidrag');
+      }
+      return fields;
+    }
+    const fields = [
+      'applicant_name', 'applicant_dob', 'applicant_sex', 'applicant_country_of_birth',
+      'applicant_nationality', 'applicant_marital_status', 'applicant_has_children',
+      'applicant_passport_number', 'applicant_passport_expiry', 'applicant_phone', 'applicant_email',
+      'applicant_already_in_dk', 'applicant_education_level', 'applicant_total_experience_years'
+    ];
+    if (data.applicant_already_in_dk === 'Yes'){
+      fields.push('applicant_dk_entry_date', 'applicant_dk_address', 'applicant_stay_during_processing');
+    }
+    return fields;
+  }
+
   // ---- Save / resume (text fields only — file inputs cannot be restored
   // programmatically for security reasons, so they're excluded and the
   // person is told to re-attach files on return) ----
@@ -645,10 +728,25 @@
     e.preventDefault();
     const form = e.target;
 
-    // Explicit check on whichever panel is actually active — replaces the
+    // Explicit checks on whichever panel is actually active — replaces the
     // native `required` attribute, which could silently block submission
-    // when the confirmation checkbox sat in a hidden (display:none) panel.
+    // when a required field sat in a hidden (display:none) panel.
     const employerActive = document.getElementById('panel-employer').classList.contains('active');
+    const activePanel = employerActive ? 'employer' : 'applicant';
+    const fieldData = collectFieldData(form);
+
+    const missing = getMandatoryFields(activePanel, config.schemes, fieldData).filter(function(name){
+      const v = fieldData[name];
+      return v === undefined || v === null || v === '' || v === false;
+    });
+    if (missing.length){
+      const labels = missing.map(function(n){ return FIELD_LABELS[n] || n; });
+      alert('Please fill in the following before submitting your section:\n\n- ' + labels.join('\n- '));
+      const firstEl = form.querySelector('[name="' + missing[0] + '"]');
+      if (firstEl) firstEl.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+
     const activeCheckbox = employerActive
       ? document.getElementById('employer_confirm')
       : document.getElementById('applicant_confirm');
@@ -657,8 +755,6 @@
       activeCheckbox.scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
-
-    const fieldData = collectFieldData(form);
 
     // Built manually (not `new FormData(form)`) so the readable summary and
     // case identifiers land FIRST in the submission — Formspree's default
