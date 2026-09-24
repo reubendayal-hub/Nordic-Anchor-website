@@ -966,18 +966,29 @@ var ALL_STEPS=[
       indk:"Welcome. You\u2019re applying for a new permit while already in Denmark. Under the job change rule, you can begin work as soon as we lodge your application with SIRI \u2014 you don\u2019t have to wait for the decision. Here\u2019s what to expect."
     },
     sections:[
-      {type:'overview',items:[
-        "Stage 1: Introduction \u2014 we review your case and collect all required documents",
-        "Stage 2: Documents \u2014 we review everything and prepare your application",
-        "Stage 3: Application & biometrics \u2014 we submit to SIRI; you attend a biometrics appointment",
-        "Stage 4: Approval \u2014 SIRI decides and we notify you immediately",
-        "Stage 5: Arrival in Denmark \u2014 your new chapter begins"
-      ]},
+      {type:'overview',items:{
+        abroad:[
+          "Stage 1: Introduction \u2014 we review your case and collect all required documents",
+          "Stage 2: Documents \u2014 we review everything and prepare your application",
+          "Stage 3: Application & biometrics \u2014 we submit to SIRI; you attend a biometrics appointment at a VFS Center abroad, SIRI or a Norwegian VFS centre",
+          "Stage 4: Approval \u2014 SIRI decides and we notify you immediately",
+          "Stage 5: Arrival in Denmark \u2014 your new chapter begins"
+        ],
+        indk:[
+          "Stage 1: Introduction \u2014 we review your case and collect all required documents",
+          "Stage 2: Documents \u2014 we review everything and prepare your application",
+          "Stage 3: Application & biometrics \u2014 we submit to SIRI; you attend a biometrics appointment at SIRI",
+          "Stage 4: Approval \u2014 SIRI decides and we notify you immediately",
+          "Stage 5: Continued Employment \u2014 you continue working under your new permit, uninterrupted"
+        ]
+      }},
       {type:'docs',label:'What we need from you',items:[
         {text:"Danish Employment Contract \u2014 preferably signed by both employer and applicant"},
         {text:"Power of attorney (applicant) \u2014 authorising Nordic Anchor to act on your behalf. We provide the template.",dl:'poa-applicant'},
         {text:"Power of attorney (employer) \u2014 authorising Nordic Anchor to submit on behalf of your employer. We provide the template.",dl:'poa-employer'},
-        {text:"Passport \u2014 all pages, clearly scanned. Must be valid for at least 6 months beyond your expected permit end date."}
+        {text:"Passport \u2014 all pages, clearly scanned. Must be valid for at least 6 months beyond your expected permit end date."},
+        {text:"Employee questionnaire \u2014 collects the personal and case details we need directly from you. We\u2019ll share the link with you during the process."},
+        {text:"Employer questionnaire \u2014 collects the details we need from your employer. We\u2019ll share the link with you during the process."}
       ]},
       {type:'na',text:"We confirm your salary meets the current Pay Limit Scheme threshold, verify your role and contract terms, and prepare everything for submission."},
       {type:'tip',text:"Should anything feel unclear at any point, we can always arrange a quick call to walk through it together."}
@@ -1005,7 +1016,7 @@ var ALL_STEPS=[
     sections:[
       {type:'docs_routed',label:'What happens',items:{
         abroad:[
-          {text:"We submit your application online via the AR6 form and confirm your SIRI Case Order ID by email the same day"},
+          {text:"We submit your application online with SIRI"},
           {text:"We send you a detailed biometrics guide specific to your country of residence"}
         ],
         indk:[
@@ -1286,10 +1297,11 @@ function renderPanel(){
         '<div class="journey-overview-list">';
       // Map item index to short stage label for visual reinforcement
       var stageLabels=steps.map(function(st){return st.label;});
-      for(var k=0;k<sec.items.length;k++){
+      var overviewItems = Array.isArray(sec.items) ? sec.items : (sec.items[route] || sec.items.abroad);
+      for(var k=0;k<overviewItems.length;k++){
         var stageLabel = stageLabels[k] || ('Stage '+(k+1));
         // Strip "Stage N: " prefix from item if present, since we display the stage label visually
-        var itemTxt = sec.items[k].replace(/^Stage \d+:\s*[^—]+—\s*/,'');
+        var itemTxt = overviewItems[k].replace(/^Stage \d+:\s*[^—]+—\s*/,'');
         bodyHtml+='<div class="journey-overview-item">'+
           '<div class="journey-overview-num">'+(k+1)+'</div>'+
           '<div class="journey-overview-body">'+
