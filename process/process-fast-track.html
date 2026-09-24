@@ -1341,6 +1341,7 @@ function renderPanel(){
         var bioFee      = getParam('biofee');      // numeric, e.g. "185"
         var bioCurrency = getParam('biocurrency') || 'USD';
         var bioScenario = getParam('bioscenario'); // 'vfs' | 'embassy' | 'norway'
+        var bioPay      = getParam('biopay') || 'card and cash';
 
         var hasPersonalised = bioCountry && bioCenter && bioUrl;
 
@@ -1356,7 +1357,7 @@ function renderPanel(){
           bodyHtml+='</div>';
           bodyHtml+='<div class="ditem"><div class="dn">1</div><span>Use the booking link above to reserve a date and time at <strong>'+e(bioCenter)+'</strong></span></div>';
           bodyHtml+='<div class="ditem"><div class="dn">2</div><span>Attend in person on the day. <strong>Bring:</strong> your passport (original), all application documents we have provided to you, and 2 passport-style photos taken within the last 3 months</span></div>';
-          bodyHtml+='<div class="ditem"><div class="dn">3</div><span>Pay the fee at the appointment\u2014 most centres accept card and cash. Some VFS centres charge additional service or courier fees.</span></div>';
+          bodyHtml+='<div class="ditem"><div class="dn">3</div><span>Pay the fee at the appointment \u2014 accepted payment methods: '+e(bioPay)+'. Some VFS centres charge additional service or courier fees.</span></div>';
           bodyHtml+='<div class="ditem"><div class="dn">4</div><span>Send us a copy of the appointment confirmation as soon as you receive it</span></div>';
           if(bioScenario === 'norway'){
             bodyHtml+='<div class="ditem"><div class="dn">!</div><span><strong>Note for Norway representation:</strong> Denmark uses Norway\u2019s embassy in your country only for identity verification. Your biometrics will then be re-recorded at a SIRI branch office <em>after</em> you arrive in Denmark, within 14 days of arrival.</span></div>';
